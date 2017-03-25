@@ -11,12 +11,11 @@ header {
 
 #addBusButton{
  float: right;
- background: #0275d8;
+ /*background: #0275d8;*/
 }
 #addDriverButtton{
   float: right;
-  
-  background: #0275d8;
+  /*background: #0275d8;*/
 }
 
 #busAndDriverButton{
