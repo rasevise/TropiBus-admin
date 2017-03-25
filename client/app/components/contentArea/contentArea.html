@@ -1,1 +1,90 @@
-This is where the content goes
+
+<!--main container-->
+<div class="container-fluid" id="mainContainer">
+  <div class="row" >
+    <div class="col-9" id="mainTabs">
+      <ngb-tabset>
+      <ngb-tab>
+        <template ngbTabTitle><b>Map Overview</b></template>
+        <template ngbTabContent>
+          <!--mapview component-->
+          <mapview></mapview>
+        </template>
+      </ngb-tab>
+      <ngb-tab>
+        <template ngbTabTitle><b>Routes and Stops</b></template>
+        <template ngbTabContent>
+          <!--maproute component-->
+          <maproute></maproute>
+        </template>
+      </ngb-tab>
+        <ngb-tab>
+        <template ngbTabTitle><b>Buses and Drivers</b></template>
+        <template ngbTabContent>
+          <!--busdriver component-->
+          <busdriver></busdriver>
+        </template>
+      </ngb-tab>
+        <ngb-tab>
+        <template ngbTabTitle><b>Messages</b></template>
+        <template ngbTabContent>
+          <!--Message Component-->
+          <messages></messages>
+        </template>
+      </ngb-tab>
+      </ngb-tabset>
+    </div>
+
+
+
+    <!--Dashboard Content-->
+    <div class="col-3" id="dashboard">
+      <ul class="list-group" id="ActiveItems">
+        <li class="list-group-item justify-content-between">
+          Active Buses
+          <img alt="busicon" src="../../assets/graphics/busimg.jpg" width="50px"/>
+          <span class="badge badge-default badge-pill">9/18</span>
+        </li>
+        <li class="list-group-item justify-content-between">
+          Active Drivers
+          <img alt="busicon" src="../../assets/graphics/driverimg.png" width="50px"/>
+          <span class="badge badge-default badge-pill">9/24</span>
+        </li>
+        <li class="list-group-item justify-content-between">
+          Working Routes
+          <img alt="busicon" src="../../assets/graphics/routeimg.jpg" width="50px"/>
+          <span class="badge badge-default badge-pill">9/9</span>
+        </li>
+      </ul>
+      <!--messages-->
+      <h4 class="card-title text-center">Messages</h4>
+      <div class="list-group" id="messageList">
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">Route 1 Closed</h5>
+            <small>3 days ago</small>
+          </div>
+          <p class="mb-1">Route one will be closed until May 3, 2017</p>
+          <small>Updatewhen necessary</small>
+        </a>
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">Users happy with TropiBus system</h5>
+            <small class="text-muted">6 days ago</small>
+          </div>
+          <p class="mb-1">It has been a major success. </p>
+          <small class="text-muted">Final veredict coming soon</small>
+        </a>
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">Sonnell Started Collab with TropiBus</h5>
+            <small class="text-muted">10 days ago</small>
+          </div>
+          <p class="mb-1">Sonnel about to start working with TB.</p>
+          <small class="text-muted">Changes incoming $$$</small>
+        </a>
+      </div>
+    </div>
+    
+  </div>
+</div>

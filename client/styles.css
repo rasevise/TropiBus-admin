@@ -9,6 +9,26 @@ header {
   width: 100%;
 }
 
+#addBusButton{
+ float: right;
+ background: #0275d8;
+}
+#addDriverButtton{
+  float: right;
+  
+  background: #0275d8;
+}
+
+#busAndDriverButton{
+      margin: 3% auto;
+}
+
+
+
+th{
+  font:10px;
+}
+
 @media only screen and (max-width: 1345px){
   #container{
     width: auto;
