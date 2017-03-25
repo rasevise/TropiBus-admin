@@ -1,0 +1,22 @@
+{
+  "name": "tropibusadminserver",
+  "version": "1.0.0",
+  "description": "Simple task manager",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@ng-bootstrap/ng-bootstrap": "^1.0.0-alpha.21",
+    "body-parser": "^1.15.2",
+    "bootstrap": "^4.0.0-alpha.4",
+    "ejs": "^2.5.2",
+    "express": "^4.14.0",
+    "jquery": "3.2.0",
+    "nodemon": "^1.11.0",
+    "pg": "4.x",
+    "tether": "^1.4.0"
+  }
+}
