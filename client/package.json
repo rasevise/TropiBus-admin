@@ -4,7 +4,6 @@
   "scripts": {
     "start": "tsc && concurrently \"tsc -w\" \"lite-server\" ",
     "lite": "lite-server",
-    "postinstall": "typings install",
     "tsc": "tsc",
     "tsc:w": "tsc -w",
     "typings": "typings"
@@ -31,6 +30,7 @@
     "rxjs": "5.0.0-beta.12",
     "systemjs": "0.19.39",
     "tether": "^1.4.0",
+    "typings": "^1.4.0",
     "zone.js": "^0.6.25"
   },
   "devDependencies": {

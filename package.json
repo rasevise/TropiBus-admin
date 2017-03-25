@@ -31,6 +31,7 @@
     "rxjs": "5.0.0-beta.12",
     "systemjs": "0.19.39",
     "tether": "^1.4.0",
+    "typings": "^1.4.0",
     "zone.js": "^0.6.25",
     "body-parser": "^1.15.2",
     "ejs": "^2.5.2",
