@@ -1,0 +1,8 @@
+{
+    "name": "TropiBus Administrator",
+    "description": "Node.js Express Postgre Angular 2 Application for administrating TropiBus",
+    "repository": "https://github.com/rasevise/TropiBus-admin",
+    "logo": "https://github.com/rasevise/TropiBus-admin/blob/master/client/assets/graphics/tropibuslogo.png",
+    "keywords": ["node", "express", "static", "angular 2", "postgre", "html", "javascript", "trypescript"],
+    "image": "heroku/nodejs"
+}
