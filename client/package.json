@@ -26,6 +26,7 @@
     "@angular/upgrade": "^4.0.0",
     "@ng-bootstrap/ng-bootstrap": "^1.0.0-alpha.21",
     "angular-in-memory-web-api": "~0.3.1",
+    "angular2-google-maps": "^0.17.0",
     "bootstrap": "^4.0.0-alpha.4",
     "core-js": "^2.4.1",
     "express": "4.15.2",

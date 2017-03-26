@@ -1,9 +1,11 @@
-import { NgModule }      from '@angular/core';
+import { NgModule, ApplicationRef, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { NgbModule }     from '@ng-bootstrap/ng-bootstrap';
+import { AgmCoreModule } from 'angular2-google-maps/ts/core';
 
 import { headerComponent }      from './components/header/app.headerComponent';
 import { contentAreaComponent } from './components/contentArea/app.contentAreaComponent';
@@ -17,7 +19,11 @@ import { maprouteComponent }    from './components/maproute/app.maprouteComponen
   imports:      [ BrowserModule, 
                   HttpModule, 
                   FormsModule,
-                  NgbModule.forRoot()  
+                  CommonModule,
+                  NgbModule.forRoot(),
+                  AgmCoreModule.forRoot({
+                    apiKey: 'AIzaSyDDT42OhzKsDxHmgkswT3WZsuX5H-ITG8E'
+                  }),  
                   ],
   declarations: [ AppComponent,
                   headerComponent, 
@@ -28,6 +34,7 @@ import { maprouteComponent }    from './components/maproute/app.maprouteComponen
                   busdriverComponent,
                   messagesComponent,
                   ],
+  schemas:  [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ],
   bootstrap:    [ AppComponent ]
 })
 export class AppModule { }

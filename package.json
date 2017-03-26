@@ -25,9 +25,13 @@
     "@angular/upgrade": "^4.0.0",
     "@ng-bootstrap/ng-bootstrap": "^1.0.0-alpha.21",
     "angular-in-memory-web-api": "~0.3.1",
+    "angular2-google-maps": "^0.17.0",
+    "body-parser": "^1.15.2",
     "bootstrap": "^4.0.0-alpha.4",
     "core-js": "^2.4.1",
+    "ejs": "^2.5.2",
     "express": "4.15.2",
+    "jquery": "3.2.0",
     "nodemon": "^1.11.0",
     "pg": "^6.1.5",
     "reflect-metadata": "^0.1.8",
@@ -35,12 +39,9 @@
     "systemjs": "0.19.47",
     "tether": "^1.4.0",
     "typings": "^2.1.0",
-    "zone.js": "^0.8.5",
-    "body-parser": "^1.15.2",
-    "ejs": "^2.5.2",
-    "jquery": "3.2.0"
+    "zone.js": "^0.8.5"
   },
-    "devDependencies": {
+  "devDependencies": {
     "concurrently": "^3.0.0",
     "lite-server": "^2.2.2",
     "typescript": "^2.0.3",
