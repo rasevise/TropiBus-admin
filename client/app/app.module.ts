@@ -2,10 +2,10 @@ import { NgModule, ApplicationRef, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA }   
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }    from "@angular/forms";
 import { AppComponent } from './app.component';
+import { Ng2UtilsModule } from 'ng2-utils';
 import { NgbModule }     from '@ng-bootstrap/ng-bootstrap';
-import { AgmCoreModule } from 'angular2-google-maps/ts/core';
 
 import { headerComponent }      from './components/header/app.headerComponent';
 import { contentAreaComponent } from './components/contentArea/app.contentAreaComponent';
@@ -14,16 +14,19 @@ import { busdriverComponent }   from './components/busdriver/app.busdriverCompon
 import { messagesComponent }    from './components/messages/app.messagesComponent';
 import { mapviewComponent }     from './components/mapview/app.mapviewComponent';
 import { maprouteComponent }    from './components/maproute/app.maprouteComponent';
+import { Ng2MapModule,  }      from 'ng2-map';
 
 @NgModule({
   imports:      [ BrowserModule, 
                   HttpModule, 
                   FormsModule,
                   CommonModule,
+                  ReactiveFormsModule,
                   NgbModule.forRoot(),
-                  AgmCoreModule.forRoot({
-                    apiKey: 'AIzaSyDDT42OhzKsDxHmgkswT3WZsuX5H-ITG8E'
-                  }),  
+                  Ng2MapModule.forRoot({
+                    apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyCHzXlwzDfvO_W481qe-fr1mqH1iBLEd20'
+                  }),
+                  Ng2UtilsModule,
                   ],
   declarations: [ AppComponent,
                   headerComponent, 
@@ -37,4 +40,5 @@ import { maprouteComponent }    from './components/maproute/app.maprouteComponen
   schemas:  [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ],
   bootstrap:    [ AppComponent ]
 })
+
 export class AppModule { }
