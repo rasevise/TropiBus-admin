@@ -3,6 +3,7 @@ var path = require('path');
 var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
+var routes = require('./routes/routes');
 
 var port = process.env.PORT || 8080;
 
@@ -21,6 +22,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
 app.use('/', index);
+app.use('/routesjson', routes);
 
 app.listen(port, function(){
     console.log('Server started on port '+port);
