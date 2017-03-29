@@ -1,22 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { BusDriverService } from './app.busdriverService'
 
 @Component({
   selector: 'busdriver',
   templateUrl: './app/components/busdriver/busdriver.html',
 })
 export class busdriverComponent  {
-  busProperties=[
-    {name: "Bus A", driver: "Juan", route: "Route A", status: "active"},
-    {name: "Bus B", driver: "Pedro", route: "Route B", status: "offline"},
-    {name: "Bus C", driver: "Jorge", route: "Route C", status: "offline"}
-    ]
+  busProperties : any[] = []
+
+    constructor (@Inject(BusDriverService) private service: BusDriverService){
+        service.getBuses()
+        .subscribe(buses => this.busesGet(buses));
+    }
+
+    busesGet(buses: any[]){
+      this.busProperties = buses;
+    }
     
 }
 interface busProperties {
  name: string;
  driver: string;
  route: string;
-status: string;
+ status: string;
 }
 
 

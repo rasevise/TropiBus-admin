@@ -17,6 +17,7 @@ import { maprouteComponent }    from './components/maproute/app.maprouteComponen
 import { RoutesComponent }      from './routepaths/routes.component';
 import { Ng2MapModule }         from 'ng2-map';
 import { RoutesService }        from './routepaths/routes.service';
+import { BusDriverService }     from './components/busdriver/app.busdriverService';
 import { Routes }               from './routepaths/routes';
 
 @NgModule({
@@ -43,7 +44,8 @@ import { Routes }               from './routepaths/routes';
                   ],
   schemas:  [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ],
   bootstrap:    [ AppComponent ],
-  providers: [ RoutesService ]
+  providers: [ RoutesService,
+               BusDriverService ]
   
 })
 
