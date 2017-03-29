@@ -4,11 +4,11 @@
             <div id = "busAndDriverButton" class="row">
 				
 				<div class="col-md-6">
-                    <h3>Bus <button  id = "addBusButton" type="button" class="btn btn-primary" onclick="myFunction">Add</button> </h3>
+                    <h3>Bus <button  id = "addBusButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddBusModal"> Add</button> </h3>
                     
 				</div>
 				<div class="col-md-6">
-                    <h3>Driver <button id = "addDriverButtton" type="button" class="btn btn-primary">Add</button></h3>
+                    <h3>Driver <button id = "addDriverButtton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddDriverModal"> Add</button></h3>
                     
 				</div>
 			</div>
@@ -20,12 +20,12 @@
 							<tr id = "busTable">
 								<th>Bus</th>
 								<th>Driver</th>
-                                <th>Route</th>
+                <th>Route</th>
 								<th>Status</th>
 							</tr>
-						</thead>
+					</thead>
 						<tbody>
-							<tr>
+								<!--<tr>
 								<td>Bus A</td>
 								<td>Juan</td>
 								<td>A</td>
@@ -54,7 +54,13 @@
 								<td>Jill</td>
 								<td>E</td>
 								<td>Inactive</td>
-							</tr>
+							</tr>-->
+							<tr *ngFor="let bus of busProperties">
+   						 <td>{{bus.name}}</td>
+    					<td>{{bus.driver}}</td>
+							<td>{{bus.route}}</td>
+							<td>{{bus.status}}</td>
+</tr>
 							
 						</tbody>
 					</table>
@@ -108,18 +114,31 @@
 	</div>
 </div>
 
-	<!--<form role="form" id = "busPopUpForm">
+
+			<!-- AddBusModal -->
+<div class="modal fade" id="AddBusModal" tabindex="-1" role="dialog" aria-labelledby="Bus" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+			<form role="form" id = "busPopUpForm">
+      <div class="modal-header">
+        <h5 class="modal-title" id="AddBusLabel">Add Bus</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
 				<div class="form-group" >
 					 
 					<label for="Bus">
 						Bus
 					</label>
 					  <select class="form-control" id="busSelect">
-						<option>Bus A</option>
-						<option>Bus B</option>
-						<option>Bus C</option>
-						<option>Bus D</option>
-						<option>Bus E</option>
+						<option busProperties.name = " Bus A">Bus A</option>
+						<option  busProperties.name = " Bus B">Bus B</option>
+						<option  busProperties.name = " Bus C">Bus C</option>
+						<option  busProperties.name = " Bus D">Bus D</option>
+						<option  busProperties.name = " Bus E">Bus E</option>
 					</select>
 				</div>
 				<div class="form-group">
@@ -128,14 +147,79 @@
 						Driver
 					</label>
 					<select class="form-control" id="busSelect">
-						<option>Juan</option>
-						<option>Pedro</option>
-						<option>Jean</option>
-						<option>Ibra</option>
-						<option>Econo</option>
+						<option busProperties.driver = "Juan">Juan</option>
+						<option busProperties.driver = "Pedro">Pedro</option>
+						<option busProperties.driver = "Jean">Jean</option>
+						<option busProperties.driver = "Ibra">Ibra</option>
+						<option busProperties.driver = "Econo">Econo</option>
 					</select>
 				</div>
 				<div class="form-group">
+					 
+					<label for="Route">
+						Route
+					</label>
+						<select class="form-control" id="busSelect">
+						<option busProperties.route = "Route A">Route A</option>
+						<option busProperties.route = "Route B">Route B</option>
+						<option busProperties.route = "Route D">Route C</option>
+						<option busProperties.route = "Route D">Route D</option>
+						<option busProperties.route = "Route E">Route E</option>
+					</select>
+					
+				</div>
+				 
+				
+			
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <input type="button" />
+					      </div>
+						</form>
+    </div>
+  </div>
+</div>
+
+		<!--AddDriverModal -->
+<div class="modal fade" id="AddDriverModal" tabindex="-1" role="dialog" aria-labelledby="Driver" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="AddDriverLabel">Add Driver</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method ="post" role="form" id = "busPopUpForm">
+				<div class="form-group" >
+					 
+					<label for="Name">
+						Name
+					</label>
+					  <select class="form-control" id="busSelect">
+						<option>John</option>
+						<option>Jack</option>
+						<option>Jean</option>
+						<option>Jeff</option>
+						<option>Jill</option>
+					</select>
+				</div>
+				<div class="form-group">
+					 
+					<label for="lastName">
+						Last Name
+					</label>
+					<select class="form-control" id="busSelect">
+						<option>Figueroa</option>
+						<option>Lopes</option>
+						<option>Hall</option>
+						<option>Black</option>
+						<option>Hess</option>
+					</select>
+				</div>
+				<!--<div class="form-group">
 					 
 					<label for="Route">
 						Route
@@ -148,9 +232,28 @@
 						<option>Route E</option>
 					</select>
 					
-				</div>
+				</div>-->
 				 
-				<button type="submit" class="btn btn-default">
-					Submit
-				</button>
-			</form>		-->
+				
+			</form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <input type="submit" class="btn btn-primary" value ="Save" />
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!--<tr *ngFor="let name of names; let i = index">
+    <td>{{bus}}</td>
+    <td>{{driverName}}</td>
+		<td>{{route}}</td>
+</tr>-->
+<!--<tr *ngFor="let hero of heroes; let i = index">
+    <td>{{driver}}</td>
+    <td>{{driverLastName}}</td>
+</tr>-->
+
