@@ -9,6 +9,15 @@ header {
   width: 100%;
 }
 
+.ng2map {
+  width: 100%;
+  height: 100%;
+}
+
+#mainTabs {
+  height: 75%;
+}
+
 #addBusButton{
  float: right;
  /*background: #0275d8;*/
@@ -21,8 +30,6 @@ header {
 #busAndDriverButton{
       margin: 3% auto;
 }
-
-
 
 th{
   font:10px;

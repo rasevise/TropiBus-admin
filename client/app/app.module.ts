@@ -1,7 +1,7 @@
 import { NgModule, ApplicationRef, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule } from '@angular/http';
-import { CommonModule } from '@angular/common';
+import { HttpModule, Http } from '@angular/http';
+import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { FormsModule, ReactiveFormsModule }    from "@angular/forms";
 import { AppComponent } from './app.component';
 import { Ng2UtilsModule } from 'ng2-utils';
@@ -14,7 +14,10 @@ import { busdriverComponent }   from './components/busdriver/app.busdriverCompon
 import { messagesComponent }    from './components/messages/app.messagesComponent';
 import { mapviewComponent }     from './components/mapview/app.mapviewComponent';
 import { maprouteComponent }    from './components/maproute/app.maprouteComponent';
-import { Ng2MapModule,  }      from 'ng2-map';
+import { RoutesComponent }      from './routepaths/routes.component';
+import { Ng2MapModule }         from 'ng2-map';
+import { RoutesService }        from './routepaths/routes.service';
+import { Routes }               from './routepaths/routes';
 
 @NgModule({
   imports:      [ BrowserModule, 
@@ -36,9 +39,12 @@ import { Ng2MapModule,  }      from 'ng2-map';
                   mapviewComponent,
                   busdriverComponent,
                   messagesComponent,
+                  RoutesComponent
                   ],
   schemas:  [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ],
-  bootstrap:    [ AppComponent ]
+  bootstrap:    [ AppComponent ],
+  providers: [ RoutesService ]
+  
 })
 
-export class AppModule { }
+export class AppModule {}

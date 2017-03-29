@@ -5,5 +5,5 @@ import { Component } from '@angular/core';
   templateUrl: './app/components/contentArea/contentArea.html',
 })
 export class contentAreaComponent  {
-  
+
 }

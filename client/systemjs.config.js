@@ -90,14 +90,6 @@
          main: 'index.js', 
          defaultExtension: 'js' 
       },
-      // 'ng2-map': { 
-      //   main: 'dist/index.js', 
-      //   defaultExtension: 'js' 
-      // },
-      // 'ng2-utils': { 
-      //   main: './index.js', 
-      //   defaultExtension: 'js' 
-      // }
     },
   });
 })(this);
