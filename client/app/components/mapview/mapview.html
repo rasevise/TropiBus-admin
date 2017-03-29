@@ -1,33 +1,3 @@
-<<<<<<< HEAD
-<!--<h1>
-  {{title}}
-</h1>
-
-<sebm-google-map class="sebm-google-map-container"
-  [latitude]="lat"
-  [longitude]="lng"
-  [zoom]="zoom"
-  [disableDefaultUI]="true"
-  [zoomControl]="true"
-  >
-
-  <sebm-google-map-marker 
-      *ngFor="let m of markers; let i = index"
-      (markerClick)="clickedMarker(m.label, i)"
-      [latitude]="m.lat"
-      [longitude]="m.lng"
-      [label]="m.label"
-      [markerDraggable]="m.draggable"
-      [iconUrl]="m.icon">
-
-    <sebm-google-map-info-window>
-        <p>More info!</p>
-    </sebm-google-map-info-window>
-
-  </sebm-google-map-marker>
-
-</sebm-google-map>-->
-=======
 <ng2-map 
 class="ng2Map" 
 id="overviewmap" 
@@ -41,4 +11,3 @@ scrollwheel="true">
 [strokeOpacity]="1"
 [strokeWeight]="2"></polyline>
 </ng2-map>
->>>>>>> 008bfa676ec4833b91c27093e818fd4fd3b6d808
