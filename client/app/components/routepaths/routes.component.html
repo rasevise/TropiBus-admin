@@ -13,4 +13,8 @@
         [strokeOpacity]="1"
         [strokeWeight]="2">
     </polyline>
+    <marker 
+        *ngFor="let stop of stops" 
+        [position]= "[stop.stop_latitude, stop.stop_longitude]">
+    </marker>
 </ng2-map>
