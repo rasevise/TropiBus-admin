@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule }    from "@angular/forms";
 import { AppComponent } from './app.component';
 import { Ng2UtilsModule } from 'ng2-utils';
 import { NgbModule }     from '@ng-bootstrap/ng-bootstrap';
+import { Ng2MapModule }         from 'ng2-map';
 
 import { headerComponent }      from './components/header/app.headerComponent';
 import { contentAreaComponent } from './components/contentArea/app.contentAreaComponent';
@@ -14,11 +15,10 @@ import { busdriverComponent }   from './components/busdriver/app.busdriverCompon
 import { messagesComponent }    from './components/messages/app.messagesComponent';
 import { mapviewComponent }     from './components/mapview/app.mapviewComponent';
 import { maprouteComponent }    from './components/maproute/app.maprouteComponent';
-import { RoutesComponent }      from './routepaths/routes.component';
-import { Ng2MapModule }         from 'ng2-map';
-import { RoutesService }        from './routepaths/routes.service';
+import { RoutesComponent }      from './components/routepaths/routes.component';
+import { RoutesService }        from './components/routepaths/routes.service';
 import { BusDriverService }     from './components/busdriver/app.busdriverService';
-import { Routes }               from './routepaths/routes';
+import { Routes }               from './components/routepaths/routes';
 
 @NgModule({
   imports:      [ BrowserModule, 

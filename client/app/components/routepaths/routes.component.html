@@ -1,0 +1,16 @@
+<ng2-map 
+    class="ng2Map" 
+    id="overviewmap" 
+    center="Mayagüez, Puerto Rico" 
+    mapTypeId="terrain" 
+    scrollwheel="true">
+    <polyline 
+        *ngFor="let p of path" 
+        [editable]="false"
+        [path]="p.path"
+        [geodesic]="true"
+        [strokeColor]="'#0000ff'"
+        [strokeOpacity]="1"
+        [strokeWeight]="2">
+    </polyline>
+</ng2-map>

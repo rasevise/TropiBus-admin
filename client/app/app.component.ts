@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
 import { Ng2MapComponent } from 'ng2-map';
-import { RoutesService } from './routepaths/routes.service';
+import { RoutesService } from './components/routepaths/routes.service';
 
 @Component({
   selector: 'my-app',
