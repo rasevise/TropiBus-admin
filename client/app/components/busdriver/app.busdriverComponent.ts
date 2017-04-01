@@ -34,8 +34,16 @@ export class busdriverComponent{
     this.buses.push(bus);
   }
 
-  addDriver(){
-    this.drivers.push(this.drivers);
+  addDriver(driver: Driver){
+    this.drivers.push(driver);
+  }
+
+    deleteBus(i: any){
+      this.buses.splice(i , 1);
+  }
+
+      deleteDriver(i: any){
+      this.drivers.splice(i , 1);
   }
 
 }
