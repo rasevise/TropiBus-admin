@@ -1,10 +1,15 @@
+
 import { Component, OnInit } from '@angular/core';
 import { Injectable, Inject } from '@angular/core';
 import { Location }   from '@angular/common';
-import { busDriverService } from './busdriver.service';
+
 import { Bus} from './bus';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
+
+import { BusDriverService } from './app.busdriverService'
+
 
 @Component({
   selector: 'busdriver',
@@ -12,6 +17,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
  
   
 })
+
 
 
 export class busdriverComponent{ 
@@ -28,7 +34,7 @@ export class busdriverComponent{
   //   }
   // }
 
-  constructor (@Inject(busDriverService) private service: busDriverService){
+  constructor (@Inject(BusDriverService) private service: BusDriverService){
         service.getBuses()
         .subscribe(buses => this.bus = buses);
     }
@@ -69,8 +75,6 @@ this.bus.push(bus);
   // goBack(): void {
   //   this.location.back();
   // }
-}
-
 
 
 
