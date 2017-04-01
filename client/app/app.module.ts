@@ -19,6 +19,7 @@ import { maprouteComponent }    from './components/maproute/app.maprouteComponen
 import { RoutesComponent }      from './components/routepaths/routes.component';
 import { RoutesService }        from './components/routepaths/routes.service';
 import { BusDriverService }     from './components/busdriver/app.busdriverService';
+import { MessageService }     from './components/messages/app.messageService';
 import { Routes }               from './components/routepaths/routes';
 
 @NgModule({
@@ -49,7 +50,8 @@ import { Routes }               from './components/routepaths/routes';
 
 
   providers: [ RoutesService,
-               BusDriverService ]
+               BusDriverService,
+               MessageService ]
 
   
 })
