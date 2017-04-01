@@ -1,61 +1,56 @@
 <div class="container-fluid" >
 	<div class="row">
 		<div class="col-md-12">
-            <div id = "busAndDriverButton" class="row">
-				
+      <br>
+        <div id = "busAndDriversButton" class="row">
 				<div class="col-md-6">
-                    <h3>Bus <button  id = "addBusButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddBusModal"> Add</button> </h3>
-                    
+           <h3>Bus <button (click)="addBus()"  id = "addBusButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddBusModal"> Add</button> </h3>        
 				</div>
 				<div class="col-md-6">
-                    <h3>Driver <button id = "addDriverButtton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddDriverModal"> Add</button></h3>
-                    
+           <h3>Drivers <button (click)="addDriver()" id = "addDriversButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddDriversModal"> Add</button></h3>
 				</div>
 			</div>
+      <br>
 			<div class="row">
 				<div class="col-md-6">
-                    
 					<table class="table table-hover">
 						<thead>
 							<tr id = "busTable">
 								<th>Bus</th>
-								<th>Driver</th>
+								<th>Drivers</th>
                 <th>Route</th>
 								<th>Status</th>
 							</tr>
-					</thead>
+					  </thead>
 						<tbody>
-							<tr *ngFor="let bus of Bus">
-   						 <td>{{bus.name}}</td>
-    					<td>{{bus.driver}}</td>
-							<td>{{bus.route}}</td>
-							<td>{{bus.status}}</td>
-</tr>
-							
+							<tr *ngFor="let bus of buses">
+                <td>{{bus.name}}</td>
+                <td>{{bus.drivers}}</td>
+                <td>{{bus.route}}</td>
+                <td>{{bus.status}}</td>
+              </tr>
 						</tbody>
 					</table>
-					
 				</div>
 				<div class="col-md-6">
 					<table class="table table-hover">
-						
-        	<thead>
-							<tr id = "busTable">
-								<th>Name</th>
-								<th>Last Name</th>
+            <thead>
+              <tr id = "busTable">
+                <th>Name</th>
+                <th>Last Name</th>
                 <th>Route</th>
-								<th>Status</th>
-							</tr>
-					</thead>
-              <tbody>
-							<tr *ngFor="let driver of Driver">
-								<td>{{driver.name}}</td>
-								<td>{{driver.lastName}}</td>
-								<td>{{driver.route}}</td>
-								<td>{{driver.status}}</td>
-							</tr>
-						</tbody>
-					</table>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let driver of drivers">
+              <td>{{driver.name}}</td>
+              <td>{{driver.lastName}}</td>
+              <td>{{driver.route}}</td>
+              <td>{{driver.status}}</td>
+            </tr>
+            </tbody>
+          </table>
 				</div>
 			</div>
 		</div>
@@ -93,16 +88,16 @@
  
 
       <div class="form-group">
-        <label for="driver">Driver</label>
+        <label for="drivers">Drivers</label>
         <select  class="form-control"
-                name="driver"
-                [(ngModel)]="bus.driver" required
-                #driver="ngModel" >
-          <option *ngFor="let driver of drivers" [value]="driver.name">{{driver.name}} {{driver.lastName}}</option>
+                name="drivers"
+                [(ngModel)]="bus.drivers" required
+                #drivers="ngModel" >
+          <option *ngFor="let drivers of driverss" [value]="drivers.name">{{drivers.name}} {{drivers.lastName}}</option>
         </select>
 
-        <div *ngIf="driver.errors && driver.touched" class="alert alert-danger">
-          <div [hidden]="!driver.errors.required">Driver is required</div>
+        <div *ngIf="drivers.errors && drivers.touched" class="alert alert-danger">
+          <div [hidden]="!drivers.errors.required">Drivers is required</div>
         </div>
       </div>
 
@@ -112,8 +107,8 @@
   </div>
 </div>-->
 
-		<!--AddDriverModal -->
-<!--<div class="modal fade" id="AddBusModal" tabindex="-1" role="dialog" aria-labelledby="Bus" aria-hidden="true">
+		<!--AddDriversModal -->
+<div class="modal fade" id="AddBusModal" tabindex="-1" role="dialog" aria-labelledby="Bus" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -148,16 +143,16 @@
  
 
       <div class="form-group">
-        <label for="driver">Driver</label>
+        <label for="drivers">Drivers</label>
         <select  class="form-control"
-                name="driver"
-                [(ngModel)]="bus.driver" required
-                #driver="ngModel" >
-          <option *ngFor="let driver of drivers" [value]="driver.name">{{driver.name}} {{driver.lastName}}</option>
+                name="drivers"
+                [(ngModel)]="bus.drivers" required
+                #drivers="ngModel" >
+          <option *ngFor="let drivers of driverss" [value]="drivers.name">{{drivers.name}} {{drivers.lastName}}</option>
         </select>
 
-        <div *ngIf="driver.errors && driver.touched" class="alert alert-danger">
-          <div [hidden]="!driver.errors.required">Driver is required</div>
+        <div *ngIf="drivers.errors && drivers.touched" class="alert alert-danger">
+          <div [hidden]="!drivers.errors.required">Drivers is required</div>
         </div>
       </div>
 
@@ -170,18 +165,18 @@
       </div>
     </div>
   </div>
-</div>-->
+</div>
 
 
 
 
 
-		<!--AddDriverModal -->
-<!--<div class="modal fade" id="AddDriverModal" tabindex="-1" role="dialog" aria-labelledby="Driver" aria-hidden="true">
+		<!--AddDriversModal -->
+<div class="modal fade" id="AddDriversModal" tabindex="-1" role="dialog" aria-labelledby="Drivers" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="AddDriverLabel">Add Driver</h5>
+        <h5 class="modal-title" id="AddDriversLabel">Add Drivers</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -195,7 +190,7 @@
 					</label>
 					  <input type="text"  class="form-control"
                required minlength="4" maxlength="24"
-                 name="name" [(ngModel)]="driver.name"
+                 name="name" [(ngModel)]="drivers.name"
                    #name="ngModel" >
 
         <div *ngIf="name.errors && (name.dirty || name.touched)"
@@ -218,7 +213,7 @@
 					</label>
 					        <input type="text"  class="form-control"
                required minlength="4" maxlength="24"
-               name="lastName" [(ngModel)]="driver.lastName"
+               name="lastName" [(ngModel)]="drivers.lastName"
                #lastName="ngModel" >
 
         <div *ngIf="lastName.errors && (lastName.dirty || lastName.touched)"
@@ -235,7 +230,7 @@
         </div>
                 <div class="form-group">
                      <label for="">Password</label>
-                         <input type="password" class="form-control" name="password" [ngModel]="driver.password" 
+                         <input type="password" class="form-control" name="password" [ngModel]="drivers.password" 
                             required validateEqual="confirmPassword" reverse="true" #password="ngModel">
                   <small [hidden]="password.valid || (password.pristine && !f.submitted)" class="text-danger">
                     Password is required
@@ -243,7 +238,7 @@
              </div>
             <div class="form-group">
                   <label for="">Retype password</label>
-                      <input type="password" class="form-control" name="confirmPassword" [ngModel]="driver.confirmPassword" 
+                      <input type="password" class="form-control" name="confirmPassword" [ngModel]="drivers.confirmPassword" 
                           required validateEqual="password" reverse="false" #confirmPassword="ngModel">
                   <small [hidden]="confirmPassword.valid || (confirmPassword.pristine && !f.submitted)" class="text-danger">
                   Password mismatch
@@ -259,7 +254,7 @@
       </div>
     </div>
   </div>
-</div>-->
+</div>
 
 
 

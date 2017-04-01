@@ -14,8 +14,10 @@ import { BusDriverService } from './app.busdriverService'
 })
 
 export class busdriverComponent{ 
-  bus: any[];
 
+  buses: any[] = [];
+  drivers: any[] = [];
+  bus = {id: 1, name: 'name', driver: 'driver', route: 'route', status:'status'};
   x:number;
   //   ngOnInit() {
   //   this.bus = {
@@ -29,24 +31,14 @@ export class busdriverComponent{
 
   constructor (@Inject(BusDriverService) private service: BusDriverService){
         service.getBuses()
-        .subscribe(buses => this.bus = buses);
-    }
+        .subscribe(buses => this.buses = buses);
+        service.getDrivers()
+        .subscribe(drivers => this.drivers = drivers);
+  }
 
-   Bus = [
-    {id: 1, name: "Bus A", driver: "Juan", route: "Route A", status: "active"},
-    { id: 2 ,name: "Bus B", driver: "Pedro", route: "Route B", status: "offline"},
-    {id: 3 ,name: "Bus C", driver: "Jorge", route: "Route C", status: "offline"}
-    ]
-
-      Driver =[
-    { id: 1, name: "Juan", lastName: "Juan", route: "Route A", status: "active"},
-    {  id: 2, name: "Juan", lastName: "Pedro", route: "Route B", status: "active"},
-    {  id: 3, name: "Juan", lastName: "Jorge", route: "Route C", status: "active"}
-    ];
-
-    addBus(bus: any){
-    this.bus.push(bus);
-    }
+  addBus(){
+    this.buses.push(this.bus);
+  }
 
 //  constructor(
 //     private busService: busService,

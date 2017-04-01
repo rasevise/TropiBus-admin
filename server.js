@@ -2,13 +2,12 @@ var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
 
+//route models
 var index = require('./routes/index');
 var routes = require('./routes/routes');
 var buses = require('./routes/buses');
-
- var stops = require('./routes/stops');
-
 var stops = require('./routes/stops');
+var drivers = require('./routes/drivers');
 
 
 var port = process.env.PORT || 8080;
@@ -30,9 +29,10 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 // Route Services
 app.use('/', index);
-app.use('/routesjson', routes);
+app.use('/routes', routes);
 app.use('/buses', buses);
-app.use('/stopsjson', stops);
+app.use('/stops', stops);
+app.use('/drivers', drivers);
 
 app.listen(port, function(){
     console.log('Server started on port '+port);

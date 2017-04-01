@@ -9,8 +9,8 @@ import 'rxjs/add/operator/do';
 @Injectable()
 export class RoutesService {
   
-  private _routesURL = '/routesjson';
-  private _stopsURL = '/stopsjson';
+  private _routesURL = '/routes';
+  private _stopsURL = '/stops';
 
   constructor (@Inject(Http) private http: Http ) {}
 
