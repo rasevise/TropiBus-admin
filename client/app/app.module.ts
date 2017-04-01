@@ -6,6 +6,8 @@ import { FormsModule, ReactiveFormsModule }    from "@angular/forms";
 import { AppComponent } from './app.component';
 import { Ng2UtilsModule } from 'ng2-utils';
 import { NgbModule }     from '@ng-bootstrap/ng-bootstrap';
+import { busDriverService } from './components/busdriver/busdriver.service';
+import { EqualValidator } from './directives/validator/equal-validator.directive';
 
 import { headerComponent }      from './components/header/app.headerComponent';
 import { contentAreaComponent } from './components/contentArea/app.contentAreaComponent';
@@ -32,6 +34,7 @@ import { Routes }               from './routepaths/routes';
                   Ng2UtilsModule,
                   ],
   declarations: [ AppComponent,
+                  EqualValidator,
                   headerComponent, 
                   contentAreaComponent,
                   footerComponent,
@@ -43,7 +46,7 @@ import { Routes }               from './routepaths/routes';
                   ],
   schemas:  [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ],
   bootstrap:    [ AppComponent ],
-  providers: [ RoutesService ]
+  providers: [ RoutesService, busDriverService ]
   
 })
 

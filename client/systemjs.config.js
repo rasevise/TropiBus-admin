@@ -71,7 +71,7 @@
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
       "ts":                        'npm:plugin-typescript/lib',
       'typescript':                'npm:typescript/lib/typescript.js',
-
+      'angular2-click-to-edit': 'npm:angular2-click-to-edit@1.0.50',
       //ng2-maps Google maps
       'ng2-map': 'npm:ng2-map/dist/ng2-map.umd.js',
 
@@ -90,6 +90,7 @@
          main: 'index.js', 
          defaultExtension: 'js' 
       },
+      'angular2-click-to-edit': { main: 'index' },
     },
   });
 })(this);

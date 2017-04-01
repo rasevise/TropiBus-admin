@@ -25,37 +25,7 @@
 							</tr>
 					</thead>
 						<tbody>
-								<!--<tr>
-								<td>Bus A</td>
-								<td>Juan</td>
-								<td>A</td>
-								<td>Active</td>
-							</tr>
-							<tr>
-								<td>Bus B</td>
-								<td>John</td>
-								<td>B</td>
-								<td>Active</td>
-							</tr>
-							<tr>
-								<td>Bus c</td>
-								<td>Jeff</td>
-								<td>C</td>
-								<td>Changing Driver</td>
-							</tr>
-							<tr>
-								<td>Bus D</td>
-								<td>Jack</td>
-								<td>D</td>
-								<td>Inactive</td>
-							</tr>
-							<tr>
-								<td>Bus E</td>
-								<td>Jill</td>
-								<td>E</td>
-								<td>Inactive</td>
-							</tr>-->
-							<tr *ngFor="let bus of busProperties">
+							<tr *ngFor="let bus of Bus">
    						 <td>{{bus.name}}</td>
     					<td>{{bus.driver}}</td>
 							<td>{{bus.route}}</td>
@@ -67,44 +37,22 @@
 					
 				</div>
 				<div class="col-md-6">
-					<table class="table table-striped table-hover">
-						<thead>
-							<tr>
+					<table class="table table-hover">
+						
+        	<thead>
+							<tr id = "busTable">
 								<th>Name</th>
 								<th>Last Name</th>
+                <th>Route</th>
 								<th>Status</th>
 							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Juan</td>
-								<td>Figueroa</td>
-								<td>Logged</td>
-								
-							</tr>
-							<tr>
-								<td>John</td>
-								<td>Lopes</td>
-								<td>Logged</td>
-								
-							</tr>
-							<tr>
-								<td>Jeff</td>
-								<td>Hall</td>
-								<td>Offline</td>
-								
-							</tr>
-							<tr>
-								<td>Jack</td>
-								<td>Black</td>
-								<td>Logged</td>
-								
-							</tr>
-							<tr>
-								<td>Jill</td>
-								<td>Hess</td>
-								<td>Logged</td>
-								
+					</thead>
+              <tbody>
+							<tr *ngFor="let driver of Driver">
+								<td>{{driver.name}}</td>
+								<td>{{driver.lastName}}</td>
+								<td>{{driver.route}}</td>
+								<td>{{driver.status}}</td>
 							</tr>
 						</tbody>
 					</table>
@@ -115,11 +63,59 @@
 </div>
 
 
-			<!-- AddBusModal -->
-<div class="modal fade" id="AddBusModal" tabindex="-1" role="dialog" aria-labelledby="Bus" aria-hidden="true">
+			 <!--AddBusModal--> 
+<!--<div class="modal fade" id="AddBusModal" tabindex="-1" role="dialog" aria-labelledby="Bus" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-			<form role="form" id = "busPopUpForm">
+			<form #busForm="ngForm"   (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="Bus name">Bus name</label>
+
+        <input type="text"  class="form-control"
+               required minlength="4" maxlength="24"
+               name="name" [(ngModel)]="bus.name"
+               #name="ngModel" >
+
+        <div *ngIf="name.errors && (name.dirty || name.touched)"
+             class="alert alert-danger">
+            <div [hidden]="!bus.errors.required">
+              Bus name is urequired
+            </div>
+            <div [hidden]="!bus.errors.minlength">
+              Name must be at least 4 characters long.
+            </div>
+            <div [hidden]="!bus.errors.maxlength">
+              Name cannot be more than 24 characters long.
+            </div>
+        </div>
+      </div>
+
+ 
+
+      <div class="form-group">
+        <label for="driver">Driver</label>
+        <select  class="form-control"
+                name="driver"
+                [(ngModel)]="bus.driver" required
+                #driver="ngModel" >
+          <option *ngFor="let driver of drivers" [value]="driver.name">{{driver.name}} {{driver.lastName}}</option>
+        </select>
+
+        <div *ngIf="driver.errors && driver.touched" class="alert alert-danger">
+          <div [hidden]="!driver.errors.required">Driver is required</div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+    </div>
+  </div>
+</div>-->
+
+		<!--AddDriverModal -->
+<!--<div class="modal fade" id="AddBusModal" tabindex="-1" role="dialog" aria-labelledby="Bus" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="AddBusLabel">Add Bus</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -127,62 +123,61 @@
         </button>
       </div>
       <div class="modal-body">
-        
-				<div class="form-group" >
-					 
-					<label for="Bus">
-						Bus
-					</label>
-					  <select class="form-control" id="busSelect">
-						<option busProperties.name = " Bus A">Bus A</option>
-						<option  busProperties.name = " Bus B">Bus B</option>
-						<option  busProperties.name = " Bus C">Bus C</option>
-						<option  busProperties.name = " Bus D">Bus D</option>
-						<option  busProperties.name = " Bus E">Bus E</option>
-					</select>
-				</div>
-				<div class="form-group">
-					 
-					<label for="Driver">
-						Driver
-					</label>
-					<select class="form-control" id="busSelect">
-						<option busProperties.driver = "Juan">Juan</option>
-						<option busProperties.driver = "Pedro">Pedro</option>
-						<option busProperties.driver = "Jean">Jean</option>
-						<option busProperties.driver = "Ibra">Ibra</option>
-						<option busProperties.driver = "Econo">Econo</option>
-					</select>
-				</div>
-				<div class="form-group">
-					 
-					<label for="Route">
-						Route
-					</label>
-						<select class="form-control" id="busSelect">
-						<option busProperties.route = "Route A">Route A</option>
-						<option busProperties.route = "Route B">Route B</option>
-						<option busProperties.route = "Route D">Route C</option>
-						<option busProperties.route = "Route D">Route D</option>
-						<option busProperties.route = "Route E">Route E</option>
-					</select>
-					
-				</div>
-				 
-				
-			
+       	<form #busForm="ngForm"   (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="Bus name">Bus name</label>
+
+        <input type="text"  class="form-control" required minlength="4" maxlength="24"
+               name="name" [(ngModel)]="bus.name"
+               #name="ngModel" >
+
+        <div *ngIf="name.errors && (name.dirty || name.touched)"
+             class="alert alert-danger">
+            <div [hidden]="!bus.errors.required">
+              Bus name is urequired
+            </div>
+            <div [hidden]="!bus.errors.minlength">
+              Name must be at least 4 characters long.
+            </div>
+            <div [hidden]="!bus.errors.maxlength">
+              Name cannot be more than 24 characters long.
+            </div>
+        </div>
       </div>
+
+ 
+
+      <div class="form-group">
+        <label for="driver">Driver</label>
+        <select  class="form-control"
+                name="driver"
+                [(ngModel)]="bus.driver" required
+                #driver="ngModel" >
+          <option *ngFor="let driver of drivers" [value]="driver.name">{{driver.name}} {{driver.lastName}}</option>
+        </select>
+
+        <div *ngIf="driver.errors && driver.touched" class="alert alert-danger">
+          <div [hidden]="!driver.errors.required">Driver is required</div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+    </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <input type="button" />
-					      </div>
-						</form>
+        
+      </div>
     </div>
   </div>
-</div>
+</div>-->
+
+
+
+
 
 		<!--AddDriverModal -->
-<div class="modal fade" id="AddDriverModal" tabindex="-1" role="dialog" aria-labelledby="Driver" aria-hidden="true">
+<!--<div class="modal fade" id="AddDriverModal" tabindex="-1" role="dialog" aria-labelledby="Driver" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -192,68 +187,89 @@
         </button>
       </div>
       <div class="modal-body">
-        <form method ="post" role="form" id = "busPopUpForm">
+        <form #busForm="ngForm"   (ngSubmit)="onSubmit()">
 				<div class="form-group" >
 					 
 					<label for="Name">
 						Name
 					</label>
-					  <select class="form-control" id="busSelect">
-						<option>John</option>
-						<option>Jack</option>
-						<option>Jean</option>
-						<option>Jeff</option>
-						<option>Jill</option>
-					</select>
-				</div>
-				<div class="form-group">
+					  <input type="text"  class="form-control"
+               required minlength="4" maxlength="24"
+                 name="name" [(ngModel)]="driver.name"
+                   #name="ngModel" >
+
+        <div *ngIf="name.errors && (name.dirty || name.touched)"
+               class="alert alert-danger">
+            <div [hidden]="!name.errors.required">
+              Name is urequired
+            </div>
+            <div [hidden]="!name.errors.minlength">
+              Name must be at least 4 characters long.
+            </div>
+            <div [hidden]="!name.errors.maxlength">
+              Name cannot be more than 24 characters long.
+            </div>
+        </div>
+
+
 					 
 					<label for="lastName">
 						Last Name
 					</label>
-					<select class="form-control" id="busSelect">
-						<option>Figueroa</option>
-						<option>Lopes</option>
-						<option>Hall</option>
-						<option>Black</option>
-						<option>Hess</option>
-					</select>
-				</div>
-				<!--<div class="form-group">
-					 
-					<label for="Route">
-						Route
-					</label>
-						<select class="form-control" id="busSelect">
-						<option>Route A</option>
-						<option>Route B</option>
-						<option>Route C</option>
-						<option>Route D</option>
-						<option>Route E</option>
-					</select>
-					
-				</div>-->
-				 
-				
-			</form>
-      </div>
+					        <input type="text"  class="form-control"
+               required minlength="4" maxlength="24"
+               name="lastName" [(ngModel)]="driver.lastName"
+               #lastName="ngModel" >
+
+        <div *ngIf="lastName.errors && (lastName.dirty || lastName.touched)"
+             class="alert alert-danger">
+            <div [hidden]="!lastName.errors.required">
+              Last name is urequired
+            </div>
+            <div [hidden]="!lastName.errors.minlength">
+              Name must be at least 4 characters long.
+            </div>
+            <div [hidden]="!lastName.errors.maxlength">
+              Name cannot be more than 24 characters long.
+            </div>
+        </div>
+                <div class="form-group">
+                     <label for="">Password</label>
+                         <input type="password" class="form-control" name="password" [ngModel]="driver.password" 
+                            required validateEqual="confirmPassword" reverse="true" #password="ngModel">
+                  <small [hidden]="password.valid || (password.pristine && !f.submitted)" class="text-danger">
+                    Password is required
+                  </small>
+             </div>
+            <div class="form-group">
+                  <label for="">Retype password</label>
+                      <input type="password" class="form-control" name="confirmPassword" [ngModel]="driver.confirmPassword" 
+                          required validateEqual="password" reverse="false" #confirmPassword="ngModel">
+                  <small [hidden]="confirmPassword.valid || (confirmPassword.pristine && !f.submitted)" class="text-danger">
+                  Password mismatch
+                  </small>
+            </div>
+
+			</div>				
+		</form>
+    </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <input type="submit" class="btn btn-primary" value ="Save" />
+        
       </div>
     </div>
   </div>
-</div>
+</div>-->
 
 
 
-<!--<tr *ngFor="let name of names; let i = index">
-    <td>{{bus}}</td>
-    <td>{{driverName}}</td>
-		<td>{{route}}</td>
-</tr>-->
-<!--<tr *ngFor="let hero of heroes; let i = index">
-    <td>{{driver}}</td>
-    <td>{{driverLastName}}</td>
-</tr>-->
+
+
+
+
+
+
+
+
+
 
