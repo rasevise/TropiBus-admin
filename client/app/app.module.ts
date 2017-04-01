@@ -5,12 +5,8 @@ import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/c
 import { FormsModule, ReactiveFormsModule }    from "@angular/forms";
 import { Ng2UtilsModule } from 'ng2-utils';
 import { NgbModule }     from '@ng-bootstrap/ng-bootstrap';
-
-
 import { EqualValidator } from './directives/validator/equal-validator.directive';
-
 import { Ng2MapModule }         from 'ng2-map';
-
 
 import { AppComponent } from './app.component';
 import { headerComponent }      from './components/header/app.headerComponent';

@@ -2,11 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs';
 import { Routes } from './routes';
-
-
-
 import { Stops } from './stops';
-
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 

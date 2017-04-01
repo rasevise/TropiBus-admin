@@ -32,11 +32,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use('/', index);
 app.use('/routesjson', routes);
 app.use('/buses', buses);
-<<<<<<< HEAD
-
-=======
 app.use('/stopsjson', stops);
->>>>>>> 4d7f1bbd48ded02ac62b161050f926e333ec9a3d
 
 app.listen(port, function(){
     console.log('Server started on port '+port);
