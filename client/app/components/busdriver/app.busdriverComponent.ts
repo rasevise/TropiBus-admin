@@ -1,8 +1,7 @@
 
-import { Component, OnInit } from '@angular/core';
-import { Injectable, Inject } from '@angular/core';
+import { Component, OnInit, Injectable, Inject } from '@angular/core';
 import { Location }   from '@angular/common';
-import { Bus} from './bus';
+import { Bus, Driver } from './busdriver';
 import { NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BusDriverService } from './app.busdriverService'
@@ -11,34 +10,35 @@ import { BusDriverService } from './app.busdriverService'
 @Component({
   selector: 'busdriver',
   templateUrl: './app/components/busdriver/busdriver.html',
+  providers: [NgbModal],
 })
 
 export class busdriverComponent{ 
 
+  bus: Bus = new Bus();
+  driver: Driver = new Driver();
   buses: any[] = [];
   drivers: any[] = [];
-  bus = {id: 1, name: 'name', driver: 'driver', route: 'route', status:'status'};
-  x:number;
-  //   ngOnInit() {
-  //   this.bus = {
-  //     id: 2,
-  //     name: '',
-  //     driver: '',
-  //     route: '',
-  //     status: ''
-  //   }
-  // }
+  
+  // bus = {id: 1, name: 'name', driver: 'driver', route: 'route', status:'status'};
 
   constructor (@Inject(BusDriverService) private service: BusDriverService){
-        service.getBuses()
-        .subscribe(buses => this.buses = buses);
-        service.getDrivers()
-        .subscribe(drivers => this.drivers = drivers);
+
+    service.getBuses()
+    .subscribe(buses => this.buses = buses);
+    service.getDrivers()
+    .subscribe(drivers => this.drivers = drivers);
   }
 
-  addBus(){
-    this.buses.push(this.bus);
+  addBus(bus: Bus){
+    this.buses.push(bus);
   }
+
+  addDriver(){
+    this.drivers.push(this.drivers);
+  }
+
+}
 
 //  constructor(
 //     private busService: busService,

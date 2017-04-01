@@ -1,4 +1,4 @@
-export interface Bus {
+export class Bus {
     id: number;
     name: string;
     driver: string;
@@ -6,7 +6,7 @@ export interface Bus {
     status: string;
 }
 
-export interface Driver {
+export class Driver {
     id: number;
     name: string;
     lastName: string;
