@@ -6,7 +6,7 @@ import { RoutesService } from './components/routepaths/routes.service';
 @Component({
   selector: 'my-app',
   templateUrl: './app/app.component.html',
-  providers:[RoutesService],
+  providers:[ RoutesService ],
 })
 
 export class AppComponent {

@@ -3,11 +3,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule, Http } from '@angular/http';
 import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { FormsModule, ReactiveFormsModule }    from "@angular/forms";
-import { AppComponent } from './app.component';
 import { Ng2UtilsModule } from 'ng2-utils';
 import { NgbModule }     from '@ng-bootstrap/ng-bootstrap';
 import { Ng2MapModule }         from 'ng2-map';
 
+import { AppComponent } from './app.component';
 import { headerComponent }      from './components/header/app.headerComponent';
 import { contentAreaComponent } from './components/contentArea/app.contentAreaComponent';
 import { footerComponent }      from './components/footer/app.footerComponent';

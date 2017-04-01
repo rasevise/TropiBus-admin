@@ -23,4 +23,9 @@ export class RoutesComponent{
         service.getStops()
         .subscribe(stops => this.stops = stops);
     }
+
+    selectPoly(event: any){
+        var poly = event.target;
+        poly.nguiMapComponent;
+    }
 }

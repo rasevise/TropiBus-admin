@@ -1,14 +1,20 @@
 <ng2-map 
-class="ng2Map" 
-id="routemap" 
-zoom="3" 
-center="0, -180" 
-mapTypeId="terrain" 
-scrollwheel="true">
-<polyline [editable]="true"
-[path]="path"
-[geodesic]="true"
-[strokeColor]="'#FF0000'"
-[strokeOpacity]="1"
-[strokeWeight]="2"></polyline>
+    class="ng2Map" 
+    id="routemap"
+    center="Mayagüez, Puerto Rico" 
+    mapTypeId="terrain" 
+    scrollwheel="true"
+    (click)="addStop($event)">
+    <polyline  
+        [editable]="false"
+        [path]="path"
+        [geodesic]="true"
+        [strokeColor]="'#0000ff'"
+        [strokeOpacity]="1"
+        [strokeWeight]="2">
+    </polyline>
+    <marker 
+        *ngFor="let stop of stops" 
+        [position]="stop">
+    </marker>
 </ng2-map>

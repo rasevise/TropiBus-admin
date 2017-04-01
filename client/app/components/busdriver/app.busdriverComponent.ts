@@ -10,11 +10,7 @@ export class busdriverComponent  {
 
     constructor (@Inject(BusDriverService) private service: BusDriverService){
         service.getBuses()
-        .subscribe(buses => this.busesGet(buses));
-    }
-
-    busesGet(buses: any[]){
-      this.busProperties = buses;
+        .subscribe(buses => this.busProperties = buses);
     }
     
 }

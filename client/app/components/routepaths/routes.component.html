@@ -11,7 +11,8 @@
         [geodesic]="true"
         [strokeColor]="'#0000ff'"
         [strokeOpacity]="1"
-        [strokeWeight]="2">
+        [strokeWeight]="2"
+        (click)="selectPoly($event)">
     </polyline>
     <marker 
         *ngFor="let stop of stops" 
