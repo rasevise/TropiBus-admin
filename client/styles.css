@@ -18,6 +18,23 @@ header {
   height: 75%;
 }
 
+#map {
+  height: 100%;
+  width: 100%;
+  overflow:visible;
+  position: absolute;
+}
+
+#maproute2 {
+  height: 100%;
+  width: 100%;
+  overflow:visible;
+}
+
+#routeSelect {
+  position: relative;
+}
+
 #addBusButton{
  float: right;
  /*background: #0275d8;*/

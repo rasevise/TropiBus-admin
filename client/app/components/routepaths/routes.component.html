@@ -1,21 +1,33 @@
-<ng2-map 
-    class="ng2Map" 
-    id="overviewmap" 
-    center="Mayagüez, Puerto Rico" 
-    mapTypeId="terrain" 
-    scrollwheel="true">
-    <polyline 
-        *ngFor="let p of path" 
-        [editable]="false"
-        [path]="p.path"
-        [geodesic]="true"
-        [strokeColor]="'#0000ff'"
-        [strokeOpacity]="1"
-        [strokeWeight]="2"
-        (click)="selectPoly($event)">
-    </polyline>
-    <marker 
-        *ngFor="let stop of stops" 
-        [position]= "[stop.stop_latitude, stop.stop_longitude]">
-    </marker>
-</ng2-map>
+<div #map id="map">
+</div>
+<div class="btn-group" id="routeSelect">
+  <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Large button
+  </button>
+  <button id="routeSelectButton" type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="sr-only">Toggle Dropdown</span>
+  </button>
+<div class="dropdown-menu">
+  ...
+</div>
+<!-- Modal -->
+<div class="modal fade" id="pathModal" tabindex="-1" role="dialog" aria-labelledby="pathModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="pathModalLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!--body-->
+        {{m_title}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button (click)="setMTitle()" type="button" class="btn btn-primary">Send message</button>
+      </div>
+    </div>
+  </div>
+</div>
