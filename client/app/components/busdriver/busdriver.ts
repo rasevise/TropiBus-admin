@@ -10,5 +10,7 @@ export class Driver {
     id: number;
     name: string;
     lastName: string;
+    username: string;
+    password: string;
     status: string;
 }

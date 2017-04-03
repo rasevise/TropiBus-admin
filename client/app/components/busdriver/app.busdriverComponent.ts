@@ -7,6 +7,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BusDriverService } from './app.busdriverService'
 
 
+
 @Component({
   selector: 'busdriver',
   templateUrl: './app/components/busdriver/busdriver.html',
@@ -14,7 +15,8 @@ import { BusDriverService } from './app.busdriverService'
 })
 
 export class busdriverComponent{ 
-
+ private myValue: number;
+ private userNameValid: boolean = false;
   bus: Bus = new Bus();
   driver: Driver = new Driver();
   buses: any[] = [];
@@ -30,20 +32,108 @@ export class busdriverComponent{
     .subscribe(drivers => this.drivers = drivers);
   }
 
+    setValue(val:number) {
+        this.myValue = val;
+    }
+    getValue(){
+      return this.myValue;
+    }
+
+   getTempBus(x: number){
+     console.log(this.buses[x].name);
+      return this.buses[x];
+      
+    }
+       getTempDriver(x: number){
+      return this.drivers[x];
+    }
   addBus(bus: Bus){
-    this.buses.push(bus);
+       var temp_bus= new Bus();
+    temp_bus.name = bus.name;
+    temp_bus.driver = bus.driver;
+    temp_bus.route = bus.route;
+    temp_bus.status = bus.status;
+    
+    this.bus.name="";
+    this.bus.driver="";
+    this.bus.route="";
+    this.bus.status="";
+    this.buses.push(temp_bus);
   }
 
   addDriver(driver: Driver){
-    this.drivers.push(driver);
+    var temp_driver= new Driver();
+    temp_driver.name = driver.name;
+    temp_driver.lastName = driver.lastName;
+    temp_driver.username = driver.username;
+    temp_driver.password = driver.password;
+    
+    this.driver.name="";
+    this.driver.lastName="";
+    this.driver.username="";
+    this.driver.password="";
+    this.drivers.push(temp_driver);
+  
   }
 
     deleteBus(i: any){
       this.buses.splice(i , 1);
   }
 
-      deleteDriver(i: any){
+   deleteDriver(i: any){
       this.drivers.splice(i , 1);
+  }
+      
+      
+   editBus(bus:Bus){
+  
+    var temp_bus= new Bus();
+      
+      temp_bus.name = bus.name;
+      temp_bus.driver = bus.driver;
+  
+      this.bus.name="";
+      this.bus.driver="";
+
+      this.buses.splice(this.myValue, 1);
+      this.buses.splice(this.myValue, 0, temp_bus)  
+      
+      
+  }
+
+  editDriver(driver:Driver){
+  
+    var temp_driver= new Driver();
+      temp_driver.id = driver.id;
+      temp_driver.name = driver.name;
+      temp_driver.lastName = driver.lastName;
+      temp_driver.username = driver.username;
+      temp_driver.password = driver.password;
+     
+ 
+        this.driver.name="";
+        this.driver.lastName="";
+        this.driver.username ="";
+        this.driver.password ="";
+
+          this.drivers.splice(this.myValue, 1);
+          this.drivers.splice(this.myValue, 0, temp_driver)  
+      
+      
+  }
+
+  checkUsername(username : String){
+    for(var i:number = 0; i <this.drivers.length; i++){
+      if(username == this.drivers[i].username){
+        this.userNameValid = false;
+        break
+      }
+      else{
+        this.userNameValid = true;
+        break
+      }
+    }
+    return true;
   }
 
 }

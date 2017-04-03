@@ -39,10 +39,33 @@ header {
   float: right;
   /*background: #0275d8;*/
 }
-
+#editDriverButton{
+        border-right-width: 10px;
+        border-left-width: 10px;
+        float:right;
+}
+#editBusButton{
+        border-right-width: 10px;
+        border-left-width: 10px;
+        float: right;
+       
+}
+#deleteBusButton{
+        float:right;
+       
+}
+#deleteDriverButton{
+        float:right;
+       
+}
+    
 #busAndDriverButton{
       margin: 3% auto;
 }
+/*#messageInput{
+    height:200px;
+    font-size:14pt;
+}*/
 
 th{
   font:10px;
