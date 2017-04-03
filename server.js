@@ -8,6 +8,7 @@ var routes = require('./routes/routes');
 var buses = require('./routes/buses');
 var stops = require('./routes/stops');
 var drivers = require('./routes/drivers');
+var messages = require('./routes/messages');
 
 
 var port = process.env.PORT || 8080;
@@ -33,6 +34,7 @@ app.use('/routes', routes);
 app.use('/buses', buses);
 app.use('/stops', stops);
 app.use('/drivers', drivers);
+app.use('/messages', messages);
 
 app.listen(port, function(){
     console.log('Server started on port '+port);

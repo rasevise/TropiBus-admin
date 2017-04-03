@@ -44,6 +44,19 @@ header {
   /*background: #0275d8;*/
 }
 
+#addMessageButton{
+  float: right;
+  /*background: #0275d8;*/
+}
+#messageDeleteButton{
+  float: right;
+  /*background: #0275d8;*/
+}
+#editMessageButton{
+  float: right;
+  /*background: #0275d8;*/
+}
+
 #busAndDriverButton{
       margin: 3% auto;
 }
