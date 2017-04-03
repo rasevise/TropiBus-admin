@@ -2,7 +2,6 @@
 import { Component, OnInit, Injectable, Inject } from '@angular/core';
 import { Location }   from '@angular/common';
 import { Bus, Driver } from './busdriver';
-import { NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BusDriverService } from './app.busdriverService'
 
@@ -11,7 +10,7 @@ import { BusDriverService } from './app.busdriverService'
 @Component({
   selector: 'busdriver',
   templateUrl: './app/components/busdriver/busdriver.html',
-  providers: [NgbModal],
+  providers: [],
 })
 
 export class busdriverComponent{ 

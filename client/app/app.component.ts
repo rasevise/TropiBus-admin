@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
-import { Ng2MapComponent } from 'ng2-map';
 import { RoutesService } from './components/routepaths/routes.service';
 
 @Component({

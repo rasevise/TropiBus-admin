@@ -3,38 +3,29 @@
 <div class="container-fluid" id="mainContainer">
   <div class="row" >
     <div class="col-9" id="mainTabs">
-      <ngb-tabset>
-      <ngb-tab>
-        <template ngbTabTitle><b>Map Overview</b></template>
-        <template ngbTabContent>
+      <tabset #staticTabs>
+        <tab heading="Map Overview">
           <!--ng2-map component-->
-         <routes></routes>
-        </template>
-      </ngb-tab>
-      <ngb-tab>
-        <template ngbTabTitle><b>Routes and Stops</b></template>
-        <template ngbTabContent>
-          <!--maproute component-->
-          <maproute></maproute>>
-        </template>
-      </ngb-tab>
-        <ngb-tab>
-        <template ngbTabTitle><b>Buses and Drivers</b></template>
-        <template ngbTabContent>
+          <div id="overview" >
+            <routes></routes>
+          </div>
+        </tab>
+        <!--<tab heading="Routes and Stops">
+          maproute component
+          <div id="routestops">
+            <maproute></maproute>
+          </div>
+        </tab>-->
+        <tab heading="Buses and Drivers">
           <!--busdriver component-->
           <busdriver></busdriver>
-        </template>
-      </ngb-tab>
-        <ngb-tab>
-        <template ngbTabTitle><b>Messages</b></template>
-        <template ngbTabContent>
+        </tab>
+        <tab heading="Messages">
           <!--Message Component-->
           <messages></messages>
-        </template>
-      </ngb-tab>
-      </ngb-tabset>
+        </tab>
+      </tabset>
     </div>
-
 
 
     <!--Dashboard Content-->

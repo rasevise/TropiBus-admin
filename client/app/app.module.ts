@@ -4,9 +4,9 @@ import { HttpModule, Http } from '@angular/http';
 import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { FormsModule, ReactiveFormsModule }    from "@angular/forms";
 import { Ng2UtilsModule } from 'ng2-utils';
-import { NgbModule }     from '@ng-bootstrap/ng-bootstrap';
+import { Ng2BootstrapModule } from 'ng2-bootstrap';
+import { ModalModule } from 'ng2-bootstrap';
 import { EqualValidator } from './directives/validator/equal-validator.directive';
-import { Ng2MapModule }         from 'ng2-map';
 
 import { AppComponent } from './app.component';
 import { headerComponent }      from './components/header/app.headerComponent';
@@ -28,10 +28,8 @@ import { Routes }               from './components/routepaths/routes';
                   FormsModule,
                   CommonModule,
                   ReactiveFormsModule,
-                  NgbModule.forRoot(),
-                  Ng2MapModule.forRoot({
-                    apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyCHzXlwzDfvO_W481qe-fr1mqH1iBLEd20'
-                  }),
+                  ModalModule.forRoot(),
+                  Ng2BootstrapModule.forRoot(),
                   Ng2UtilsModule,
                   ],
   declarations: [ AppComponent,
