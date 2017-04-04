@@ -5,42 +5,142 @@
 
 <!--Route Select DropDown-->
 <div class="btn-group" id="routeSelect">
-<button class="btn btn-primary btn-lg" type="button" data-toggle="" aria-haspopup="true" aria-expanded="false" id="routeDisplay" (click)="openPathModal()">
+<button class="btn btn-primary btn-lg" type="button" data-toggle="" aria-haspopup="true" aria-expanded="false" id="routeDisplay" (click)="openPathModal()" href="javascript:void(0)">
   Select Route
 </button>
-<button id="routeSelectButton" type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<button id="routeSelectButton" type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="javascript:void(0)">
   <span class="sr-only">Toggle Dropdown</span>
 </button>
 <div class="dropdown-menu">
   <a 
   class="dropdown-item" 
-  (click)="setMTitle(''); setButtonText('routeDisplay', 'Select Route'); loadRoutes();" 
+  (click)="setMTitle(''); setButtonText('routeDisplay', 'Select Route'); loadRoutes(); clearMarkers()" 
   href="javascript:void(0)">
   <h4>Show All</h4></a>
   <a *ngFor="let route of routes;" 
   class="dropdown-item" 
-  (click)="setMTitle(route.route_name); setButtonText('routeDisplay', route.route_name); setRoute(route.route_ID);" 
+  (click)="setMTitle(route.route_name, route); setButtonText('routeDisplay', route.route_name); setRoute(route.route_ID);" 
   href="javascript:void(0)">
   {{route.route_name}}</a>
 </div>
 
 <!-- Path Edit Modal Modal -->
-<div class="modal fade" id="pathModal" tabindex="-1" role="dialog" aria-labelledby="pathModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal fade bd-example-modal-lg" id="pathModal" tabindex="-1" role="dialog" aria-labelledby="pathModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="pathModalLabel"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <h3 class="modal-title" id="pathModalLabel">{{m_title}}</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" href="javascript:void(0)">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body" *ngIf="m_title">
         <!--body-->
-        {{m_title}}
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="row">
+                <div class="card-block">
+                  <h5 class="card-title">Route</h5>
+                  <p class="card-text">{{m_route.route_name}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="card-block">
+                  <h5 class="card-title">Stop Name</h5>
+                  <p class="card-text">{{m_stop?.name}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="card-block">
+                  <h5 class="card-title">Latitude</h5>
+                  <p class="card-text">{{m_stop?.latitude}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="card-block">
+                  <h5 class="card-title">Area</h5>
+                  <p class="card-text">{{m_route.route_area}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="card-block">
+                  <h5 class="card-title">Stop Description</h5>
+                  <p class="card-text">{{m_stop?.description}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="card-block">
+                  <h5 class="card-title">Longitude</h5>
+                  <p class="card-text">{{m_stop?.longitude}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="card-block">
+                  <h5 class="card-title">Status</h5>
+                  <p class="card-text">{{m_route.status}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="card-block">
+                  <h5 class="card-title"></h5>
+                  <p class="card-text"></p></div>
+              </div>
+              <div class="row">
+                <div class="card-block">
+                  <h5 class="card-title"></h5>
+                  <p class="card-text"></p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--Description-->
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card w-100">
+                <div class="card-block">
+                  <h5 class="card-title">Description</h5>
+                  <p class="card-text">{{m_route.route_description}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--Route List-->
+          <div class="row">
+            <div class="col-md-12">
+              <div class="list-group" id="stopInfo">
+                <a type="button" class="list-group-item list-group-item-action active">
+                      <h5>Stop List</h5>
+                </a> 
+                <div *ngFor="let stop of locationMarkers" href="javascript:void(0)" >
+                  <div class="list-group">
+                    <a 
+                    href="javascript:void(0)" 
+                    class="list-group-item list-group-item-action list-group-item-info"
+                    (click)="editStop(stop)">
+                    Name: {{stop.name}}</a>
+                    <a class="list-group-item list-group-item-action">Description: {{stop.description}}</a>
+                    <a class="list-group-item list-group-item-action">Latitude: {{stop.latitude}}</a>
+                    <a class="list-group-item list-group-item-action">Longitude: {{stop.longitude}}</a>
+                  </div>
+                  <div id="editdeletestopbuttons">
+                  <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Edit</a>
+                  <a href="#" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Delete</a>
+                  </div>
+                  <br>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Send message</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" href="javascript:void(0)">Close</button>
+        <button type="button" class="btn btn-primary" href="javascript:void(0)">Send message</button>
       </div>
     </div>
   </div>
