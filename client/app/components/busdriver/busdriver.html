@@ -4,10 +4,10 @@
       <br>
         <div id = "busAndDriversButton" class="row">
 				<div class="col-md-6">
-           <h3>Bus <button  id = "addBusButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddBusModal"> Add</button> </h3>        
+           <h3>Bus <button  id = "addDriversButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddBusModal" (click)="busFormA.reset()"> Add</button> </h3>        
 				</div>
 				<div class="col-md-6">
-           <h3>Drivers <button id = "addDriversButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddDriverModal"> Add</button></h3>
+           <h3>Drivers <button id = "addDriversButton" (click)="driverFormA.reset()"type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddDriverModal"> Add</button></h3>
 				</div>
 			</div>
       <br>
@@ -28,7 +28,10 @@
                 <td>{{bus.driver}}</td>
                 <td>{{bus.route}}</td>
                 <td>{{bus.status}}</td>
-                <td><button class="btn" type="button" (click) ="deleteBus(i)">Delete</button></td>
+                <td><button  id = "editBusButton" type="button" class="btn btn-primary" (click) = "setValue(i);busFormE.reset()" data-toggle="modal" data-target="#EditBusModal">
+                     Edit
+                    </button>
+                    <button id ="deleteBusButton" class="btn" type="button" (click) ="deleteBus(i)">Delete</button></td>
               </tr>
 						</tbody>
 					</table>
@@ -49,7 +52,11 @@
               <td>{{driver.lastName}}</td>
               <td>{{driver.route}}</td>
               <td>{{driver.status}}</td>
-              <td><button class="btn" type="button" (click)="deleteDriver(i)">Delete</button></td>
+              <td>  <button  id = "editDriverButton" type="button" class="btn btn-primary" (click) = "setValue(i);driverFormB.reset()" data-toggle="modal" data-target="#EditDriverModal">
+                    Edit
+                    </button> 
+                    <button id ="deleteDriverButton" class="btn" type="button" (click)="deleteDriver(i)">Delete</button>
+            </td>
             </tr>
             </tbody>
           </table>
@@ -71,47 +78,50 @@
         </button>
       </div>
       <div class="modal-body">
-        <form #busForm="ngForm">
+        <form #busFormA="ngForm">
         <div class="form-group">
-          <label for="Bus name">Bus name</label>
+          <label for="Name">Bus name</label>
 
           <input type="text"  class="form-control"
                 required minlength="4" maxlength="24"
                 name="name" [(ngModel)]="bus.name"
-                #name="ngModel" >
-          <!--<div *ngIf="name.errors && (name.dirty || name.touched)"
-                class="alert alert-danger">
-            <div [hidden]="!name.errors.required">
-              Bus name is required
+                #busnameA="ngModel" >
+        <div *ngIf="busnameA.errors && (busnameA.dirty || busnameA.touched)"
+               class="alert alert-danger">
+            <div [hidden]="!busnameA.errors.required">
+              Name is required
             </div>
-            <div [hidden]="!name.errors.minlength">
+            <div [hidden]="!busnameA.errors.minlength">
               Name must be at least 4 characters long.
             </div>
-            <div [hidden]="!name.errors.maxlength">
+            <div [hidden]="!busnameA.errors.maxlength">
               Name cannot be more than 24 characters long.
             </div>
-          </div>-->
+            </div>
         </div>
         
         <div class="form-group">
-            <label for="driver">Drivers</label>
+            <label for="">Drivers</label>
               <select  class="form-control"
                         name="driver"
                         [(ngModel)]="bus.driver" required
-                        #driver="ngModel" >
-                  <option *ngFor="let driver of drivers" [value]="driver.name">{{driver.name}} {{driver.lastName}}</option>
+                        #busdriverA="ngModel" >
+                  <option *ngFor="let driver of drivers" >{{driver.name}} {{driver.lastName}}</option>
               </select>
-                <!--<div *ngIf="driver.errors && driver.touched" class="alert alert-danger">
-                  <div [hidden]="!driver.errors.required">Drivers is required</div>
-                </div>-->
+                <div *ngIf="busdriverA.errors && busdriverA.touched" class="alert alert-danger">
+                  <div [hidden]="!busdriverA.errors.required">Drivers is required</div>
+                 
+                </div>
                </div>
-              </form>
+			    </form>
+			   </div>
+             
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" (click)='addBus(bus)'>Save changes</button>
+              <button type="submit" class="btn btn-primary" [disabled]="!busFormA.form.valid"(click)="addBus(bus); busFormA.reset(); close('AddBusModal')" data-dismiss="modal">Submit</button>
             </div>
-          </div>
+          
         </div>
       </div>
 
@@ -120,13 +130,13 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Add Bus</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form #busForm="ngForm"   >
+        <form #driverFormA="ngForm"   >
 				<div class="form-group" >
 					 
 					<label for="Name">
@@ -135,19 +145,198 @@
 					  <input type="text"  class="form-control"
                required minlength="4" maxlength="24"
                  name="name" [(ngModel)]="driver.name"
-                   #name="ngModel" >
+                   #drivernameA="ngModel" >
 
-        <!--<div *ngIf="name.errors && (name.dirty || name.touched)"
+        <div *ngIf="drivernameA.errors && (drivernameA.dirty || drivernameA.touched)"
                class="alert alert-danger">
-            <div [hidden]="!name.errors.required">
-              Name is urequired
+            <div [hidden]="!drivernameA.errors.required">
+              Name is required
             </div>
-            <div [hidden]="!name.errors.minlength">
+            <div [hidden]="!drivernameA.errors.minlength">
               Name must be at least 4 characters long.
             </div>
-            <div [hidden]="!name.errors.maxlength">
+            <div [hidden]="!drivernameA.errors.maxlength">
               Name cannot be more than 24 characters long.
-            </div>-->
+            </div>
+            </div>
+        </div>
+
+        <div class="form-group" >
+					 
+					<label for="lastName">
+						Last Name
+					</label>
+					        <input type="text"  class="form-control" value ='fable'
+               required minlength="4" maxlength="24"
+               name="lastName" [(ngModel)]="driver.lastName"
+               #lastNameA="ngModel" >
+
+        <div *ngIf="lastNameA.errors && (lastNameA.dirty || lastNameA.touched)"
+             class="alert alert-danger">
+            <div [hidden]="!lastNameA.errors.required">
+              Last name is required
+            </div>
+            <div [hidden]="!lastNameA.errors.minlength">
+              Name must be at least 4 characters long.
+            </div>
+            <div [hidden]="!lastNameA.errors.maxlength">
+              Name cannot be more than 24 characters long.
+            </div>
+        </div>
+
+        </div>
+                <div class="form-group" >
+					 
+					<label for="username">
+						username
+					</label>
+					        <input type="text"  class="form-control"
+               required minlength="4" maxlength="24"
+               name="usernameA" [(ngModel)]="driver.username"
+               #usernameA="ngModel" >
+
+        <div *ngIf="usernameA.errors && (usernameA.dirty || usernameA.touched)"
+             class="alert alert-danger">
+            <div [hidden]="usernameA.errors.required">
+              username is required
+            </div>
+            
+            
+            <div [hidden]="!usernameA.errors.minlength">
+              username must be at least 4 characters long.
+            </div>
+            <div [hidden]="!usernameA.errors.maxlength">
+              username cannot be more than 24 characters long.
+            </div>
+            
+            
+            
+        </div>
+
+        </div>
+                <div class="form-group">
+                     <label for="">Password</label>
+                         <input type="password" class="form-control" name="password" [ngModel]="driver.password" 
+                            required validateEqual="confirmPassword" reverse="true" #passwordA="ngModel">
+ 
+             </div>
+            <div class="form-group">
+                  <label for="">Retype password</label>
+                      <input type="password" class="form-control" name="confirmPassword" [ngModel]="driver.confirmPassword" 
+                          required validateEqual="password" reverse="false" #confirmPasswordA="ngModel">
+                  <div *ngIf="confirmPasswordA.errors && (confirmPasswordA.dirty || confirmPasswordA.touched)"
+             class="alert alert-danger">
+                    Password Mismatch
+                  </div>
+            </div>
+            </form>
+			</div>				
+		
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary"  [disabled]="!driverFormA.form.valid"(click)="addDriver(driver); driverFormA.reset();close('AddDriverModal')" data-dismiss="modal"> 
+          Submit
+        </button>
+      </div>
+    </div>
+ 
+</div>
+
+
+
+
+<!-- EditBusModal -->
+<div class="modal fade" id="EditBusModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Bus</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #busFormE="ngForm">
+        <div class="form-group">
+          <label for="Name">Bus name</label>
+
+          <input type="text"  class="form-control" 
+                required minlength="4" maxlength="24"
+                name="name" [(ngModel)]="bus.name"
+                #busnameE="ngModel" >
+        <div *ngIf="busnameE.errors && (busnameE.dirty || busnameE.touched)"
+               class="alert alert-danger">
+            <div [hidden]="!busnameE.errors.required">
+              Name is required
+            </div>
+            <div [hidden]="!busnameE.errors.minlength">
+              Name must be at least 4 characters long.
+            </div>
+            <div [hidden]="!busnameE.errors.maxlength">
+              Name cannot be more than 24 characters long.
+            </div>
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="">Drivers</label>
+              <select  class="form-control" 
+                        name="driver"
+                        [(ngModel)]="bus.driver" required
+                        #driverE="ngModel" >
+                  <option *ngFor="let driver of drivers" >{{driver.name}} {{driver.lastName}}</option>
+              </select>
+                <div *ngIf="driverE.errors && driverE.touched" class="alert alert-danger">
+                  <div [hidden]="!driverE.errors.required">Driver is required</div>
+                </div>
+               </div>
+			    </form>
+			   </div>
+             
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)= " busFormE.reset()">Close</button>
+              <button type="button" class="btn btn-primary" data-dismiss="modal"[disabled]="!busFormE.form.valid"(click)="editBus(bus); busFormE.reset(); close('EditBusModal')" >Save changes</button>
+            </div>
+          
+        </div>
+      </div>
+
+<!-- EditDriverModal -->
+<div class="modal fade" id="EditDriverModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Driver</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #driverFormE="ngForm"   >
+				<div class="form-group" >
+					 
+					<label for="Name">
+						Name
+					</label>
+					  <input type="text"  class="form-control"
+               required minlength="4" maxlength="24"
+                 name="name" [(ngModel)]="driver.name"
+                   #drivernameE="ngModel" >
+
+        <div *ngIf="drivernameE.errors && (drivernameE.dirty || drivernameE.touched)"
+               class="alert alert-danger">
+            <div [hidden]="!drivernameE.errors.required">
+              Name is required
+            </div>
+            <div [hidden]="!drivernameE.errors.minlength">
+              Name must be at least 4 characters long.
+            </div>
+            <div [hidden]="!drivernameE.errors.maxlength">
+              Name cannot be more than 24 characters long.
+            </div>
+            </div>
         </div>
 
         <div class="form-group" >
@@ -158,37 +347,60 @@
 					        <input type="text"  class="form-control"
                required minlength="4" maxlength="24"
                name="lastName" [(ngModel)]="driver.lastName"
-               #lastName="ngModel" >
+               #lastNameE="ngModel" >
 
-        <!--<div *ngIf="lastName.errors && (lastName.dirty || lastName.touched)"
+        <div *ngIf="lastNameE.errors && (lastNameE.dirty || lastNameE.touched)"
              class="alert alert-danger">
-            <div [hidden]="!lastName.errors.required">
-              Last name is urequired
+            <div [hidden]="!lastNameE.errors.required">
+              Last name is required
             </div>
-            <div [hidden]="!lastName.errors.minlength">
+            <div [hidden]="!lastNameE.errors.minlength">
               Name must be at least 4 characters long.
             </div>
-            <div [hidden]="!lastName.errors.maxlength">
+            <div [hidden]="!lastNameE.errors.maxlength">
               Name cannot be more than 24 characters long.
             </div>
-        </div>-->
+        </div>
+
+        </div>
+                <div class="form-group" >
+					 
+					<label for="username">
+						username
+					</label>
+					        <input type="text"  class="form-control"
+               required minlength="4" maxlength="24"
+               name="username" [(ngModel)]="driver.username"
+               #usernameE="ngModel" >
+
+        <div *ngIf="usernameE.errors && (usernameE.dirty || usernameE.touched)"
+             class="alert alert-danger">
+            <div [hidden]="usernameE.errors.required">
+              username is urequired
+            </div>
+            <div [hidden]="!usernameE.errors.minlength">
+              username must be at least 4 characters long.
+            </div>
+            <div [hidden]="!usernameE.errors.maxlength">
+              username cannot be more than 24 characters long.
+            </div>
+        </div>
 
         </div>
                 <div class="form-group">
                      <label for="">Password</label>
                          <input type="password" class="form-control" name="password" [ngModel]="driver.password" 
-                            required validateEqual="confirmPassword" reverse="true" #password="ngModel">
-                  <!--<small [hidden]="password.valid || (password.pristine && !f.submitted)" class="text-danger">
-                    Password is required
-                  </small>-->
+                            required validateEqual="confirmPassword" reverse="true" #passwordB="ngModel">
+ 
              </div>
             <div class="form-group">
                   <label for="">Retype password</label>
                       <input type="password" class="form-control" name="confirmPassword" [ngModel]="driver.confirmPassword" 
-                          required validateEqual="password" reverse="false" #confirmPassword="ngModel">
-                  <!--<small [hidden]="confirmPassword.valid || (confirmPassword.pristine && !f.submitted)" class="text-danger">
-                  Password mismatch
-                  </small>-->
+                          required validateEqual="password" reverse="false" #confirmPasswordE="ngModel">
+                  <div *ngIf="confirmPasswordE.errors && (confirmPasswordE.dirty || confirmPasswordE.touched)"
+             class="alert alert-danger">
+                    Password Mismatch
+                  </div>
             </div>
             </form>
 			</div>				
@@ -196,169 +408,8 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)='addDriver(driver)'>Save changes</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" [disabled]="!driverFormE.form.valid"(click)="editDriver(driver); driverFormE.reset(); close('EditDriverModal')">Save changes</button>
       </div>
     </div>
  
 </div>
-
-
-
-
-		<!--AddBusModal -->
-<!--<div class="modal fade" id="AddBusModal" tabindex="-1" role="dialog" aria-labelledby="Bus" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="AddBusLabel">Add Bus</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-       	<form #busForm="ngForm"   (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="bus">Bus name</label>
-
-        <input type="text"  class="form-control" required minlength="4" maxlength="24"
-               name="name" [(ngModel)]="bus.name"
-               #name="ngModel" >
-
-        <div *ngIf="name.errors && (name.dirty || name.touched)"
-             class="alert alert-danger">
-            <div [hidden]="!bus.errors.required">
-              Bus name is urequired
-            </div>
-            <div [hidden]="!bus.errors.minlength">
-              Name must be at least 4 characters long.
-            </div>
-            <div [hidden]="!bus.errors.maxlength">
-              Name cannot be more than 24 characters long.
-            </div>
-        </div>
-      </div>
-
- 
-
-      <div class="form-group">
-        <label for="driver">Drivers</label>
-        <select  class="form-control"
-                name="drivers"
-                [(ngModel)]="bus.driver" required
-                #driver="ngModel" >
-          <option *ngFor="let driver of drivers" [value]="driver.name">{{driver.name}} {{driver.lastName}}</option>
-        </select>
-
-        <div *ngIf="driver.errors && driver.touched" class="alert alert-danger">
-          <div [hidden]="!driver.errors.required">Drivers is required</div>
-        </div>
-      </div>
-
-      <button type="submit" class="btn btn-default">Submit</button>
-          </form>
-    </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        
-      </div>
-    </div>
-  </div>
-</div>-->
-
-		<!--AddDriversModal -->
-<!--<div class="modal fade" id="AddDriversModal" tabindex="-1" role="dialog" aria-labelledby="Drivers" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="AddDriversLabel">Add Drivers</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form #busForm="ngForm"   (ngSubmit)="onSubmit()">
-				<div class="form-group" >
-					 
-					<label for="Name">
-						Name
-					</label>
-					  <input type="text"  class="form-control"
-               required minlength="4" maxlength="24"
-                 name="name" [(ngModel)]="driver.name"
-                   #name="ngModel" >
-
-        <div *ngIf="name.errors && (name.dirty || name.touched)"
-               class="alert alert-danger">
-            <div [hidden]="!name.errors.required">
-              Name is urequired
-            </div>
-            <div [hidden]="!name.errors.minlength">
-              Name must be at least 4 characters long.
-            </div>
-            <div [hidden]="!name.errors.maxlength">
-              Name cannot be more than 24 characters long.
-            </div>
-        </div>
-
-
-					 
-					<label for="lastName">
-						Last Name
-					</label>
-					        <input type="text"  class="form-control"
-               required minlength="4" maxlength="24"
-               name="lastName" [(ngModel)]="driver.lastName"
-               #lastName="ngModel" >
-
-        <div *ngIf="lastName.errors && (lastName.dirty || lastName.touched)"
-             class="alert alert-danger">
-            <div [hidden]="!lastName.errors.required">
-              Last name is urequired
-            </div>
-            <div [hidden]="!lastName.errors.minlength">
-              Name must be at least 4 characters long.
-            </div>
-            <div [hidden]="!lastName.errors.maxlength">
-              Name cannot be more than 24 characters long.
-            </div>
-        </div>
-                <div class="form-group">
-                     <label for="">Password</label>
-                         <input type="password" class="form-control" name="password" [ngModel]="driver.password" 
-                            required validateEqual="confirmPassword" reverse="true" #password="ngModel">
-                  <small [hidden]="password.valid || (password.pristine && !f.submitted)" class="text-danger">
-                    Password is required
-                  </small>
-             </div>
-            <div class="form-group">
-                  <label for="">Retype password</label>
-                      <input type="password" class="form-control" name="confirmPassword" [ngModel]="driver.confirmPassword" 
-                          required validateEqual="password" reverse="false" #confirmPassword="ngModel">
-                  <small [hidden]="confirmPassword.valid || (confirmPassword.pristine && !f.submitted)" class="text-danger">
-                  Password mismatch
-                  </small>
-            </div>
-
-			</div>				
-		</form>
-    </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        
-      </div>
-    </div>
-  </div>
-</div>-->
-
-
-
-
-
-
-
-
-
-
-
-
-

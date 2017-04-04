@@ -15,7 +15,8 @@
             <div>
               <h4>
               {{message.title}} 
-                  <button  id = "editMessageButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#EditMessageModal" >
+                  <button  id = "editMessageButton" type="button" class="btn btn-primary" (click) = "setValue(i)" data-toggle="modal"  
+                   data-target="#EditMessageModal" >
                     Edit
                   </button>
                 <button id = "messageDeleteButton" class="btn" type="button" (click) ="deleteMessage(i)">
@@ -51,47 +52,47 @@
         </button>
       </div>
       <div class="modal-body">
-        <form (ngSubmit)="onSubmit()" #messageForm="ngForm" >
+        <form  #messageFormA ="ngForm" >
         <div class="form-group">
           <label for="">Title</label>
 
           <input type="text"  class="form-control"
-                required minlength="4" maxlength="24"
+                required minlength="5" maxlength="15"
                 name="title" [(ngModel)]="message.title"
-                #title="ngModel">
-          <!--<div *ngIf="name.errors && (name.dirty || name.touched)"
+                #mtitle="ngModel">
+           <div *ngIf="mtitle.errors && (mtitle.dirty || mtitle.touched)"
                 class="alert alert-danger">
-            <div [hidden]="!name.errors.required">
-              Bus name is required
+            <div [hidden]="!mtitle.errors.required">
+              Title is required
             </div>
-            <div [hidden]="!name.errors.minlength">
-              Name must be at least 4 characters long.
+            <div [hidden]="!mtitle.errors.minlength">
+              Title must be at least 5 characters long.
             </div>
-            <div [hidden]="!name.errors.maxlength">
-              Name cannot be more than 24 characters long.
+            <div [hidden]="!mtitle.errors.maxlength">
+              Title cannot be more than 15 characters long.
             </div>
-          </div>-->
+          </div>
         </div>
 		
 		  <div class="form-group">
           <label for="">Message</label>
 
           <input type="text"  class="form-control"
-                required minlength="4" maxlength="50"
-                name="messageContent" [(ngModel)]="message.messageContent"
-                #messageContent="ngModel">
-          <!--<div *ngIf="name.errors && (name.dirty || name.touched)"
+                required minlength="4" maxlength="25"
+                name="messageContent" [(ngModel)]="message.messageContent" 
+                #mcontent="ngModel">
+          <div *ngIf="mcontent.errors && (mcontent.dirty || mcontent.touched)"
                 class="alert alert-danger">
-            <div [hidden]="!name.errors.required">
-              Bus name is required
+            <div [hidden]="!mcontent.errors.required">
+              Body is required
             </div>
-            <div [hidden]="!name.errors.minlength">
-              Name must be at least 4 characters long.
+            <div [hidden]="!mcontent.errors.minlength">
+              Body must be at least 4 characters long.
             </div>
-            <div [hidden]="!name.errors.maxlength">
-              Name cannot be more than 24 characters long.
+            <div [hidden]="!mcontent.errors.maxlength">
+              Body cannot be more than 25 characters long.
             </div>
-          </div>-->
+          </div>
         </div>
         
  
@@ -99,7 +100,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary" (click)="addMessage(message); messageForm.reset()" >Submit</button>
+              <button type="submit" class="btn btn-primary" [disabled]="!messageFormA.form.valid"(click)="addMessage(message); messageFormA.reset(); close('AddMessageModal')" >Submit</button>
             </div>
           </div>
         </div>
@@ -116,47 +117,49 @@
         </button>
       </div>
       <div class="modal-body">
-        <form (ngSubmit)="onSubmit()" #messageForm="ngForm" >
+        <form #messageFormE="ngForm"  ng-controller="updateCtrl">
         <div class="form-group">
           <label for="">Title</label>
 
-          <input type="text"  class="form-control"
+          <input  type="text"  class="form-control"
                 required minlength="4" maxlength="24"
-                name="title" [(ngModel)]="message.title" 
-                #title="ngModel">
-          <!--<div *ngIf="name.errors && (name.dirty || name.touched)"
+                name="title"  [(ngModel)]="message.title" 
+                #title="ngModel" >
+                
+          <div *ngIf="title.errors && (title.dirty || title.touched)"
                 class="alert alert-danger">
-            <div [hidden]="!name.errors.required">
-              Bus name is required
+            <div [hidden]="!title.errors.required">
+             Title is required
             </div>
-            <div [hidden]="!name.errors.minlength">
-              Name must be at least 4 characters long.
+            <div [hidden]="!title.errors.minlength">
+             Title must be at least 4 characters long.
             </div>
-            <div [hidden]="!name.errors.maxlength">
+            <div [hidden]="!title.errors.maxlength">
               Name cannot be more than 24 characters long.
             </div>
-          </div>-->
+          </div>
         </div>
 		
 		  <div class="form-group">
           <label for="">Message</label>
-
-          <input type="text"  class="form-control"
-                required minlength="4" maxlength="50"
-                name="messageContent" [(ngModel)]="message.messageContent"
-                #messageContent="ngModel">
-          <!--<div *ngIf="name.errors && (name.dirty || name.touched)"
+         
+         
+          <textarea class="form-control" rows="3" cols="25"
+                required minlength="4" maxlength="50" name="messageContent"
+                   [(ngModel)]="message.messageContent" #mContent="ngModel"></textarea>
+         
+          <div *ngIf="mContent.errors && (mContent.dirty || mContent.touched)"
                 class="alert alert-danger">
-            <div [hidden]="!name.errors.required">
-              Bus name is required
+            <div [hidden]="!mContent.errors.required">
+              Message is required
             </div>
-            <div [hidden]="!name.errors.minlength">
-              Name must be at least 4 characters long.
+            <div [hidden]="!mContent.errors.minlength">
+              Message must be at least 4 characters long.
             </div>
-            <div [hidden]="!name.errors.maxlength">
-              Name cannot be more than 24 characters long.
+            <div [hidden]="!mContent.errors.maxlength">
+              Message cannot be more than 24 characters long.
             </div>
-          </div>-->
+          </div>
         </div>
         
  
@@ -164,7 +167,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary" (click)="addMessage(message); messageForm.reset()" >Submit</button>
+              <button type="submit" class="btn btn-primary" data-dismiss="modal" [disabled]="!messageFormE.form.valid"(click)="editMessage(i,message) ;messageFormE.reset(); close('EditMessageModal')" >Submit</button>
             </div>
           </div>
         </div>

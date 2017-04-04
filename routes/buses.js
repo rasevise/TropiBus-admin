@@ -2,9 +2,9 @@ var express = require('express');
 var router = express.Router();
 
  buses = [
-    {name: "Bus A", driver: "Juan", route: "Route A", status: "active"},
+    {name: "Bus A", driver: "Juan",  route: "Route A", status: "active"},
     {name: "Bus B", driver: "Pedro", route: "Route B", status: "offline"},
-    {name: "Bus C", driver: "Jorge", route: "Route C", status: "offline"}
+    {name: "Bus C", driver: "Jorge",  route: "Route C", status: "offline"}
     ];
 
 router.get('/', function(req, res, next){
