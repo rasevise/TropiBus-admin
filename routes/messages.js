@@ -13,6 +13,7 @@ router.get('/', function(req, res, next){
     var routesJSON = JSON.stringify(this.Message);
     res.json(this.Message);
 });
+<<<<<<< HEAD
 
 
 
@@ -32,6 +33,10 @@ router.get('/', function(req, res, next){
 router.post('/addMessage', function (req, res, next) {
     console.log("Hello from messages");
 
+=======
+    
+router.post('/addMessage', function (req, res, next) {
+>>>>>>> ece86c40b39e435c394c62ceefa9c65001cf9f32
   var m_title = req.body.title;
   var m_mess = req.body.messageContent;
 
@@ -44,6 +49,25 @@ router.post('/addMessage', function (req, res, next) {
 
   Message.push(newD);
 
+});
+
+router.put('/updateMessage', function (req, res, next) {
+  var m_title = req.body.title;
+  var m_mess = req.body.messageContent;
+  var i = req.body.index;
+
+  var newD = ({
+    id: Message.length,
+    title: m_title,
+    messageContent: m_mess
+  });
+  Message[i] = newD;
+});
+
+router.delete('/deleteMessage', function (req, res, next) {
+    console.log("req.query. = " + req.query.id);
+  var id = req.query.id;
+  this.Message.splice(this.Message[id], 1);
 });
 
 module.exports = router;

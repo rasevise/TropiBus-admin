@@ -48,17 +48,18 @@ export class messagesComponent  {
     this.getMessages();
   }
 
-    delete(i : number): void {
+  delete(i : number): void {
     this.MessageService
-        .delete(i)
+        .delete(i);
+        this.getMessages();
   }
 
-    save(): void {
-    this.MessageService.update(this.message)
- 
+  save(): void {
+    this.MessageService.update(this.message, this.getValue())
+    this.getMessages();
   }
 
-    ngOnInit(): void {
+  ngOnInit(): void {
     this.getMessages();
   }
     
@@ -83,9 +84,9 @@ export class messagesComponent  {
 
 
 
-    deleteMessage(i: any){
-      this.messages.splice(i , 1);
-  }
+  // deleteMessage(i: any){
+  //     this.messages.splice(i , 1);
+  // }
       editMessage(i: any, message:Message){
   
 var temp_message= new Message();
