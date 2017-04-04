@@ -13,17 +13,6 @@ router.get('/', function(req, res, next){
     var routesJSON = JSON.stringify(this.Message);
     res.json(this.Message);
 });
-
-// router.post('/', function(req, res){
-//     res.contentType('application/json');
-//     var title = req.body.title;
-//     var id = req.body.id;
-//     var messageContent = req.body.messageContent;
-//     var date = req.body.date;
-
-//     var routesJSON = JSON.stringify(this.Message);
-//     res.json(this.Message);
-// }
     
 router.post('/addMessage', function (req, res, next) {
   var m_title = req.body.title;
