@@ -14,10 +14,10 @@ router.get('/', function(req, res, next){
     res.json(this.Message);
 });
 
-<<<<<<< HEAD
 
-router.post('/addM', function (req, res, next) {
-=======
+
+// router.post('/addM', function (req, res, next) {
+
 // router.post('/', function(req, res){
 //     res.contentType('application/json');
 //     var title = req.body.title;
@@ -31,7 +31,7 @@ router.post('/addM', function (req, res, next) {
     
 router.post('/addMessage', function (req, res, next) {
     console.log("Hello from messages");
->>>>>>> c070c4a5278dca4329e939477f3c0ced7b845d49
+
   var m_title = req.body.title;
   var m_mess = req.body.messageContent;
 
@@ -40,12 +40,10 @@ router.post('/addMessage', function (req, res, next) {
     title: m_title,
     messageContent: m_mess
   });
-<<<<<<< HEAD
-  Driver.push(newD);
 
-=======
+
   Message.push(newD);
->>>>>>> c070c4a5278dca4329e939477f3c0ced7b845d49
+
 });
 
 module.exports = router;
