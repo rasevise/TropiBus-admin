@@ -14,28 +14,28 @@ router.get('/', function(req, res, next){
     res.json(this.Message);
 });
 
-<<<<<<< HEAD
-router.post('/', function(req, res){
-    res.contentType('application/json');
-    var title = req.body.title;
-    var id = req.body.id;
-    var messageContent = req.body.messageContent;
-    var date = req.body.date;
+// router.post('/', function(req, res){
+//     res.contentType('application/json');
+//     var title = req.body.title;
+//     var id = req.body.id;
+//     var messageContent = req.body.messageContent;
+//     var date = req.body.date;
 
-    var routesJSON = JSON.stringify(this.Message);
-    res.json(this.Message);
-=======
-router.post('/addM', function (req, res, next) {
+//     var routesJSON = JSON.stringify(this.Message);
+//     res.json(this.Message);
+// }
+    
+router.post('/addMessage', function (req, res, next) {
+    console.log("Hello from messages");
   var m_title = req.body.title;
   var m_mess = req.body.messageContent;
 
   var newD = ({
     id: Message.length,
     title: m_title,
-    messageContent: d_mess
+    messageContent: m_mess
   });
-  Driver.push(newD);
->>>>>>> 9376ae5fe233ff56bb1e177663aa53c689d2d906
+  Message.push(newD);
 });
 
 module.exports = router;
