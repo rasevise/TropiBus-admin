@@ -14,4 +14,16 @@ router.get('/', function(req, res, next){
     res.json(this.Message);
 });
 
+router.post('/addM', function (req, res, next) {
+  var m_title = req.body.title;
+  var m_mess = req.body.messageContent;
+
+  var newD = ({
+    id: Message.length,
+    title: m_title,
+    messageContent: d_mess
+  });
+  Driver.push(newD);
+});
+
 module.exports = router;
