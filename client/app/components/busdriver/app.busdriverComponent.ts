@@ -4,7 +4,7 @@ import { Location }   from '@angular/common';
 import { Bus, Driver } from './busdriver';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BusDriverService } from './app.busdriverService'
-
+declare var $:JQueryStatic;
 
 
 @Component({
@@ -122,17 +122,19 @@ export class busdriverComponent{
   }
 
   checkUsername(username : String){
-    for(var i:number = 0; i <this.drivers.length; i++){
+    for(var i:number = 0; i < this.drivers.length; i++){
       if(username == this.drivers[i].username){
-        this.userNameValid = false;
-        break
+        return false
+       
       }
-      else{
-        this.userNameValid = true;
-        break
-      }
-    }
+      
     return true;
+    }
+    
+  }
+
+  close(modalId: String){
+    $('#'+ modalId).modal('hide')
   }
 
 }

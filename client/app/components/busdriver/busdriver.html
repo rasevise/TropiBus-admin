@@ -119,7 +119,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary" [disabled]="!busFormA.form.valid"(click)='addBus(bus); busFormA.reset(); ' data-dismiss="modal">Submit</button>
+              <button type="submit" class="btn btn-primary" [disabled]="!busFormA.form.valid"(click)="addBus(bus); busFormA.reset(); close('AddBusModal')" data-dismiss="modal">Submit</button>
             </div>
           
         </div>
@@ -210,6 +210,7 @@
             </div>
             
             
+            
         </div>
 
         </div>
@@ -234,7 +235,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary"  [disabled]="!driverFormA.form.valid"(click)='addDriver(driver); driverFormA.reset()' data-dismiss="modal"> 
+        <button type="button" class="btn btn-primary"  [disabled]="!driverFormA.form.valid"(click)="addDriver(driver); driverFormA.reset();close('AddDriverModal')" data-dismiss="modal"> 
           Submit
         </button>
       </div>
@@ -296,7 +297,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)= " busFormE.reset()">Close</button>
-              <button type="button" class="btn btn-primary" data-dismiss="modal"[disabled]="!busFormE.form.valid"(click)='editBus(bus); busFormE.reset()'>Save changes</button>
+              <button type="button" class="btn btn-primary" data-dismiss="modal"[disabled]="!busFormE.form.valid"(click)="editBus(bus); busFormE.reset(); close('EditBusModal')" >Save changes</button>
             </div>
           
         </div>
@@ -407,19 +408,8 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" [disabled]="!driverFormE.form.valid"(click)='editDriver(driver); driverFormE.reset()'>Save changes</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" [disabled]="!driverFormE.form.valid"(click)="editDriver(driver); driverFormE.reset(); close('EditDriverModal')">Save changes</button>
       </div>
     </div>
  
 </div>
-
-
-
-
-
-
-
-
-
-
-

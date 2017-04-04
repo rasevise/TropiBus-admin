@@ -2,14 +2,14 @@
 import { Component, OnInit, Injectable, Inject } from '@angular/core';
 import { Location }   from '@angular/common';
 import { Message } from './messages';
-import { NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MessageService } from './app.messageService'
 
 @Component({
   selector: 'messages',
   templateUrl: './app/components/messages/messages.html',
-  providers: [NgbModal],
+ 
 })
 export class messagesComponent  {
   message: Message = new Message();
@@ -63,6 +63,9 @@ var temp_message= new Message();
       this.messages.splice(this.myValue, 0, temp_message)  
       
       
+  }
+  close(modalId: string){
+    $('#'+ modalId).modal('hide')
   }
 
 
