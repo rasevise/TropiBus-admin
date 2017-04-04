@@ -36,32 +36,32 @@ export class messagesComponent  {
 
   
 
-    getMessages(): void {
-    this.MessageService
-        .getMessages()
-        .subscribe(messages => this.messages = messages);
-  }
+  //   getMessages(): void {
+  //   this.MessageService
+  //       .getMessages()
+  //       .subscribe(messages => this.messages = messages);
+  // }
 
 
-  add(message: Message): void {
-    this.MessageService.create(message);
-    this.getMessages();
-  }
+  // add(message: Message): void {
+  //   this.MessageService.create(message);
+  //   this.getMessages();
+  // }
 
-  delete(i : number): void {
-    this.MessageService
-        .delete(i);
-        this.getMessages();
-  }
+  // delete(i : number): void {
+  //   this.MessageService
+  //       .delete(i);
+  //       this.getMessages();
+  // }
 
-  save(): void {
-    this.MessageService.update(this.message, this.getValue())
-    this.getMessages();
-  }
+  // save(): void {
+  //   this.MessageService.update(this.message, this.getValue())
+  //   this.getMessages();
+  // }
 
-  ngOnInit(): void {
-    this.getMessages();
-  }
+  // ngOnInit(): void {
+  //   this.getMessages();
+  // }
     
 
     getTempMessage(x: number){
@@ -69,25 +69,25 @@ export class messagesComponent  {
     }
 
   
-//   addMessage(message: Message){
-// var temp_message= new Message();
-//     temp_message.title = message.title;
-//     temp_message.messageContent = message.messageContent;
-//     temp_message.date = Date.now();
-//    // x: number =  new Date.now();
+  addMessage(message: Message){
+var temp_message= new Message();
+    temp_message.title = message.title;
+    temp_message.messageContent = message.messageContent;
+    temp_message.date = Date.now();
+   // x: number =  new Date.now();
 
-//     this.message.title="";
-//     this.message.messageContent="";
-//     this.message.date = 0;
-//     this.messages.push(temp_message);
-//   }
+    this.message.title="";
+    this.message.messageContent="";
+    this.message.date = 0;
+    this.messages.push(temp_message);
+  }
 
 
 
-  // deleteMessage(i: any){
-  //     this.messages.splice(i , 1);
-  // }
-      editMessage(i: any, message:Message){
+  deleteMessage(i: any){
+      this.messages.splice(i , 1);
+  }
+      editMessage( message:Message){
   
 var temp_message= new Message();
     temp_message.id = message.id;

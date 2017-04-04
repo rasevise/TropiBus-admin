@@ -13,4 +13,43 @@ router.get('/', function(req, res, next){
     res.json(this.buses);
 });
 
+router.post('/addB', function (req, res, next) {
+  var b_name = req.body.name;
+  var b_driver = req.body.driver;
+  var b_route = req.body.route;
+  var b_status = req.body.status;
+
+  var newB = ({
+    id: Bus.length,
+    name: b_name,
+    driver: b_driver,
+    route: b_route,
+    status: b_status
+  });
+  Bus.push(newB);
+});
+
+router.put('/updateBus', function (req, res, next) {
+   var b_name = req.body.name;
+  var b_driver = req.body.driver;
+  var b_route = req.body.route;
+  var b_status = req.body.status;
+  var i = req.body.index;
+
+var newB = ({
+    id: Bus.length,
+    name: b_name,
+    driver: b_driver,
+    route: b_route,
+    status: b_status
+  });
+  Bus[i] = newD;
+});
+
+router.delete('/deletBus', function (req, res, next) {
+    console.log("req.query. = " + req.query.id);
+  var id = req.query.id;
+  this.Bus.splice(this.Bus[id], 1);
+});
+
 module.exports = router;

@@ -1,6 +1,8 @@
 import { Injectable, Inject } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs';
+import { Driver } from './busdriver';
+import { Bus } from './busdriver';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 
@@ -8,6 +10,8 @@ import 'rxjs/add/operator/do';
 export class BusDriverService {
   private _busesURL = '/buses';
   private _driversURL = '/drivers';
+  private headers = new Headers({'Content-Type': 'application/json'});
+  postResponse:any;
   constructor (@Inject(Http) private http: Http ) {}
 
  
@@ -16,37 +20,75 @@ export class BusDriverService {
     .map((res: Response) => res.json())
     .do(data => console.log('JSON length: ' + data.length));
   }
+   
+  //     deleteBus(i: number): Observable<Response> {
+  //   return this.http
+  //   .delete('buses/deleteBus' + "/?id=" + i, { headers:this.headers })
+  //   .map((res: Response) => res.json())
+  //   .subscribe(
+  //     (res:Response) => { this.postResponse = res; console.log(res); }
+  //   );
+  // }
+
+  //   createBus(bus: any){
+  //   return this.http
+  //     .post('drivers/addDriver', JSON.stringify({name: bus.name,
+  //        driver: bus.driver, route : bus.route, status: bus.status}), { headers:this.headers })
+  //     .map((res: Response) => res.json().data)
+  //     .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
+  //     // .catch(this.handleError);
+  // }
+
+  //   updateBus(bus: any, i: any): Observable<Driver> {
+  //   return this.http
+  //     .put('buses/updateBus', JSON.stringify({name: bus.name,
+  //        driver: bus.driver, route : bus.route, status: bus.status, index: i}), { headers:this.headers })
+  //     .map((res: Response) => res.json().data)
+  //     .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
+  //     // .catch(this.handleError);
+  //   }
+  //       private handleError(error: any): Promise<any> {
+  //   console.error('An error occurred', error); // for demo purposes only
+  //   return Promise.reject(error.message || error);
+  // }
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   getDrivers(): Observable<any[]> {
     return this.http.get(this._driversURL)
     .map((res: Response) => res.json())
     .do(data => console.log('JSON length: ' + data.length));
   }
-//     create(name: string): Promise<Bus> {
-//   return this.http
-//     .post(this._busesURL, JSON.stringify({name: name}))
-//     .toPromise()
-//     .then(res => res.json().data as Bus)
-//     .catch(this.handleError);
-// }
+  //  deleteDriver(i: number): Observable<Response> {
+  //   return this.http
+  //   .delete('drivers/deleteDriver' + "/?id=" + i, { headers:this.headers })
+  //   .map((res: Response) => res.json())
+  //   .subscribe(
+  //     (res:Response) => { this.postResponse = res; console.log(res); }
+  //   );
+  // }
 
-// delete(id: number): Promise<void> {
-//     const url = `${this._busesURL}/${id}`;
-//     return this.http.delete(url)
-//       .toPromise()
-//       .then(() => null)
-//       .catch(this.handleError);
-//   }
-//     update(bus: Bus): Promise<Bus> {
-//     const url = `${this._busesURL}/${bus.id}`;
-//     return this.http
-//       .put(url, JSON.stringify(bus))
-//       .toPromise()
-//       .then(() => bus)
-//       .catch(this.handleError);
-//   }
+  //   createDriver(driver: any){
+  //   return this.http
+  //     .post('drivers/addDriver', JSON.stringify({name: driver.name,
+  //        lastName: driver.lastName, username : driver.username, password: driver.password}), { headers:this.headers })
+  //     .map((res: Response) => res.json().data)
+  //     .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
+  //     // .catch(this.handleError);
+  // }
 
-  // private handleError(error: any): Promise<any> {
+  //   updateDriver(driver: any, i: any): Observable<Driver> {
+  //   return this.http
+  //     .put('drivers/updateMessage', JSON.stringify({name: driver.name,
+  //        lastName: driver.lastName, username : driver.username, password: driver.password, index: i}), { headers:this.headers })
+  //     .map((res: Response) => res.json().data)
+  //     .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
+  //     // .catch(this.handleError);
+  //   }
+  //       private handleError(error: any): Promise<any> {
   //   console.error('An error occurred', error); // for demo purposes only
   //   return Promise.reject(error.message || error);
   // }

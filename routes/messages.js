@@ -13,8 +13,27 @@ router.get('/', function(req, res, next){
     var routesJSON = JSON.stringify(this.Message);
     res.json(this.Message);
 });
+
+
+
+
+// router.post('/addM', function (req, res, next) {
+
+// router.post('/', function(req, res){
+//     res.contentType('application/json');
+//     var title = req.body.title;
+//     var id = req.body.id;
+//     var messageContent = req.body.messageContent;
+//     var date = req.body.date;
+
+//     var routesJSON = JSON.stringify(this.Message);
+//     res.json(this.Message);
+// }
+    
+
     
 router.post('/addMessage', function (req, res, next) {
+
   var m_title = req.body.title;
   var m_mess = req.body.messageContent;
 
@@ -23,7 +42,10 @@ router.post('/addMessage', function (req, res, next) {
     title: m_title,
     messageContent: m_mess
   });
+
+
   Message.push(newD);
+
 });
 
 router.put('/updateMessage', function (req, res, next) {
