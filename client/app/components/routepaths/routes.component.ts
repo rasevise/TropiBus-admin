@@ -73,7 +73,7 @@ export class RoutesComponent implements OnInit{
   }
 
   editStop(){
-    this.service.edit();
+    this.service.editStop(m_stop);
   }
 
   deleteStop(){
