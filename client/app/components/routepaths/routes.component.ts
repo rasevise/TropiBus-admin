@@ -66,30 +66,33 @@ export class RoutesComponent implements OnInit{
     $('#'+b_id).html(text);
   }
 
+  clearMarkers(){
+    for (var i = 0; i < this.locationMarkers.length; i++) {
+      this.locationMarkers[i].setMap(null);
+      this.locationMarkers[i] = null;
+    }
+    this.locationMarkers = null;
+    this.locationMarkers = [];
+  }
+
   setRoute(r_id:any){
     this.polylinePaths.forEach(p => {//warning, not an error
       p.setMap(null);
     });
-    for (var i = 0; i < this.locationMarkers.length; i++) {
-      this.locationMarkers[i].setMap(null);
-    }
+    this.clearMarkers();
+    this.m_stop = null;
     this.loadRoute(r_id);
-    this.getStops(r_id);
+    this.loadStops(r_id);
   }
 
   editStop(stop:any){
     this.m_stop = stop;
     this.m_stop.latitude = stop.latitude;
     this.m_stop.longitude = stop.longitude;
-    $('html, body').animate({ scrollTop: 0 }, 'slow');
   }
 
   loadMap(){
-
-  //Geolocation.getCurrentPosition().then((myposition) => {
     let latLng = new google.maps.LatLng(18.2013257,-67.1392801);
-    console.log(latLng);
-    
     let mapOptions = {
       center: latLng,
       zoom: 15,
@@ -100,8 +103,9 @@ export class RoutesComponent implements OnInit{
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
     google.maps.event.trigger(this.map, 'resize');
     this.getRoutes();
-    // this.getStops(r_id);
+    this.getAllStops();
   }
+
   getRoutes(){
     this.service.getPaths()
     .subscribe(routes => {
@@ -110,16 +114,14 @@ export class RoutesComponent implements OnInit{
         console.log(routes);
     })
   }
-  getStops(r_id:any){
+  getAllStops(){
     this.service.getStops().subscribe(stops => {
         this.stops = stops;
-        this.loadStops(r_id);
         console.log(stops);
   })
-}
+  }
 
   loadRoutes(){
-
     for(var i=0;i<this.routes.length;i++){
         var route=this.routes[i];
         var polyline = new google.maps.Polyline({
@@ -138,29 +140,30 @@ export class RoutesComponent implements OnInit{
       }
   }
 
-    loadRoute(r_id:any){
-    this.polylinePaths = [];
-    for(var i=0;i<this.routes.length;i++){
-      if(r_id === this.routes[i].route_ID){
-        var route=this.routes[i];
-        var polyline = new google.maps.Polyline({
-            map: this.map,
-            path: route.path,
-            strokeColor: route.color,
-            strokeOpacity: 1.0,
-            strokeWeight: 4,
-            id: route.route_ID,
-            name: route.route_name,
-            color: route.color_name,
-            description: route.route_description,
-            area: route.route_area,
-        });
-        this.polylinePaths.push(polyline);
-      }
-      }
+  loadRoute(r_id:any){
+  this.polylinePaths = [];
+  for(var i=0;i<this.routes.length;i++){
+    if(r_id === this.routes[i].route_ID){
+      var route=this.routes[i];
+      var polyline = new google.maps.Polyline({
+          map: this.map,
+          path: route.path,
+          strokeColor: route.color,
+          strokeOpacity: 1.0,
+          strokeWeight: 4,
+          id: route.route_ID,
+          name: route.route_name,
+          color: route.color_name,
+          description: route.route_description,
+          area: route.route_area,
+      });
+      this.polylinePaths.push(polyline);
+    }
+    }
   }
   
   loadStops(r_id:any){
+    this.locationMarkers = [];
     for(var i=0;i<this.stops.length;i++){
       if(r_id === this.stops[i].route_ID){
       var stop=this.stops[i];
@@ -181,63 +184,30 @@ export class RoutesComponent implements OnInit{
       let content="<h4>"+stop_marker.name+"</h4><p>"+stop_marker.description+"</p>"
       this.addInfoWindow(stop_marker,content)
     }
+    else if(i == this.stops.length){
+      this.locationMarkers = null;
+    }
     }
   }
 
-addInfoWindow(item:any,content:any){
-  let infowindow = new google.maps.InfoWindow({
-    content: content
-  });
-   google.maps.event.addListener(item, 'click', (event:any) => {
-   if(!item.open){
-                infowindow.setPosition(event.latLng)
-                infowindow.open(this.map,item);
-                item.open = true;
-            }
-            else{
-                infowindow.close();
-                item.open = false;
-            }
-            google.maps.event.addListener(this.map, 'click', function() {
-                infowindow.close();
-                item.open = false;
-            });
-
-  });
-}
-
-// addInfoWindowRoutes(item:any, content:any){
- 
-//   let infowindow = new google.maps.InfoWindow({
-//     content: content
-//   });
-//   google.maps.event.addListener(item, 'mouseover', function(latlng:any) {
-//             let path = item.getPath();
-//             var polyline = new google.maps.Polyline({
-//                 map: this.map,
-//                 path: path,
-//                 strokeColor: "#42f4d9",
-//                 strokeOpacity: 1.0,
-//                 strokeWeight: 7
-//               });
-//             this.tempRoute=polyline;
-//         // let content= "<h4>"+route.route_name+"</h4><p>"+route.route_description+"</p>"
-//         // this.addInfoWindowRoutes(polyline,content)
-//   });
-
-//   google.maps.event.addListener(item, 'mouseout', function(latlng:any) {
-//             if(this.tempRoute!=undefined){
-//               this.tempRoute.setMap(null);
-//             }
-//   });
-//   google.maps.event.addListener(item, 'click', (event:any) => {
-//       this.m_title = item.name;
-//       $('#pathModal').find('.modal-title').text('Route: ' + this.m_title);
-//       $('#pathModal').modal('show').on('shown.bs.modal', function (e: any) {
-//         //do something
-//       })
-      
-//   });
-// }
-
+  addInfoWindow(item:any,content:any){
+    let infowindow = new google.maps.InfoWindow({
+      content: content
+    });
+    google.maps.event.addListener(item, 'click', (event:any) => {
+    if(!item.open){
+        infowindow.setPosition(event.latLng)
+        infowindow.open(this.map,item);
+        item.open = true;
+    }
+    else{
+        infowindow.close();
+        item.open = false;
+    }
+    google.maps.event.addListener(this.map, 'click', function() {
+        infowindow.close();
+        item.open = false;
+    });
+    });
+  }
 }

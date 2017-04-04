@@ -14,7 +14,7 @@
 <div class="dropdown-menu">
   <a 
   class="dropdown-item" 
-  (click)="setMTitle(''); setButtonText('routeDisplay', 'Select Route'); loadRoutes();" 
+  (click)="setMTitle(''); setButtonText('routeDisplay', 'Select Route'); loadRoutes(); clearMarkers()" 
   href="javascript:void(0)">
   <h4>Show All</h4></a>
   <a *ngFor="let route of routes;" 
@@ -38,8 +38,7 @@
         <!--body-->
         <div class="container-fluid">
           <div class="row">
-            <!--Route and route color-->
-            <div class="col-md-6">
+            <div class="col-md-4">
               <div class="row">
                 <div class="card-block">
                   <h5 class="card-title">Route</h5>
@@ -48,8 +47,8 @@
               </div>
               <div class="row">
                 <div class="card-block">
-                  <h5 class="card-title">Color</h5>
-                  <p class="card-text">{{m_route.color}}</p>
+                  <h5 class="card-title">Stop Name</h5>
+                  <p class="card-text">{{m_stop?.name}}</p>
                 </div>
               </div>
               <div class="row">
@@ -59,8 +58,7 @@
                 </div>
               </div>
             </div>
-            <!--Area and Status-->
-            <div class="col-md-6">
+            <div class="col-md-4">
               <div class="row">
                 <div class="card-block">
                   <h5 class="card-title">Area</h5>
@@ -69,14 +67,33 @@
               </div>
               <div class="row">
                 <div class="card-block">
-                  <h5 class="card-title">Status</h5>
-                  <p class="card-text">{{m_route.status}}</p>
+                  <h5 class="card-title">Stop Description</h5>
+                  <p class="card-text">{{m_stop?.description}}</p>
                 </div>
               </div>
               <div class="row">
                 <div class="card-block">
                   <h5 class="card-title">Longitude</h5>
                   <p class="card-text">{{m_stop?.longitude}}</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="row">
+                <div class="card-block">
+                  <h5 class="card-title">Status</h5>
+                  <p class="card-text">{{m_route.status}}</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="card-block">
+                  <h5 class="card-title"></h5>
+                  <p class="card-text"></p></div>
+              </div>
+              <div class="row">
+                <div class="card-block">
+                  <h5 class="card-title"></h5>
+                  <p class="card-text"></p>
                 </div>
               </div>
             </div>
@@ -110,6 +127,11 @@
                     <a class="list-group-item list-group-item-action">Latitude: {{stop.latitude}}</a>
                     <a class="list-group-item list-group-item-action">Longitude: {{stop.longitude}}</a>
                   </div>
+                  <div id="editdeletestopbuttons">
+                  <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Edit</a>
+                  <a href="#" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Delete</a>
+                  </div>
+                  <br>
                 </div>
               </div>
             </div>

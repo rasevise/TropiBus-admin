@@ -102,3 +102,7 @@ th{
   color: white;
   background-color: #369;
 }
+
+#editdeletestopbuttons {
+  float: right;
+}
