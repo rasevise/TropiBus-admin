@@ -19,8 +19,8 @@
                    data-target="#EditMessageModal" >
                     Edit
                   </button>
-                <button id = "messageDeleteButton" class="btn" type="button" 
-                (click) ="delete(i)">
+                <button id = "messageDeleteButton" class="btn btn-danger btn md" type="button" 
+                (click) ="deleteMessage(i)">
                   Delete
                   </button>
               </h4>
@@ -101,7 +101,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary" [disabled]="!messageFormA.form.valid"(click)=" add(message); messageFormA.reset();close('AddMessageModal')" >Submit</button>
+              <button type="submit" class="btn btn-primary" [disabled]="!messageFormA.form.valid"(click)=" addMessage(message); messageFormA.reset();close('AddMessageModal')" >Submit</button>
             </div>
           </div>
         </div>
@@ -168,7 +168,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary" data-dismiss="modal" [disabled]="!messageFormE.form.valid"(click)=" save(); ;messageFormE.reset(); close('EditMessageModal')" >Submit</button>
+              <button type="submit" class="btn btn-primary" data-dismiss="modal" [disabled]="!messageFormE.form.valid"(click)=" editMessage(message); ;messageFormE.reset(); close('EditMessageModal')" >Submit</button>
             </div>
           </div>
         </div>

@@ -30,7 +30,70 @@ export class busdriverComponent{
     service.getDrivers()
     .subscribe(drivers => this.drivers = drivers);
   }
-   
+  // //  Buses Crud
+  //   getBuses(): void {
+  //   this.service
+  //       .getBuses()
+  //       .subscribe(buses => this.buses = buses);
+  // }
+
+
+  // addB(bus: Bus): void {
+  //   this.service.createBus(bus);
+  //   this.getBuses();
+  // }
+
+  // deleteB(i : number): void {
+  //   this.service
+  //       .deleteBus(i);
+  //       this.getBuses();
+  // }
+
+  // saveB(): void {
+  //   this.service.updateBus(this.bus, this.getValue())
+  //   this.getBuses();
+  // }
+
+  // ngOnInit(): void {
+  //   this.getBuses();
+  // }
+
+
+
+  //   //  Drivers Crud
+  //   getDrivers(): void {
+  //   this.service
+  //       .getDrivers()
+  //       .subscribe(drivers => this.drivers = drivers);
+  // }
+
+
+  // addD(driver:Driver): void {
+  //   this.service.createDriver(driver);
+  //   this.getDrivers();
+  // }
+
+  // deleteD(i : number): void {
+  //   this.service
+  //       .deleteDriver(i);
+  //       this.getDrivers();
+  // }
+
+  // saveD(): void {
+  //   this.service.updateDriver(this.bus, this.getValue())
+  //   this.getDrivers();
+  // }
+
+  // ngOnInitD(): void {
+  //   this.getDrivers();
+  // }
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     setValue(val:number) {
         this.myValue = val;
     }
@@ -60,7 +123,7 @@ export class busdriverComponent{
     this.buses.push(temp_bus);
   }
 
-  addDriver(driver: Driver){
+  addDrivers(driver: Driver){
     var temp_driver= new Driver();
     temp_driver.name = driver.name;
     temp_driver.lastName = driver.lastName;

@@ -13,7 +13,7 @@ router.get('/', function(req, res, next){
     var routesJSON = JSON.stringify(this.Message);
     res.json(this.Message);
 });
-<<<<<<< HEAD
+
 
 
 
@@ -30,13 +30,10 @@ router.get('/', function(req, res, next){
 //     res.json(this.Message);
 // }
     
-router.post('/addMessage', function (req, res, next) {
-    console.log("Hello from messages");
 
-=======
     
 router.post('/addMessage', function (req, res, next) {
->>>>>>> ece86c40b39e435c394c62ceefa9c65001cf9f32
+
   var m_title = req.body.title;
   var m_mess = req.body.messageContent;
 
