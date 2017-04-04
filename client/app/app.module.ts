@@ -10,8 +10,10 @@ import { EqualValidator } from './directives/validator/equal-validator.directive
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 //import { InMemoryMessageService }  from './components/messages/in-memory-message-service';
 
-import { AppComponent } from './app.component';
+
+import { AppComponent }         from './app.component';
 import { headerComponent }      from './components/header/app.headerComponent';
+import { loginComponent }       from './components/login/app.loginComponent';
 import { contentAreaComponent } from './components/contentArea/app.contentAreaComponent';
 import { footerComponent }      from './components/footer/app.footerComponent';
 import { busdriverComponent }   from './components/busdriver/app.busdriverComponent';
@@ -21,7 +23,7 @@ import { maprouteComponent }    from './components/maproute/app.maprouteComponen
 import { RoutesComponent }      from './components/routepaths/routes.component';
 import { RoutesService }        from './components/routepaths/routes.service';
 import { BusDriverService }     from './components/busdriver/app.busdriverService';
-import { MessageService }     from './components/messages/app.messageService';
+import { MessageService }       from './components/messages/app.messageService';
 import { Routes }               from './components/routepaths/routes';
 
 @NgModule({
@@ -35,6 +37,7 @@ import { Routes }               from './components/routepaths/routes';
                   Ng2UtilsModule,
                   ],
   declarations: [ AppComponent,
+                  loginComponent,
                   EqualValidator,
                   headerComponent, 
                   contentAreaComponent,
