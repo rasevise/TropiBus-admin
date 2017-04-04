@@ -20,12 +20,8 @@ export class busdriverComponent{
   driver: Driver = new Driver();
   buses: any[] = [];
   drivers: any[] = [];
-  for(i:number = 0 ; i < this.buses.length;i++){
 
-  
-  console.log(buses[i]);
-  }
-  
+
   // bus = {id: 1, name: 'name', driver: 'driver', route: 'route', status:'status'};
 
   constructor (@Inject(BusDriverService) private service: BusDriverService){
@@ -120,12 +116,6 @@ export class busdriverComponent{
     temp_bus.driver = bus.driver;
     temp_bus.route = bus.route;
     temp_bus.status = bus.status;
-
-     for(i:number = 0 ; i < this.buses.length;i++){
-
-  
-  console.log(buses[i]);
-  }
     
     this.bus.name="";
     this.bus.driver="";
