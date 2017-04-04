@@ -2,14 +2,14 @@
 import { Component, OnInit, Injectable, Inject } from '@angular/core';
 import { Location }   from '@angular/common';
 import { Message } from './messages';
-
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MessageService } from './app.messageService'
 
 @Component({
   selector: 'messages',
   templateUrl: './app/components/messages/messages.html',
- 
+  providers: [],
+
 })
 export class messagesComponent  {
   message: Message = new Message();

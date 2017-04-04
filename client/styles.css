@@ -25,14 +25,9 @@ header {
   position: absolute;
 }
 
-#maproute2 {
-  height: 100%;
-  width: 100%;
-  overflow:visible;
-}
-
 #routeSelect {
   position: relative;
+  float: right;
 }
 
 #addBusButton{
