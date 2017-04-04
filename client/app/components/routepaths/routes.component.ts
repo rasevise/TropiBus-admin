@@ -1,4 +1,5 @@
-import { Component, OnInit,ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit,ViewChild, ElementRef, Input } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Inject } from '@angular/core';
 import { Routes } from './routes';
 import { RoutesService } from './routes.service';
@@ -20,19 +21,21 @@ export class RoutesComponent implements OnInit{
   @ViewChild('pathModal') pathModal: ElementRef;
   map: any;
   routes:any;
+  route_array: any;
   stops:any;
   tempRoute:any;
   locationMarker:any;
   polylinePaths:any;
 
   //Modal Values
-  m_title: any;
+  m_title: any = '';
   m_body: any;
   m_desc: any;
 
-  setMTitle(){
-    return this.m_title
+  setMTitle(title:any){
+    this.m_title = title;
   }
+
   getMTitle(){
     return this.m_title;
   }
@@ -43,12 +46,31 @@ export class RoutesComponent implements OnInit{
   this.loadMap();
   this.routes=[];
   this.polylinePaths=[];
-  this.m_title = '';
   }
   
   //JQuery Functions for boottrap functionality
   dropdownClick(){
     $('#routeSelectButton').dropdown();
+  }
+
+  openPathModal(){
+    if(this.m_title != ''){
+      $('#pathModal').find('.modal-title').text('Route: ' + this.m_title);
+      $('#pathModal').modal('show').on('shown.bs.modal', function (e: any) {
+        //do something
+      })
+    }
+  }
+
+  setButtonText(b_id:any, text:any){
+    $('#'+b_id).html(text);
+  }
+
+  setRoute(r_id:any){
+    this.polylinePaths.forEach(p => {//warning, not an error
+      p.setMap(null);
+    });
+    this.loadRoute(r_id);
   }
 
   loadMap(){
@@ -107,9 +129,26 @@ export class RoutesComponent implements OnInit{
             id: route.route_ID,
             name: route.route_name
         });
-        let content= "<h4>"+route.route_name+"</h4><p>"+route.route_description+"</p>"
-        this.addInfoWindowRoutes(polyline,content)
         this.polylinePaths.push(polyline)
+      }
+  }
+
+    loadRoute(r_id:any){
+    this.polylinePaths = [];
+    for(var i=0;i<this.routes.length;i++){
+      if(r_id === this.routes[i].route_ID){
+        var route=this.routes[i];
+        var polyline = new google.maps.Polyline({
+            map: this.map,
+            path: route.path,
+            strokeColor: route.color,
+            strokeOpacity: 1.0,
+            strokeWeight: 4,
+            id: route.route_ID,
+            name: route.route_name
+        });
+        this.polylinePaths.push(polyline)
+      }
       }
   }
   
@@ -149,38 +188,38 @@ addInfoWindow(item:any,content:any){
   });
 }
 
-addInfoWindowRoutes(item:any, content:any){
+// addInfoWindowRoutes(item:any, content:any){
  
-  // let infowindow = new google.maps.InfoWindow({
-  //   content: content
-  // });
-  google.maps.event.addListener(item, 'mouseover', function(latlng:any) {
-            let path = item.getPath();
-            var polyline = new google.maps.Polyline({
-                map: this.map,
-                path: path,
-                strokeColor: "#42f4d9",
-                strokeOpacity: 1.0,
-                strokeWeight: 7
-              });
-            this.tempRoute=polyline;
-        // let content= "<h4>"+route.route_name+"</h4><p>"+route.route_description+"</p>"
-        // this.addInfoWindowRoutes(polyline,content)
-  });
+//   let infowindow = new google.maps.InfoWindow({
+//     content: content
+//   });
+//   google.maps.event.addListener(item, 'mouseover', function(latlng:any) {
+//             let path = item.getPath();
+//             var polyline = new google.maps.Polyline({
+//                 map: this.map,
+//                 path: path,
+//                 strokeColor: "#42f4d9",
+//                 strokeOpacity: 1.0,
+//                 strokeWeight: 7
+//               });
+//             this.tempRoute=polyline;
+//         // let content= "<h4>"+route.route_name+"</h4><p>"+route.route_description+"</p>"
+//         // this.addInfoWindowRoutes(polyline,content)
+//   });
 
-  google.maps.event.addListener(item, 'mouseout', function(latlng:any) {
-            if(this.tempRoute!=undefined){
-              this.tempRoute.setMap(null);
-            }
-  });
-  google.maps.event.addListener(item, 'click', (event:any) => {
-      this.m_title = item.name;
-      $('#pathModal').find('.modal-title').text('Route: ' + this.m_title);
-      $('#pathModal').modal('show').on('shown.bs.modal', function (e: any) {
-        //do something
-      })
+//   google.maps.event.addListener(item, 'mouseout', function(latlng:any) {
+//             if(this.tempRoute!=undefined){
+//               this.tempRoute.setMap(null);
+//             }
+//   });
+//   google.maps.event.addListener(item, 'click', (event:any) => {
+//       this.m_title = item.name;
+//       $('#pathModal').find('.modal-title').text('Route: ' + this.m_title);
+//       $('#pathModal').modal('show').on('shown.bs.modal', function (e: any) {
+//         //do something
+//       })
       
-  });
-}
+//   });
+// }
 
 }
