@@ -26,7 +26,6 @@ router.get('/', function(req, res, next){
 // }
     
 router.post('/addMessage', function (req, res, next) {
-    console.log("Hello from messages");
   var m_title = req.body.title;
   var m_mess = req.body.messageContent;
 
@@ -36,6 +35,25 @@ router.post('/addMessage', function (req, res, next) {
     messageContent: m_mess
   });
   Message.push(newD);
+});
+
+router.put('/updateMessage', function (req, res, next) {
+  var m_title = req.body.title;
+  var m_mess = req.body.messageContent;
+  var i = req.body.index;
+
+  var newD = ({
+    id: Message.length,
+    title: m_title,
+    messageContent: m_mess
+  });
+  Message[i] = newD;
+});
+
+router.delete('/deleteMessage', function (req, res, next) {
+    console.log("req.query. = " + req.query.id);
+  var id = req.query.id;
+  this.Message.splice(this.Message[id], 1);
 });
 
 module.exports = router;

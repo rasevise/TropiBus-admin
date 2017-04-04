@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Message } from './messages';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class MessageService {
@@ -20,10 +21,13 @@ export class MessageService {
   }
 
 
-    delete(id: number): Observable<Response> {
-      const url = `${this._messagesURL}/${id}`;   
-    return this.http.delete(url)
-    .map(() => null);
+    delete(i: number): Observable<Response> {
+    return this.http
+    .delete('messages/deleteMessage' + "/?id=" + i, { headers:this.headers })
+    .map((res: Response) => res.json())
+    .subscribe(
+      (res:Response) => { this.postResponse = res; console.log(res); }
+    );
   }
 
     create(message: any){
@@ -35,12 +39,13 @@ export class MessageService {
       // .catch(this.handleError);
   }
 
-    update(message: Message): Observable<Message> {
-    const url = `${this._messagesURL}/${message.id}`;
+    update(message: any, i: any): Observable<Message> {
     return this.http
-      .put(url, JSON.stringify(message))
-      .map(() => message)
-      .catch(this.handleError);
+      .put('messages/updateMessage', JSON.stringify({title: message.title,
+         messageContent: message.messageContent, index: i}), { headers:this.headers })
+      .map((res: Response) => res.json().data)
+      .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
+      // .catch(this.handleError);
     }
         private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only

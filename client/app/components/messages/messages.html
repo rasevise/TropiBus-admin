@@ -15,12 +15,12 @@
             <div>
               <h4>
               {{message.title}} {{message.date| date}}
-                  <button  id = "editMessageButton" type="button" class="btn btn-primary" (click) = "setValue(i)" data-toggle="modal"  
+                  <button  id = "editMessageButton" type="button" class="btn btn-primary" (click) = "setValue(i);" data-toggle="modal"  
                    data-target="#EditMessageModal" >
                     Edit
                   </button>
                 <button id = "messageDeleteButton" class="btn" type="button" 
-                (click) ="deleteMessage(i); delete(i)">
+                (click) ="delete(i)">
                   Delete
                   </button>
               </h4>
@@ -168,7 +168,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary" data-dismiss="modal" [disabled]="!messageFormE.form.valid"(click)="editMessage(i,message) ;messageFormE.reset(); close('EditMessageModal')" >Submit</button>
+              <button type="submit" class="btn btn-primary" data-dismiss="modal" [disabled]="!messageFormE.form.valid"(click)=" save(); ;messageFormE.reset(); close('EditMessageModal')" >Submit</button>
             </div>
           </div>
         </div>
