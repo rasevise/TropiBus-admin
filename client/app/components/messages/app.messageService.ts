@@ -9,7 +9,7 @@ import 'rxjs/add/operator/do';
 export class MessageService {
   private _messagesURL = '/messages';
   private headers = new Headers({'Content-Type': 'application/json'});
-
+  postResponse:any;
   constructor (@Inject(Http) private http: Http ) {}
 
  
@@ -26,18 +26,19 @@ export class MessageService {
     .map(() => null);
   }
 
-    create(message: Message): Observable<Message> {
+    create(message: any){
     return this.http
-      .post(this._messagesURL, JSON.stringify({title: message.title, date: message.date,
-         messageContent: message.messageContent}),  {headers: this.headers})
-      .map(res => res.json().data as Message)
-      .catch(this.handleError);
+      .post('messages/addMessage', JSON.stringify({title: message.title,
+         messageContent: message.messageContent}), { headers:this.headers })
+      .map((res: Response) => res.json().data)
+      .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
+      // .catch(this.handleError);
   }
 
     update(message: Message): Observable<Message> {
     const url = `${this._messagesURL}/${message.id}`;
     return this.http
-      .put(url, JSON.stringify(message), {headers: this.headers})
+      .put(url, JSON.stringify(message))
       .map(() => message)
       .catch(this.handleError);
     }

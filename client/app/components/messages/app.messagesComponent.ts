@@ -36,24 +36,21 @@ export class messagesComponent  {
 
   
 
-      getMessages(): void {
+    getMessages(): void {
     this.MessageService
         .getMessages()
         .subscribe(messages => this.messages = messages);
   }
 
 
-      add(message: Message): void {
-    this.MessageService.create(message)
-      .map(message => {
-        this.messages.push(message);
-      });
+  add(message: Message): void {
+    this.MessageService.create(message);
+    this.getMessages();
   }
 
     delete(i : number): void {
     this.MessageService
         .delete(i)
-      
   }
 
     save(): void {
@@ -71,18 +68,18 @@ export class messagesComponent  {
     }
 
   
-  addMessage(message: Message){
-var temp_message= new Message();
-    temp_message.title = message.title;
-    temp_message.messageContent = message.messageContent;
-    temp_message.date = Date.now();
-   // x: number =  new Date.now();
+//   addMessage(message: Message){
+// var temp_message= new Message();
+//     temp_message.title = message.title;
+//     temp_message.messageContent = message.messageContent;
+//     temp_message.date = Date.now();
+//    // x: number =  new Date.now();
 
-    this.message.title="";
-    this.message.messageContent="";
-    this.message.date = 0;
-    this.messages.push(temp_message);
-  }
+//     this.message.title="";
+//     this.message.messageContent="";
+//     this.message.date = 0;
+//     this.messages.push(temp_message);
+//   }
 
 
 
