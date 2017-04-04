@@ -14,4 +14,10 @@ router.get('/', function(req, res, next){
     res.json(this.Driver);
 });
 
+router.post('/', function(req, res, next){
+    req.contentType('application/json');
+    req.json(this.Driver);
+    Driver.push(JSON);
+});
+
 module.exports = router;

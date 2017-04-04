@@ -21,18 +21,20 @@ export class RoutesComponent implements OnInit{
   @ViewChild('pathModal') pathModal: ElementRef;
   map: any;
   routes:any;
-  route_array: any;
   stops:any;
   tempRoute:any;
-  locationMarker:any;
+  locationMarkers:any;
   polylinePaths:any;
 
   //Modal Values
   m_title: any = '';
   m_body: any;
   m_desc: any;
+  m_route: any;
+  m_stop: any;
 
-  setMTitle(title:any){
+  setMTitle(title:any, route: any){
+    this.m_route = route;
     this.m_title = title;
   }
 
@@ -46,6 +48,7 @@ export class RoutesComponent implements OnInit{
   this.loadMap();
   this.routes=[];
   this.polylinePaths=[];
+  this.locationMarkers=[];
   }
   
   //JQuery Functions for boottrap functionality
@@ -55,10 +58,7 @@ export class RoutesComponent implements OnInit{
 
   openPathModal(){
     if(this.m_title != ''){
-      $('#pathModal').find('.modal-title').text('Route: ' + this.m_title);
-      $('#pathModal').modal('show').on('shown.bs.modal', function (e: any) {
-        //do something
-      })
+      $('#pathModal').modal('show');
     }
   }
 
@@ -70,7 +70,18 @@ export class RoutesComponent implements OnInit{
     this.polylinePaths.forEach(p => {//warning, not an error
       p.setMap(null);
     });
+    for (var i = 0; i < this.locationMarkers.length; i++) {
+      this.locationMarkers[i].setMap(null);
+    }
     this.loadRoute(r_id);
+    this.getStops(r_id);
+  }
+
+  editStop(stop:any){
+    this.m_stop = stop;
+    this.m_stop.latitude = stop.latitude;
+    this.m_stop.longitude = stop.longitude;
+    $('html, body').animate({ scrollTop: 0 }, 'slow');
   }
 
   loadMap(){
@@ -87,18 +98,9 @@ export class RoutesComponent implements OnInit{
     }
 
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-
-    // let marker = new google.maps.Marker({
-    //       map: this.map,
-    //       animation: google.maps.Animation.DROP,
-    //       position: latLng
-    //   })
-    // let content= "<h4>Your location</h4>"
-    // this.addInfoWindow(marker,content)
     google.maps.event.trigger(this.map, 'resize');
     this.getRoutes();
-    // this.getStops();
-
+    // this.getStops(r_id);
   }
   getRoutes(){
     this.service.getPaths()
@@ -108,10 +110,10 @@ export class RoutesComponent implements OnInit{
         console.log(routes);
     })
   }
-  getStops(){
+  getStops(r_id:any){
     this.service.getStops().subscribe(stops => {
         this.stops = stops;
-        this.loadStops();
+        this.loadStops(r_id);
         console.log(stops);
   })
 }
@@ -127,7 +129,10 @@ export class RoutesComponent implements OnInit{
             strokeOpacity: 1.0,
             strokeWeight: 4,
             id: route.route_ID,
-            name: route.route_name
+            name: route.route_name,
+            color: route.color_name,
+            description: route.route_description,
+            area: route.route_area,
         });
         this.polylinePaths.push(polyline)
       }
@@ -145,24 +150,37 @@ export class RoutesComponent implements OnInit{
             strokeOpacity: 1.0,
             strokeWeight: 4,
             id: route.route_ID,
-            name: route.route_name
+            name: route.route_name,
+            color: route.color_name,
+            description: route.route_description,
+            area: route.route_area,
         });
-        this.polylinePaths.push(polyline)
+        this.polylinePaths.push(polyline);
       }
       }
   }
   
-  loadStops(){
+  loadStops(r_id:any){
     for(var i=0;i<this.stops.length;i++){
-      var stop=this.stops[i]
+      if(r_id === this.stops[i].route_ID){
+      var stop=this.stops[i];
       var latlng = new google.maps.LatLng(stop.stop_latitude, stop.stop_longitude);
       let stop_marker = new google.maps.Marker({
         map: this.map,
         animation: google.maps.Animation.DROP,
-        position: latlng
+        position: latlng,
+        id: stop.route_ID,
+        name: stop.stop_name,
+        description: stop.stop_description,
+        latitude: stop.stop_latitude,
+        longitude: stop.stop_longitude
       });
-      let content="<h4>"+stop.stop_name+"</h4><p>"+stop.stop_description+"</p>"
+      this.locationMarkers.push(stop_marker);
+
+      //info window content
+      let content="<h4>"+stop_marker.name+"</h4><p>"+stop_marker.description+"</p>"
       this.addInfoWindow(stop_marker,content)
+    }
     }
   }
 
