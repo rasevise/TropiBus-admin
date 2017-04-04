@@ -30,7 +30,7 @@ export class busdriverComponent{
     service.getDrivers()
     .subscribe(drivers => this.drivers = drivers);
   }
-
+   
     setValue(val:number) {
         this.myValue = val;
     }

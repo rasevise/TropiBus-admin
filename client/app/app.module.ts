@@ -7,6 +7,8 @@ import { Ng2UtilsModule } from 'ng2-utils';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { ModalModule } from 'ng2-bootstrap';
 import { EqualValidator } from './directives/validator/equal-validator.directive';
+import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+//import { InMemoryMessageService }  from './components/messages/in-memory-message-service';
 
 import { AppComponent } from './app.component';
 import { headerComponent }      from './components/header/app.headerComponent';

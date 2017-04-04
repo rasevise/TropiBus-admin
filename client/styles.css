@@ -74,10 +74,9 @@ header {
 #busAndDriverButton{
       margin: 3% auto;
 }
-/*#messageInput{
-    height:200px;
-    font-size:14pt;
-}*/
+#messageDate{
+   padding-left: 10cm;
+}
 
 th{
   font:10px;

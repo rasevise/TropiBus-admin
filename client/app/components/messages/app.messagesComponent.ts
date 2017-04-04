@@ -18,10 +18,15 @@ export class messagesComponent  {
 
 
 
-  constructor (@Inject(MessageService) private service: MessageService){
-     service.getMessages()
+
+
+  constructor (@Inject(MessageService) private MessageService: MessageService, ){
+     MessageService.getMessages()
     .subscribe(messages => this.messages = messages);
   }
+
+ 
+
     setValue(val:number) {
         this.myValue = val;
     }
@@ -29,17 +34,53 @@ export class messagesComponent  {
       return this.myValue;
     }
 
+  
+
+      getMessages(): void {
+    this.MessageService
+        .getMessages()
+        .subscribe(messages => this.messages = messages);
+  }
+
+
+      add(message: Message): void {
+    this.MessageService.create(message)
+      .map(message => {
+        this.messages.push(message);
+      });
+  }
+
+    delete(i : number): void {
+    this.MessageService
+        .delete(i)
+      
+  }
+
+    save(): void {
+    this.MessageService.update(this.message)
+ 
+  }
+
+    ngOnInit(): void {
+    this.getMessages();
+  }
+    
+
     getTempMessage(x: number){
       return this.messages[x];
     }
 
+  
   addMessage(message: Message){
 var temp_message= new Message();
     temp_message.title = message.title;
     temp_message.messageContent = message.messageContent;
-    
+    temp_message.date = Date.now();
+   // x: number =  new Date.now();
+
     this.message.title="";
     this.message.messageContent="";
+    this.message.date = 0;
     this.messages.push(temp_message);
   }
 

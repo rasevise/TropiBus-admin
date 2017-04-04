@@ -14,4 +14,15 @@ router.get('/', function(req, res, next){
     res.json(this.Message);
 });
 
+router.post('/', function(req, res){
+    res.contentType('application/json');
+    var title = req.body.title;
+    var id = req.body.id;
+    var messageContent = req.body.messageContent;
+    var date = req.body.date;
+
+    var routesJSON = JSON.stringify(this.Message);
+    res.json(this.Message);
+});
+
 module.exports = router;

@@ -18,6 +18,8 @@ var app_headerComponent_1 = require('./components/header/app.headerComponent');
 var app_contentAreaComponent_1 = require('./components/contentArea/app.contentAreaComponent');
 var app_footerComponent_1 = require('./components/footer/app.footerComponent');
 var app_busdriverComponent_1 = require('./components/busdriver/app.busdriverComponent');
+//
+var app_busdriverComponent_1 = require('./components/busdriver/app.busdriverComponent');
 var app_messagesComponent_1 = require('./components/messages/app.messagesComponent');
 var app_mapviewComponent_1 = require('./components/mapview/app.mapviewComponent');
 var app_maprouteComponent_1 = require('./components/maproute/app.maprouteComponent');

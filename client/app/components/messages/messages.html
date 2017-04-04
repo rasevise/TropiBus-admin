@@ -4,7 +4,7 @@
       <br>
         <div  class="row">
 			    <div class="col-md-12">
-             <button  id = "addMessageButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddMessageModal" >Add Message</button> 
+             <button  id = "addMessageButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddMessageModal"  >Add Message</button> 
                
 			   </div>
 			</div>
@@ -14,12 +14,13 @@
 				  <div class="col-md-12">
             <div>
               <h4>
-              {{message.title}} 
+              {{message.title}} {{message.date| date}}
                   <button  id = "editMessageButton" type="button" class="btn btn-primary" (click) = "setValue(i)" data-toggle="modal"  
                    data-target="#EditMessageModal" >
                     Edit
                   </button>
-                <button id = "messageDeleteButton" class="btn" type="button" (click) ="deleteMessage(i)">
+                <button id = "messageDeleteButton" class="btn" type="button" 
+                (click) ="deleteMessage(i); delete(i)">
                   Delete
                   </button>
               </h4>
@@ -54,7 +55,7 @@
       <div class="modal-body">
         <form  #messageFormA ="ngForm" >
         <div class="form-group">
-          <label for="">Title</label>
+          <label for="">Title   </label>
 
           <input type="text"  class="form-control"
                 required minlength="5" maxlength="15"
@@ -100,7 +101,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary" [disabled]="!messageFormA.form.valid"(click)="addMessage(message); messageFormA.reset(); close('AddMessageModal')" >Submit</button>
+              <button type="submit" class="btn btn-primary" [disabled]="!messageFormA.form.valid"(click)="addMessage(message); messageFormA.reset(); add(message); close('AddMessageModal')" >Submit</button>
             </div>
           </div>
         </div>
