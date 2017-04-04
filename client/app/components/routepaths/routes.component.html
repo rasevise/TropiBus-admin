@@ -45,16 +45,16 @@
                   <p class="card-text">{{m_route.route_name}}</p>
                 </div>
               </div>
-              <div class="row">
+              <div class="row form-group">
                 <div class="card-block">
                   <h5 class="card-title">Stop Name</h5>
-                  <p class="card-text">{{m_stop?.name}}</p>
+                  <input class="form-control" type="text" id="stopNameInput" [value] ="m_stop?.name" (input)="m_stop.name=$event.target.value"> 
                 </div>
               </div>
-              <div class="row">
+              <div class="row form-group">
                 <div class="card-block">
                   <h5 class="card-title">Latitude</h5>
-                  <p class="card-text">{{m_stop?.latitude}}</p>
+                  <input class="form-control" type="text" id="stopNameInput" [value] ="m_stop?.latitude" (input)="m_stop.latitude=$event.target.value">
                 </div>
               </div>
             </div>
@@ -66,15 +66,15 @@
                 </div>
               </div>
               <div class="row">
-                <div class="card-block">
+                <div class="card-block form-group">
                   <h5 class="card-title">Stop Description</h5>
-                  <p class="card-text">{{m_stop?.description}}</p>
+                  <input class="form-control" type="text" id="stopNameInput" [value] ="m_stop?.description" (input)="m_stop.description=$event.target.value">
                 </div>
               </div>
               <div class="row">
-                <div class="card-block">
+                <div class="card-block form-group">
                   <h5 class="card-title">Longitude</h5>
-                  <p class="card-text">{{m_stop?.longitude}}</p>
+                  <input class="form-control" type="text" id="stopNameInput" [value] ="m_stop?.longitude" (input)="m_stop.longitude=$event.target.value">
                 </div>
               </div>
             </div>
@@ -94,6 +94,28 @@
                 <div class="card-block">
                   <h5 class="card-title"></h5>
                   <p class="card-text"></p>
+                  <div id="editdeletestopbuttons" class= "btn-group-vertical">
+                  <a 
+                  href="javascript:void(0)" 
+                  class="btn btn-success btn-md active" 
+                  role="button" 
+                  aria-pressed="true">
+                  Add</a>
+                  <a 
+                  (click)="editStop()"
+                  href="javascript:void(0)" 
+                  class="btn btn-primary btn-md active" 
+                  role="button" 
+                  aria-pressed="true">
+                  Edit</a>
+                  <a 
+                  (click)="deleteStop()"
+                  href="javascript:void(0)" 
+                  class="btn btn-secondary btn-md active" 
+                  role="button" 
+                  aria-pressed="true">
+                  Delete</a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -121,15 +143,11 @@
                     <a 
                     href="javascript:void(0)" 
                     class="list-group-item list-group-item-action list-group-item-info"
-                    (click)="editStop(stop)">
+                    (click)="selectStop(stop)">
                     Name: {{stop.name}}</a>
                     <a class="list-group-item list-group-item-action">Description: {{stop.description}}</a>
                     <a class="list-group-item list-group-item-action">Latitude: {{stop.latitude}}</a>
                     <a class="list-group-item list-group-item-action">Longitude: {{stop.longitude}}</a>
-                  </div>
-                  <div id="editdeletestopbuttons">
-                  <a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Edit</a>
-                  <a href="#" class="btn btn-secondary btn-lg active" role="button" aria-pressed="true">Delete</a>
                   </div>
                   <br>
                 </div>

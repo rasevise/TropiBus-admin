@@ -847,4 +847,41 @@ router.get('/', function(req, res, next){
     res.json(this.stops);
 });
 
+router.post('/addStop', function (req, res, next) {
+  var stop = req.body.stop;
+
+  var newD = ({
+    route_ID: stop.id,
+    route_name: stop.name,
+    route_description: stop.description,
+    route_latitude: stop.latitude,
+    route_longitude: stop.longitude
+  });
+  stops.push(newD);
+});
+
+router.put('/updateStop', function (req, res, next) {
+//   var m_title = req.body.title;
+//   var m_mess = req.body.messageContent;
+//   var i = req.body.index;
+
+//   var newD = ({
+//     id: Message.length,
+//     title: m_title,
+//     messageContent: m_mess
+//   });
+//   Message[i] = newD;
+});
+
+router.delete('/deleteStop', function (req, res, next) {
+    console.log("req.query. = " + req.query.name);
+  var name = req.query.name;
+  for(var i = 0; i < this.stops.length; i++){
+      if(this.stops[i].stop_name == name){
+          console.log("inside splice with i: " + i + " Deleting: " + this.stops[i].stop_name);
+        this.stops.splice(i, 1);
+      }
+  }
+});
+
 module.exports = router;

@@ -11,6 +11,8 @@ export class RoutesService {
   
   private _routesURL = '/routes';
   private _stopsURL = '/stops';
+  private headers = new Headers({'Content-Type': 'application/json'});
+  postResponse:any; 
 
   constructor (@Inject(Http) private http: Http ) {}
 
@@ -22,6 +24,31 @@ export class RoutesService {
   getStops(): Observable<Stops[]> {
     return this.http.get(this._stopsURL)
     .map((res: Response) => res.json());
+  }
+  
+  delete(stop: any): Observable<any> {
+    return this.http
+    .delete('stops/deleteStop' + "/?name=" + stop, { headers:this.headers })
+    .map((res: Response) => res.json())
+    .subscribe(
+      (res:Response) => { this.postResponse = res; console.log(res); }
+    );
+  }
+
+  create(stop: any){
+    return this.http
+      .post('stops/addStop', JSON.stringify(stop), { headers:this.headers })
+      .map((res: Response) => res.json().data)
+      .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
+      // .catch(this.handleError);
+  }
+
+  update(stop: any, i: any): Observable<any> {
+    return this.http
+      .put('stops/updateStop', JSON.stringify(stop), { headers:this.headers })
+      .map((res: Response) => res.json().data)
+      .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
+      // .catch(this.handleError);
   }
 
 }

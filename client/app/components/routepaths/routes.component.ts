@@ -31,7 +31,13 @@ export class RoutesComponent implements OnInit{
   m_body: any;
   m_desc: any;
   m_route: any;
-  m_stop: any;
+  m_stop: {
+    id: number = -1,
+    name:string = '',
+    description:string = '',
+    latitude:number = '',
+    longitude:number = ''
+  };
 
   setMTitle(title:any, route: any){
     this.m_route = route;
@@ -66,6 +72,22 @@ export class RoutesComponent implements OnInit{
     $('#'+b_id).html(text);
   }
 
+  editStop(){
+    this.service.edit();
+  }
+
+  deleteStop(){
+    console.log(this.stops.length);
+    this.service.delete(this.m_stop.name);
+    this.getAllStops();
+    this.loadStops(this.m_stop.id);
+    for(var i=0;i<this.stops.length;i++){
+      if(this.stops[i] === this.m_stop.name){
+        console.log("Deleted: " + this.m_stop.name);
+      }
+    }
+  }
+
   clearMarkers(){
     for (var i = 0; i < this.locationMarkers.length; i++) {
       this.locationMarkers[i].setMap(null);
@@ -85,7 +107,7 @@ export class RoutesComponent implements OnInit{
     this.loadStops(r_id);
   }
 
-  editStop(stop:any){
+  selectStop(stop:any){
     this.m_stop = stop;
     this.m_stop.latitude = stop.latitude;
     this.m_stop.longitude = stop.longitude;
