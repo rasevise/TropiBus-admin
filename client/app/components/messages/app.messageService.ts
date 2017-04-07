@@ -14,7 +14,7 @@ export class MessageService {
   constructor (@Inject(Http) private http: Http ) {}
 
  
-    getMessages(): Observable<any[]> {
+    getMessages(){
     return this.http.get(this._messagesURL)
     .map((res: Response) => res.json())
     .do(data => console.log('JSON length: ' + data.length));
@@ -22,8 +22,9 @@ export class MessageService {
 
 
     delete(i: number){
+    console.log('index: ' + i)
     return this.http
-    .delete('/messages/deleteMessage' + "/?index =" + i, { headers:this.headers })
+    .delete('/messages/deleteMessage' + "/?index=" + i, { headers:this.headers })
     .map((res: Response) => res.json())
     .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
   }

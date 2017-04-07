@@ -1,5 +1,5 @@
 
-import { Component, OnInit, Injectable, Inject } from '@angular/core';
+import { Component, OnInit, Injectable, Inject, Input } from '@angular/core';
 import { Location }   from '@angular/common';
 import { Message } from './messages';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -11,14 +11,10 @@ import { MessageService } from './app.messageService'
   providers: [],
 
 })
-export class messagesComponent  {
-  message: Message = new Message();
-  messages: any[] = [];
+export class messagesComponent implements OnInit{
+  message: Message = new Message(null,'', Date.now(), '');
+  @Input() messages: Message[] = [];
   private myValue: number;
-
-
-
-
 
   constructor (@Inject(MessageService) private MessageService: MessageService, ){
      MessageService.getMessages()
@@ -36,38 +32,32 @@ export class messagesComponent  {
 
   
 
-  getMessages(): void {
+  getMessages(): void{
     this.MessageService
         .getMessages()
         .subscribe(messages => this.messages = messages);
   }
 
 
-  add(message: Message): void {
-    this.MessageService.create(message);
+  add(): void {
+    this.MessageService.create(this.message);
     this.getMessages();
   }
 
   delete(i : number): void {
-    console.log("index: "  + i);
     this.MessageService
         .delete(i);
         this.getMessages();
   }
 
-  edit(i: number): void {
-    this.MessageService.update(this.message, i)
+  edit(message: any): void {
+    this.MessageService.update(message, this.getValue())
     this.getMessages();
   }
 
   ngOnInit(): void {
     this.getMessages();
   }
-    
-
-    getTempMessage(x: number){
-      return this.messages[x];
-    }
 
   close(modalId: string){
     $('#'+ modalId).modal('hide')
