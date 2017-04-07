@@ -20,7 +20,8 @@ export class busdriverComponent{
   driver: Driver = new Driver();
   buses: any[] = [];
   drivers: any[] = [];
-  
+
+
   // bus = {id: 1, name: 'name', driver: 'driver', route: 'route', status:'status'};
 
   constructor (@Inject(BusDriverService) private service: BusDriverService){
