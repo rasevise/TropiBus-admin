@@ -16,5 +16,5 @@ export class contentAreaComponent{
   // constructor (@Inject(MessageService) private service: MessageService){
   //   MessageService.getMessages()
   //   .subscribe(messages => this.messages = messages);
-  // }
+  // } 
 }
