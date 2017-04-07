@@ -62,9 +62,9 @@ router.put('/updateMessage', function (req, res, next) {
 });
 
 router.delete('/deleteMessage', function (req, res, next) {
-    console.log("req.query. = " + req.query.id);
-  var id = req.query.id;
-  this.Message.splice(this.Message[id], 1);
+    console.log("req.query. = " + req.query.index);
+  var index = req.query.index;
+  this.Message.splice(index, 1);
 });
 
 module.exports = router;
