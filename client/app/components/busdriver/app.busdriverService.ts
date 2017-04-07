@@ -1,10 +1,11 @@
 import { Injectable, Inject } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs';
 import { Driver } from './busdriver';
 import { Bus } from './busdriver';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class BusDriverService {
@@ -22,28 +23,23 @@ export class BusDriverService {
     .map((res: Response) => res.json())
     .do(data => console.log('JSON length: ' + data.length));
   }
-      deleteBus(i: number): Observable<any> {
+      deleteBus(i: number){
     return this.http
     .delete('buses/deleteBus' + "/?index=" + i, { headers: this.headers })
-    .map((res: Response) => res.json())
-    .subscribe(
-      (res:Response) => { this.postResponse = res; console.log(res); }
-    );
+    .map((res: Response) => res.json());
   }
     createBus(bus: any): Observable<any> {
     return this.http
       .post('drivers/addDriver', JSON.stringify({name: bus.name,
          driver: bus.driver, route : bus.route, status: bus.status}), { headers:this.headers })
-      .map((res: Response) => res.json().data)
-      .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
+      .map((res: Response) => res.json().data);
       // .catch(this.handleError);
   }
     updateBus(bus: any, i: any): Observable<any> {
     return this.http
       .put('buses/updateBus', JSON.stringify({name: bus.name,
          driver: bus.driver, route : bus.route, status: bus.status, index: i}), { headers:this.headers })
-      .map((res: Response) => res.json().data)
-      .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
+      .map((res: Response) => res.json().data);
       // .catch(this.handleError);
     }
         private handleError(error: any): Promise<any> {
@@ -61,7 +57,7 @@ export class BusDriverService {
     .map((res: Response) => res.json())
     .do(data => console.log('JSON length: ' + data.length));
   }
-   deleteDriver(i: number): Observable<any> {
+   deleteDriver(i: number){
     return this.http
     .delete('drivers/deleteDriver' + "/?index=" + i, { headers:this.headers })
     .map((res: Response) => res.json())

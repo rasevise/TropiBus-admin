@@ -51,8 +51,8 @@ router.post('/addMessage', function (req, res, next) {
 router.put('/updateMessage', function (req, res, next) {
   var m_title = req.body.title;
   var m_mess = req.body.messageContent;
-  var i = req.body.index;
-
+  var i = parseInt(req.body.index);
+  console.log("index: "+ i);
   var newD = ({
     id: Message.length,
     title: m_title,
@@ -62,9 +62,9 @@ router.put('/updateMessage', function (req, res, next) {
 });
 
 router.delete('/deleteMessage', function (req, res, next) {
-    console.log("req.query. = " + req.query.id);
-  var id = req.query.id;
-  this.Message.splice(this.Message[id], 1);
+    console.log("req.query. = " + req.query.index);
+  var index = req.query.index;
+  this.Message.splice(index, 1);
 });
 
 module.exports = router;
