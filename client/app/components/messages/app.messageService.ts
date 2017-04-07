@@ -24,10 +24,7 @@ export class MessageService {
     delete(i: number): Observable<Response> {
     return this.http
     .delete('messages/deleteMessage' + "/?index =" + i, { headers:this.headers })
-    .map((res: Response) => res.json())
-    .subscribe(
-      (res:Response) => { this.postResponse = res; console.log(res); }
-    );
+    .map((res: Response) => res.json());
   }
 
     create(message: any){
@@ -43,9 +40,7 @@ export class MessageService {
     return this.http
       .put('messages/updateMessage', JSON.stringify({title: message.title,
          messageContent: message.messageContent, index: i}), { headers:this.headers })
-      .map((res: Response) => res.json().data)
-      .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
-      // .catch(this.handleError);
+      .map((res: Response) => res.json().data);
     }
         private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only

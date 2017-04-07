@@ -26,12 +26,7 @@ router.post('/addBuses', function (req, res, next) {
     route: b_route,
     status: b_status
   });
-<<<<<<< HEAD
-  
-  this.buses.push(newB);
-=======
   buses.push(newB);
->>>>>>> 623f6abcc97991af4a666402ad2b5b4524d1d5d4
 });
 
 router.put('/updateBus', function (req, res, next) {
