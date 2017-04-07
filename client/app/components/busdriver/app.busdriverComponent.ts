@@ -70,6 +70,7 @@ export class busdriverComponent{
 
 
   addD(driver:Driver): void {
+    console.log("hello")
     this.service.createDriver(driver);
     this.getDrivers();
   }
@@ -101,6 +102,11 @@ export class busdriverComponent{
     getValue(){
       return this.myValue;
     }
+      close(modalId: String){
+    $('#'+ modalId).modal('hide')
+  }
+
+}
 
   //  getTempBus(x: number){
   //    console.log(this.buses[x].name);
@@ -197,11 +203,7 @@ export class busdriverComponent{
     
   // }
 
-  // close(modalId: String){
-  //   $('#'+ modalId).modal('hide')
-  // }
 
-}
 
 //  constructor(
 //     private busService: busService,

@@ -13,7 +13,7 @@ router.get('/', function(req, res, next){
     res.json(this.buses);
 });
 
-router.post('/addB', function (req, res, next) {
+router.post('/addBuses', function (req, res, next) {
   var b_name = req.body.name;
   var b_driver = req.body.driver;
   var b_route = req.body.route;

@@ -21,35 +21,35 @@ export class MessageService {
   }
 
 
-  //   delete(i: number): Observable<Response> {
-  //   return this.http
-  //   .delete('messages/deleteMessage' + "/?id=" + i, { headers:this.headers })
-  //   .map((res: Response) => res.json())
-  //   .subscribe(
-  //     (res:Response) => { this.postResponse = res; console.log(res); }
-  //   );
-  // }
+    delete(i: number): Observable<Response> {
+    return this.http
+    .delete('messages/deleteMessage' + "/?id=" + i, { headers:this.headers })
+    .map((res: Response) => res.json())
+    .subscribe(
+      (res:Response) => { this.postResponse = res; console.log(res); }
+    );
+  }
 
-  //   create(message: any){
-  //   return this.http
-  //     .post('messages/addMessage', JSON.stringify({title: message.title,
-  //        messageContent: message.messageContent}), { headers:this.headers })
-  //     .map((res: Response) => res.json().data)
-  //     .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
-  //     // .catch(this.handleError);
-  // }
+    create(message: any){
+    return this.http
+      .post('messages/addMessage', JSON.stringify({title: message.title,
+         messageContent: message.messageContent}), { headers:this.headers })
+      .map((res: Response) => res.json().data)
+      .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
+      // .catch(this.handleError);
+  }
 
-  //   update(message: any, i: any): Observable<Message> {
-  //   return this.http
-  //     .put('messages/updateMessage', JSON.stringify({title: message.title,
-  //        messageContent: message.messageContent, index: i}), { headers:this.headers })
-  //     .map((res: Response) => res.json().data)
-  //     .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
-  //     // .catch(this.handleError);
-  //   }
-  //       private handleError(error: any): Promise<any> {
-  //   console.error('An error occurred', error); // for demo purposes only
-  //   return Promise.reject(error.message || error);
-  // }
+    update(message: any, i: any): Observable<Message> {
+    return this.http
+      .put('messages/updateMessage', JSON.stringify({title: message.title,
+         messageContent: message.messageContent, index: i}), { headers:this.headers })
+      .map((res: Response) => res.json().data)
+      .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
+      // .catch(this.handleError);
+    }
+        private handleError(error: any): Promise<any> {
+    console.error('An error occurred', error); // for demo purposes only
+    return Promise.reject(error.message || error);
+  }
   }
 
