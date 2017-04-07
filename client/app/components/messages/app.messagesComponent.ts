@@ -27,16 +27,16 @@ export class messagesComponent  {
 
  
 
-    setValue(val:number) {
-        this.myValue = val;
-    }
-    getValue(){
-      return this.myValue;
-    }
+  setValue(val:number) {
+      this.myValue = val;
+  }
+  getValue(){
+    return this.myValue;
+  }
 
   
 
-    getMessages(): void {
+  getMessages(): void {
     this.MessageService
         .getMessages()
         .subscribe(messages => this.messages = messages);
@@ -49,13 +49,14 @@ export class messagesComponent  {
   }
 
   delete(i : number): void {
+    console.log("index: "  + i);
     this.MessageService
         .delete(i);
         this.getMessages();
   }
 
-  save(): void {
-    this.MessageService.update(this.message, this.getValue())
+  edit(i: number): void {
+    this.MessageService.update(this.message, i)
     this.getMessages();
   }
 
@@ -68,41 +69,6 @@ export class messagesComponent  {
       return this.messages[x];
     }
 
-  
-//   addMessage(message: Message){
-// var temp_message= new Message();
-//     temp_message.title = message.title;
-//     temp_message.messageContent = message.messageContent;
-//     temp_message.date = Date.now();
-//    // x: number =  new Date.now();
-
-//     this.message.title="";
-//     this.message.messageContent="";
-//     this.message.date = 0;
-//     this.messages.push(temp_message);
-//   }
-
-
-
-//   deleteMessage(i: any){
-//       this.messages.splice(i , 1);
-//   }
-//       editMessage( message:Message){
-  
-// var temp_message= new Message();
-//     temp_message.id = message.id;
-//     temp_message.title = message.title;
-//     temp_message.messageContent = message.messageContent;
-//     console.log(this.getTempMessage(this.myValue).title);
-  
-//     this.message.title="";
-//     this.message.messageContent="";
-
-//       this.messages.splice(this.myValue, 1);
-//       this.messages.splice(this.myValue, 0, temp_message)  
-      
-      
-//   }
   close(modalId: string){
     $('#'+ modalId).modal('hide')
   }

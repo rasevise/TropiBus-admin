@@ -51,8 +51,8 @@ router.post('/addMessage', function (req, res, next) {
 router.put('/updateMessage', function (req, res, next) {
   var m_title = req.body.title;
   var m_mess = req.body.messageContent;
-  var i = req.body.index;
-
+  var i = parseInt(req.body.index);
+  console.log("index: "+ i);
   var newD = ({
     id: Message.length,
     title: m_title,
