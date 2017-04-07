@@ -33,7 +33,7 @@
                   <button  id = "editBusButton" type="button" class="btn btn-primary btn-md" (click) = "setValue(i);busFormE.reset()" data-toggle="modal" data-target="#EditBusModal">
                      Edit
                     </button>
-                    <button id ="deleteBusButton" class="btn btn-danger btn md" type="button" (click) ="deleteBus(i)">Delete</button>
+                    <button id ="deleteBusButton" class="btn btn-danger btn md" type="button" (click) ="deleteB(i)">Delete</button>
                     </div>
                     </td>
               </tr>
@@ -61,7 +61,7 @@
                 <button  id = "editDriverButton" type="button" class="btn btn-primary" (click) = "setValue(i);driverFormB.reset()" data-toggle="modal" data-target="#EditDriverModal">
                     Edit
                     </button> 
-                    <button id ="deleteDriverButton" class="btn btn-danger btn md" type="button" (click)="deleteDriver(i)">Delete</button>
+                    <button id ="deleteDriverButton" class="btn btn-danger btn md" type="button" (click)="deleteD(i)">Delete</button>
                 </div>
             </td>
             </tr>
@@ -126,7 +126,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary" [disabled]="!busFormA.form.valid"(click)="addBus(bus); busFormA.reset(); close('AddBusModal')" data-dismiss="modal">Submit</button>
+              <button type="submit" class="btn btn-primary" [disabled]="!busFormA.form.valid"(click)="addB(bus); busFormA.reset(); close('AddBusModal')" data-dismiss="modal">Submit</button>
             </div>
           
         </div>
@@ -223,8 +223,23 @@
         </div>
                 <div class="form-group">
                      <label for="">Password</label>
-                         <input type="password" class="form-control" name="password" [ngModel]="driver.password" 
+                         <input type="password" class="form-control" name="password"required minlength="4"   maxlength="24" [ngModel]="driver.password" 
                             required validateEqual="confirmPassword" reverse="true" #passwordA="ngModel">
+
+                            <div *ngIf="passwordA.errors && (passwordA.dirty || passwordA.touched)"
+             class="alert alert-danger">
+            <div [hidden]="passwordA.errors.required">
+              password is required
+            </div>
+            
+            
+            <div [hidden]="!passwordA.errors.minlength">
+              password must be at least 4 characters long.
+            </div>
+            <div [hidden]="!passwordA.errors.maxlength">
+              password cannot be more than 24 characters long.
+            </div>
+                            </div>
  
              </div>
             <div class="form-group">
@@ -242,7 +257,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary"  [disabled]="!driverFormA.form.valid"(click)="addDriver(driver); driverFormA.reset();close('AddDriverModal')" data-dismiss="modal"> 
+        <button type="button" class="btn btn-primary"  [disabled]="!driverFormA.form.valid"(click)="addD(driver); driverFormA.reset();close('AddDriverModal')" data-dismiss="modal"> 
           Submit
         </button>
       </div>
@@ -304,7 +319,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)= " busFormE.reset()">Close</button>
-              <button type="button" class="btn btn-primary" data-dismiss="modal"[disabled]="!busFormE.form.valid"(click)="editBus(bus); busFormE.reset(); close('EditBusModal')" >Save changes</button>
+              <button type="button" class="btn btn-primary" data-dismiss="modal"[disabled]="!busFormE.form.valid"(click)="editB(bus); busFormE.reset(); close('EditBusModal')" >Save changes</button>
             </div>
           
         </div>
@@ -396,8 +411,23 @@
         </div>
                 <div class="form-group">
                      <label for="">Password</label>
-                         <input type="password" class="form-control" name="password" [ngModel]="driver.password" 
+                         <input type="password" class="form-control" name="password" required minlength="4"  maxlength="24"[ngModel]="driver.password" 
                             required validateEqual="confirmPassword" reverse="true" #passwordB="ngModel">
+
+                            <div *ngIf="passwordB.errors && (passwordB.dirty || passwordB.touched)"
+             class="alert alert-danger">
+            <div [hidden]="passwordB.errors.required">
+              password is required
+            </div>
+            
+            
+            <div [hidden]="!passwordB.errors.minlength">
+              password must be at least 4 characters long.
+            </div>
+            <div [hidden]="!passwordB.errors.maxlength">
+              username cannot be more than 24 characters long.
+            </div>
+                            </div>
  
              </div>
             <div class="form-group">
@@ -415,7 +445,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" [disabled]="!driverFormE.form.valid"(click)="editDriver(driver); driverFormE.reset(); close('EditDriverModal')">Save changes</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" [disabled]="!driverFormE.form.valid"(click)="editD(driver); driverFormE.reset(); close('EditDriverModal')">Save changes</button>
       </div>
     </div>
  

@@ -30,63 +30,63 @@ export class busdriverComponent{
     service.getDrivers()
     .subscribe(drivers => this.drivers = drivers);
   }
-  // //  Buses Crud
-  //   getBuses(): void {
-  //   this.service
-  //       .getBuses()
-  //       .subscribe(buses => this.buses = buses);
-  // }
+  //  Buses Crud
+    getBuses(): void {
+    this.service
+        .getBuses()
+        .subscribe(buses => this.buses = buses);
+  }
 
 
-  // addB(bus: Bus): void {
-  //   this.service.createBus(bus);
-  //   this.getBuses();
-  // }
+  addB(bus: Bus): void {
+    this.service.createBus(bus);
+    this.getBuses();
+  }
 
-  // deleteB(i : number): void {
-  //   this.service
-  //       .deleteBus(i);
-  //       this.getBuses();
-  // }
+  deleteB(i : number): void {
+    this.service
+        .deleteBus(i);
+        this.getBuses();
+  }
 
-  // saveB(): void {
-  //   this.service.updateBus(this.bus, this.getValue())
-  //   this.getBuses();
-  // }
+  saveB(): void {
+    this.service.updateBus(this.bus, this.getValue())
+    this.getBuses();
+  }
 
-  // ngOnInit(): void {
-  //   this.getBuses();
-  // }
-
-
-
-  //   //  Drivers Crud
-  //   getDrivers(): void {
-  //   this.service
-  //       .getDrivers()
-  //       .subscribe(drivers => this.drivers = drivers);
-  // }
+  ngOnInit(): void {
+    this.getBuses();
+  }
 
 
-  // addD(driver:Driver): void {
-  //   this.service.createDriver(driver);
-  //   this.getDrivers();
-  // }
 
-  // deleteD(i : number): void {
-  //   this.service
-  //       .deleteDriver(i);
-  //       this.getDrivers();
-  // }
+    //  Drivers Crud
+    getDrivers(): void {
+    this.service
+        .getDrivers()
+        .subscribe(drivers => this.drivers = drivers);
+  }
 
-  // saveD(): void {
-  //   this.service.updateDriver(this.bus, this.getValue())
-  //   this.getDrivers();
-  // }
 
-  // ngOnInitD(): void {
-  //   this.getDrivers();
-  // }
+  addD(driver:Driver): void {
+    this.service.createDriver(driver);
+    this.getDrivers();
+  }
+
+  deleteD(i : number): void {
+    this.service
+        .deleteDriver(i);
+        this.getDrivers();
+  }
+
+  saveD(): void {
+    this.service.updateDriver(this.bus, this.getValue())
+    this.getDrivers();
+  }
+
+  ngOnInitD(): void {
+    this.getDrivers();
+  }
 
 
 
@@ -101,104 +101,104 @@ export class busdriverComponent{
       return this.myValue;
     }
 
-   getTempBus(x: number){
-     console.log(this.buses[x].name);
-      return this.buses[x];
+  //  getTempBus(x: number){
+  //    console.log(this.buses[x].name);
+  //     return this.buses[x];
       
-    }
-       getTempDriver(x: number){
-      return this.drivers[x];
-    }
-  addBus(bus: Bus){
-       var temp_bus= new Bus();
-    temp_bus.name = bus.name;
-    temp_bus.driver = bus.driver;
-    temp_bus.route = bus.route;
-    temp_bus.status = bus.status;
+  //   }
+  //      getTempDriver(x: number){
+  //     return this.drivers[x];
+  //   }
+  // addBus(bus: Bus){
+  //      var temp_bus= new Bus();
+  //   temp_bus.name = bus.name;
+  //   temp_bus.driver = bus.driver;
+  //   temp_bus.route = bus.route;
+  //   temp_bus.status = bus.status;
     
-    this.bus.name="";
-    this.bus.driver="";
-    this.bus.route="";
-    this.bus.status="";
-    this.buses.push(temp_bus);
-  }
+  //   this.bus.name="";
+  //   this.bus.driver="";
+  //   this.bus.route="";
+  //   this.bus.status="";
+  //   this.buses.push(temp_bus);
+  // }
 
-  addDrivers(driver: Driver){
-    var temp_driver= new Driver();
-    temp_driver.name = driver.name;
-    temp_driver.lastName = driver.lastName;
-    temp_driver.username = driver.username;
-    temp_driver.password = driver.password;
+  // addDriver(driver: Driver){
+  //   var temp_driver= new Driver();
+  //   temp_driver.name = driver.name;
+  //   temp_driver.lastName = driver.lastName;
+  //   temp_driver.username = driver.username;
+  //   temp_driver.password = driver.password;
     
-    this.driver.name="";
-    this.driver.lastName="";
-    this.driver.username="";
-    this.driver.password="";
-    this.drivers.push(temp_driver);
+  //   this.driver.name="";
+  //   this.driver.lastName="";
+  //   this.driver.username="";
+  //   this.driver.password="";
+  //   this.drivers.push(temp_driver);
   
-  }
+  // }
 
-    deleteBus(i: any){
-      this.buses.splice(i , 1);
-  }
+  //   deleteBus(i: any){
+  //     this.buses.splice(i , 1);
+  // }
 
-   deleteDriver(i: any){
-      this.drivers.splice(i , 1);
-  }
+  //  deleteDriver(i: any){
+  //     this.drivers.splice(i , 1);
+  // }
       
       
-   editBus(bus:Bus){
+  //  editBus(bus:Bus){
   
-    var temp_bus= new Bus();
+  //   var temp_bus= new Bus();
       
-      temp_bus.name = bus.name;
-      temp_bus.driver = bus.driver;
+  //     temp_bus.name = bus.name;
+  //     temp_bus.driver = bus.driver;
   
-      this.bus.name="";
-      this.bus.driver="";
+  //     this.bus.name="";
+  //     this.bus.driver="";
 
-      this.buses.splice(this.myValue, 1);
-      this.buses.splice(this.myValue, 0, temp_bus)  
+  //     this.buses.splice(this.myValue, 1);
+  //     this.buses.splice(this.myValue, 0, temp_bus)  
       
       
-  }
+  // }
 
-  editDriver(driver:Driver){
+  // editDriver(driver:Driver){
   
-    var temp_driver= new Driver();
-      temp_driver.id = driver.id;
-      temp_driver.name = driver.name;
-      temp_driver.lastName = driver.lastName;
-      temp_driver.username = driver.username;
-      temp_driver.password = driver.password;
+  //   var temp_driver= new Driver();
+  //     temp_driver.id = driver.id;
+  //     temp_driver.name = driver.name;
+  //     temp_driver.lastName = driver.lastName;
+  //     temp_driver.username = driver.username;
+  //     temp_driver.password = driver.password;
      
  
-        this.driver.name="";
-        this.driver.lastName="";
-        this.driver.username ="";
-        this.driver.password ="";
+  //       this.driver.name="";
+  //       this.driver.lastName="";
+  //       this.driver.username ="";
+  //       this.driver.password ="";
 
-          this.drivers.splice(this.myValue, 1);
-          this.drivers.splice(this.myValue, 0, temp_driver)  
+  //         this.drivers.splice(this.myValue, 1);
+  //         this.drivers.splice(this.myValue, 0, temp_driver)  
       
       
-  }
+  // }
 
-  checkUsername(username : String){
-    for(var i:number = 0; i < this.drivers.length; i++){
-      if(username == this.drivers[i].username){
-        return false
+  // checkUsername(username : String){
+  //   for(var i:number = 0; i < this.drivers.length; i++){
+  //     if(username == this.drivers[i].username){
+  //       return false
        
-      }
+  //     }
       
-    return true;
-    }
+  //   return true;
+  //   }
     
-  }
+  // }
 
-  close(modalId: String){
-    $('#'+ modalId).modal('hide')
-  }
+  // close(modalId: String){
+  //   $('#'+ modalId).modal('hide')
+  // }
 
 }
 
