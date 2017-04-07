@@ -57,9 +57,9 @@ router.put('/updateDriver', function (req, res, next) {
 });
 
 router.delete('/deleteDriver', function (req, res, next) {
-    console.log("req.query. = " + req.query.id);
-  var id = req.query.id;
-  this.Driver.splice(this.Driver[id], 1);
+    console.log("req.query. = " + req.query.index);
+  var index = req.query.index;
+  this.Driver.splice(index, 1);
 });
 
 module.exports = router;
