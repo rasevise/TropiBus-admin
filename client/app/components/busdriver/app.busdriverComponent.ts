@@ -32,7 +32,7 @@ export class busdriverComponent{
     .subscribe(drivers => this.drivers = drivers);
   }
   //  Buses Crud
-    getBuses(): void {
+  getBuses(): void {
     this.service
         .getBuses()
         .subscribe(buses => this.buses = buses);

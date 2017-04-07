@@ -36,7 +36,7 @@ router.post('/addD', function (req, res, next) {
 });
 
 router.put('/updateDriver', function (req, res, next) {
-   var d_name = req.body.name;
+  var d_name = req.body.name;
   var d_last = req.body.lastName;
   var d_user = req.body.username;
   var d_password = req.body.password;

@@ -23,7 +23,7 @@ export class BusDriverService {
     .do(data => console.log('JSON length: ' + data.length));
   }
    
-      deleteBus(i: number): Observable<Response> {
+      deleteBus(i: number): Observable<any> {
     return this.http
     .delete('buses/deleteBus' + "/?index=" + i, { headers: this.headers })
     .map((res: Response) => res.json())
@@ -32,7 +32,7 @@ export class BusDriverService {
     );
   }
 
-    createBus(bus: any){
+    createBus(bus: any): Observable<any> {
     return this.http
       .post('drivers/addDriver', JSON.stringify({name: bus.name,
          driver: bus.driver, route : bus.route, status: bus.status}), { headers:this.headers })
@@ -41,7 +41,7 @@ export class BusDriverService {
       // .catch(this.handleError);
   }
 
-    updateBus(bus: any, i: any): Observable<Driver> {
+    updateBus(bus: any, i: any): Observable<any> {
     return this.http
       .put('buses/updateBus', JSON.stringify({name: bus.name,
          driver: bus.driver, route : bus.route, status: bus.status, index: i}), { headers:this.headers })
@@ -64,16 +64,16 @@ export class BusDriverService {
     .map((res: Response) => res.json())
     .do(data => console.log('JSON length: ' + data.length));
   }
-   deleteDriver(i: number): Observable<Response> {
+   deleteDriver(i: number): Observable<any> {
     return this.http
-    .delete('drivers/deleteDriver' + "/?id=" + i, { headers:this.headers })
+    .delete('drivers/deleteDriver' + "/?index=" + i, { headers:this.headers })
     .map((res: Response) => res.json())
     .subscribe(
       (res:Response) => { this.postResponse = res; console.log(res); }
     );
   }
 
-    createDriver(driver: any){
+    createDriver(driver: any): Observable<any> {
     return this.http
       .post('drivers/addDriver', JSON.stringify({name: driver.name,
          lastName: driver.lastName, username : driver.username, password: driver.password}), { headers:this.headers })
@@ -82,7 +82,7 @@ export class BusDriverService {
       // .catch(this.handleError);
   }
 
-    updateDriver(driver: any, i: any): Observable<Driver> {
+    updateDriver(driver: any, i: any): Observable<any> {
     return this.http
       .put('drivers/updateMessage', JSON.stringify({name: driver.name,
          lastName: driver.lastName, username : driver.username, password: driver.password, index: i}), { headers:this.headers })

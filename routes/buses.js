@@ -26,6 +26,7 @@ router.post('/addB', function (req, res, next) {
     route: b_route,
     status: b_status
   });
+  
   this.buses.push(newB);
 });
 
@@ -37,7 +38,7 @@ router.put('/updateBus', function (req, res, next) {
   var i = req.body.index;
 
 var newB = ({
-    id: this.buses.length,
+    id: i,
     name: b_name,
     driver: b_driver,
     route: b_route,
@@ -47,7 +48,6 @@ var newB = ({
 });
 
 router.delete('/deleteBus', function (req, res, next) {
-    console.log("req.query. = " + req.query.id);
   var index = req.query.index;
   this.buses.splice(index, 1);
 });
