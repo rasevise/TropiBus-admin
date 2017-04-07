@@ -10,24 +10,28 @@ var router = express.Router();
 router.get('/', function(req, res, next){
     res.contentType('application/json');
     var routesJSON = JSON.stringify(this.buses);
-    res.json(this.buses);
+    res.json(buses);
 });
 
-router.post('/addB', function (req, res, next) {
+router.post('/addBuses', function (req, res, next) {
   var b_name = req.body.name;
   var b_driver = req.body.driver;
   var b_route = req.body.route;
   var b_status = req.body.status;
 
   var newB = ({
-    id: this.buses.length,
+    id: buses.length,
     name: b_name,
     driver: b_driver,
     route: b_route,
     status: b_status
   });
+<<<<<<< HEAD
   
   this.buses.push(newB);
+=======
+  buses.push(newB);
+>>>>>>> 623f6abcc97991af4a666402ad2b5b4524d1d5d4
 });
 
 router.put('/updateBus', function (req, res, next) {
@@ -44,12 +48,12 @@ var newB = ({
     route: b_route,
     status: b_status
   });
-  this.buses[i] = newD;
+  buses[i] = newD;
 });
 
 router.delete('/deleteBus', function (req, res, next) {
   var index = req.query.index;
-  this.buses.splice(index, 1);
+  buses.splice(index, 1);
 });
 
 module.exports = router;

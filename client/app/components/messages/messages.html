@@ -20,7 +20,7 @@
                     Edit
                   </button>
                 <button id = "messageDeleteButton" class="btn btn-danger btn md" type="button" 
-                (click) ="deleteMessage(i)">
+                (click) ="delete(i)">
                   Delete
                   </button>
               </h4>
@@ -168,7 +168,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary" data-dismiss="modal" [disabled]="!messageFormE.form.valid"(click)=" editMessage(message); ;messageFormE.reset(); close('EditMessageModal')" >Submit</button>
+              <button type="submit" class="btn btn-primary" data-dismiss="modal" [disabled]="!messageFormE.form.valid"(click)=" edit(message); ;messageFormE.reset(); close('EditMessageModal')" >Submit</button>
             </div>
           </div>
         </div>
