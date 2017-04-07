@@ -20,13 +20,13 @@ router.post('/addBuses', function (req, res, next) {
   var b_status = req.body.status;
 
   var newB = ({
-    id: Bus.length,
+    id: this.buses.length,
     name: b_name,
     driver: b_driver,
     route: b_route,
     status: b_status
   });
-  Bus.push(newB);
+  this.buses.push(newB);
 });
 
 router.put('/updateBus', function (req, res, next) {
@@ -37,19 +37,19 @@ router.put('/updateBus', function (req, res, next) {
   var i = req.body.index;
 
 var newB = ({
-    id: Bus.length,
+    id: this.buses.length,
     name: b_name,
     driver: b_driver,
     route: b_route,
     status: b_status
   });
-  Bus[i] = newD;
+  this.buses[i] = newD;
 });
 
 router.delete('/deleteBus', function (req, res, next) {
     console.log("req.query. = " + req.query.id);
   var index = req.query.index;
-  this.Bus.splice(index, 1);
+  this.buses.splice(index, 1);
 });
 
 module.exports = router;
