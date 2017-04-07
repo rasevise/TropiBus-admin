@@ -46,7 +46,7 @@ var newB = ({
   Bus[i] = newD;
 });
 
-router.delete('/deletBus', function (req, res, next) {
+router.delete('/deleteBus', function (req, res, next) {
     console.log("req.query. = " + req.query.id);
   var id = req.query.id;
   this.Bus.splice(this.Bus[id], 1);
