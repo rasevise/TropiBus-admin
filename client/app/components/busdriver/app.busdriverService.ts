@@ -15,6 +15,8 @@ export class BusDriverService {
   constructor (@Inject(Http) private http: Http ) {}
 
  
+//Buses//
+
     getBuses(): Observable<any[]> {
     return this.http.get(this._busesURL)
     .map((res: Response) => res.json())
@@ -54,8 +56,8 @@ export class BusDriverService {
 
 
 
+//Drivers//
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   getDrivers(): Observable<any[]> {
     return this.http.get(this._driversURL)
