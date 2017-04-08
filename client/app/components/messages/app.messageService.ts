@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import {Headers, Http, Response } from '@angular/http';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/rx';
 import { Message } from './messages';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
@@ -17,16 +17,15 @@ export class MessageService {
     getMessages(){
     return this.http.get(this._messagesURL)
     .map((res: Response) => res.json())
-    .do(data => console.log('JSON length: ' + data.length));
+    .catch((error:any) => 'Server error');
   }
 
 
     delete(i: number){
-    console.log('index: ' + i)
     return this.http
     .delete('/messages/deleteMessage' + "/?index=" + i, { headers:this.headers })
     .map((res: Response) => res.json())
-    .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
+    .subscribe((res:Response) => { this.postResponse = res; console.log(res); })
   }
 
     create(message: any){
@@ -35,11 +34,9 @@ export class MessageService {
          messageContent: message.messageContent}), { headers:this.headers })
       .map((res: Response) => res.json().data)
       .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
-      // .catch(this.handleError);
   }
 
     update(message: any, i: any){
-      console.log("index: "+i);
     return this.http
       .put('/messages/updateMessage', JSON.stringify({title: message.title,
          messageContent: message.messageContent, index: i}), { headers:this.headers })

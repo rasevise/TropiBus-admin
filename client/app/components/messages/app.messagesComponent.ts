@@ -4,6 +4,7 @@ import { Location }   from '@angular/common';
 import { Message } from './messages';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MessageService } from './app.messageService'
+import { Observable } from 'rxjs/rx';
 
 @Component({
   selector: 'messages',
@@ -13,15 +14,12 @@ import { MessageService } from './app.messageService'
 })
 export class messagesComponent implements OnInit{
   message: Message = new Message(null,'', Date.now(), '');
-  @Input() messages: Message[] = [];
+  messages: Message[] = [];
   private myValue: number;
+  timerSubscription: any;
+  messageSubscription: any;
 
-  constructor (@Inject(MessageService) private MessageService: MessageService, ){
-     MessageService.getMessages()
-    .subscribe(messages => this.messages = messages);
-  }
-
- 
+  constructor (@Inject(MessageService) private MessageService: MessageService, ){}
 
   setValue(val:number) {
       this.myValue = val;
@@ -30,12 +28,16 @@ export class messagesComponent implements OnInit{
     return this.myValue;
   }
 
-  
-
   getMessages(): void{
     this.MessageService
         .getMessages()
-        .subscribe(messages => this.messages = messages);
+        .catch(err =>  { 
+          return Observable.throw(err); // observable needs to be returned or exception raised
+        })
+        .subscribe(
+          messages => {this.messages = messages},
+          err => console.error(err),
+          () => console.log('get messages'));
   }
 
 
