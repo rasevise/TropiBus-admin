@@ -4,7 +4,7 @@ import { Location }   from '@angular/common';
 import { Message } from './messages';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MessageService } from './app.messageService'
-import { Observable } from 'rxjs/rx';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'messages',
@@ -14,12 +14,21 @@ import { Observable } from 'rxjs/rx';
 })
 export class messagesComponent implements OnInit{
   message: Message = new Message(null,'', Date.now(), '');
-  messages: Message[] = [];
+  messages: Array<Message> = [];
   private myValue: number;
   timerSubscription: any;
   messageSubscription: any;
 
-  constructor (@Inject(MessageService) private MessageService: MessageService, ){}
+  constructor (@Inject(MessageService) private MessageService: MessageService, ){
+  }
+
+  ngOnInit(): void {
+    this.MessageService.messages
+    .subscribe((messages: Array<Message>) => {
+        this.messages = messages
+    });
+    this.getMessages();
+  }
 
   setValue(val:number) {
       this.myValue = val;
@@ -30,14 +39,7 @@ export class messagesComponent implements OnInit{
 
   getMessages(): void{
     this.MessageService
-        .getMessages()
-        .catch(err =>  { 
-          return Observable.throw(err); // observable needs to be returned or exception raised
-        })
-        .subscribe(
-          messages => {this.messages = messages},
-          err => console.error(err),
-          () => console.log('get messages'));
+        .getMessages();
   }
 
 
@@ -57,9 +59,7 @@ export class messagesComponent implements OnInit{
     this.getMessages();
   }
 
-  ngOnInit(): void {
-    this.getMessages();
-  }
+
 
   close(modalId: string){
     $('#'+ modalId).modal('hide')

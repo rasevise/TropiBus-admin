@@ -1,23 +1,28 @@
 import { Injectable, Inject } from '@angular/core';
-import {Headers, Http, Response } from '@angular/http';
-import { Observable } from 'rxjs/rx';
+import { Headers, Http, Response } from '@angular/http';
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { Message } from './messages';
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class MessageService {
   private _messagesURL = '/messages';
   private headers = new Headers({'Content-Type': 'application/json'});
   postResponse:any;
-  constructor (@Inject(Http) private http: Http ) {}
 
+
+  constructor (@Inject(Http) private http: Http ) {}
+  messages: Subject<Array<Message>> = new BehaviorSubject<Array<Message>>([]);
  
-    getMessages(){
+  getMessages(){
     return this.http.get(this._messagesURL)
     .map((res: Response) => res.json())
-    .catch((error:any) => 'Server error');
+    .subscribe(
+      (data:any) => {
+        this.messages.next(data);
+      },
+      (err:any) => console.log("Error in 'getMessages()"),
+      () => console.log("load messages"));
   }
 
 
@@ -43,7 +48,8 @@ export class MessageService {
       .map((res: Response) => res.json().data)
       .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
     }
-        private handleError(error: any): Promise<any> {
+    
+  private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
   }
