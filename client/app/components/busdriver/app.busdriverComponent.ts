@@ -50,7 +50,7 @@ export class busdriverComponent{
         this.getBuses();
   }
 
-  saveB(): void {
+  editB(): void {
     this.service.updateBus(this.bus, this.getValue())
     this.getBuses();
   }
@@ -81,8 +81,8 @@ export class busdriverComponent{
         this.getDrivers();
   }
 
-  saveD(): void {
-    this.service.updateDriver(this.bus, this.getValue())
+  editD(): void {
+    this.service.updateDriver(this.driver, this.getValue())
     this.getDrivers();
   }
 

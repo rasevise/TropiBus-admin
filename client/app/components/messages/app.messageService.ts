@@ -23,7 +23,7 @@ export class MessageService {
 
     delete(i: number){
     return this.http
-    .delete('/messages/deleteMessage' + "/?index =" + i, { headers:this.headers })
+    .delete('/messages/deleteMessage' + "/?index=" + i, { headers:this.headers })
     .map((res: Response) => res.json())
     .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
   }

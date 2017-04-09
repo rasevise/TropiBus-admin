@@ -25,21 +25,25 @@ export class BusDriverService {
   }
       deleteBus(i: number){
     return this.http
-    .delete('buses/deleteBus' + "/?index=" + i, { headers: this.headers })
-    .map((res: Response) => res.json());
+    .delete('/buses/deleteBus' + "/?index=" + i, { headers: this.headers })
+    .map((res: Response) => res.json())
+    .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
   }
-    createBus(bus: any): Observable<any> {
+
+    createBus(bus: any) {
     return this.http
-      .post('drivers/addDriver', JSON.stringify({name: bus.name,
+      .post('/buses/addBus', JSON.stringify({name: bus.name,
          driver: bus.driver, route : bus.route, status: bus.status}), { headers:this.headers })
-      .map((res: Response) => res.json().data);
+      .map((res: Response) => res.json().data)
+      .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
       // .catch(this.handleError);
   }
-    updateBus(bus: any, i: any): Observable<any> {
+    updateBus(bus: any, i: any) {
     return this.http
-      .put('buses/updateBus', JSON.stringify({name: bus.name,
+      .put('/buses/updateBus', JSON.stringify({name: bus.name,
          driver: bus.driver, route : bus.route, status: bus.status, index: i}), { headers:this.headers })
-      .map((res: Response) => res.json().data);
+      .map((res: Response) => res.json().data)
+      .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
       // .catch(this.handleError);
     }
         private handleError(error: any): Promise<any> {
@@ -57,6 +61,7 @@ export class BusDriverService {
     .map((res: Response) => res.json())
     .do(data => console.log('JSON length: ' + data.length));
   }
+
    deleteDriver(i: number){
     return this.http
     .delete('drivers/deleteDriver' + "/?index=" + i, { headers:this.headers })
@@ -65,7 +70,7 @@ export class BusDriverService {
       (res:Response) => { this.postResponse = res; console.log(res); }
     );
   }
-    createDriver(driver: any): Observable<any> {
+    createDriver(driver: any) {
     return this.http
       .post('drivers/addDriver', JSON.stringify({name: driver.name,
          lastName: driver.lastName, username : driver.username, password: driver.password}), { headers:this.headers })
@@ -73,9 +78,9 @@ export class BusDriverService {
       .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
       // .catch(this.handleError);
   }
-    updateDriver(driver: any, i: any): Observable<any> {
+    updateDriver(driver: any, i: any) {
     return this.http
-      .put('drivers/updateMessage', JSON.stringify({name: driver.name,
+      .put('drivers/updateDriver', JSON.stringify({name: driver.name,
          lastName: driver.lastName, username : driver.username, password: driver.password, index: i}), { headers:this.headers })
       .map((res: Response) => res.json().data)
       .subscribe((res:Response) => { this.postResponse = res; console.log(res); });

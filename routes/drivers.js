@@ -32,7 +32,7 @@ router.post('/addDriver', function (req, res, next) {
     status: d_status,
     username: d_user
   });
-  this.Driver.push(newD);
+  Driver.push(newD);
 });
 
 router.put('/updateDriver', function (req, res, next) {
@@ -53,7 +53,7 @@ router.put('/updateDriver', function (req, res, next) {
     status: d_status,
     username: d_user
   });
-  this.Driver[i] = newD;
+  Driver[i] = newD;
 });
 
 router.delete('/deleteDriver', function (req, res, next) {

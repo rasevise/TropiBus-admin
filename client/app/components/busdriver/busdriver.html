@@ -58,7 +58,7 @@
               <td>{{driver.status}}</td>
               <td>  
                 <div class= "btn-group-vertical">
-                <button  id = "editDriverButton" type="button" class="btn btn-primary" (click) = "setValue(i);driverFormB.reset()" data-toggle="modal" data-target="#EditDriverModal">
+                <button  id = "editDriverButton" type="button" class="btn btn-primary" (click) = "setValue(i); driverFormE.reset()" data-toggle="modal" data-target="#EditDriverModal">
                     Edit
                     </button> 
                     <button id ="deleteDriverButton" class="btn btn-danger btn md" type="button" (click)="deleteD(i)">Delete</button>
@@ -319,7 +319,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)= " busFormE.reset()">Close</button>
-              <button type="button" class="btn btn-primary" data-dismiss="modal"[disabled]="!busFormE.form.valid"(click)="editB(bus); busFormE.reset(); close('EditBusModal')" >Save changes</button>
+              <button type="button" class="btn btn-primary" data-dismiss="modal"[disabled]="!busFormE.form.valid"(click)="editB(); busFormE.reset(); close('EditBusModal')" >Save changes</button>
             </div>
           
         </div>
@@ -445,7 +445,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" [disabled]="!driverFormE.form.valid"(click)="editD(driver); driverFormE.reset(); close('EditDriverModal')">Save changes</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" [disabled]="!driverFormE.form.valid"(click)="editD(); driverFormE.reset(); close('EditDriverModal')">Save changes</button>
       </div>
     </div>
  
