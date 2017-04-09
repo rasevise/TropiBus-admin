@@ -73,7 +73,7 @@ export class RoutesComponent implements OnInit{
   }
 
   editStop(){
-    this.service.editStop(m_stop);
+    // this.service.update(this.m_stop);
   }
 
   deleteStop(){
@@ -98,7 +98,7 @@ export class RoutesComponent implements OnInit{
   }
 
   setRoute(r_id:any){
-    this.polylinePaths.forEach(p => {//warning, not an error
+    this.polylinePaths.forEach((p:any) => {//warning, not an error
       p.setMap(null);
     });
     this.clearMarkers();
@@ -133,13 +133,13 @@ export class RoutesComponent implements OnInit{
     .subscribe(routes => {
         this.routes = routes;
         this.loadRoutes();
-        console.log(routes);
+        // console.log(routes);
     })
   }
   getAllStops(){
     this.service.getStops().subscribe(stops => {
         this.stops = stops;
-        console.log(stops);
+        // console.log(stops);
   })
   }
 

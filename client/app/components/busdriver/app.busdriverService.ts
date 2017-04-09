@@ -20,8 +20,8 @@ export class BusDriverService {
 
     getBuses(): Observable<any[]> {
     return this.http.get(this._busesURL)
-    .map((res: Response) => res.json())
-    .do(data => console.log('JSON length: ' + data.length));
+    .map((res: Response) => res.json());
+    // .do(data => console.log('JSON length: ' + data.length));
   }
       deleteBus(i: number){
     return this.http
@@ -58,8 +58,8 @@ export class BusDriverService {
 
   getDrivers(): Observable<any[]> {
     return this.http.get(this._driversURL)
-    .map((res: Response) => res.json())
-    .do(data => console.log('JSON length: ' + data.length));
+    .map((res: Response) => res.json());
+    // .do(data => console.log('JSON length: ' + data.length));
   }
 
    deleteDriver(i: number){

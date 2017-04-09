@@ -5,28 +5,23 @@ import { Message } from './messages';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MessageService } from './app.messageService'
 import { Observable } from 'rxjs';
+import 'rxjs/add/operator/catch';
 
 @Component({
   selector: 'messages',
   templateUrl: './app/components/messages/messages.html',
-  providers: [],
+  providers: [MessageService],
 
 })
 export class messagesComponent implements OnInit{
   message: Message = new Message(null,'', Date.now(), '');
-  messages: Array<Message> = [];
+  messages: any[] = [];
   private myValue: number;
-  timerSubscription: any;
-  messageSubscription: any;
 
-  constructor (@Inject(MessageService) private MessageService: MessageService, ){
+  constructor (@Inject(MessageService) private service: MessageService, ){
   }
 
   ngOnInit(): void {
-    this.MessageService.messages
-    .subscribe((messages: Array<Message>) => {
-        this.messages = messages
-    });
     this.getMessages();
   }
 
@@ -38,31 +33,37 @@ export class messagesComponent implements OnInit{
   }
 
   getMessages(): void{
-    this.MessageService
-        .getMessages();
+    this.service.getMessages()
+    .subscribe((messages: any) => {
+        this.messages = messages
+    });
   }
 
 
   add(): void {
-    this.MessageService.create(this.message);
+    this.service.create(this.message);
     this.getMessages();
   }
 
   delete(i : number): void {
-    this.MessageService
+    this.service
         .delete(i);
         this.getMessages();
   }
 
   edit(message: any): void {
-    this.MessageService.update(message, this.getValue())
+    this.service.update(message, this.getValue())
     this.getMessages();
   }
 
 
 
   close(modalId: string){
-    $('#'+ modalId).modal('hide')
+    $('#'+ modalId).modal('hide');
+  }
+
+  log(){
+    console.log(this.messages.length);
   }
 
 

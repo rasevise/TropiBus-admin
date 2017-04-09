@@ -1,8 +1,10 @@
 import { Injectable, Inject } from '@angular/core';
 import { Headers, Http, Response } from '@angular/http';
-import { Observable, Subject, BehaviorSubject } from 'rxjs';
+import { Subject, BehaviorSubject } from 'rxjs';
 import { Message } from './messages';
 import 'rxjs/add/operator/map';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class MessageService {
@@ -12,17 +14,11 @@ export class MessageService {
 
 
   constructor (@Inject(Http) private http: Http ) {}
-  messages: Subject<Array<Message>> = new BehaviorSubject<Array<Message>>([]);
  
   getMessages(){
     return this.http.get(this._messagesURL)
     .map((res: Response) => res.json())
-    .subscribe(
-      (data:any) => {
-        this.messages.next(data);
-      },
-      (err:any) => console.log("Error in 'getMessages()"),
-      () => console.log("load messages"));
+    .do(data => console.log('Messages length: ' + data.length))
   }
 
 
@@ -49,9 +45,19 @@ export class MessageService {
       .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
     }
     
-  private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject(error.message || error);
-  }
+  // private handleError(error: any){ 
+  //   // In a real world app, you might use a remote logging infrastructure
+  //   let errMsg: string;
+  //   if (error instanceof Response) {
+  //     const body = error.json() || '';
+  //     const err = body.error || JSON.stringify(body);
+  //     errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+  //   } else {
+  //     errMsg = error.message ? error.message : error.toString();
+  //   }
+  //   console.error(errMsg);
+  //   return Observable.throw(errMsg);
+  // }
+  
   }
 

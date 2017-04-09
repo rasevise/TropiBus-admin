@@ -4,7 +4,7 @@
       <br>
         <div  class="row">
 			    <div class="col-md-12">
-             <button  id = "addMessageButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddMessageModal"  >Add Message</button> 
+             <button  id = "addMessageButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddMessageModal">Add Message</button> 
                
 			   </div>
 			</div>
@@ -14,7 +14,7 @@
 				  <div class="col-md-12">
             <div>
               <h4>
-              {{message.title}} {{message.date| date}}
+              {{message.message_title}} {{message.message_date| date}}
                   <button  id = "editMessageButton" type="button" class="btn btn-primary" (click) = "setValue(i);" data-toggle="modal"  
                    data-target="#EditMessageModal" >
                     Edit
@@ -30,7 +30,7 @@
          <div class="row">
 				  <div class="col-md-8">
             <div>
-              {{message.messageContent}}  
+              {{message.message_text}}  
             </div>
 				  </div>
           </div>
