@@ -45,7 +45,8 @@
     },
     paths: {
       // paths serve as alias
-      'npm:': 'node_modules/'
+      'npm:': 'node_modules/',
+      'rxjs/*': 'node_modules/rxjs/*.js'
     },
     // map tells the System loader where to look for things
     map: {
@@ -84,6 +85,7 @@
         defaultExtension: 'ts'
       },
       rxjs: {
+        main: 'Rx.js',
         defaultExtension: 'js'
       },
       'angular2-in-memory-web-api': {
@@ -94,5 +96,16 @@
       'ng2-bootstrap':          { format: 'cjs', main: 'bundles/ng2-bootstrap.umd.js', defaultExtension: 'js' },
       'moment':                 { main: 'moment.js', defaultExtension: 'js' },
     },
+    bundles: {
+        'npm:rxjs/bundles/Rx.min.js': [
+            "rxjs/*",
+            "rxjs/operator/*",
+            "rxjs/observable/*",
+            "rxjs/add/operator/*",
+            "rxjs/add/observable/*",
+            "rxjs/util/*"
+        ],
+        '/js/app.bundle': ['main']
+    }
   });
 })(this);

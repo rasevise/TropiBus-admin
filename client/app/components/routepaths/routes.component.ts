@@ -32,11 +32,11 @@ export class RoutesComponent implements OnInit{
   m_desc: any;
   m_route: any;
   m_stop: {
-    id: number = -1,
-    name:string = '',
-    description:string = '',
-    latitude:number = '',
-    longitude:number = ''
+    id: number,
+    name:string,
+    description:string,
+    latitude:number,
+    longitude:number
   };
 
   setMTitle(title:any, route: any){

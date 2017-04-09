@@ -1,9 +1,10 @@
 
-import { Component, OnInit, Injectable, Inject } from '@angular/core';
+import { Component, OnInit, Injectable, Inject, Input } from '@angular/core';
 import { Location }   from '@angular/common';
 import { Message } from './messages';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MessageService } from './app.messageService'
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'messages',
@@ -11,21 +12,23 @@ import { MessageService } from './app.messageService'
   providers: [],
 
 })
-export class messagesComponent  {
-  message: Message = new Message();
-  messages: any[] = [];
+export class messagesComponent implements OnInit{
+  message: Message = new Message(null,'', Date.now(), '');
+  messages: Array<Message> = [];
   private myValue: number;
-
-
-
-
+  timerSubscription: any;
+  messageSubscription: any;
 
   constructor (@Inject(MessageService) private MessageService: MessageService, ){
-     MessageService.getMessages()
-    .subscribe(messages => this.messages = messages);
   }
 
- 
+  ngOnInit(): void {
+    this.MessageService.messages
+    .subscribe((messages: Array<Message>) => {
+        this.messages = messages
+    });
+    this.getMessages();
+  }
 
   setValue(val:number) {
       this.myValue = val;
@@ -34,40 +37,29 @@ export class messagesComponent  {
     return this.myValue;
   }
 
-  
-
-  getMessages(): void {
+  getMessages(): void{
     this.MessageService
-        .getMessages()
-        .subscribe(messages => this.messages = messages);
+        .getMessages();
   }
 
 
-  add(message: Message): void {
-    this.MessageService.create(message);
+  add(): void {
+    this.MessageService.create(this.message);
     this.getMessages();
   }
 
   delete(i : number): void {
-    console.log("index: "  + i);
     this.MessageService
         .delete(i);
         this.getMessages();
   }
 
-  edit(i: number): void {
-    this.MessageService.update(this.message, i)
+  edit(message: any): void {
+    this.MessageService.update(message, this.getValue())
     this.getMessages();
   }
 
-  ngOnInit(): void {
-    this.getMessages();
-  }
-    
 
-    getTempMessage(x: number){
-      return this.messages[x];
-    }
 
   close(modalId: string){
     $('#'+ modalId).modal('hide')

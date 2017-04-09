@@ -1,7 +1,9 @@
 var express = require('express');
 var path = require('path');
 var bodyParser = require('body-parser');
-
+var debug = require('debug')('http');
+var http = require('http');
+var errorHandler = require('errorhandler');
 //route models
 var index = require('./routes/index');
 var routes = require('./routes/routes');
@@ -12,7 +14,6 @@ var messages = require('./routes/messages');
 
 
 var port = process.env.PORT || 8080;
-
 var app = express();
 
 //View Engine
@@ -26,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'client')));
 // Body Parser MW
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(errorHandler({ dumpExceptions: true, showStack: true })); 
 
 
 // Route Services
@@ -36,6 +38,11 @@ app.use('/stops', stops);
 app.use('/drivers', drivers);
 app.use('/messages', messages);
 
-app.listen(port, function(){
-    console.log('Server started on port '+port);
+
+http.createServer(app).listen(port, (err) => {  
+  if (err) {
+    return console.log('something bad happened', err)
+  }
+
+  console.log(`server is listening on ${port}`)
 });

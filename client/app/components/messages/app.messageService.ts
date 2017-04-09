@@ -1,23 +1,28 @@
 import { Injectable, Inject } from '@angular/core';
-import {Headers, Http, Response } from '@angular/http';
-import { Observable } from 'rxjs';
+import { Headers, Http, Response } from '@angular/http';
+import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { Message } from './messages';
 import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/do';
-import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class MessageService {
   private _messagesURL = '/messages';
   private headers = new Headers({'Content-Type': 'application/json'});
   postResponse:any;
-  constructor (@Inject(Http) private http: Http ) {}
 
+
+  constructor (@Inject(Http) private http: Http ) {}
+  messages: Subject<Array<Message>> = new BehaviorSubject<Array<Message>>([]);
  
-    getMessages(): Observable<any[]> {
+  getMessages(){
     return this.http.get(this._messagesURL)
     .map((res: Response) => res.json())
-    .do(data => console.log('JSON length: ' + data.length));
+    .subscribe(
+      (data:any) => {
+        this.messages.next(data);
+      },
+      (err:any) => console.log("Error in 'getMessages()"),
+      () => console.log("load messages"));
   }
 
 
@@ -25,7 +30,7 @@ export class MessageService {
     return this.http
     .delete('/messages/deleteMessage' + "/?index=" + i, { headers:this.headers })
     .map((res: Response) => res.json())
-    .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
+    .subscribe((res:Response) => { this.postResponse = res; console.log(res); })
   }
 
     create(message: any){
@@ -34,18 +39,17 @@ export class MessageService {
          messageContent: message.messageContent}), { headers:this.headers })
       .map((res: Response) => res.json().data)
       .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
-      // .catch(this.handleError);
   }
 
     update(message: any, i: any){
-      console.log("index: "+i);
     return this.http
       .put('/messages/updateMessage', JSON.stringify({title: message.title,
          messageContent: message.messageContent, index: i}), { headers:this.headers })
       .map((res: Response) => res.json().data)
       .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
     }
-        private handleError(error: any): Promise<any> {
+    
+  private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
     return Promise.reject(error.message || error);
   }
