@@ -1,16 +1,19 @@
 export class Bus {
-    id: number;
-    name: string;
-    driver: string;
-    route: string;
-    status: string;
+    constructor(
+    public id: number,
+   public name: string,
+    public driver: string,
+    public route: string,
+    public status: string){}
 }
 
 export class Driver {
-    id: number;
-    name: string;
-    lastName: string;
-    username: string;
-    password: string;
-    status: string;
+    constructor(public id: number,
+    public name: string,
+    public lastName : string,
+    public username :string,
+    public password : string,
+    public status : string){}
+
 }
+

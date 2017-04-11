@@ -24,10 +24,10 @@
 					  </thead>
 						<tbody>
 							<tr *ngFor="let bus of buses; let i = index">
-                <td>{{bus.name}}</td>
-                <td>{{bus.driver}}</td>
-                <td>{{bus.route}}</td>
-                <td>{{bus.status}}</td>
+                <td>{{bus.bus_name}}</td>
+                <td>{{bus.bus_driver}}</td>
+                <td>{{bus.bus_route}}</td>
+                <td>{{bus.bus_status}}</td>
                 <td>
                   <div class= "btn-group-vertical">
                   <button  id = "editBusButton" type="button" class="btn btn-primary btn-md" (click) = "setValue(i);busFormE.reset()" data-toggle="modal" data-target="#EditBusModal">
@@ -52,10 +52,10 @@
             </thead>
             <tbody>
             <tr *ngFor="let driver of drivers; let i = index">
-              <td>{{driver.name}}</td>
-              <td>{{driver.lastName}}</td>
-              <td>{{driver.route}}</td>
-              <td>{{driver.status}}</td>
+              <td>{{driver.driver_firstname}}</td>
+              <td>{{driver.driver_lastname}}</td>
+              <td>{{driver.driver_route}}</td>
+              <td>{{driver.driver_status}}</td>
               <td>  
                 <div class= "btn-group-vertical">
                 <button  id = "editDriverButton" type="button" class="btn btn-primary" (click) = "setValue(i); driverFormE.reset()" data-toggle="modal" data-target="#EditDriverModal">

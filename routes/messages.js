@@ -12,7 +12,7 @@ router.get('/', function(req, res, next){
   db.query('SELECT * FROM Message', sendData);
 
   function sendData(err, results) {
-    console.log("getting messages from server: " + results.rows[0].message_title);
+    console.log("getting messages from server: ");
     Message = results.rows;
     res.json(Message);
   }
