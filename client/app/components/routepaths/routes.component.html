@@ -14,12 +14,12 @@
 <div class="dropdown-menu">
   <a 
   class="dropdown-item" 
-  (click)="setMTitle(''); setButtonText('routeDisplay', 'Select Route'); loadRoutes(); clearMarkers()" 
+  (click)="setMTitle(''); setButtonText('routeDisplay', 'Select Route'); getRoutes(); clearMarkers()" 
   href="javascript:void(0)">
   <h4>Show All</h4></a>
   <a *ngFor="let route of routes;" 
   class="dropdown-item" 
-  (click)="setMTitle(route.route_name, route); setButtonText('routeDisplay', route.route_name); setRoute(route.route_ID);" 
+  (click)="setMTitle(route.route_name, route); setButtonText('routeDisplay', route.route_name); setRoute(route.route_id);" 
   href="javascript:void(0)">
   {{route.route_name}}</a>
 </div>
@@ -143,7 +143,7 @@
                     <a 
                     href="javascript:void(0)" 
                     class="list-group-item list-group-item-action list-group-item-info"
-                    (click)="selectStop(stop)">
+                    (click)="selectStop(stop); scrollModalTop('pathModal');">
                     Name: {{stop.name}}</a>
                     <a class="list-group-item list-group-item-action">Description: {{stop.description}}</a>
                     <a class="list-group-item list-group-item-action">Latitude: {{stop.latitude}}</a>
