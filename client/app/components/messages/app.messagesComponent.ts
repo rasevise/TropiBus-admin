@@ -41,7 +41,7 @@ export class messagesComponent implements OnInit{
 
 
   add(): void {
-    this.service.create(this.message);
+    this.service.create(this.message, this.getValue());
     this.getMessages();
   }
 

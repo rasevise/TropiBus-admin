@@ -27,18 +27,17 @@ export class MessageService {
     .subscribe((res:Response) => { this.postResponse = res; console.log(res); })
   }
 
-    create(message: any){
+    create(message: any, i: number){
     return this.http
       .post('/messages/addMessage', JSON.stringify({title: message.title,
-         messageContent: message.messageContent}), { headers:this.headers })
-      .map((res: Response) => res.json().data)
+         messageContent: message.messageContent, index: i}), { headers:this.headers })
       .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
   }
 
     update(message: any, i: any){
     return this.http
       .put('/messages/updateMessage', JSON.stringify({title: message.title,
-         messageContent: message.messageContent, index: i}), { headers:this.headers })
+         messageContent: message.messageContent, index: i, date: message.date}), { headers:this.headers })
       .map((res: Response) => res.json().data)
       .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
     }
