@@ -4,26 +4,19 @@ const db = require('../server.js');
 
 var Message = [];
 
-
-
 router.get('/', function(req, res, next){
   res.contentType('application/json');
   db.query('SELECT * FROM Message', sendData);
-
   function sendData(err, results) {
-
     Message = results.rows;
     res.json(Message);
   }
-
 });
 
-
+//fix when admin is created by login
 router.post('/addMessage', function (req, res, next) {
-
   var m_title = req.body.title;
   var m_mess = req.body.messageContent;
-  // var m_date = req.body.date;
   var m_id = Math.floor(Math.random() * (100000 - 1000)) + 1000;
   var a_id = 2;
   var dt = new Date();
@@ -35,19 +28,6 @@ router.post('/addMessage', function (req, res, next) {
     }
     res.send(result);
   });
-  // function sendData(err, results) {
-  //   res.sendStatus(200);
-  // }
-  // db.query('INSERT INTO users (name, age) VALUES ($1, $2);', [user.name, user.age], function (err, result) {
-  //     done() //this done callback signals the pg driver that the connection can be closed or returned to the connection pool
-
-  //     if (err) {
-  //       // pass the error to the express error handler
-  //       return next(err)
-  //     }
-
-  //     res.send(200)
-  //   })
 
 });
 
@@ -75,22 +55,6 @@ router.put('/updateMessage', function(req, res, next) {
     });
   });
 
-
-// router.delete('/deleteMessage', function (req, res, next) {
-//   var index = req.query.index;
-//   console.log("inside delete with index: " + index);
-//   Message.splice(index, 1);
-// });
-
-// router.delete('/deleteMessage', function (req, res, next) {
-  
-
-//   res.contentType('application/json');
-//    db.query('delete from Message where id = 1')
-
-
-
-// });
 
 router.delete('/deleteMessage', function(req, res, next) {
   var deleteID = parseInt(req.params.id)

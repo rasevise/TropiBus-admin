@@ -5,8 +5,8 @@ import { Routes } from './routes';
 import { RoutesService } from './routes.service';
 import { Http } from '@angular/http';
 import { ModalDirective } from 'ng2-bootstrap/modal';
-declare var $:JQueryStatic;
 
+declare var $:JQueryStatic;
 declare var google:any;
 
 @Component({
@@ -22,7 +22,6 @@ export class RoutesComponent implements OnInit{
   map: any;
   routes:any;
   stops:any;
-  tempRoute:any;
   locationMarkers:any;
   polylinePaths:any;
 
@@ -33,6 +32,7 @@ export class RoutesComponent implements OnInit{
   m_route: any;
   m_stop: {
     id: number,
+    stop_id: number,
     name:string,
     description:string,
     latitude:number,
@@ -49,17 +49,28 @@ export class RoutesComponent implements OnInit{
   }
 
   constructor (@Inject(RoutesService) private service: RoutesService){}
+
   ngOnInit(){
   //checkInternet connection
   this.loadMap();
   this.routes=[];
   this.polylinePaths=[];
   this.locationMarkers=[];
+  this.stops=[];
+
+  //bug fix for grey map
+  $('#map').css('height', '99%').css( 'width', '99%');
+  $('#map').css('height', '100%').css( 'width', '100%');
+  //
   }
   
   //JQuery Functions for boottrap functionality
   dropdownClick(){
     $('#routeSelectButton').dropdown();
+  }
+
+  scrollModalTop(modal: string){
+    $('#' + modal).animate({ scrollTop: 0 }, 'fast');
   }
 
   openPathModal(){
@@ -77,15 +88,14 @@ export class RoutesComponent implements OnInit{
   }
 
   deleteStop(){
-    console.log(this.stops.length);
-    this.service.delete(this.m_stop.name);
-    this.getAllStops();
-    this.loadStops(this.m_stop.id);
-    for(var i=0;i<this.stops.length;i++){
-      if(this.stops[i] === this.m_stop.name){
-        console.log("Deleted: " + this.m_stop.name);
-      }
-    }
+    console.log("Deleting stop with ID: " + this.m_stop.stop_id);
+    this.service.delete(this.m_stop.stop_id);
+    this.getStopsFromRoute(this.m_stop.stop_id);
+  }
+
+  addStop(){
+    this.service.create(this.m_stop);
+    this.getStopsFromRoute(this.m_stop.stop_id);
   }
 
   clearMarkers(){
@@ -98,13 +108,13 @@ export class RoutesComponent implements OnInit{
   }
 
   setRoute(r_id:any){
-    this.polylinePaths.forEach((p:any) => {//warning, not an error
+    this.polylinePaths.forEach((p:any) => {
       p.setMap(null);
     });
     this.clearMarkers();
     this.m_stop = null;
-    this.loadRoute(r_id);
-    this.loadStops(r_id);
+    this.getRoute(r_id);
+    this.getStopsFromRoute(r_id);
   }
 
   selectStop(stop:any){
@@ -125,7 +135,6 @@ export class RoutesComponent implements OnInit{
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
     google.maps.event.trigger(this.map, 'resize');
     this.getRoutes();
-    this.getAllStops();
   }
 
   getRoutes(){
@@ -133,30 +142,44 @@ export class RoutesComponent implements OnInit{
     .subscribe(routes => {
         this.routes = routes;
         this.loadRoutes();
-        // console.log(routes);
     })
   }
-  getAllStops(){
-    this.service.getStops().subscribe(stops => {
+
+  getRoute(r_id: any){
+      this.loadRoute(r_id);
+  }
+
+  // getAllStops(){
+  //   this.service.getStops()
+  //     .subscribe(stops => {
+  //       this.stops = stops;
+  //   })
+  // }
+
+  getStopsFromRoute(r_id: any){
+    this.service.getStopsFromRoute(r_id)
+      .subscribe(stops => {
         this.stops = stops;
-        // console.log(stops);
-  })
+        this.loadStops();
+      })
   }
 
   loadRoutes(){
+    this.polylinePaths = [];
     for(var i=0;i<this.routes.length;i++){
         var route=this.routes[i];
         var polyline = new google.maps.Polyline({
-            map: this.map,
-            path: route.path,
-            strokeColor: route.color,
-            strokeOpacity: 1.0,
-            strokeWeight: 4,
-            id: route.route_ID,
-            name: route.route_name,
-            color: route.color_name,
-            description: route.route_description,
-            area: route.route_area,
+          map: this.map,
+          path: route.route_path,
+          path_id: route.path_id,
+          strokeColor: route.color,
+          strokeOpacity: 1.0,
+          strokeWeight: 4,
+          id: route.route_id,
+          name: route.route_name,
+          color: route.color_name,
+          description: route.route_description,
+          area: route.route_area,
         });
         this.polylinePaths.push(polyline)
       }
@@ -165,36 +188,37 @@ export class RoutesComponent implements OnInit{
   loadRoute(r_id:any){
   this.polylinePaths = [];
   for(var i=0;i<this.routes.length;i++){
-    if(r_id === this.routes[i].route_ID){
+    if(r_id === this.routes[i].route_id){
       var route=this.routes[i];
       var polyline = new google.maps.Polyline({
-          map: this.map,
-          path: route.path,
-          strokeColor: route.color,
-          strokeOpacity: 1.0,
-          strokeWeight: 4,
-          id: route.route_ID,
-          name: route.route_name,
-          color: route.color_name,
-          description: route.route_description,
-          area: route.route_area,
+        map: this.map,
+        path: route.route_path,
+        path_id: route.path_id,
+        strokeColor: route.color,
+        strokeOpacity: 1.0,
+        strokeWeight: 4,
+        id: route.route_id,
+        name: route.route_name,
+        color: route.color_name,
+        description: route.route_description,
+        area: route.route_area,
       });
       this.polylinePaths.push(polyline);
     }
     }
   }
   
-  loadStops(r_id:any){
+  loadStops(){
     this.locationMarkers = [];
     for(var i=0;i<this.stops.length;i++){
-      if(r_id === this.stops[i].route_ID){
       var stop=this.stops[i];
       var latlng = new google.maps.LatLng(stop.stop_latitude, stop.stop_longitude);
       let stop_marker = new google.maps.Marker({
         map: this.map,
         animation: google.maps.Animation.DROP,
         position: latlng,
-        id: stop.route_ID,
+        id: stop.route_id,
+        stop_id: stop.stop_id,
         name: stop.stop_name,
         description: stop.stop_description,
         latitude: stop.stop_latitude,
@@ -205,10 +229,6 @@ export class RoutesComponent implements OnInit{
       //info window content
       let content="<h4>"+stop_marker.name+"</h4><p>"+stop_marker.description+"</p>"
       this.addInfoWindow(stop_marker,content)
-    }
-    else if(i == this.stops.length){
-      this.locationMarkers = null;
-    }
     }
   }
 

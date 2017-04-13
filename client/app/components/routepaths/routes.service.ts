@@ -21,8 +21,18 @@ export class RoutesService {
     .map((res: Response) => res.json());
   }
 
+  getPath(r_id: any): Observable<Routes[]> {
+    return this.http.get(this._routesURL + '/getRoute?r_id=' + r_id)
+    .map((res: Response) => res.json());
+  }
+
   getStops(): Observable<Stops[]> {
     return this.http.get(this._stopsURL)
+    .map((res: Response) => res.json());
+  }
+
+  getStopsFromRoute(r_id: any): Observable<Stops[]> {
+    return this.http.get(this._stopsURL + '/getStopsFromRoute?r_id=' + r_id)
     .map((res: Response) => res.json());
   }
   
