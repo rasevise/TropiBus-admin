@@ -26,11 +26,10 @@ export class MessageService {
     .map((res: Response) => res.json())
     .subscribe((res:Response) => { this.postResponse = res; console.log(res); })
   }
-
     create(message: any, index: number){
     return this.http
       .post('/messages/addMessage', JSON.stringify({id: index, title: message.title,
-         messageContent: message.messageContent, date: message.date}), { headers:this.headers })
+         messageContent: message.messageContent}), { headers:this.headers })
       .map((res: Response) => res.json().data)
       .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
   }
@@ -38,7 +37,7 @@ export class MessageService {
     update(message: any, i: any){
     return this.http
       .put('/messages/updateMessage', JSON.stringify({title: message.title,
-         messageContent: message.messageContent, index: i}), { headers:this.headers })
+         messageContent: message.messageContent, index: i, date: message.date}), { headers:this.headers })
       .map((res: Response) => res.json().data)
       .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
     }

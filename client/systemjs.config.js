@@ -10,19 +10,6 @@
     tsconfig: true                  // also accepts a path
     },
     transpiler: "typescript",
-    packages: {
-      "app": {
-        "defaultExtension": "ts",
-      },
-      "src": {
-      "defaultExtension": "ts",
-      "meta": {
-        "*.ts": {
-          "loader": "ts"
-        }
-      }
-    }
-    },
     paths: {
       // paths serve as alias
       'npm:': 'node_modules/',
@@ -72,7 +59,7 @@
          defaultExtension: 'js' 
       },
       'angular2-click-to-edit': { main: 'index' },
-      'ng2-bootstrap':          { format: 'cjs', main: 'bundles/ng2-bootstrap.umd.js', defaultExtension: 'js' },
+      'ng2-bootstrap':          { format: 'cjs', main: 'bundles/ngx-bootstrap.umd.js', defaultExtension: 'js' },
       'moment':                 { main: 'moment.js', defaultExtension: 'js' },
       "ts": {
       "main": "plugin.js"
@@ -84,8 +71,15 @@
             "exports": "ts"
           }
         }
+      },
+      "src": {
+      "defaultExtension": "ts",
+      "meta": {
+        "*.ts": {
+          "loader": "ts"
+        }
       }
-    },
+    }},
     bundles: {
         'npm:rxjs/bundles/Rx.min.js': [
             "rxjs/*",
