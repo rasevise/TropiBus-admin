@@ -22,7 +22,7 @@ router.post('/addMessage', function (req, res, next) {
   var m_title = req.body.title;
   var m_mess = req.body.messageContent;
   // var m_date = req.body.date;
-  var m_id = 5511;
+  var m_id = Math.floor(Math.random() * (100000 - 1000)) + 1000;;
   var a_id = 2;
   var dt = new Date();
   var m_date = dt.toUTCString();
