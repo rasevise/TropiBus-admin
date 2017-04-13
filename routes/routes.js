@@ -108,3 +108,15 @@ router.get('/', function(req, res, next){
 });
 
 module.exports = router;
+
+// router.get('/', function(req, res, next){
+//   console.log("getting routes from server: " );
+//   res.contentType('application/json');
+//   db.query('SELECT * FROM Route NATURAL JOIN routepath', sendData);
+
+//   function sendData(err, results) {
+//     console.log("getting Route from server: ");
+//     routes = results.rows;
+//     res.json(routes);
+//   }
+//   });

@@ -26,11 +26,11 @@ export class MessageService {
     .map((res: Response) => res.json())
     .subscribe((res:Response) => { this.postResponse = res; console.log(res); })
   }
-
-    create(message: any, i: number){
+    create(message: any, index: number){
     return this.http
-      .post('/messages/addMessage', JSON.stringify({title: message.title,
-         messageContent: message.messageContent, index: i}), { headers:this.headers })
+      .post('/messages/addMessage', JSON.stringify({id: index, title: message.title,
+         messageContent: message.messageContent}), { headers:this.headers })
+      .map((res: Response) => res.json().data)
       .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
   }
 

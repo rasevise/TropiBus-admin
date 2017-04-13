@@ -16,8 +16,8 @@ declare var $:JQueryStatic;
 export class busdriverComponent{ 
  private myValue: number;
  private userNameValid: boolean = false;
-  bus: Bus = new Bus();
-  driver: Driver = new Driver();
+  bus: Bus = new Bus(null, "","","","");
+  driver: Driver = new Driver(null,"","","","","");
   buses: any[] = [];
   drivers: any[] = [];
 

@@ -11,7 +11,6 @@ router.get('/', function(req, res, next){
   db.query('SELECT * FROM Message', sendData);
 
   function sendData(err, results) {
-  console.log("getting messages from server: " + results.rows);
     Message = results.rows;
     res.json(Message);
   }
@@ -62,10 +61,22 @@ router.put('/updateMessage', function (req, res, next) {
   Message[i] = newD;
 });
 
-router.delete('/deleteMessage', function (req, res, next) {
-  var index = req.query.index;
-  console.log("inside delete with index: " + index);
-  Message.splice(index, 1);
-});
+// router.delete('/deleteMessage', function (req, res, next) {
+//   var index = req.query.index;
+//   console.log("inside delete with index: " + index);
+//   Message.splice(index, 1);
+// });
+
+// router.delete('/deleteMessage', function (req, res, next) {
+  
+
+//   res.contentType('application/json');
+//    db.query('delete from Message where id = 1')
+
+
+
+// });
+
+
 
 module.exports = router;

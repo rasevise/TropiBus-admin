@@ -885,3 +885,15 @@ router.delete('/deleteStop', function (req, res, next) {
 });
 
 module.exports = router;
+
+// router.get('/', function(req, res, next){
+//   console.log("getting stops from server: " );
+//   res.contentType('application/json');
+//   db.query('SELECT * FROM Stop', sendData);
+
+//   function sendData(err, results) {
+//     console.log("getting Stop from server: ");
+//     stops = results.rows;
+//     res.json(stops);
+//   }
+//   });

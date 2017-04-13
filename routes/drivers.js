@@ -1,17 +1,19 @@
 var express = require('express');
 var router = express.Router();
-var app = express();
-    Driver =[
-    { id: 1, name: "Juan", lastName: "Juan", username: "juanito",route: "Route A", status: "active", password: "skate"},
-    {  id: 2, name: "Pedro", lastName: "Pedro",  username: "pedrito",route: "Route B", status: "active", password: "vaio"},
-    {  id: 3, name: "Jorge", lastName: "Jorge", username: "georgie",route: "Route C", status: "active", password: "router"}
-    ]
+const db = require('../server.js');
+    var Driver =[];
 
 
 router.get('/', function(req, res, next){
+    console.log("getting messages from server: " );
     res.contentType('application/json');
-    var routesJSON = JSON.stringify(this.Driver);
-    res.json(this.Driver);
+    db.query('SELECT * FROM Driver', sendData);
+    
+      function sendData(err, results) {
+    console.log("getting drivers from server: ");
+    Driver = results.rows;
+    res.json(Driver);
+  }
 });
 
 

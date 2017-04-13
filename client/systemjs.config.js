@@ -72,7 +72,7 @@
          defaultExtension: 'js' 
       },
       'angular2-click-to-edit': { main: 'index' },
-      'ng2-bootstrap':          { format: 'cjs', main: 'bundles/ngx-bootstrap.umd.js', defaultExtension: 'js' },
+      'ng2-bootstrap':          { format: 'cjs', main: 'bundles/ng2-bootstrap.umd.js', defaultExtension: 'js' },
       'moment':                 { main: 'moment.js', defaultExtension: 'js' },
       "ts": {
       "main": "plugin.js"
