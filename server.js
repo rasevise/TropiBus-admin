@@ -3,7 +3,6 @@ var path = require('path');
 var bodyParser = require('body-parser');
 var debug = require('debug')('http');
 var http = require('http');
-var errorHandler = require('errorhandler');
 var pg = require('pg');
 
 var client = new pg.Client({
@@ -39,7 +38,6 @@ app.use(express.static(path.join(__dirname, 'client')));
 // Body Parser MW
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-app.use(errorHandler({ dumpExceptions: true, showStack: true })); 
 
 
 // Route Services

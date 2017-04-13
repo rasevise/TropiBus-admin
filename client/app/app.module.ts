@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule, Http } from '@angular/http';
 import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { FormsModule, ReactiveFormsModule }    from "@angular/forms";
-import { Ng2UtilsModule } from 'ng2-utils';
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { ModalModule } from 'ng2-bootstrap';
 import { EqualValidator } from './directives/validator/equal-validator.directive';
@@ -34,7 +33,6 @@ import { Routes }               from './components/routepaths/routes';
                   ReactiveFormsModule,
                   ModalModule.forRoot(),
                   Ng2BootstrapModule.forRoot(),
-                  Ng2UtilsModule,
                   ],
   declarations: [ AppComponent,
                   loginComponent,

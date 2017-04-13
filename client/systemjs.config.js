@@ -3,26 +3,6 @@
  * Adjust as necessary for your application needs.
  */
 (function (global) {
-  SystemJS.config({
-  packages: {
-    "ts": {
-      "main": "plugin.js"
-    },
-    "typescript": {
-      "main": "lib/typescript.js",
-      "meta": {
-        "lib/typescript.js": {
-          "exports": "ts"
-        }
-      }
-    }
-  },
-  map: {
-      "ts":          'npm:plugin-typescript/lib',
-      'typescript':  'npm:typescript/lib/typescript.js',
-  },
-  transpiler: 'ts'
-  });
   System.config({
     typescriptOptions: {
     module: "system",
@@ -73,10 +53,9 @@
       'rxjs':                      'npm:rxjs',
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
       "ts":                        'npm:plugin-typescript/lib',
-      'typescript':                'npm:typescript/lib/typescript.js',
+      'typescript':                'npm:typescript/lib',
       'angular2-click-to-edit':    'npm:angular2-click-to-edit@1.0.50',
 
-      'ng2-utils': 'npm:ng2-utils/dist/ng2-utils.umd.js',
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -95,6 +74,17 @@
       'angular2-click-to-edit': { main: 'index' },
       'ng2-bootstrap':          { format: 'cjs', main: 'bundles/ngx-bootstrap.umd.js', defaultExtension: 'js' },
       'moment':                 { main: 'moment.js', defaultExtension: 'js' },
+      "ts": {
+      "main": "plugin.js"
+      },
+      "typescript": {
+        "main": "typescript.js",
+        "meta": {
+          "lib/typescript.js": {
+            "exports": "ts"
+          }
+        }
+      }
     },
     bundles: {
         'npm:rxjs/bundles/Rx.min.js': [
