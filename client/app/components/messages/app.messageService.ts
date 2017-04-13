@@ -18,9 +18,7 @@ export class MessageService {
   getMessages(){
     return this.http.get(this._messagesURL)
     .map((res: Response) => res.json())
-    .do(data => console.log('Messages length: ' + data.length))
   }
-
 
     delete(i: number){
     return this.http

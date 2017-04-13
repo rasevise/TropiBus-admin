@@ -12,7 +12,6 @@ router.get('/', function(req, res, next){
   db.query('SELECT * FROM Message', sendData);
 
   function sendData(err, results) {
-    console.log("getting messages from server: " + results.rows[0].message_title);
     Message = results.rows;
     res.json(Message);
   }
@@ -21,18 +20,22 @@ router.get('/', function(req, res, next){
 
 
 router.post('/addMessage', function (req, res, next) {
-
   var m_title = req.body.title;
   var m_mess = req.body.messageContent;
-  console.log("message: " + m_mess );
+  // db.query('INSERT INTO Message(admin_id, message_text, message_date, message_title) VALUES(${i},${m_mess},${m_date},${m_title})', sendData);
+  function sendData(err, results) {
+    res.send(200);
+  }
+  db.query('INSERT INTO users (name, age) VALUES ($1, $2);', [user.name, user.age], function (err, result) {
+      done() //this done callback signals the pg driver that the connection can be closed or returned to the connection pool
 
-  var newD = {
-    id: '',
-    title: m_title,
-    messageContent: m_mess
-  };
+      if (err) {
+        // pass the error to the express error handler
+        return next(err)
+      }
 
-  Message.push(newD);
+      res.send(200)
+    })
 
 });
 
