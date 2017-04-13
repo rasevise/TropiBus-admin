@@ -48,7 +48,7 @@ export class messagesComponent implements OnInit{
 
   delete(i : number): void {
     this.service
-        .delete(i);
+        .delete(this.messages[i].message_id);
         this.getMessages();
   }
 

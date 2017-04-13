@@ -21,8 +21,9 @@ export class MessageService {
   }
 
     delete(i: number){
+      console.log("delete i :" + i);
     return this.http
-    .delete('/messages/deleteMessage' + "/?index=" + i, { headers:this.headers })
+    .delete('/messages/deleteMessage' + "/?id=" + i, { headers:this.headers })
     .map((res: Response) => res.json())
     .subscribe((res:Response) => { this.postResponse = res; console.log(res); })
   }

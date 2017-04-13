@@ -11,10 +11,7 @@ router.get('/', function(req, res, next){
   db.query('SELECT * FROM Message', sendData);
 
   function sendData(err, results) {
-<<<<<<< HEAD
-    console.log("getting messages from server: ");
-=======
->>>>>>> 87048f0a284101b6c0b25c5c464c4b045c62ddd2
+
     Message = results.rows;
     res.json(Message);
   }
@@ -23,22 +20,11 @@ router.get('/', function(req, res, next){
 
 
 router.post('/addMessage', function (req, res, next) {
-<<<<<<< HEAD
-   var m_title = req.body.title;
-  var m_mess = req.body.messageContent;
-  var m_date = req.body.date
-  var i = parseInt(req.body.id);
-  console.log("getting messages from server: " + i + m_date + m_mess + m_title );
-  
-  res.contentType('application/json');
-  db.query('INSERT INTO Message(admin_id, message_text, message_date, message_title) VALUES($1,$2,$3,$4)', [i],[m_mess],[m_date],[m_title]);
-console.log("helo")
-=======
->>>>>>> 87048f0a284101b6c0b25c5c464c4b045c62ddd2
+
   var m_title = req.body.title;
   var m_mess = req.body.messageContent;
   // var m_date = req.body.date;
-  var m_id = Math.floor(Math.random() * (100000 - 1000)) + 1000;;
+  var m_id = Math.floor(Math.random() * (100000 - 1000)) + 1000;
   var a_id = 2;
   var dt = new Date();
   var m_date = dt.toUTCString();
@@ -92,6 +78,19 @@ router.put('/updateMessage', function (req, res, next) {
 
 
 // });
+
+router.delete('/deleteMessage', function(req, res, next) {
+  var deleteID = parseInt(req.params.id)
+  console.log("id:" + req.query.id)
+    db.query('DELETE FROM Message WHERE message_id = $1',[req.query.id], function(err, result) {
+
+      if (err) {
+        return console.error('error running query', err);
+      }
+      res.send(result);
+    });
+  });
+
 
 
 
