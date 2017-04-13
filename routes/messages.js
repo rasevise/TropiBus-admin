@@ -21,19 +21,15 @@ router.get('/', function(req, res, next){
 
 
 router.post('/addMessage', function (req, res, next) {
-
-  var m_title = req.body.title;
+   var m_title = req.body.title;
   var m_mess = req.body.messageContent;
-  console.log("message: " + m_mess );
-
-  var newD = {
-    id: '',
-    title: m_title,
-    messageContent: m_mess
-  };
-
-  Message.push(newD);
-
+  var m_date = req.body.date
+  var i = parseInt(req.body.id);
+  console.log("getting messages from server: " + i + m_date + m_mess + m_title );
+  
+  res.contentType('application/json');
+  db.query('INSERT INTO Message(admin_id, message_text, message_date, message_title) VALUES($1,$2,$3,$4)', [i],[m_mess],[m_date],[m_title]);
+console.log("helo")
 });
 
 router.put('/updateMessage', function (req, res, next) {
@@ -48,10 +44,22 @@ router.put('/updateMessage', function (req, res, next) {
   Message[i] = newD;
 });
 
-router.delete('/deleteMessage', function (req, res, next) {
-  var index = req.query.index;
-  console.log("inside delete with index: " + index);
-  Message.splice(index, 1);
-});
+// router.delete('/deleteMessage', function (req, res, next) {
+//   var index = req.query.index;
+//   console.log("inside delete with index: " + index);
+//   Message.splice(index, 1);
+// });
+
+// router.delete('/deleteMessage', function (req, res, next) {
+  
+
+//   res.contentType('application/json');
+//    db.query('delete from Message where id = 1')
+
+
+
+// });
+
+
 
 module.exports = router;
