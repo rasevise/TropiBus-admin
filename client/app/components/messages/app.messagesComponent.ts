@@ -53,7 +53,8 @@ export class messagesComponent implements OnInit{
   }
 
   edit(message: any): void {
-    this.service.update(message, this.getValue())
+    console.log("edit value:" + this.myValue)
+    this.service.update(this.message, this.messages[this.myValue].message_id)
     this.getMessages();
   }
 

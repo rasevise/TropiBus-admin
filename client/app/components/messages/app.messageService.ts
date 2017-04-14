@@ -35,10 +35,10 @@ export class MessageService {
       .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
   }
 
-    update(message: any, i: any){
+    update(message: any, id: number){
     return this.http
       .put('/messages/updateMessage', JSON.stringify({title: message.title,
-         messageContent: message.messageContent, index: i, date: message.date}), { headers:this.headers })
+         messageContent: message.messageContent, id: id, date: message.date}), { headers:this.headers })
       .map((res: Response) => res.json().data)
       .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
     }

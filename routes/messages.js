@@ -31,17 +31,30 @@ router.post('/addMessage', function (req, res, next) {
 
 });
 
-router.put('/updateMessage', function (req, res, next) {
-  var m_title = req.body.title;
-  var m_mess = req.body.messageContent;
-  var i = req.body.index;
-  var newD = ({
-    id: Message.length,
-    title: m_title,
-    messageContent: m_mess
+// router.put('/updateMessage', function (req, res, next) {
+//   var m_title = req.body.title;
+//   var m_mess = req.body.messageContent;
+//   var i = req.body.index;
+//   var newD = ({
+//     id: Message.length,
+//     title: m_title,
+//     messageContent: m_mess
+//   });
+//   Message[i] = newD;
+// });
+
+router.put('/updateMessage', function(req, res, next) {
+
+    console.log("edit id:" + req.body.id);
+    //compare with .compareSync(req.body.data.attributes.password, storedPW)
+    db.query('UPDATE Message SET message_title = $2, message_text = $3  WHERE message_id = $1', [req.body.id, req.body.title, req.body.messageContent], function(err, result) {
+      if (err) {
+        return console.error('error running query', err);
+      }
+      res.send(result);
+    });
   });
-  Message[i] = newD;
-});
+
 
 router.delete('/deleteMessage', function(req, res, next) {
   var deleteID = parseInt(req.params.id)
