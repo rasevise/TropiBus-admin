@@ -8,8 +8,8 @@ router.get('/', function(req, res, next){
   res.contentType('application/json');
   db.query('SELECT * FROM Message', sendData);
   function sendData(err, results) {
-    Message = results.rows;
-    res.json(Message);
+    // Message = results.rows;
+    res.json(results.rows);
   }
 });
 
@@ -20,10 +20,15 @@ router.post('/addMessage', function (req, res, next) {
   var a_id = 2;
   var dt = new Date();
   var m_date = dt.toUTCString();
+<<<<<<< HEAD
   console.log("creating message from server: " + m_mess + ", date: " + m_date);
   db.query('INSERT INTO Message(message_id, message_text, message_date, admin_id, message_title) VALUES($1, $2, $3, $4, $5)', [m_id,req.body.messageContent,m_date,a_id,req.body.title], function(err, result) {
+=======
+  db.query('INSERT INTO Message(message_id, message_text, message_date, admin_id, message_title) VALUES($1, $2, $3, $4, $5)', 
+  [m_id,m_mess,m_date,a_id,m_title], function(err, result) {
+>>>>>>> 828dd453a7ee8dddf9448d3e61aaf53257faa67a
     if(err) {
-      return console.error('error running query', err);
+      return console.error('error ', err);
     }
     res.send(result);
   });

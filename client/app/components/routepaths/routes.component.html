@@ -14,12 +14,12 @@
 <div class="dropdown-menu">
   <a 
   class="dropdown-item" 
-  (click)="setMTitle(''); setButtonText('routeDisplay', 'Select Route'); getRoutes(); clearMarkers()" 
+  (click)="setMTitle(''); setButtonText('routeDisplay', 'Select Route'); clearMarkers(); getRoutes();" 
   href="javascript:void(0)">
   <h4>Show All</h4></a>
   <a *ngFor="let route of routes;" 
   class="dropdown-item" 
-  (click)="setMTitle(route.route_name, route); setButtonText('routeDisplay', route.route_name); setRoute(route.route_id);" 
+  (click)="setMTitle(route.route_name, route); setButtonText('routeDisplay', route.route_name); setRoute(route.route_id); " 
   href="javascript:void(0)">
   {{route.route_name}}</a>
 </div>
@@ -96,6 +96,7 @@
                   <p class="card-text"></p>
                   <div id="editdeletestopbuttons" class= "btn-group-vertical">
                   <a 
+                  (click)="addStop()"
                   href="javascript:void(0)" 
                   class="btn btn-success btn-md active" 
                   role="button" 
