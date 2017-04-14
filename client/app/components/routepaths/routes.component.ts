@@ -13,6 +13,7 @@ declare var google:any;
     selector: 'routes',
     templateUrl: './app/components/routepaths/routes.component.html',
     providers: [ RoutesService ],
+
 })
 
 export class RoutesComponent implements OnInit{
@@ -27,9 +28,10 @@ export class RoutesComponent implements OnInit{
 
   //Modal Values
   m_title: any = '';
-  m_body: any;
-  m_desc: any;
+  m_body: any = '';
+  m_desc: any = '';
   m_route: any;
+  r_id: any;
   m_stop: {
     id: number,
     stop_id: number,
@@ -88,31 +90,45 @@ export class RoutesComponent implements OnInit{
   }
 
   deleteStop(){
-    console.log("Deleting stop with ID: " + this.m_stop.stop_id);
-    this.service.delete(this.m_stop.stop_id);
-    this.getStopsFromRoute(this.m_stop.stop_id);
+    this.service.delete(this.m_stop.stop_id, this.stops.id);
+    this.clearMarkersOnly();
+    this.getStopsFromRoute(this.m_stop.id);
   }
 
   addStop(){
     this.service.create(this.m_stop);
-    this.getStopsFromRoute(this.m_stop.stop_id);
+    this.clearMarkersOnly();
+    this.getStopsFromRoute(this.m_stop.id);
   }
 
   clearMarkers(){
-    for (var i = 0; i < this.locationMarkers.length; i++) {
-      this.locationMarkers[i].setMap(null);
-      this.locationMarkers[i] = null;
-    }
-    this.locationMarkers = null;
+    this.locationMarkers.forEach((l:any) => {
+      l.setMap(null);
+      // l = null;
+    });
+    this.polylinePaths.forEach((p:any) => {
+      p.setMap(null);
+      // p = null;
+    });
+    // this.polylinePaths = null;
+    this.polylinePaths = [];
+    // this.locationMarkers = null;
+    this.locationMarkers = [];
+  }
+
+  clearMarkersOnly(){
+    this.locationMarkers.forEach((l:any) => {
+      l.setMap(null);
+      // l = null;
+    });
+    // this.locationMarkers = null;
     this.locationMarkers = [];
   }
 
   setRoute(r_id:any){
-    this.polylinePaths.forEach((p:any) => {
-      p.setMap(null);
-    });
     this.clearMarkers();
     this.m_stop = null;
+    this.r_id = r_id;
     this.getRoute(r_id);
     this.getStopsFromRoute(r_id);
   }
@@ -157,11 +173,13 @@ export class RoutesComponent implements OnInit{
   // }
 
   getStopsFromRoute(r_id: any){
-    this.service.getStopsFromRoute(r_id)
+      console.log("locationMarker length before add: " + this.stops.length);
+      this.service.getStopsFromRoute(r_id)
       .subscribe(stops => {
         this.stops = stops;
         this.loadStops();
-      })
+        console.log("locationMarker length after add: " + this.stops.length);
+  })
   }
 
   loadRoutes(){
