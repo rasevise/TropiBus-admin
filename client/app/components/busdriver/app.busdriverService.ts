@@ -62,9 +62,9 @@ export class BusDriverService {
     // .do(data => console.log('JSON length: ' + data.length));
   }
 
-   deleteDriver(i: number){
+   deleteDriver(id: number){
     return this.http
-    .delete('drivers/deleteDriver' + "/?index=" + i, { headers:this.headers })
+    .delete('drivers/deleteDriver' + "/?id=" + id, { headers:this.headers })
     .map((res: Response) => res.json())
     .subscribe(
       (res:Response) => { this.postResponse = res; console.log(res); }
@@ -78,10 +78,10 @@ export class BusDriverService {
       .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
       // .catch(this.handleError);
   }
-    updateDriver(driver: any, i: any) {
+    updateDriver(driver: any, id: any) {
     return this.http
       .put('drivers/updateDriver', JSON.stringify({name: driver.name,
-         lastName: driver.lastName, username : driver.username, password: driver.password, index: i}), { headers:this.headers })
+         lastName: driver.lastName, username : driver.username, password: driver.password, id: id}), { headers:this.headers })
       .map((res: Response) => res.json().data)
       .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
       // .catch(this.handleError);

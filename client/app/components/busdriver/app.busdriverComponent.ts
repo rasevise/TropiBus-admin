@@ -79,12 +79,12 @@ export class busdriverComponent{
 
   deleteD(i : number): void {
     this.service
-        .deleteDriver(i);
+        .deleteDriver(this.drivers[i].driver_id);
         this.getDrivers();
   }
 
   editD(): void {
-    this.service.updateDriver(this.driver, this.getValue())
+    this.service.updateDriver(this.driver, this.drivers[this.myValue].driver_id)
     this.getDrivers();
   }
 
