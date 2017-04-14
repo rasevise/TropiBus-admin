@@ -45,13 +45,15 @@ export class busdriverComponent{
   }
 
   deleteB(i : number): void {
+    console.log("id:" + this.buses[i].bus_id);
+     console.log("index:" + i);
     this.service
-        .deleteBus(i);
+        .deleteBus(this.buses[i].bus_id);
         this.getBuses();
   }
 
   editB(): void {
-    this.service.updateBus(this.bus, this.getValue())
+    this.service.updateBus(this.bus, this.buses[this.myValue].bus_id)
     this.getBuses();
   }
 

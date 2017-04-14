@@ -107,19 +107,6 @@
             </div>
         </div>
         
-        <div class="form-group">
-            <label for="">Drivers</label>
-              <select  class="form-control"
-                        name="driver"
-                        [(ngModel)]="bus.driver" required
-                        #busdriverA="ngModel" >
-                  <option *ngFor="let driver of drivers" >{{driver.name}}</option>
-              </select>
-                <div *ngIf="busdriverA.errors && busdriverA.touched" class="alert alert-danger">
-                  <div [hidden]="!busdriverA.errors.required">Drivers is required</div>
-                 
-                </div>
-               </div>
 			    </form>
 			   </div>
              
@@ -300,19 +287,6 @@
             </div>
             </div>
         </div>
-        
-        <div class="form-group">
-            <label for="">Drivers</label>
-              <select  class="form-control" 
-                        name="driver"
-                        [(ngModel)]="bus.driver" required
-                        #driverE="ngModel" >
-                  <option *ngFor="let driver of drivers" >{{driver.name}} {{driver.lastName}}</option>
-              </select>
-                <div *ngIf="driverE.errors && driverE.touched" class="alert alert-danger">
-                  <div [hidden]="!driverE.errors.required">Driver is required</div>
-                </div>
-               </div>
 			    </form>
 			   </div>
              
