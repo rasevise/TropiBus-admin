@@ -2,6 +2,7 @@ import { Component, OnInit,ViewChild, ElementRef, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Inject } from '@angular/core';
 import { Routes } from './routes';
+import { Stops } from './stops';
 import { RoutesService } from './routes.service';
 import { Http } from '@angular/http';
 import { ModalDirective } from 'ng2-bootstrap/modal';
@@ -32,14 +33,8 @@ export class RoutesComponent implements OnInit{
   m_desc: any = '';
   m_route: any;
   r_id: any;
-  m_stop: {
-    id: number,
-    stop_id: number,
-    name:string,
-    description:string,
-    latitude:number,
-    longitude:number
-  };
+  @Input() m_stop: Stops;
+  
 
   setMTitle(title:any, route: any){
     this.m_route = route;
@@ -59,7 +54,6 @@ export class RoutesComponent implements OnInit{
   this.polylinePaths=[];
   this.locationMarkers=[];
   this.stops=[];
-
   //bug fix for grey map
   $('#map').css('height', '99%').css( 'width', '99%');
   $('#map').css('height', '100%').css( 'width', '100%');
@@ -96,10 +90,10 @@ export class RoutesComponent implements OnInit{
   }
 
   addStop(){
-    this.service.create(this.m_stop)
+    this.service.create(this.m_stop, this.r_id)
     .subscribe(() => {
     this.clearMarkersOnly();
-    this.getStopsFromRoute(this.m_stop.id)});
+    this.getStopsFromRoute(this.r_id)});
     
   }
 
@@ -129,7 +123,7 @@ export class RoutesComponent implements OnInit{
 
   setRoute(r_id:any){
     this.clearMarkers();
-    this.m_stop = null;
+    this.m_stop = new Stops(null, null, '', '', null, null);
     this.r_id = r_id;
     this.getRoute(r_id);
     this.getStopsFromRoute(r_id);

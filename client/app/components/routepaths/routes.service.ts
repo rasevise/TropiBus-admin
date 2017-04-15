@@ -44,11 +44,11 @@ export class RoutesService {
     .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
   }
 
-  create(stop: any){
+  create(stop: any, route_id:number){
     return this.http
     .post(this._stopsURL + '/createStop', 
     JSON.stringify({stop_name: stop.name, stop_description: stop.description, 
-      stop_latitude: stop.latitude, stop_longitude: stop.longitude, r_id: stop.id}), 
+      stop_latitude: stop.latitude, stop_longitude: stop.longitude, r_id: route_id}), 
     { headers:this.headers })
     .map((res: Response) => res.json())
   }

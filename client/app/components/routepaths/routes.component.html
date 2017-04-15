@@ -48,7 +48,7 @@
               <div class="row form-group">
                 <div class="card-block">
                   <h5 class="card-title">Stop Name</h5>
-                  <input class="form-control" type="text" id="stopNameInput" [value] ="m_stop?.name" (input)="m_stop.name=$event.target.value"> 
+                  <input class="form-control" type="text" id="stopNameInput" [(ngModel)]="m_stop.name" > 
                 </div>
               </div>
               <div class="row form-group">
