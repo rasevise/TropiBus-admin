@@ -75,6 +75,13 @@ export class RoutesComponent implements OnInit{
     }
   }
 
+  onModalClose(){
+    $('#pathModal').on('hide.bs.modal', () => {
+    console.log("inside hide modal function");
+      this.clearMarkersOnly();
+    })
+  }
+
   setButtonText(b_id:any, text:any){
     $('#'+b_id).html(text);
   }
@@ -84,15 +91,15 @@ export class RoutesComponent implements OnInit{
   }
 
   deleteStop(){
-    this.service.delete(this.m_stop.stop_id, this.stops.id);
-    this.clearMarkersOnly();
-    this.getStopsFromRoute(this.m_stop.id);
+    this.service.delete(this.m_stop.stop_id, this.r_id);
+    // this.clearMarkersOnly();
+    this.getStopsFromRoute(this.r_id);
   }
 
   addStop(){
     this.service.create(this.m_stop, this.r_id)
     .subscribe(() => {
-    this.clearMarkersOnly();
+    // this.clearMarkersOnly();
     this.getStopsFromRoute(this.r_id)});
     
   }
@@ -100,15 +107,11 @@ export class RoutesComponent implements OnInit{
   clearMarkers(){
     this.locationMarkers.forEach((l:any) => {
       l.setMap(null);
-      // l = null;
     });
     this.polylinePaths.forEach((p:any) => {
       p.setMap(null);
-      // p = null;
     });
-    // this.polylinePaths = null;
     this.polylinePaths = [];
-    // this.locationMarkers = null;
     this.locationMarkers = [];
   }
 
