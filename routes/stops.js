@@ -51,17 +51,23 @@ router.post('/createStop', function(req, res, next) {
         if (err){ 
             console.error(err); res.send("Error " + err); 
         }
-        db.query(asignStopToRoute, [routeID, stopID], function(err, result){
+        else{
+            db.query(asignStopToRoute, [routeID, stopID], function(err, result){
             if(err){ 
                 console.error(err); res.send("Error " + err); 
             }
-            db.query(getStopsFromRoute,[routeID], function(err, result) {
-            if (err)
-                { console.error(err); res.send("Error " + err); }
-            res.send(result);
-        });
-        });
-        
+            else{ 
+                db.query(getStopsFromRoute,[routeID], function(err, result) {
+                    if (err){ 
+                        console.error(err); res.send("Error " + err); 
+                    }
+                    else{
+                        res.send(result);
+                    }
+                });
+            }
+            });
+        }
     });
 });
 
