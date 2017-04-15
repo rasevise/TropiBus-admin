@@ -8,7 +8,6 @@ router.get('/', function(req, res, next){
   res.contentType('application/json');
   db.query('SELECT * FROM Message', sendData);
   function sendData(err, results) {
-    // Message = results.rows;
     res.json(results.rows);
   }
 });
@@ -28,18 +27,6 @@ router.post('/addMessage', function (req, res, next) {
   });
 
 });
-
-// router.put('/updateMessage', function (req, res, next) {
-//   var m_title = req.body.title;
-//   var m_mess = req.body.messageContent;
-//   var i = req.body.index;
-//   var newD = ({
-//     id: Message.length,
-//     title: m_title,
-//     messageContent: m_mess
-//   });
-//   Message[i] = newD;
-// });
 
 router.put('/updateMessage', function(req, res, next) {
 

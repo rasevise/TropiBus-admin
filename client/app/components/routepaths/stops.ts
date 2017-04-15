@@ -1,7 +1,22 @@
 export class Stops {
-    route_ID: number;
-    stop_name:string;
-    stop_description:string;
-    stop_latitude:number;
-    stop_longitude:number;
+    id: number;
+    stop_id: number;
+    name:string;
+    description:string;
+    latitude:number;
+    longitude:number;
+    constructor(
+    id: number,
+    stop_id: number,
+    name:string,
+    description:string,
+    latitude:number,
+    longitude:number,){
+        this.id = id;
+        this.stop_id = stop_id;
+        this.name = name;
+        this.description = description;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
 }
