@@ -51,7 +51,6 @@ export class RoutesService {
       stop_latitude: stop.latitude, stop_longitude: stop.longitude, r_id: stop.id}), 
     { headers:this.headers })
     .map((res: Response) => res.json())
-    .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
   }
 
   update(stop: any, i: any){

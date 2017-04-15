@@ -96,9 +96,11 @@ export class RoutesComponent implements OnInit{
   }
 
   addStop(){
-    this.service.create(this.m_stop);
+    this.service.create(this.m_stop)
+    .subscribe(() => {
     this.clearMarkersOnly();
-    this.getStopsFromRoute(this.m_stop.id);
+    this.getStopsFromRoute(this.m_stop.id)});
+    
   }
 
   clearMarkers(){

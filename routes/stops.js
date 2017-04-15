@@ -49,25 +49,18 @@ router.post('/createStop', function(req, res, next) {
         stopID = result.rows[0].stop_id;
         console.log("Stop ID: " + stopID + " Route ID: " + routeID)
         if (err){ 
-            console.error(err); res.send("Error " + err); 
+            console.error(err); 
+            res.send("Error " + err); 
+        }
+        db.query(asignStopToRoute, [routeID, stopID], function(err, result){
+        if(err){ 
+            console.error(err); 
+            res.send("Error " + err); 
         }
         else{
-            db.query(asignStopToRoute, [routeID, stopID], function(err, result){
-            if(err){ 
-                console.error(err); res.send("Error " + err); 
-            }
-            else{ 
-                db.query(getStopsFromRoute,[routeID], function(err, result) {
-                    if (err){ 
-                        console.error(err); res.send("Error " + err); 
-                    }
-                    else{
-                        res.send(result);
-                    }
-                });
-            }
-            });
+            res.send(result);
         }
+        });
     });
 });
 
