@@ -4,10 +4,10 @@
       <br>
         <div id = "busAndDriversButton" class="row">
 				<div class="col-md-6">
-           <h3>Bus <button  id = "addDriversButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddBusModal" (click)="busFormA.reset()"> Add</button> </h3>        
+           <h3>Bus <button  id = "addDriversButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddBusModal" (click)="busFormA.reset(); resetTempB()"> Add</button> </h3>        
 				</div>
 				<div class="col-md-6">
-           <h3>Drivers <button id = "addDriversButton" (click)="driverFormA.reset()"type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddDriverModal"> Add</button></h3>
+           <h3>Drivers <button id = "addDriversButton" (click)="driverFormA.reset(); resetTempD()"type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddDriverModal"> Add</button></h3>
 				</div>
 			</div>
       <br>
@@ -30,7 +30,7 @@
                 <td>{{bus.bus_status}}</td>
                 <td>
                   <div class= "btn-group-vertical">
-                  <button  id = "editBusButton" type="button" class="btn btn-primary btn-md" (click) = "setValue(i);busFormE.reset()" data-toggle="modal" data-target="#EditBusModal">
+                  <button  id = "editBusButton" type="button" class="btn btn-primary btn-md" (click) = "setValue(i);busFormE.reset(); setTempB()" data-toggle="modal" data-target="#EditBusModal">
                      Edit
                     </button>
                     <button id ="deleteBusButton" class="btn btn-danger btn md" type="button" (click) ="deleteB(i)">Delete</button>
@@ -58,7 +58,7 @@
               <td>{{driver.driver_status}}</td>
               <td>  
                 <div class= "btn-group-vertical">
-                <button  id = "editDriverButton" type="button" class="btn btn-primary" (click) = "setValue(i); driverFormE.reset()" data-toggle="modal" data-target="#EditDriverModal">
+                <button  id = "editDriverButton" type="button" class="btn btn-primary" (click) = "setValue(i); driverFormE.reset();setTempD()" data-toggle="modal" data-target="#EditDriverModal">
                     Edit
                     </button> 
                     <button id ="deleteDriverButton" class="btn btn-danger btn md" type="button" (click)="deleteD(i)">Delete</button>

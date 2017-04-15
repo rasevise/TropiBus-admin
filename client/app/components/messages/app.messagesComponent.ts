@@ -2,7 +2,7 @@
 import { Component, OnInit, Injectable, Inject, Input } from '@angular/core';
 import { Location }   from '@angular/common';
 import { Message } from './messages';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { MessageService } from './app.messageService'
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/catch';
@@ -17,6 +17,8 @@ export class messagesComponent implements OnInit{
   message: Message = new Message(null,'', Date.now(), '');
   messages: any[] = [];
   private myValue: number;
+  user: FormGroup;
+  temp_title : String = "";
 
   constructor (@Inject(MessageService) private service: MessageService, ){
   }
@@ -53,11 +55,18 @@ export class messagesComponent implements OnInit{
   }
 
   edit(message: any): void {
-    console.log("edit value:" + this.myValue)
     this.service.update(this.message, this.messages[this.myValue].message_id)
     this.getMessages();
   }
-
+  resetTemp(){
+    this.message.title = "";
+    this.message.messageContent = "";
+  }
+  setTemp(){
+    this.message.title = this.messages[this.myValue].message_title;
+    this.message.messageContent = this.messages[this.myValue].message_text;
+    console.log("edit value:" + this.temp_title)
+  }
 
 
   close(modalId: string){
@@ -68,8 +77,18 @@ export class messagesComponent implements OnInit{
     console.log(this.messages.length);
   }
 
+    // ngOnInitD() :void{
+    // this.user = new FormGroup({
+
+    //     title: new FormControl('hello'),
+    //     messageContent: new FormControl('hello')
+    
+    // });
+
 
 }
+
+
 
 
 

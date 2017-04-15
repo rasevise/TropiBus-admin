@@ -31,6 +31,27 @@ export class busdriverComponent{
     service.getDrivers()
     .subscribe(drivers => this.drivers = drivers);
   }
+
+    resetTempD(){
+    this.driver.name = "";
+    this.driver.lastName = "";
+    this.driver.username = "";
+  }
+  setTempD(){
+    this.driver.name = this.drivers[this.myValue].driver_name;
+    this.driver.lastName = this.drivers[this.myValue].driver_lastname;
+    this.driver.username = this.drivers[this.myValue].driver_username;
+  }
+
+      resetTempB(){
+    this.bus.name = "";
+
+  }
+  setTempB(){
+    this.bus.name = this.buses[this.myValue].bus_name;
+
+  }
+
   //  Buses Crud
   getBuses(): void {
     this.service

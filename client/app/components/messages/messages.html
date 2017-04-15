@@ -4,7 +4,7 @@
       <br>
         <div  class="row">
 			    <div class="col-md-12">
-             <button  id = "addMessageButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddMessageModal">Add Message</button> 
+             <button  id = "addMessageButton" type="button" class="btn btn-primary" data-toggle="modal" (click) = "resetTemp()" data-target="#AddMessageModal">Add Message</button> 
                
 			   </div>
 			</div>
@@ -15,7 +15,7 @@
             <div>
               <h4>
               {{message.message_title}} {{message.message_date| date}}
-                  <button  id = "editMessageButton" type="button" class="btn btn-primary" (click) = "setValue(i);" data-toggle="modal"  
+                  <button  id = "editMessageButton" type="button" class="btn btn-primary" (click) = "setValue(i); setTemp()" data-toggle="modal"  
                    data-target="#EditMessageModal" >
                     Edit
                   </button>
@@ -124,7 +124,7 @@
 
           <input  type="text"  class="form-control"
                 required minlength="4" maxlength="15"
-                name="title"  [(ngModel)]="message.title" 
+                name="temp_title"  [(ngModel)]="message.title"
                 #title="ngModel" >
                 
           <div *ngIf="title.errors && (title.dirty || title.touched)"
