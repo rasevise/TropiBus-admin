@@ -1,4 +1,5 @@
 import { Component, OnInit,ViewChild, ElementRef, Input } from '@angular/core';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Inject } from '@angular/core';
 import { Routes } from './routes';
@@ -39,6 +40,8 @@ export class RoutesComponent implements OnInit{
   //stop from selected stop in modal
   @Input() m_stop: Stops;
 
+  
+
   constructor (@Inject(RoutesService) private service: RoutesService){}
 
   ngOnInit(){
@@ -49,6 +52,7 @@ export class RoutesComponent implements OnInit{
     this.locationMarkers=[];
     this.stops=[];
     this.greyFix();
+    
   }
 
   loadMap(){
@@ -85,7 +89,7 @@ export class RoutesComponent implements OnInit{
   }
 
   setRoute(r_id:any){
-    this.m_stop = new Stops(null, null, '', '', null, null);
+    this.m_stop = new Stops(null, null, '', '', null, null, '');
     this.r_id = r_id;
     this.getRoute(r_id);
     this.getStopsFromRoute(r_id);
@@ -152,8 +156,8 @@ export class RoutesComponent implements OnInit{
   getRoutes(){
     this.service.getPaths()
     .subscribe(routes => {
-      this.clearMarkers();
       this.clearPolylines();
+      this.clearMarkers();
       this.routes = routes;
       this.loadRoutes();
     })

@@ -19,6 +19,7 @@ export class messagesComponent implements OnInit{
   private myValue: number;
   user: FormGroup;
   temp_title : String = "";
+  
 
   constructor (@Inject(MessageService) private service: MessageService, ){
   }
@@ -50,8 +51,8 @@ export class messagesComponent implements OnInit{
 
   delete(i : number): void {
     this.service
-        .delete(this.messages[i].message_id);
-        this.getMessages();
+    .delete(this.messages[i].message_id);
+    this.getMessages();
   }
 
   edit(message: any): void {
@@ -76,16 +77,6 @@ export class messagesComponent implements OnInit{
   log(){
     console.log(this.messages.length);
   }
-
-    // ngOnInitD() :void{
-    // this.user = new FormGroup({
-
-    //     title: new FormControl('hello'),
-    //     messageContent: new FormControl('hello')
-    
-    // });
-
-
 }
 
 
