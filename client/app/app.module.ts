@@ -2,12 +2,11 @@ import { NgModule, ApplicationRef, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA }   
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule, Http } from '@angular/http';
 import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
-import { FormsModule, ReactiveFormsModule }    from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { Ng2BootstrapModule } from 'ng2-bootstrap';
 import { ModalModule } from 'ng2-bootstrap';
 import { EqualValidator } from './directives/validator/equal-validator.directive';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-//import { InMemoryMessageService }  from './components/messages/in-memory-message-service';
 
 
 import { AppComponent }         from './app.component';

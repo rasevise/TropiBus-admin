@@ -1,4 +1,5 @@
 import { Component, OnInit,ViewChild, ElementRef, Input } from '@angular/core';
+import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { Inject } from '@angular/core';
 import { Routes } from './routes';
@@ -21,45 +22,82 @@ export class RoutesComponent implements OnInit{
     
   @ViewChild('map') mapElement: ElementRef;
   @ViewChild('pathModal') pathModal: ElementRef;
+
   map: any;
   routes:any;
   stops:any;
   locationMarkers:any;
   polylinePaths:any;
 
-  //Modal Values
+  //Modal window Values
   m_title: any = '';
   m_body: any = '';
   m_desc: any = '';
   m_route: any;
+
+  //route id from selected route
   r_id: any;
+  //stop from selected stop in modal
   @Input() m_stop: Stops;
+
   
 
+  constructor (@Inject(RoutesService) private service: RoutesService){}
+
+  ngOnInit(){
+    //checkInternet connection
+    this.loadMap();
+    this.routes=[];
+    this.polylinePaths=[];
+    this.locationMarkers=[];
+    this.stops=[];
+    this.greyFix();
+    
+  }
+
+  loadMap(){
+    let latLng = new google.maps.LatLng(18.2013257,-67.1392801);
+    let mapOptions = {
+      center: latLng,
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      disableDefaultUI: true
+    }
+    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+    google.maps.event.trigger(this.map, 'resize');
+    this.getRoutes();
+  }
+
+  greyFix(){
+    //bug fix for grey map
+    $('#map').css('height', '99%').css( 'width', '99%');
+    $('#map').css('height', '100%').css( 'width', '100%');
+  }
+
+  //set modal route and title
   setMTitle(title:any, route: any){
     this.m_route = route;
     this.m_title = title;
+  }
+
+  setButtonText(b_id:any, text:any){
+    $('#'+b_id).html(text);
   }
 
   getMTitle(){
     return this.m_title;
   }
 
-  constructor (@Inject(RoutesService) private service: RoutesService){}
-
-  ngOnInit(){
-  //checkInternet connection
-  this.loadMap();
-  this.routes=[];
-  this.polylinePaths=[];
-  this.locationMarkers=[];
-  this.stops=[];
-  //bug fix for grey map
-  $('#map').css('height', '99%').css( 'width', '99%');
-  $('#map').css('height', '100%').css( 'width', '100%');
-  //
+  setRoute(r_id:any){
+    this.m_stop = new Stops(null, null, '', '', null, null, '');
+    this.r_id = r_id;
+    this.getRoute(r_id);
+    this.getStopsFromRoute(r_id);
   }
-  
+
+  selectStop(stop:any){
+    this.m_stop = stop;
+  }
   //JQuery Functions for boottrap functionality
   dropdownClick(){
     $('#routeSelectButton').dropdown();
@@ -76,109 +114,57 @@ export class RoutesComponent implements OnInit{
   }
 
   onModalClose(){
-    $('#pathModal').on('hide.bs.modal', () => {
+    $('#pathModal').on('hidden.bs.modal', () => {
     console.log("inside hide modal function");
-      this.clearMarkersOnly();
+    // this.clearMarkers(); 
+    // this.clearPolylines();
     })
   }
 
-  setButtonText(b_id:any, text:any){
-    $('#'+b_id).html(text);
-  }
-
   editStop(){
-    // this.service.update(this.m_stop);
+    this.service.update(this.m_stop)
+    .subscribe(() => {
+    this.getStopsFromRoute(this.r_id)});
   }
 
   deleteStop(){
     this.service.delete(this.m_stop.stop_id, this.r_id);
-    // this.clearMarkersOnly();
     this.getStopsFromRoute(this.r_id);
   }
 
   addStop(){
     this.service.create(this.m_stop, this.r_id)
     .subscribe(() => {
-    // this.clearMarkersOnly();
     this.getStopsFromRoute(this.r_id)});
     
+  }
+
+  clearPolylines(){
+    this.polylinePaths.forEach((p:any) => {
+      p.setMap(null);
+    });
+    this.polylinePaths = [];
   }
 
   clearMarkers(){
     this.locationMarkers.forEach((l:any) => {
       l.setMap(null);
     });
-    this.polylinePaths.forEach((p:any) => {
-      p.setMap(null);
-    });
-    this.polylinePaths = [];
     this.locationMarkers = [];
-  }
-
-  clearMarkersOnly(){
-    this.locationMarkers.forEach((l:any) => {
-      l.setMap(null);
-      // l = null;
-    });
-    // this.locationMarkers = null;
-    this.locationMarkers = [];
-  }
-
-  setRoute(r_id:any){
-    this.clearMarkers();
-    this.m_stop = new Stops(null, null, '', '', null, null);
-    this.r_id = r_id;
-    this.getRoute(r_id);
-    this.getStopsFromRoute(r_id);
-  }
-
-  selectStop(stop:any){
-    this.m_stop = stop;
-    this.m_stop.latitude = stop.latitude;
-    this.m_stop.longitude = stop.longitude;
-  }
-
-  loadMap(){
-    let latLng = new google.maps.LatLng(18.2013257,-67.1392801);
-    let mapOptions = {
-      center: latLng,
-      zoom: 15,
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
-      disableDefaultUI: true
-    }
-
-    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-    google.maps.event.trigger(this.map, 'resize');
-    this.getRoutes();
   }
 
   getRoutes(){
     this.service.getPaths()
     .subscribe(routes => {
-        this.routes = routes;
-        this.loadRoutes();
+      this.clearPolylines();
+      this.clearMarkers();
+      this.routes = routes;
+      this.loadRoutes();
     })
   }
 
   getRoute(r_id: any){
       this.loadRoute(r_id);
-  }
-
-  // getAllStops(){
-  //   this.service.getStops()
-  //     .subscribe(stops => {
-  //       this.stops = stops;
-  //   })
-  // }
-
-  getStopsFromRoute(r_id: any){
-      console.log("locationMarker length before add: " + this.stops.length);
-      this.service.getStopsFromRoute(r_id)
-      .subscribe(stops => {
-        this.stops = stops;
-        this.loadStops();
-        console.log("locationMarker length after add: " + this.stops.length);
-  })
   }
 
   loadRoutes(){
@@ -200,10 +186,13 @@ export class RoutesComponent implements OnInit{
         });
         this.polylinePaths.push(polyline)
       }
+    this.map.setZoom(15);
+    this.map.setCenter(new google.maps.LatLng(18.2013257,-67.1392801));
   }
 
   loadRoute(r_id:any){
-  this.polylinePaths = [];
+  this.clearPolylines();
+  var bounds = new google.maps.LatLngBounds();
   for(var i=0;i<this.routes.length;i++){
     if(r_id === this.routes[i].route_id){
       var route=this.routes[i];
@@ -220,13 +209,28 @@ export class RoutesComponent implements OnInit{
         description: route.route_description,
         area: route.route_area,
       });
+      polyline.getPath().forEach(function(e:any){//can't do polyline.getPath()[i] because it's a MVCArray
+          bounds.extend(e);
+      })         
+      this.map.fitBounds(bounds);
       this.polylinePaths.push(polyline);
     }
     }
   }
+
+  getStopsFromRoute(r_id: any){
+      console.log("locationMarker length before add: " + this.stops.length);
+      this.service.getStopsFromRoute(r_id)
+      .subscribe(stops => {
+        this.stops = stops;
+        this.loadStops();
+        console.log("locationMarker length after add: " + this.stops.length);
+  })
+  }
+
   
   loadStops(){
-    this.locationMarkers = [];
+    this.clearMarkers();
     for(var i=0;i<this.stops.length;i++){
       var stop=this.stops[i];
       var latlng = new google.maps.LatLng(stop.stop_latitude, stop.stop_longitude);
@@ -241,11 +245,10 @@ export class RoutesComponent implements OnInit{
         latitude: stop.stop_latitude,
         longitude: stop.stop_longitude
       });
-      this.locationMarkers.push(stop_marker);
-
       //info window content
-      let content="<h4>"+stop_marker.name+"</h4><p>"+stop_marker.description+"</p>"
-      this.addInfoWindow(stop_marker,content)
+      let content="<h4>"+stop_marker.name+"</h4><p>"+stop_marker.description+"</p>";
+      this.addInfoWindow(stop_marker,content);
+      this.locationMarkers.push(stop_marker);
     }
   }
 

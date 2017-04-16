@@ -1,9 +1,10 @@
-import { Component, OnInit,ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { MessageService } from '../messages/app.messageService'
 import { Message } from '../messages/messages';
 import { Observable } from 'rxjs';
 import { Inject } from '@angular/core';
 import { Http } from '@angular/http';
+import { RoutesComponent } from '../routepaths/routes.component';
 
 @Component({
   selector: 'contentarea',
@@ -14,8 +15,10 @@ export class contentAreaComponent{
   message: Message = new Message(null,'', Date.now(), '');
   messages:any[];
 
-  constructor (@Inject(MessageService) private MessageService: MessageService){
-  }
+  //calls child component
+  @ViewChild(RoutesComponent) routecomponent: RoutesComponent;
+
+  constructor (@Inject(MessageService) private MessageService: MessageService){}
 
    ngOnInit(): void {
     this.getMessages();
@@ -27,6 +30,13 @@ export class contentAreaComponent{
         this.messages = messages
     });
   }
+
+  public selectedMapTab(): void{
+    console.log("selected map tab");
+    // this.routecomponent.greyFix();
+  }
+
+
 
  
    

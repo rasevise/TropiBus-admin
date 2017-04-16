@@ -4,7 +4,7 @@
   <div class="row" >
     <div class="col-9" id="mainTabs">
       <tabset #staticTabs>
-        <tab heading="Map Overview">
+        <tab heading="Map Overview" (select)="selectedMapTab()">
           <!--map component-->
           <div id="overview" >
             <routes></routes>
@@ -44,25 +44,16 @@
       <!--messages-->
       <h4 class="card-title text-center">Messages</h4>
       <div class="list-group" id="messageList">
-               <div *ngFor ="let message of messages; let i = index">
-			  <div class="row" >
-				  <div class="col-md-12">
-            <div>
-              <h5>
-              {{message.message_title}}           {{message.message_date| date}}
-
-              </h5>
+        <div *ngFor ="let message of messages; let i = index">
+          <div class="card text-center">
+            <div class="card-block">
+              <h5 class="card-title">{{message.message_title}}</h5>
+              <p class="card-text">{{message.message_text}}</p>
+            </div>
+            <div class="card-footer text-muted">
+              {{message.message_date| date}}
             </div>
           </div>
-				</div>
-         <div class="row">
-				  <div class="col-md-8">
-            <div>
-              {{message.message_text}}  
-            </div>
-				  </div>
-          </div>
-          <br>
 		  	</div>
       </div>
     </div>

@@ -6,6 +6,7 @@ var getStopsFromRoute = 'SELECT * FROM route_stop NATURAL JOIN stop NATURAL JOIN
 var createStop = 'INSERT INTO Stop(stop_name,stop_description,stop_latitude,stop_longitude) VALUES($1,$2,$3,$4) RETURNING stop_id'
 var asignStopToRoute = 'INSERT INTO route_stop(route_id, stop_id) VALUES($1,$2)'
 var deleteStop = 'DELETE FROM Stop WHERE stop_id=$1'
+var updateStop = 'UPDATE stop SET stop_name=$1, stop_description=$2 WHERE stop_id=$3'
 
 stops = [];
 
@@ -28,16 +29,17 @@ router.get('/getStopsFromRoute', function(req, res, next) {//Parameter: Route ID
 });
 
 router.put('/updateStop', function (req, res, next) {
-//   var m_title = req.body.title;
-//   var m_mess = req.body.messageContent;
-//   var i = req.body.index;
-
-//   var newD = ({
-//     id: Message.length,
-//     title: m_title,
-//     messageContent: m_mess
-//   });
-//   Message[i] = newD;
+    var stop_name = req.body.stop_name;
+    var stop_description = req.body.stop_description;
+    var stop_id = req.body.s_id;
+    db.query(updateStop,[stop_name ,stop_description, stop_id] ,function(err, result) {
+        if (err){ 
+            console.error(err); res.send("Error" + err); 
+        }
+        else {
+            res.json(result.rows);
+        }
+    });
 });
 router.post('/createStop', function(req, res, next) {
     var stop_name = req.body.stop_name;

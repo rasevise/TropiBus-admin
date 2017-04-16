@@ -14,17 +14,18 @@
 <div class="dropdown-menu">
   <a 
   class="dropdown-item" 
-  (click)="setMTitle(''); setButtonText('routeDisplay', 'Select Route'); clearMarkers(); getRoutes();" 
+  (click)="setMTitle(''); setButtonText('routeDisplay', 'Select Route'); getRoutes();" 
   href="javascript:void(0)">
   <h4>Show All</h4></a>
   <a *ngFor="let route of routes;" 
   class="dropdown-item" 
-  (click)="setMTitle(route.route_name, route); setButtonText('routeDisplay', route.route_name); setRoute(route.route_id); onModalClose()" 
+  (click)="setMTitle(route.route_name, route); setButtonText('routeDisplay', route.route_name); setRoute(route.route_id);" 
   href="javascript:void(0)">
   {{route.route_name}}</a>
 </div>
+</div>
 
-<!-- Path Edit Modal Modal -->
+<!-- Path Edit Modal -->
 <div class="modal fade bd-example-modal-lg" id="pathModal" tabindex="-1" role="dialog" aria-labelledby="pathModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
@@ -37,7 +38,7 @@
       <div class="modal-body" *ngIf="m_title">
         <!--body-->
         <div class="container-fluid">
-          <div class="row">
+          <div class="row" name="First row of Modal Window">
             <div class="col-md-4">
               <div class="row">
                 <div class="card-block">
@@ -48,13 +49,47 @@
               <div class="row form-group">
                 <div class="card-block">
                   <h5 class="card-title">Stop Name</h5>
-                  <input class="form-control" type="text" id="stopNameInput" [(ngModel)]="m_stop.name"> 
+                  <input class="form-control" 
+                  required minlength="4" maxlength="100"
+                  type="text" 
+                  id="stopNameInput" 
+                  [(ngModel)]="m_stop.name"
+                  #mname="ngModel"> 
+                     <div *ngIf="mname.errors && (mname.dirty || mname.touched)"
+                        class="alert alert-danger">
+                      <div [hidden]="!mname.errors.required">
+                        Name is required
+                      </div>
+                      <div [hidden]="!mname.errors.minlength">
+                        Name must be at least 4 characters long.
+                      </div>
+                      <div [hidden]="!mname.errors.maxlength">
+                        Name cannot be more than 15 characters long.
+                      </div>
+                    </div>
                 </div>
               </div>
               <div class="row form-group">
                 <div class="card-block">
                   <h5 class="card-title">Latitude</h5>
-                  <input class="form-control" type="text" id="stopLatInput" [(ngModel)] ="m_stop.latitude">
+                  <input class="form-control" 
+                  required minlength="4" maxlength="100"
+                  type="number" 
+                  id="stopLatInput" 
+                  [(ngModel)] ="m_stop.latitude"
+                  #mlatitude="ngModel">
+                    <div *ngIf="mlatitude.errors && (mlatitude.dirty || mlatitude.touched)"
+                        class="alert alert-danger">
+                    <div [hidden]="!mlatitude.errors.required">
+                      Latitude is required
+                    </div>
+                    <div [hidden]="!mlatitude.errors.minlength">
+                      Latitude must be at least 4 digits long.
+                    </div>
+                    <div [hidden]="!mlatitude.errors.maxlength">
+                      Latitude cannot be more than 100 digits long.
+                    </div>
+                    </div>
                 </div>
               </div>
             </div>
@@ -68,21 +103,54 @@
               <div class="row">
                 <div class="card-block form-group">
                   <h5 class="card-title">Stop Description</h5>
-                  <input class="form-control" type="text" id="stopDescInput" [(ngModel)] ="m_stop.description">
+                  <input type="text"  
+                  class="form-control"
+                  required minlength="4" maxlength="100"
+                  name="stopDescription"
+                  id="stopDescInput" 
+                  [(ngModel)] ="m_stop.description" 
+                  #mdescription="ngModel">
+                    <div *ngIf="mdescription.errors && (mdescription.dirty || mdescription.touched)"
+                        class="alert alert-danger">
+                    <div [hidden]="!mdescription.errors.required">
+                      Description is required
+                    </div>
+                    <div [hidden]="!mdescription.errors.minlength">
+                      Description must be at least 4 characters long.
+                    </div>
+                    <div [hidden]="!mdescription.errors.maxlength">
+                      Description cannot be more than 100 characters long.
+                    </div>
+                    </div>
                 </div>
-              </div>
-              <div class="row">
-                <div class="card-block form-group">
+                </div>
+                <div class="row card-block form-group">
                   <h5 class="card-title">Longitude</h5>
-                  <input class="form-control" type="text" id="stopLongInput" [(ngModel)] ="m_stop.longitude">
+                  <input class="form-control" 
+                  required minlength="4" maxlength="100"
+                  type="text" 
+                  id="stopLongInput" 
+                  [(ngModel)] ="m_stop.longitude"
+                  #mlongitude="ngModel">
+                    <div *ngIf="mlongitude.errors && (mlongitude.dirty || mlongitude.touched)"
+                        class="alert alert-danger">
+                    <div [hidden]="!mlongitude.errors.required">
+                      Longitude is required
+                    </div>
+                    <div [hidden]="!mlongitude.errors.minlength">
+                      Longitude must be at least 4 digits long.
+                    </div>
+                    <div [hidden]="!mlongitude.errors.maxlength">
+                      Longitude cannot be more than 100 digits long.
+                    </div>
+                    </div>
                 </div>
               </div>
-            </div>
-            <div class="col-md-4">
+             <div class="col-md-4">
               <div class="row">
                 <div class="card-block">
                   <h5 class="card-title">Status</h5>
-                  <p class="card-text">{{m_route.status}}</p>
+                  <p class="card-text">{{m_route.route_status}}</p>
                 </div>
               </div>
               <div class="row">
@@ -107,7 +175,8 @@
                   href="javascript:void(0)" 
                   class="btn btn-primary btn-md active" 
                   role="button" 
-                  aria-pressed="true">
+                  aria-pressed="true"
+                  >
                   Edit</a>
                   <a 
                   (click)="deleteStop()"
