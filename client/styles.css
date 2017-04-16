@@ -105,3 +105,8 @@ th{
 #editdeletestopbuttons {
   float: right;
 }
+
+#messageList {
+  height: 46%;
+  overflow-y: scroll;
+}

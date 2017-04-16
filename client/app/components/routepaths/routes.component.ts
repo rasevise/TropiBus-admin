@@ -36,8 +36,9 @@ export class RoutesComponent implements OnInit{
 
   //route id from selected route
   r_id: any;
+  //stop from selected stop in modal
   @Input() m_stop: Stops;
-  
+
   constructor (@Inject(RoutesService) private service: RoutesService){}
 
   ngOnInit(){
@@ -47,9 +48,7 @@ export class RoutesComponent implements OnInit{
     this.polylinePaths=[];
     this.locationMarkers=[];
     this.stops=[];
-    //bug fix for grey map
-    $('#map').css('height', '99%').css( 'width', '99%');
-    $('#map').css('height', '100%').css( 'width', '100%');
+    this.greyFix();
   }
 
   loadMap(){
@@ -64,6 +63,13 @@ export class RoutesComponent implements OnInit{
     google.maps.event.trigger(this.map, 'resize');
     this.getRoutes();
   }
+
+  greyFix(){
+    //bug fix for grey map
+    $('#map').css('height', '99%').css( 'width', '99%');
+    $('#map').css('height', '100%').css( 'width', '100%');
+  }
+
   //set modal route and title
   setMTitle(title:any, route: any){
     this.m_route = route;
@@ -176,10 +182,13 @@ export class RoutesComponent implements OnInit{
         });
         this.polylinePaths.push(polyline)
       }
+    this.map.setZoom(15);
+    this.map.setCenter(new google.maps.LatLng(18.2013257,-67.1392801));
   }
 
   loadRoute(r_id:any){
   this.clearPolylines();
+  var bounds = new google.maps.LatLngBounds();
   for(var i=0;i<this.routes.length;i++){
     if(r_id === this.routes[i].route_id){
       var route=this.routes[i];
@@ -196,6 +205,10 @@ export class RoutesComponent implements OnInit{
         description: route.route_description,
         area: route.route_area,
       });
+      polyline.getPath().forEach(function(e:any){//can't do polyline.getPath()[i] because it's a MVCArray
+          bounds.extend(e);
+      })         
+      this.map.fitBounds(bounds);
       this.polylinePaths.push(polyline);
     }
     }
