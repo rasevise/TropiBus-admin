@@ -53,11 +53,11 @@ export class RoutesService {
     .map((res: Response) => res.json())
   }
 
-  update(stop: any, i: any){
+  update(stop: any){
     return this.http
-    .put('stops/updateStop', JSON.stringify(stop), { headers:this.headers })
-    .map((res: Response) => res.json().data)
-    .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
+    .put('stops/updateStop', JSON.stringify({stop_name: stop.name, stop_description: stop.description, s_id: stop.stop_id}), 
+    { headers:this.headers })
+    .map((res: Response) => res.json().data);
   }
 
 }
