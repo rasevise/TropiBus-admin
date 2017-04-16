@@ -106,6 +106,20 @@
             </div>
             </div>
         </div>
+
+            <div class="form-group">
+        <label for="driver">Assign Driver</label>
+        <select  class="form-control"
+                name="driver"
+                [(ngModel)]="bus.driver" required
+                #driverB="ngModel" >
+          <option *ngFor="let driver of drivers">{{driver.driver_firstname}} {{driver.driver_lastname}}</option>
+        </select>
+
+        <div *ngIf="driverB.errors && driverB.touched" class="alert alert-danger">
+          <div [hidden]="!driverB.errors.required">Driver is required</div>
+        </div>
+      </div>
         
 			    </form>
 			   </div>

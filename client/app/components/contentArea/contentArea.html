@@ -44,30 +44,26 @@
       <!--messages-->
       <h4 class="card-title text-center">Messages</h4>
       <div class="list-group" id="messageList">
-        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">Route 1 Closed</h5>
-            <small>7 days ago</small>
+               <div *ngFor ="let message of messages; let i = index">
+			  <div class="row" >
+				  <div class="col-md-12">
+            <div>
+              <h5>
+              {{message.message_title}}           {{message.message_date| date}}
+
+              </h5>
+            </div>
           </div>
-          <p class="mb-1">Route one will be closed until May 3, 2017</p>
-          <small>Updatewhen necessary</small>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">Stop 5 Closed</h5>
-            <small>3 days ago</small>
+				</div>
+         <div class="row">
+				  <div class="col-md-8">
+            <div>
+              {{message.message_text}}  
+            </div>
+				  </div>
           </div>
-          <p class="mb-1">Stop closed until May 5, 2017</p>
-          <small>Updatewhen necessary</small>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">Pedestrians on fire</h5>
-            <small>1 days ago</small>
-          </div>
-          <p class="mb-1">Mourn them</p>
-          <small>Updatewhen necessary</small>
-        </a>
+          <br>
+		  	</div>
       </div>
     </div>
     

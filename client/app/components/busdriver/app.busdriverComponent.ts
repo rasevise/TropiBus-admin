@@ -3,14 +3,15 @@ import { Component, OnInit, Injectable, Inject } from '@angular/core';
 import { Location }   from '@angular/common';
 import { Bus, Driver } from './busdriver';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { BusDriverService } from './app.busdriverService'
+import { BusDriverService } from './app.busdriverService';
+import { RoutesService } from '../routepaths/routes.service';
 declare var $:JQueryStatic;
 
 
 @Component({
   selector: 'busdriver',
   templateUrl: './app/components/busdriver/busdriver.html',
-  providers: [],
+  providers: [RoutesService],
 })
 
 export class busdriverComponent{ 
@@ -20,11 +21,12 @@ export class busdriverComponent{
   driver: Driver = new Driver(null,"","","","","");
   buses: any[] = [];
   drivers: any[] = [];
+  routes:any;
 
 
   // bus = {id: 1, name: 'name', driver: 'driver', route: 'route', status:'status'};
 
-  constructor (@Inject(BusDriverService) private service: BusDriverService){
+  constructor (@Inject(BusDriverService) private service: BusDriverService, private Routeservice:RoutesService){
 
     service.getBuses()
     .subscribe(buses => this.buses = buses);
@@ -111,7 +113,15 @@ export class busdriverComponent{
 
   ngOnInitD(): void {
     this.getDrivers();
+    // this.routes=[];
   }
+
+  //   getRoutes(){
+  //   this.Routeservice.getPaths()
+  //   .subscribe(routes => {
+  //       this.routes = routes;
+  //   })
+  // }
 
 
 
