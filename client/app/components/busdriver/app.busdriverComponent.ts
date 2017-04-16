@@ -45,7 +45,7 @@ export class busdriverComponent{
     this.driver.username = this.drivers[this.myValue].driver_username;
   }
 
-      resetTempB(){
+  resetTempB(){
     this.bus.name = "";
 
   }
@@ -123,7 +123,18 @@ export class busdriverComponent{
   //   })
   // }
 
+    checkUsername(username : String){
+    for(var i:number = 0; i < this.drivers.length; i++){
+      console.log("username:" + this.driver.username);
+      console.log(this.drivers[i].driver_username);
+      if(username == this.drivers[i].driver_username){
+        return false;
+       
+      }
+    }
 
+   return true; 
+  }
 
 
 
@@ -136,7 +147,15 @@ export class busdriverComponent{
       return this.myValue;
     }
       close(modalId: String){
-    $('#'+ modalId).modal('hide')
+        if(this.checkUsername(this.driver.username)){
+          this.userNameValid = true;
+          this.addD(this.driver)
+          $('#'+ modalId).modal('hide')
+        }
+      else{
+         this.userNameValid = false;
+         $('#usernameModal').modal('show')
+      }
   }
 
 }
@@ -224,17 +243,7 @@ export class busdriverComponent{
       
   // }
 
-  // checkUsername(username : String){
-  //   for(var i:number = 0; i < this.drivers.length; i++){
-  //     if(username == this.drivers[i].username){
-  //       return false
-       
-  //     }
-      
-  //   return true;
-  //   }
-    
-  // }
+
 
 
 
