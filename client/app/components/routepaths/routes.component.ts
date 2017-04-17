@@ -40,7 +40,10 @@ export class RoutesComponent implements OnInit{
   //stop from selected stop in modal
   @Input() m_stop: Stops;
 
-  
+  mname: FormControl;
+  mdescription: FormControl;
+  mlatitude: FormControl;
+  mlongitude: FormControl;
 
   constructor (@Inject(RoutesService) private service: RoutesService){}
 
@@ -52,7 +55,10 @@ export class RoutesComponent implements OnInit{
     this.locationMarkers=[];
     this.stops=[];
     this.greyFix();
-    
+    this.mname = new FormControl('', [Validators.required]);
+    this.mdescription = new FormControl('', [Validators.required]);
+    this.mlongitude = new FormControl('', [Validators.required]);
+    this.mlatitude = new FormControl('', [Validators.required]);
   }
 
   loadMap(){
@@ -116,8 +122,6 @@ export class RoutesComponent implements OnInit{
   onModalClose(){
     $('#pathModal').on('hidden.bs.modal', () => {
     console.log("inside hide modal function");
-    // this.clearMarkers(); 
-    // this.clearPolylines();
     })
   }
 
@@ -219,12 +223,10 @@ export class RoutesComponent implements OnInit{
   }
 
   getStopsFromRoute(r_id: any){
-      console.log("locationMarker length before add: " + this.stops.length);
       this.service.getStopsFromRoute(r_id)
       .subscribe(stops => {
         this.stops = stops;
         this.loadStops();
-        console.log("locationMarker length after add: " + this.stops.length);
   })
   }
 
