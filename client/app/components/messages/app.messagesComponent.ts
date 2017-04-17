@@ -3,7 +3,7 @@ import { Component, OnInit, Injectable, Inject, Input } from '@angular/core';
 import { Location }   from '@angular/common';
 import { Message } from './messages';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { MessageService } from './app.messageService'
+import { MessageService } from './app.messageService';
 import { Observable } from 'rxjs';
 import 'rxjs/add/operator/catch';
 

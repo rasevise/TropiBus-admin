@@ -123,8 +123,8 @@ export class busdriverComponent{
   //   })
   // }
 
-    checkUsername(username : String){
-    for(var i:number = 0; i < this.drivers.length; i++){
+checkUsername(username : String){
+   for(var i:number = 0; i < this.drivers.length; i++){
       console.log("username:" + this.driver.username);
       console.log(this.drivers[i].driver_username);
       if(username == this.drivers[i].driver_username){
