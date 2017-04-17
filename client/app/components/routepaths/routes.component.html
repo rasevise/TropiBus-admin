@@ -50,11 +50,13 @@
                 <div class="card-block">
                   <h5 class="card-title">Stop Name</h5>
                   <input class="form-control" 
-                  required minlength="4" maxlength="100"
+                  required 
+                  minlength="4" 
+                  maxlength="100"
                   type="text" 
                   id="stopNameInput" 
                   [(ngModel)]="m_stop.name"
-                  #mname="ngModel"> 
+                  [formControl]="mname"> 
                      <div *ngIf="mname.errors && (mname.dirty || mname.touched)"
                         class="alert alert-danger">
                       <div [hidden]="!mname.errors.required">
@@ -73,11 +75,13 @@
                 <div class="card-block">
                   <h5 class="card-title">Latitude</h5>
                   <input class="form-control" 
-                  required minlength="4" maxlength="100"
+                  required 
+                  minlength="4" 
+                  maxlength="100"
                   type="number" 
                   id="stopLatInput" 
                   [(ngModel)] ="m_stop.latitude"
-                  #mlatitude="ngModel">
+                  [formControl]="mlatitude">
                     <div *ngIf="mlatitude.errors && (mlatitude.dirty || mlatitude.touched)"
                         class="alert alert-danger">
                     <div [hidden]="!mlatitude.errors.required">
@@ -105,11 +109,13 @@
                   <h5 class="card-title">Stop Description</h5>
                   <input type="text"  
                   class="form-control"
-                  required minlength="4" maxlength="100"
+                  required 
+                  minlength="4" 
+                  maxlength="100"
                   name="stopDescription"
                   id="stopDescInput" 
-                  [(ngModel)] ="m_stop.description" 
-                  #mdescription="ngModel">
+                  [(ngModel)] ="m_stop.description"
+                  [formControl]="mdescription">
                     <div *ngIf="mdescription.errors && (mdescription.dirty || mdescription.touched)"
                         class="alert alert-danger">
                     <div [hidden]="!mdescription.errors.required">
@@ -127,11 +133,13 @@
                 <div class="row card-block form-group">
                   <h5 class="card-title">Longitude</h5>
                   <input class="form-control" 
-                  required minlength="4" maxlength="100"
-                  type="text" 
+                  required 
+                  minlength="4" 
+                  maxlength="100"
+                  type="number" 
                   id="stopLongInput" 
-                  [(ngModel)] ="m_stop.longitude"
-                  #mlongitude="ngModel">
+                  [(ngModel)]="m_stop.longitude"
+                  [formControl]="mlongitude">
                     <div *ngIf="mlongitude.errors && (mlongitude.dirty || mlongitude.touched)"
                         class="alert alert-danger">
                     <div [hidden]="!mlongitude.errors.required">
@@ -163,28 +171,30 @@
                   <h5 class="card-title"></h5>
                   <p class="card-text"></p>
                   <div id="editdeletestopbuttons" class= "btn-group-vertical">
-                  <a 
+                  <button 
                   (click)="addStop()"
                   href="javascript:void(0)" 
                   class="btn btn-success btn-md active" 
                   role="button" 
-                  aria-pressed="true">
-                  Add</a>
-                  <a 
+                  aria-pressed="true"
+                  [disabled]="!(mname.valid && mdescription.valid && mlatitude.valid && mlongitude.valid)">
+                  Add</button>
+                  <button 
                   (click)="editStop()"
                   href="javascript:void(0)" 
                   class="btn btn-primary btn-md active" 
                   role="button" 
                   aria-pressed="true"
-                  >
-                  Edit</a>
-                  <a 
+                  [disabled]="!(mname.valid && mdescription.valid && mlatitude.valid && mlongitude.valid)">
+                  Edit</button>
+                  <button 
                   (click)="deleteStop()"
                   href="javascript:void(0)" 
                   class="btn btn-secondary btn-md active" 
                   role="button" 
-                  aria-pressed="true">
-                  Delete</a>
+                  aria-pressed="true"
+                  [disabled]="!(mname.valid && mdescription.valid && mlatitude.valid && mlongitude.valid)">
+                  Delete</button>
                   </div>
                 </div>
               </div>
