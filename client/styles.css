@@ -116,3 +116,11 @@ th{
 #editDeleteStopButtons{
   float: right;
 }
+#busList{
+  height:450px;
+  overflow:auto;
+}
+#driverList{
+  height:450px;
+  overflow:auto; 
+}

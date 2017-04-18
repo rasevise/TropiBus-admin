@@ -13,6 +13,7 @@ export class Driver {
     public lastName : string,
     public username :string,
     public password : string,
+    public confirmpassword: string,
     public status : string){}
 
 }

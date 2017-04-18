@@ -5,6 +5,7 @@ import { Bus, Driver } from './busdriver';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BusDriverService } from './app.busdriverService';
 import { RoutesService } from '../routepaths/routes.service';
+import {Routes} from '../routepaths/routes';
 declare var $:JQueryStatic;
 
 
@@ -18,15 +19,18 @@ export class busdriverComponent{
  private myValue: number;
  private userNameValid: boolean = false;
   bus: Bus = new Bus(null, "","","","");
-  driver: Driver = new Driver(null,"","","","","");
+  driver: Driver = new Driver(null,"","","","","","");
+  route: Routes = new Routes();
   buses: any[] = [];
   drivers: any[] = [];
   routes:any;
 
 
-  // bus = {id: 1, name: 'name', driver: 'driver', route: 'route', status:'status'};
-
-  constructor (@Inject(BusDriverService) private service: BusDriverService, private Routeservice:RoutesService){
+  constructor (
+  @Inject(BusDriverService) 
+  @Inject(RoutesService) 
+  private service: BusDriverService, 
+  private Routeservice:RoutesService){
 
     service.getBuses()
     .subscribe(buses => this.buses = buses);
@@ -43,6 +47,7 @@ export class busdriverComponent{
     this.driver.name = this.drivers[this.myValue].driver_firstname;
     this.driver.lastName = this.drivers[this.myValue].driver_lastname;
     this.driver.username = this.drivers[this.myValue].driver_username;
+    this.driver.password = "";
   }
 
   resetTempB(){
@@ -95,7 +100,8 @@ export class busdriverComponent{
 
 
   addD(driver:Driver): void {
-    console.log("hello")
+   
+console.log("password:" + this.driver.password);
     this.service.createDriver(driver);
     this.getDrivers();
   }
@@ -113,21 +119,51 @@ export class busdriverComponent{
 
   ngOnInitD(): void {
     this.getDrivers();
-    // this.routes=[];
+    
   }
 
-  //   getRoutes(){
-  //   this.Routeservice.getPaths()
-  //   .subscribe(routes => {
-  //       this.routes = routes;
-  //   })
-  // }
 
-checkUsername(username : String){
+
+//Routes for modal
+// ngOnInitR(): void {
+//   this.getRoutes();
+//       for(var i : number = 0; i< this.routes.length;i++){
+//     console.log(this.routes[i].route_name);
+//   }
+// }
+
+// getRoutes(){
+//   this.Routeservice.getPaths()
+//   .subscribe(routes => {
+//       this.routes = routes;
+//     })
+
+//         for(var i : number = 0; i< this.routes.length;i++){
+//     console.log(this.routes[i].route_name);
+//   }
+// }
+
+
+
+
+//Verify username availability
+checkUsername(){
+   for(var i:number = 0; i < this.drivers.length; i++){
+      //console.log("username:" + this.drivers[this.myValue].driver_username);
+      console.log(this.drivers[i].driver_username);
+      if(this.driver.username == this.drivers[i].driver_username){
+        return false;
+      }
+    }
+
+         return true; 
+  }
+
+checkUsernameEdit(){
    for(var i:number = 0; i < this.drivers.length; i++){
       console.log("username:" + this.driver.username);
       console.log(this.drivers[i].driver_username);
-      if(username == this.drivers[i].driver_username){
+      if(this.driver.username == this.drivers[i].driver_username){
         return false;
        
       }
@@ -135,19 +171,24 @@ checkUsername(username : String){
 
    return true; 
   }
+  
 
 
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    setValue(val:number) {
+//Function for modals and values regarding delete and edit index
+setValue(val:number) {
         this.myValue = val;
-    }
-    getValue(){
+}
+
+
+getValue(){
       return this.myValue;
-    }
-      close(modalId: String){
-        if(this.checkUsername(this.driver.username)){
+}
+
+
+closeAddDriver(modalId: String){
+        if(this.checkUsername()){
           this.userNameValid = true;
           this.addD(this.driver)
           $('#'+ modalId).modal('hide')
@@ -156,112 +197,23 @@ checkUsername(username : String){
          this.userNameValid = false;
          $('#usernameModal').modal('show')
       }
-  }
+   }
+closeEditDriver(modalId: String){
+        if(this.checkUsernameEdit()){
+          this.userNameValid = true;
+          this.editD();
+          $('#'+ modalId).modal('hide');
+        }
+      else{
+         this.userNameValid = false;
+         $('#usernameModal').modal('show');
+      }
+   }
 
+close(modalId: String){
+      $('#'+ modalId).modal('hide');
 }
 
-  //  getTempBus(x: number){
-  //    console.log(this.buses[x].name);
-  //     return this.buses[x];
-      
-  //   }
-  //      getTempDriver(x: number){
-  //     return this.drivers[x];
-  //   }
-  // addBus(bus: Bus){
-  //      var temp_bus= new Bus();
-  //   temp_bus.name = bus.name;
-  //   temp_bus.driver = bus.driver;
-  //   temp_bus.route = bus.route;
-  //   temp_bus.status = bus.status;
-    
-  //   this.bus.name="";
-  //   this.bus.driver="";
-  //   this.bus.route="";
-  //   this.bus.status="";
-  //   this.buses.push(temp_bus);
-  // }
-
-  // addDriver(driver: Driver){
-  //   var temp_driver= new Driver();
-  //   temp_driver.name = driver.name;
-  //   temp_driver.lastName = driver.lastName;
-  //   temp_driver.username = driver.username;
-  //   temp_driver.password = driver.password;
-    
-  //   this.driver.name="";
-  //   this.driver.lastName="";
-  //   this.driver.username="";
-  //   this.driver.password="";
-  //   this.drivers.push(temp_driver);
-  
-  // }
-
-  //   deleteBus(i: any){
-  //     this.buses.splice(i , 1);
-  // }
-
-  //  deleteDriver(i: any){
-  //     this.drivers.splice(i , 1);
-  // }
-      
-      
-  //  editBus(bus:Bus){
-  
-  //   var temp_bus= new Bus();
-      
-  //     temp_bus.name = bus.name;
-  //     temp_bus.driver = bus.driver;
-  
-  //     this.bus.name="";
-  //     this.bus.driver="";
-
-  //     this.buses.splice(this.myValue, 1);
-  //     this.buses.splice(this.myValue, 0, temp_bus)  
-      
-      
-  // }
-
-  // editDriver(driver:Driver){
-  
-  //   var temp_driver= new Driver();
-  //     temp_driver.id = driver.id;
-  //     temp_driver.name = driver.name;
-  //     temp_driver.lastName = driver.lastName;
-  //     temp_driver.username = driver.username;
-  //     temp_driver.password = driver.password;
-     
- 
-  //       this.driver.name="";
-  //       this.driver.lastName="";
-  //       this.driver.username ="";
-  //       this.driver.password ="";
-
-  //         this.drivers.splice(this.myValue, 1);
-  //         this.drivers.splice(this.myValue, 0, temp_driver)  
-      
-      
-  // }
-
-
-
-
-
-//  constructor(
-//     private busService: busService,
-//      private location: Location
-//  ){}
-
-// bus : Bus;
-
-
-  // save(): void {
-  //   this.busService.update(this.bus)
-  //     .then(() => this.goBack());
-  // }
-  // goBack(): void {
-  //   this.location.back();
-  // }
-
+}
 
 
