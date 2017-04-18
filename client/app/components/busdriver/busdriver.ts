@@ -2,8 +2,8 @@ export class Bus {
     constructor(
     public id: number,
    public name: string,
-    public driver: string,
-    public route: string,
+    public driver: number,
+    public route: number,
     public status: string){}
 }
 

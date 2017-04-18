@@ -33,7 +33,7 @@ export class BusDriverService {
 
     createBus(bus: any) {
     return this.http
-      .post('/buses/addBus', JSON.stringify({name: bus.name,
+      .post('/buses/addBus', JSON.stringify({name: bus.name, routeid: bus.route, driverid: bus.driver, status: bus.status
          }), { headers:this.headers })
       .map((res: Response) => res.json().data)
       .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
@@ -41,7 +41,7 @@ export class BusDriverService {
   }
     updateBus(bus: any, id: number) {
     return this.http
-      .put('/buses/updateBus', JSON.stringify({name: bus.name, id: id}), { headers:this.headers })
+      .put('/buses/updateBus', JSON.stringify({name: bus.name, id: id, routeid: bus.route, driverid: bus.driver, status: bus.status}), { headers:this.headers })
       .map((res: Response) => res.json().data)
       .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
       // .catch(this.handleError);
