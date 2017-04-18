@@ -17,8 +17,6 @@ export class messagesComponent implements OnInit{
   message: Message = new Message(null,'', Date.now(), '');
   messages: any[] = [];
   private myValue: number;
-  user: FormGroup;
-  temp_title : String = "";
   
 
   constructor (@Inject(MessageService) private service: MessageService, ){
@@ -66,7 +64,6 @@ export class messagesComponent implements OnInit{
   setTemp(){
     this.message.title = this.messages[this.myValue].message_title;
     this.message.messageContent = this.messages[this.myValue].message_text;
-    console.log("edit value:" + this.temp_title)
   }
 
 

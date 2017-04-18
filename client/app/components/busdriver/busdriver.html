@@ -4,10 +4,16 @@
       <br>
         <div id = "busAndDriversButton" class="row">
 				<div class="col-md-6">
-           <h3>Bus <button  id = "addDriversButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddBusModal" (click)="busFormA.reset(); resetTempB()"> Add Bus</button> </h3>        
-				</div>
-				<div class="col-md-6">
-           <h3>Drivers <button id = "addDriversButton" (click)="driverFormA.reset(); resetTempD()"type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddDriverModal"> Add Driver</button></h3>
+            <h3>
+              Bus 
+                <button  id = "addDriversButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddBusModal" (click)="busFormA.reset(); resetTempB()"> Add Bus</button> 
+           </h3>        
+				 </div>
+				  <div class="col-md-6">
+             <h3>
+               Drivers
+                <button id = "addDriversButton" (click)="driverFormA.reset(); resetTempD()"type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddDriverModal"> Add Driver</button>
+             </h3>
 				</div>
 			</div>
       <br>
@@ -15,14 +21,14 @@
 				<div class="col-md-6">
 					<table  class="table table-hover">
             <div style="height:450px;overflow:auto;">
-						<thead>
-							<tr id = "busTable">
+						 <thead>
+							 <tr id = "busTable">
 								<th>Bus</th>
 								<th>Drivers</th>
                 <th>Route</th>
 								<th>Status</th>
-							</tr>
-					  </thead>
+							 </tr>
+					   </thead>
 						<tbody >
 							<tr *ngFor="let bus of buses; let i = index">
                 <td>{{bus.bus_name}}</td>
@@ -31,17 +37,20 @@
                 <td>{{bus.bus_status}}</td>
                 <td>
                   <div class= "btn-group-vertical">
-                  <button  id = "editBusButton" type="button" class="btn btn-primary btn-md" (click) = "setValue(i);busFormE.reset(); setTempB()" data-toggle="modal" data-target="#EditBusModal">
+                    <button  id = "editBusButton" type="button" class="btn btn-primary btn-md" (click) = "setValue(i); setTempB()" data-toggle="modal" data-target="#EditBusModal">
                      Edit
                     </button>
-                    <button id ="deleteBusButton" class="btn btn-danger btn md" type="button" (click) ="deleteB(i)">Delete</button>
-                    </div>
-                    </td>
-              </tr>
-						</tbody>
-            </div>
-					</table>
-				</div>
+                    <button id ="deleteBusButton" class="btn btn-danger btn md" type="button" (click) ="deleteB(i)">
+                      Delete
+                    </button>
+                </div>
+              </td>
+            </tr>
+					</tbody>
+         </div>
+			 </table>
+		 </div>
+
 				<div class="col-md-6">
 					<table class="table table-hover">
             <div style="height:450px;overflow:auto;">
@@ -61,20 +70,20 @@
               <td>{{driver.driver_status}}</td>
               <td>  
                 <div class= "btn-group-vertical">
-                <button  id = "editDriverButton" type="button" class="btn btn-primary" (click) = "setValue(i); driverFormE.reset();setTempD()" data-toggle="modal" data-target="#EditDriverModal">
+                    <button  id = "editDriverButton" type="button" class="btn btn-primary" (click) = "setValue(i); setTempD()" data-toggle="modal" data-target="#EditDriverModal">
                     Edit
                     </button> 
                     <button id ="deleteDriverButton" class="btn btn-danger btn md" type="button" (click)="deleteD(i)">Delete</button>
                 </div>
-            </td>
-            </tr>
-            </tbody>
-            </div>
-          </table>
-				</div>
+              </td>
+             </tr>
+           </tbody>
+          </div>
+        </table>
 			</div>
 		</div>
 	</div>
+</div>
 </div>
 
 
@@ -112,6 +121,20 @@
         </div>
 
             <div class="form-group">
+        <label for="driver">Assign Route</label>
+        <select  class="form-control"
+                name="driver"
+                [(ngModel)]="bus.driver" required
+                #routeB="ngModel" >
+          <option *ngFor="let route of routes">{{route.route_name}}</option>
+        </select>
+
+        <div *ngIf="routeB.errors && routeB.touched" class="alert alert-danger">
+          <div [hidden]="!routeB.errors.required">Route is required</div>
+        </div>
+      </div>
+
+      <div class="form-group">
         <label for="driver">Assign Driver</label>
         <select  class="form-control"
                 name="driver"
@@ -124,7 +147,13 @@
           <div [hidden]="!driverB.errors.required">Driver is required</div>
         </div>
       </div>
+      <label>Status</label>
+        <br>
+      <div class="form-group; btn-group" data-toggle="buttons">
         
+        <label class="radio-inline"><input type="radio"  name ="status"[(ngModel)]="bus.bus_status" value="offline">Offline</label>
+        <label class="radio-inline"><input type="radio" name ="status" [(ngModel)]="bus.bus_status" value="online">Online</label>
+      </div>        
 			    </form>
 			   </div>
              
@@ -261,7 +290,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary"  [disabled]="!driverFormA.form.valid"(click)="close('AddDriverModal')" > 
+        <button type="button" class="btn btn-primary"  [disabled]="!driverFormA.form.valid"(click)="closeAddDriver('AddDriverModal')" > 
           Submit
         </button>
       </div>
@@ -436,7 +465,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" [disabled]="!driverFormE.form.valid"(click)="editD(); driverFormE.reset(); close('EditDriverModal')">Save changes</button>
+        <button type="button" class="btn btn-primary"  [disabled]="!driverFormE.form.valid"(click)="closeEditDriver('EditDriverModal')">Save changes</button>
       </div>
     </div>
  
