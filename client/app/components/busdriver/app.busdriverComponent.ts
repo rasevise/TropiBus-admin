@@ -68,9 +68,6 @@ export class busdriverComponent{
 
 
   addB(bus: Bus): void {
-    for(var i : number = 0; i< this.routes.length;i++){
-    console.log(this.routes[i].route_name);
-  }
     this.service.createBus(bus);
     this.getBuses();
   }
@@ -103,7 +100,8 @@ export class busdriverComponent{
 
 
   addD(driver:Driver): void {
-    console.log("hello")
+   
+console.log("password:" + this.driver.password);
     this.service.createDriver(driver);
     this.getDrivers();
   }

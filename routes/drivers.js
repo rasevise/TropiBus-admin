@@ -19,9 +19,10 @@ router.get('/', function(req, res, next){
 router.post('/addDriver', function (req, res, next) {
   var status = "offline";
   var d_id = Math.floor(Math.random() * (100000 - 1000)) + 1000;
+  console.log("password:" + req.body.password);
   db.query('INSERT INTO driver(driver_id, driver_firstname, driver_lastname, driver_username, driver_password, driver_status) VALUES ($1,$2,$3,$4,$5,$6)', [d_id,req.body.name,req.body.lastName,req.body.username,req.body.password, status], function(err, result) {
     if(err) {
-      return console.error('error ', err);
+      res.send(error);
     }
     res.send(result);
   });
