@@ -2,11 +2,9 @@ var express = require('express');
 var router = express.Router();
 const db = require('../server.js');
 
-var getAllRoutes = 'SELECT * FROM Route NATURAL JOIN routepath' //ok 
+var getAllRoutes = 'SELECT * FROM Route NATURAL JOIN routepath' 
 var getRoute = 'SELECT * FROM route NATURAL JOIN routepath WHERE route_id = $1'
-var updateRoute = 'UPDATE Route SET route_name=$1, route_description=$2, route_area=$3 WHERE route_id=$4'//ok
-
-routes = [];
+var updateRoute = 'UPDATE Route SET route_name=$1, route_description=$2, route_area=$3 WHERE route_id=$4'
 
 router.get('/', function(req, res, next){
     res.contentType('application/json');
