@@ -178,7 +178,7 @@
                   role="button" 
                   aria-pressed="true"
                   [disabled]="!(mname.valid && mdescription.valid && mlatitude.valid && mlongitude.valid)">
-                  Add</button>
+                  Add New Stop</button>
                   <button 
                   (click)="editStop()"
                   href="javascript:void(0)" 
@@ -186,15 +186,7 @@
                   role="button" 
                   aria-pressed="true"
                   [disabled]="!(mname.valid && mdescription.valid && mlatitude.valid && mlongitude.valid)">
-                  Edit</button>
-                  <button 
-                  (click)="deleteStop()"
-                  href="javascript:void(0)" 
-                  class="btn btn-secondary btn-md active" 
-                  role="button" 
-                  aria-pressed="true"
-                  [disabled]="!(mname.valid && mdescription.valid && mlatitude.valid && mlongitude.valid)">
-                  Delete</button>
+                  Confirm Edit</button>
                   </div>
                 </div>
               </div>
@@ -216,21 +208,37 @@
             <div class="col-md-12">
               <div class="list-group" id="stopInfo">
                 <a type="button" class="list-group-item list-group-item-action active">
-                      <h5>Stop List</h5>
+                <h5>Stop List</h5>
                 </a> 
-                <div *ngFor="let stop of locationMarkers" href="javascript:void(0)" >
-                  <div class="list-group">
-                    <a 
+                <accordion>
+                  <accordion-group *ngFor="let stop of locationMarkers; let i = index" 
+                  [closeOthers]="oneAtATime"
+                  [heading]="stop.name">
+                    <div class="list-group">
+                      <a class="list-group-item list-group-item-action">Description: {{stop.description}}</a>
+                      <a class="list-group-item list-group-item-action">Latitude: {{stop.latitude}}</a>
+                      <a class="list-group-item list-group-item-action">Longitude: {{stop.longitude}}</a>
+                    </div>
+                    <div id="editDeleteStopButtons">
+                    <button 
+                    id="editButtonStop"
                     href="javascript:void(0)" 
-                    class="list-group-item list-group-item-action list-group-item-info"
-                    (click)="selectStop(stop); scrollModalTop('pathModal');">
-                    Name: {{stop.name}}</a>
-                    <a class="list-group-item list-group-item-action">Description: {{stop.description}}</a>
-                    <a class="list-group-item list-group-item-action">Latitude: {{stop.latitude}}</a>
-                    <a class="list-group-item list-group-item-action">Longitude: {{stop.longitude}}</a>
-                  </div>
-                  <br>
-                </div>
+                    class="btn btn-primary btn-md active" 
+                    role="button" 
+                    aria-pressed="true"
+                    (click)="scrollModalTop('pathModal'); selectStop(stop);">
+                    Edit</button>
+                    <button 
+                    id="deleteButtonStop"
+                    href="javascript:void(0)" 
+                    class="btn btn-danger btn-md active" 
+                    role="button" 
+                    aria-pressed="true"
+                    (click)="selectStop(stop); confirmDelete();">
+                    Delete</button>
+                    </div>
+                  </accordion-group>
+                </accordion>
               </div>
             </div>
           </div>

@@ -112,3 +112,7 @@ th{
   height: 46%;
   overflow-y: scroll;
 }
+
+#editDeleteStopButtons{
+  float: right;
+}

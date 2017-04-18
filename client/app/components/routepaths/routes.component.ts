@@ -74,6 +74,7 @@ export class RoutesComponent implements OnInit{
     this.getRoutes();
   }
 
+  //Google maps grey fix when changing tabs
   greyFix(){
     //bug fix for grey map
     $('#map').css('height', '99%').css( 'width', '99%');
@@ -134,6 +135,13 @@ export class RoutesComponent implements OnInit{
   deleteStop(){
     this.service.delete(this.m_stop.stop_id, this.r_id);
     this.getStopsFromRoute(this.r_id);
+  }
+
+  confirmDelete(){
+    var c = confirm("Are you sure you want to delete stop: " + this.m_stop.name);
+    if (c == true) {
+        this.deleteStop();
+    }
   }
 
   addStop(){
@@ -218,6 +226,7 @@ export class RoutesComponent implements OnInit{
       })         
       this.map.fitBounds(bounds);
       this.polylinePaths.push(polyline);
+      this.addPolyHighlight(polyline);
     }
     }
   }
