@@ -19,7 +19,7 @@ export class busdriverComponent{
  private myValue: number;
  private userNameValid: boolean = false;
   bus: Bus = new Bus(null, "","","","");
-  driver: Driver = new Driver(null,"","","","","");
+  driver: Driver = new Driver(null,"","","","","","");
   route: Routes = new Routes();
   buses: any[] = [];
   drivers: any[] = [];

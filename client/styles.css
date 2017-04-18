@@ -112,3 +112,13 @@ th{
   height: 46%;
   overflow-y: scroll;
 }
+
+#busList{
+  height:450px;
+  overflow:auto;
+}
+#driverList{
+  height:450px;
+  overflow:auto; 
+  
+}
