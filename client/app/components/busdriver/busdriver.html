@@ -12,7 +12,7 @@
 				  <div class="col-md-6">
              <h3>
                Drivers
-                <button id = "addDriversButton" (click)="driverFormA.reset(); resetTempD()"type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddDriverModal"> Add Driver</button>
+                <button id = "addDriversButton" (click)="driverFormA.reset(); fetchInfo(); resetTempD()"type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddDriverModal"> Add Driver</button>
              </h3>
 				</div>
 			</div>
@@ -122,9 +122,9 @@
         <label for="driver">Assign Route</label>
         <select  class="form-control"
                 name="driver"
-                [(ngModel)]="bus.driver" required
+                [(ngModel)]="bus.route" required
                 #routeB="ngModel" >
-          <option *ngFor="let route of routes">{{route.route_name}}</option>
+          <option *ngFor="let route of routes" [value] = "route.route_id">{{route.route_name}}</option>
         </select>
 
         <div *ngIf="routeB.errors && routeB.touched" class="alert alert-danger">
@@ -138,7 +138,7 @@
                 name="driver"
                 [(ngModel)]="bus.driver" required
                 #driverB="ngModel" >
-          <option *ngFor="let driver of drivers">{{driver.driver_firstname}} {{driver.driver_lastname}}</option>
+          <option *ngFor="let driver of drivers" [value] = "driver.driver_id">{{driver.driver_firstname}} {{driver.driver_lastname}}</option>
         </select>
 
         <div *ngIf="driverB.errors && driverB.touched" class="alert alert-danger">
@@ -149,8 +149,13 @@
         <br>
       <div class="form-group; btn-group" data-toggle="buttons">
         
-        <label class="radio-inline"><input type="radio"  name ="status"[(ngModel)]="bus.bus_status" value="offline">Offline</label>
-        <label class="radio-inline"><input type="radio" name ="status" [(ngModel)]="bus.bus_status" value="online">Online</label>
+        <select  class="form-control"
+                name="status"
+                [(ngModel)]="bus.status" required
+                #driverB="ngModel" >
+          <option value = "Inactive">Inactive</option>
+          <option value = "Active">Active</option>
+        </select>
       </div>        
 			    </form>
 			   </div>
@@ -487,6 +492,26 @@
     </div>
   </div>
 </div>
+
+
+<!--<div class="modal fade" id="usernameModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Error</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Username aready exist
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>-->
 
 
 

@@ -44,7 +44,7 @@ router.post('/addBus', function(req, res, next) {
     var b_id = Math.floor(Math.random() * (100000 - 1000)) + 1000;
          
          db.query('INSERT INTO GPS(gps_latitude, gps_longitude) VALUES(0,0) RETURNING gps_id', function(err, result) {
-
+            console.log("Result:", result)
             id = result.rows[0].gps_id
             status = 'inactive'
 
@@ -53,20 +53,26 @@ router.post('/addBus', function(req, res, next) {
             if (err)
              { console.error(err); response.send("Error " + err); }
             else{
-                db.query('INSERT INTO Bus(bus_id, bus_name, gps_id, bus_status) VALUES ($1,$2, $3,$4)',[b_id, req.body.name, id, status] ,function(err, result){
+                db.query('INSERT INTO Bus( bus_name, gps_id, bus_status, route_id) VALUES ($1,$2, $3,$4) RETURNING bus_id',[ req.body.name, id, req.body.status, req.body.routeid] ,function(err, result1){
 
                      if(err)
                 { console.error(err); response.send("Error " + err); }
-                
+                else{
+                  console.log("entre a meter driver",result1)
+                  b_id = result1.rows[0].bus_id
+                  db.query('UPDATE driver SET bus_id=$1 WHERE driver_id=$2',[b_id,req.body.driverid] ,function(err, result) {
                 {
-                    res.send(result);
+                    res.send(result1);
                   
                  }
-            });
+                  });
+              }
+
+            });//dbquery
            
             }
 
-        });
+        });//dbquery
     });
 
 
@@ -103,12 +109,27 @@ router.put('/updateBus', function(req, res, next) {
 router.delete('/deleteBus', function(req, res, next) {
 
   console.log("id:" + req.query.id)
-    db.query('DELETE FROM Bus WHERE bus_id=$1 RETURNING gps_id',[req.query.id], function(err, result) {
-
+  db.query('UPDATE driver SET bus_id=Null WHERE bus_id=$1',[req.query.id], function(err, result) {
+    
       if (err) {
         return console.error('error running query', err);
       }
-      res.send(result);
+      else{
+        db.query('DELETE FROM Bus WHERE bus_id=$1 RETURNING gps_id',[req.query.id], function(err, result1) {
+            if (err) {
+              return console.error('error running query', err);
+            }
+            else{                
+                  db.query('DELETE FROM gps WHERE gps_id=$1',[result1.rows[0].gps_id], function(err, result2) {
+                    if (err) {
+                      return console.error('error running query', err);
+                    }
+                    res.send(result2);
+                  });
+      }
+          });
+      }
+      
     });
   });
 

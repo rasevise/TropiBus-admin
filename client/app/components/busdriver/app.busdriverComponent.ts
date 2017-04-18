@@ -18,7 +18,7 @@ declare var $:JQueryStatic;
 export class busdriverComponent{ 
  private myValue: number;
  private userNameValid: boolean = false;
-  bus: Bus = new Bus(null, "","","","");
+  bus: Bus = new Bus(null, "",null,null,"");
   driver: Driver = new Driver(null,"","","","","","");
   route: Routes = new Routes();
   buses: any[] = [];
@@ -28,9 +28,9 @@ export class busdriverComponent{
 
   constructor (
   @Inject(BusDriverService) 
-  @Inject(RoutesService) 
   private service: BusDriverService, 
-  private Routeservice:RoutesService){
+  @Inject(RoutesService) 
+  private Routeservice:RoutesService){  
 
     service.getBuses()
     .subscribe(buses => this.buses = buses);
@@ -68,13 +68,12 @@ export class busdriverComponent{
 
 
   addB(bus: Bus): void {
+    console.log("status:" + bus.status);
     this.service.createBus(bus);
     this.getBuses();
   }
 
   deleteB(i : number): void {
-    console.log("id:" + this.buses[i].bus_id);
-     console.log("index:" + i);
     this.service
         .deleteBus(this.buses[i].bus_id);
         this.getBuses();
@@ -87,6 +86,7 @@ export class busdriverComponent{
 
   ngOnInit(): void {
     this.getBuses();
+      this.getRoutes();
   }
 
 
@@ -125,23 +125,22 @@ console.log("password:" + this.driver.password);
 
 
 //Routes for modal
-// ngOnInitR(): void {
-//   this.getRoutes();
-//       for(var i : number = 0; i< this.routes.length;i++){
-//     console.log(this.routes[i].route_name);
-//   }
-// }
+ngOnInitR(): void {
+  this.getRoutes();
+      //for(var i : number = 0; i< this.routes.length;i++){
+   // console.log(this.routes[i].route_name);
+ // }
+}
 
-// getRoutes(){
-//   this.Routeservice.getPaths()
-//   .subscribe(routes => {
-//       this.routes = routes;
-//     })
+getRoutes(){
+  this.Routeservice.getPaths()
+  .subscribe(routes => {
+      this.routes = routes;
+      console.log("hello perra")
+    })
 
-//         for(var i : number = 0; i< this.routes.length;i++){
-//     console.log(this.routes[i].route_name);
-//   }
-// }
+        
+}
 
 
 
@@ -165,11 +164,9 @@ checkUsernameEdit(){
       console.log(this.drivers[i].driver_username);
       if(this.driver.username == this.drivers[i].driver_username){
         return false;
-       
       }
     }
-
-   return true; 
+       return true; 
   }
   
 
