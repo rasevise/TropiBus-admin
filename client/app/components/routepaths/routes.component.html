@@ -11,6 +11,10 @@
 <button id="routeSelectButton" type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="javascript:void(0)">
   <span class="sr-only">Toggle Dropdown</span>
 </button>
+<button id="routeEditButton" type="button" class="btn btn-sm btn-warning" aria-haspopup="true" aria-expanded="false" (click)="openRouteModal()" href="javascript:void(0)"
+[hidden]="!m_title">
+  Edit Route
+</button>
 <div class="dropdown-menu">
   <a 
   class="dropdown-item" 
@@ -246,7 +250,74 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" href="javascript:void(0)">Close</button>
-        <button type="button" class="btn btn-primary" href="javascript:void(0)">Send message</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Route Edit Modal-->
+<div class="modal fade" id="routeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{m_title}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" *ngIf="m_title">
+        <div class="row form-group">
+          <div class="card-block row">
+            <h5 class="card-title">Stop Name</h5>
+            <input class="form-control" 
+            required 
+            minlength="4" 
+            maxlength="15"
+            type="text" 
+            id="routeNameInput" 
+            [(ngModel)]="m_route.route_name"
+            [formControl]="mroutename">
+              <div *ngIf="mroutename.errors && (mroutename.dirty || mroutename.touched)"
+                  class="alert alert-danger">
+              <div [hidden]="!mroutename.errors.required">
+                Latitude is required
+              </div>
+              <div [hidden]="!mroutename.errors.minlength">
+                Latitude must be at least 4 digits long.
+              </div>
+              <div [hidden]="!mroutename.errors.maxlength">
+                Latitude cannot be more than 100 digits long.
+              </div>
+              </div>
+          </div>
+          <div class="card-block row">
+            <h5 class="card-title">Stop Description</h5>
+            <textarea class="form-control" 
+            required 
+            minlength="4" 
+            maxlength="25"
+            type="text" 
+            id="routeDescriptionInput" 
+            [(ngModel)]="m_route.route_description"
+            [formControl]="mroutedesc"></textarea>
+              <div *ngIf="mroutedesc.errors && (mroutedesc.dirty || mroutedesc.touched)"
+                  class="alert alert-danger">
+              <div [hidden]="!mroutedesc.errors.required">
+                Latitude is required
+              </div>
+              <div [hidden]="!mroutedesc.errors.minlength">
+                Latitude must be at least 4 digits long.
+              </div>
+              <div [hidden]="!mroutedesc.errors.maxlength">
+                Latitude cannot be more than 100 digits long.
+              </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="updateRoute()">Save changes</button>
       </div>
     </div>
   </div>
