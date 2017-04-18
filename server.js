@@ -4,6 +4,8 @@ var bodyParser = require('body-parser');
 var debug = require('debug')('http');
 var http = require('http');
 var pg = require('pg');
+var cookieParser = require('cookie-parser');
+
 
 var client = new pg.Client({
   user: 'wymxggcwikpwav', //env var: PGUSER
@@ -35,10 +37,12 @@ app.engine('html', require('ejs').renderFile);
 // Set Static Folder
 app.use(express.static(path.join(__dirname, 'client')));
 
+//cookie parser / session
+app.use(cookieParser());
+
 // Body Parser MW
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
-
 
 // Route Services
 app.use('/', index);
@@ -47,7 +51,6 @@ app.use('/buses', buses);
 app.use('/stops', stops);
 app.use('/drivers', drivers);
 app.use('/messages', messages);
-
 
 http.createServer(app).listen(port, (err) => {  
   if (err) {

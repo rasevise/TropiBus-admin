@@ -10,7 +10,7 @@ import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 import { AppComponent }         from './app.component';
 import { headerComponent }      from './components/header/app.headerComponent';
-import { loginComponent }       from './components/login/app.loginComponent';
+// import { loginComponent }       from './components/login/app.loginComponent';
 import { contentAreaComponent } from './components/contentArea/app.contentAreaComponent';
 import { footerComponent }      from './components/footer/app.footerComponent';
 import { busdriverComponent }   from './components/busdriver/app.busdriverComponent';
@@ -34,7 +34,7 @@ import { Routes }               from './components/routepaths/routes';
                   Ng2BootstrapModule.forRoot(),
                   ],
   declarations: [ AppComponent,
-                  loginComponent,
+                  // loginComponent,
                   EqualValidator,
                   headerComponent, 
                   contentAreaComponent,
