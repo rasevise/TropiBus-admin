@@ -55,7 +55,14 @@ export class RoutesService {
 
   update(stop: any){
     return this.http
-    .put('stops/updateStop', JSON.stringify({stop_name: stop.name, stop_description: stop.description, s_id: stop.stop_id}), 
+    .put(this._stopsURL + '/updateStop', JSON.stringify({stop_name: stop.name, stop_description: stop.description, s_id: stop.stop_id}), 
+    { headers:this.headers })
+    .map((res: Response) => res.json().data);
+  }
+
+  updateRoute(route: any){
+    return this.http
+    .put(this._routesURL + '/updateRoute', JSON.stringify({route_name: route.route_name, route_description: route.route_description, route_id: route.route_id}), 
     { headers:this.headers })
     .map((res: Response) => res.json().data);
   }

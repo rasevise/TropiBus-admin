@@ -11,6 +11,10 @@
 <button id="routeSelectButton" type="button" class="btn btn-sm btn-secondary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="javascript:void(0)">
   <span class="sr-only">Toggle Dropdown</span>
 </button>
+<button id="routeEditButton" type="button" class="btn btn-sm btn-warning" aria-haspopup="true" aria-expanded="false" (click)="openRouteModal()" href="javascript:void(0)"
+[hidden]="!m_title">
+  Edit Route
+</button>
 <div class="dropdown-menu">
   <a 
   class="dropdown-item" 
@@ -178,7 +182,7 @@
                   role="button" 
                   aria-pressed="true"
                   [disabled]="!(mname.valid && mdescription.valid && mlatitude.valid && mlongitude.valid)">
-                  Add</button>
+                  Add New Stop</button>
                   <button 
                   (click)="editStop()"
                   href="javascript:void(0)" 
@@ -186,15 +190,7 @@
                   role="button" 
                   aria-pressed="true"
                   [disabled]="!(mname.valid && mdescription.valid && mlatitude.valid && mlongitude.valid)">
-                  Edit</button>
-                  <button 
-                  (click)="deleteStop()"
-                  href="javascript:void(0)" 
-                  class="btn btn-secondary btn-md active" 
-                  role="button" 
-                  aria-pressed="true"
-                  [disabled]="!(mname.valid && mdescription.valid && mlatitude.valid && mlongitude.valid)">
-                  Delete</button>
+                  Confirm Edit</button>
                   </div>
                 </div>
               </div>
@@ -216,21 +212,37 @@
             <div class="col-md-12">
               <div class="list-group" id="stopInfo">
                 <a type="button" class="list-group-item list-group-item-action active">
-                      <h5>Stop List</h5>
+                <h5>Stop List</h5>
                 </a> 
-                <div *ngFor="let stop of locationMarkers" href="javascript:void(0)" >
-                  <div class="list-group">
-                    <a 
+                <accordion>
+                  <accordion-group *ngFor="let stop of locationMarkers; let i = index" 
+                  [closeOthers]="oneAtATime"
+                  [heading]="stop.name">
+                    <div class="list-group">
+                      <a class="list-group-item list-group-item-action">Description: {{stop.description}}</a>
+                      <a class="list-group-item list-group-item-action">Latitude: {{stop.latitude}}</a>
+                      <a class="list-group-item list-group-item-action">Longitude: {{stop.longitude}}</a>
+                    </div>
+                    <div id="editDeleteStopButtons">
+                    <button 
+                    id="editButtonStop"
                     href="javascript:void(0)" 
-                    class="list-group-item list-group-item-action list-group-item-info"
-                    (click)="selectStop(stop); scrollModalTop('pathModal');">
-                    Name: {{stop.name}}</a>
-                    <a class="list-group-item list-group-item-action">Description: {{stop.description}}</a>
-                    <a class="list-group-item list-group-item-action">Latitude: {{stop.latitude}}</a>
-                    <a class="list-group-item list-group-item-action">Longitude: {{stop.longitude}}</a>
-                  </div>
-                  <br>
-                </div>
+                    class="btn btn-primary btn-md active" 
+                    role="button" 
+                    aria-pressed="true"
+                    (click)="scrollModalTop('pathModal'); selectStop(stop);">
+                    Edit</button>
+                    <button 
+                    id="deleteButtonStop"
+                    href="javascript:void(0)" 
+                    class="btn btn-danger btn-md active" 
+                    role="button" 
+                    aria-pressed="true"
+                    (click)="selectStop(stop); confirmDelete();">
+                    Delete</button>
+                    </div>
+                  </accordion-group>
+                </accordion>
               </div>
             </div>
           </div>
@@ -238,7 +250,74 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" href="javascript:void(0)">Close</button>
-        <button type="button" class="btn btn-primary" href="javascript:void(0)">Send message</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Route Edit Modal-->
+<div class="modal fade" id="routeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{m_title}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" *ngIf="m_title">
+        <div class="row form-group">
+          <div class="card-block row">
+            <h5 class="card-title">Stop Name</h5>
+            <input class="form-control" 
+            required 
+            minlength="4" 
+            maxlength="15"
+            type="text" 
+            id="routeNameInput" 
+            [(ngModel)]="m_route.route_name"
+            [formControl]="mroutename">
+              <div *ngIf="mroutename.errors && (mroutename.dirty || mroutename.touched)"
+                  class="alert alert-danger">
+              <div [hidden]="!mroutename.errors.required">
+                Latitude is required
+              </div>
+              <div [hidden]="!mroutename.errors.minlength">
+                Latitude must be at least 4 digits long.
+              </div>
+              <div [hidden]="!mroutename.errors.maxlength">
+                Latitude cannot be more than 100 digits long.
+              </div>
+              </div>
+          </div>
+          <div class="card-block row">
+            <h5 class="card-title">Stop Description</h5>
+            <textarea class="form-control" 
+            required 
+            minlength="4" 
+            maxlength="25"
+            type="text" 
+            id="routeDescriptionInput" 
+            [(ngModel)]="m_route.route_description"
+            [formControl]="mroutedesc"></textarea>
+              <div *ngIf="mroutedesc.errors && (mroutedesc.dirty || mroutedesc.touched)"
+                  class="alert alert-danger">
+              <div [hidden]="!mroutedesc.errors.required">
+                Latitude is required
+              </div>
+              <div [hidden]="!mroutedesc.errors.minlength">
+                Latitude must be at least 4 digits long.
+              </div>
+              <div [hidden]="!mroutedesc.errors.maxlength">
+                Latitude cannot be more than 100 digits long.
+              </div>
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="updateRoute()">Save changes</button>
       </div>
     </div>
   </div>

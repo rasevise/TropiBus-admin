@@ -28,22 +28,26 @@ export class RoutesComponent implements OnInit{
   stops:any;
   locationMarkers:any;
   polylinePaths:any;
+  tempRoute:any;
 
   //Modal window Values
   m_title: any = '';
   m_body: any = '';
   m_desc: any = '';
-  m_route: any;
 
   //route id from selected route
   r_id: any;
-  //stop from selected stop in modal
+
+  //stop and route from selected stop in modal
   @Input() m_stop: Stops;
+  @Input() m_route: Routes;
 
   mname: FormControl;
   mdescription: FormControl;
   mlatitude: FormControl;
   mlongitude: FormControl;
+  mroutename: FormControl;
+  mroutedesc: FormControl;
 
   constructor (@Inject(RoutesService) private service: RoutesService){}
 
@@ -59,6 +63,8 @@ export class RoutesComponent implements OnInit{
     this.mdescription = new FormControl('', [Validators.required]);
     this.mlongitude = new FormControl('', [Validators.required]);
     this.mlatitude = new FormControl('', [Validators.required]);
+    this.mroutename = new FormControl('', [Validators.required]);
+    this.mroutedesc = new FormControl('', [Validators.required]);
   }
 
   loadMap(){
@@ -74,6 +80,7 @@ export class RoutesComponent implements OnInit{
     this.getRoutes();
   }
 
+  //Google maps grey fix when changing tabs
   greyFix(){
     //bug fix for grey map
     $('#map').css('height', '99%').css( 'width', '99%');
@@ -82,7 +89,13 @@ export class RoutesComponent implements OnInit{
 
   //set modal route and title
   setMTitle(title:any, route: any){
-    this.m_route = route;
+    if(title != ''){
+      this.m_route = new Routes(route.route_id, route.color, route.route_name, route.route_description, route.route_area, route.route_status, []);
+    }
+    else{
+      this.m_route = new Routes(null, '', '', '', '', '', []);
+    }
+    // this.m_route = route;
     this.m_title = title;
   }
 
@@ -119,6 +132,12 @@ export class RoutesComponent implements OnInit{
     }
   }
 
+  openRouteModal(){
+    if(this.m_title != ''){
+      $('#routeModal').modal('show');
+    }
+  }
+
   onModalClose(){
     $('#pathModal').on('hidden.bs.modal', () => {
     console.log("inside hide modal function");
@@ -134,13 +153,31 @@ export class RoutesComponent implements OnInit{
   deleteStop(){
     this.service.delete(this.m_stop.stop_id, this.r_id);
     this.getStopsFromRoute(this.r_id);
+    this.m_stop = new Stops(null, null, '', '', null, null, '');
+  }
+
+  confirmDelete(){
+    var c = confirm("Are you sure you want to delete stop: " + this.m_stop.name);
+    if (c == true) {
+        this.deleteStop();
+    }
   }
 
   addStop(){
     this.service.create(this.m_stop, this.r_id)
     .subscribe(() => {
     this.getStopsFromRoute(this.r_id)});
-    
+    this.m_stop = new Stops(null, null, '', '', null, null, '');
+  }
+
+  updateRoute(){
+    $('#routeModal').modal('hide');
+    this.service.updateRoute(this.m_route)
+    .subscribe(() =>{
+      this.getRoutes();
+      this.setButtonText('routeDisplay', 'Select Route');
+      this.m_title = '';
+    });
   }
 
   clearPolylines(){
@@ -181,7 +218,7 @@ export class RoutesComponent implements OnInit{
           path_id: route.path_id,
           strokeColor: route.color,
           strokeOpacity: 1.0,
-          strokeWeight: 4,
+          strokeWeight: 7,
           id: route.route_id,
           name: route.route_name,
           color: route.color_name,
@@ -189,6 +226,8 @@ export class RoutesComponent implements OnInit{
           area: route.route_area,
         });
         this.polylinePaths.push(polyline)
+        let content= "<h4>"+route.route_name+"</h4><p>"+route.route_description+"</p>"
+        this.addInfoWindowRoutes(polyline,content);
       }
     this.map.setZoom(15);
     this.map.setCenter(new google.maps.LatLng(18.2013257,-67.1392801));
@@ -206,7 +245,7 @@ export class RoutesComponent implements OnInit{
         path_id: route.path_id,
         strokeColor: route.color,
         strokeOpacity: 1.0,
-        strokeWeight: 4,
+        strokeWeight: 7,
         id: route.route_id,
         name: route.route_name,
         color: route.color_name,
@@ -274,4 +313,47 @@ export class RoutesComponent implements OnInit{
     });
     });
   }
+
+  addInfoWindowRoutes(item:any, content:any){
+ 
+  let infowindow = new google.maps.InfoWindow({
+    content: content
+  });
+  google.maps.event.addListener(item, 'mouseover', function(latlng:any) {
+      let path = item.getPath();
+      var polyline = new google.maps.Polyline({
+          map: this.map,
+          path: path,
+          strokeColor: "#42f4d9",
+          strokeOpacity: 1.0,
+          strokeWeight: 12
+        });
+      this.tempRoute=polyline;
+  });
+
+  google.maps.event.addListener(item, 'mouseout', function(latlng:any) {
+      if(this.tempRoute!=undefined){
+        this.tempRoute.setMap(null);
+      }
+  });
+  google.maps.event.addListener(item, 'click', (event:any) => {
+
+   if(!item.open){
+                infowindow.setPosition(event.latLng)
+                infowindow.open(this.map,item);
+                item.open = true;
+            }
+            else{
+                infowindow.close();
+                item.open = false;
+            }
+            google.maps.event.addListener(this.map, 'click', function() {
+                infowindow.close();
+                item.open = false;
+            });
+
+  });
+ 
+  }
+
 }

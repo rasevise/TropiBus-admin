@@ -3,8 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule, Http } from '@angular/http';
 import { CommonModule, HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { Ng2BootstrapModule } from 'ng2-bootstrap';
-import { ModalModule } from 'ng2-bootstrap';
+import { Ng2BootstrapModule, ModalModule, AccordionModule } from 'ng2-bootstrap';
 import { EqualValidator } from './directives/validator/equal-validator.directive';
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 
@@ -31,6 +30,7 @@ import { Routes }               from './components/routepaths/routes';
                   CommonModule,
                   ReactiveFormsModule,
                   ModalModule.forRoot(),
+                  AccordionModule.forRoot(),
                   Ng2BootstrapModule.forRoot(),
                   ],
   declarations: [ AppComponent,

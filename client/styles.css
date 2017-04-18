@@ -113,6 +113,9 @@ th{
   overflow-y: scroll;
 }
 
+#editDeleteStopButtons{
+  float: right;
+}
 #busList{
   height:450px;
   overflow:auto;
@@ -120,5 +123,4 @@ th{
 #driverList{
   height:450px;
   overflow:auto; 
-  
 }
