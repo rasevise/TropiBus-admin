@@ -20,7 +20,7 @@ export class busdriverComponent{
  private userNameValid: boolean = false;
   bus: Bus = new Bus(null, "",null,null,"");
   driver: Driver = new Driver(null,"","","","","","");
-  route: Routes = new Routes();
+  route: Routes;
   buses: any[] = [];
   drivers: any[] = [];
   routes:any;
@@ -69,19 +69,22 @@ export class busdriverComponent{
 
   addB(bus: Bus): void {
     console.log("status:" + bus.status);
-    this.service.createBus(bus);
-    this.getBuses();
+    this.service.createBus(bus).subscribe(() => { this.getBuses() });
   }
 
-  deleteB(i : number): void {
+  deleteB(): void {
     this.service
-        .deleteBus(this.buses[i].bus_id);
-        this.getBuses();
+        .deleteBus(this.buses[this.myValue].bus_id).subscribe(() => {
+          this.getBuses();
+          });;
+        
   }
 
   editB(): void {
-    this.service.updateBus(this.bus, this.buses[this.myValue].bus_id)
-    this.getBuses();
+    this.service.updateBus(this.bus, this.buses[this.myValue].bus_id).subscribe(() => { 
+        this.getBuses();
+     });
+    
   }
 
   ngOnInit(): void {
@@ -106,9 +109,9 @@ console.log("password:" + this.driver.password);
     this.getDrivers();
   }
 
-  deleteD(i : number): void {
+  deleteD(): void {
     this.service
-        .deleteDriver(this.drivers[i].driver_id);
+        .deleteDriver(this.drivers[this.myValue].driver_id);
         this.getDrivers();
   }
 
@@ -182,6 +185,20 @@ setValue(val:number) {
 getValue(){
       return this.myValue;
 }
+
+confirmDeleteDriver(){
+    var c = confirm("Are you sure you want to delete driver: " + this.driver.name);
+    if (c == true) {
+        this.deleteD();
+    }
+  }
+
+confirmDeleteBus(){
+    var c = confirm("Are you sure you want to delete bus: " + this.bus.name);
+    if (c == true) {
+        this.deleteB();
+    }
+  }
 
 
 closeAddDriver(modalId: String){
