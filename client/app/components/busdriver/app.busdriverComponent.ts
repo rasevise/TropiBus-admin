@@ -20,7 +20,7 @@ export class busdriverComponent{
  private userNameValid: boolean = false;
   bus: Bus = new Bus(null, "",null,null,"");
   driver: Driver = new Driver(null,"","","","","","");
-  route: Routes;
+  route: any;
   buses: any[] = [];
   drivers: any[] = [];
   routes:any;
@@ -52,10 +52,14 @@ export class busdriverComponent{
 
   resetTempB(){
     this.bus.name = "";
+    this.bus.driver= null;
+    this.bus.route = null;
+    this.bus.status = null;
 
   }
   setTempB(){
     this.bus.name = this.buses[this.myValue].bus_name;
+    this.bus.status = this.buses[this.myValue].bus_status;
 
   }
 
@@ -139,7 +143,6 @@ getRoutes(){
   this.Routeservice.getPaths()
   .subscribe(routes => {
       this.routes = routes;
-      console.log("hello perra")
     })
 
         
@@ -177,6 +180,10 @@ checkUsernameEdit(){
 
 
 //Function for modals and values regarding delete and edit index
+// getRouteName(){
+// this.route=this.routes.filter(x => x.route_id === this.route.id)
+// }
+
 setValue(val:number) {
         this.myValue = val;
 }
