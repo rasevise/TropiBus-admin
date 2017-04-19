@@ -21,6 +21,11 @@ export class RoutesService {
     .map((res: Response) => res.json())
   }
 
+  getBusLocation(){
+    return this.http.get(this._routesURL + '/getBusLocation')
+    .map((res: Response) => res.json())
+  }
+
   getPath(r_id: any){
     return this.http.get(this._routesURL + '/getRoute?r_id=' + r_id)
     .map((res: Response) => res.json())

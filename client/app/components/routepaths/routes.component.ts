@@ -26,7 +26,9 @@ export class RoutesComponent implements OnInit{
   map: any;
   routes:any;
   stops:any;
+  buslocation:any;
   locationMarkers:any;
+  busMarkers:any;
   polylinePaths:any;
   tempRoute:any;
 
@@ -57,6 +59,7 @@ export class RoutesComponent implements OnInit{
     this.routes=[];
     this.polylinePaths=[];
     this.locationMarkers=[];
+    this.busMarkers=[];
     this.stops=[];
     this.greyFix();
     this.mname = new FormControl('', [Validators.required]);
@@ -65,6 +68,7 @@ export class RoutesComponent implements OnInit{
     this.mlatitude = new FormControl('', [Validators.required]);
     this.mroutename = new FormControl('', [Validators.required]);
     this.mroutedesc = new FormControl('', [Validators.required]);
+    setInterval(() => { this.getBusLocation(); }, 5000);
   }
 
   loadMap(){
@@ -79,6 +83,7 @@ export class RoutesComponent implements OnInit{
     google.maps.event.trigger(this.map, 'resize');
     this.getRoutes();
   }
+
 
   //Google maps grey fix when changing tabs
   greyFix(){
@@ -194,6 +199,13 @@ export class RoutesComponent implements OnInit{
     this.locationMarkers = [];
   }
 
+  clearBusLocations(){
+    this.busMarkers.forEach((b:any) => {
+      b.setMap(null);
+    });
+    this.busMarkers = [];
+  }
+
   getRoutes(){
     this.service.getPaths()
     .subscribe(routes => {
@@ -204,8 +216,36 @@ export class RoutesComponent implements OnInit{
     })
   }
 
+  getBusLocation(){
+    this.service.getBusLocation()
+    .subscribe(busLocation => {
+      this.buslocation = busLocation;
+      this.loadBusLocation();
+    })
+  }
+
   getRoute(r_id: any){
       this.loadRoute(r_id);
+  }
+
+  loadBusLocation(){
+    this.clearBusLocations();
+    for(var i=0;i<this.buslocation.length;i++){
+      var bus=this.buslocation[i];
+      var latlng = new google.maps.LatLng(bus.gps_latitude, bus.gps_longitude);
+      let bus_marker = new google.maps.Marker({
+        map: this.map,
+        animation: google.maps.Animation.DROP,
+        position: latlng,
+        name: bus.bus_name,
+        latitude: bus.gps_latitude,
+        longitude: bus.gps_longitude
+      });
+      //info window content
+      let content="<h4>"+bus_marker.name+"</h4>";
+      this.addInfoWindow(bus_marker,content);
+      this.busMarkers.push(bus_marker);
+    }
   }
 
   loadRoutes(){
