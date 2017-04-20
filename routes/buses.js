@@ -8,7 +8,7 @@ const db = require('../server.js');
 router.get('/', function(req, res, next){
     console.log("getting buses from server: " );
     res.contentType('application/json');
-    db.query('SELECT * FROM Bus', sendData);
+    db.query('SELECT * FROM Bus NATURAL JOIN Driver', sendData);
 
   function sendData(err, results) {
     console.log("getting buses from server: ");

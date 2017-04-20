@@ -20,10 +20,10 @@ export class busdriverComponent{
  private userNameValid: boolean = false;
   bus: Bus = new Bus(null, "",null,null,"");
   driver: Driver = new Driver(null,"","","","","","");
-  route: any;
+  route:any;
   buses: any[] = [];
   drivers: any[] = [];
-  routes:any;
+  routes:any[] = [];
 
 
   constructor (
@@ -43,11 +43,12 @@ export class busdriverComponent{
     this.driver.lastName = "";
     this.driver.username = "";
   }
-  setTempD(){
+  setTempD(driver: Driver){
     this.driver.name = this.drivers[this.myValue].driver_firstname;
     this.driver.lastName = this.drivers[this.myValue].driver_lastname;
     this.driver.username = this.drivers[this.myValue].driver_username;
-    this.driver.password = "";
+    this.driver.password = this.drivers[this.myValue].driver_password;
+    this.driver.confirmpassword = this.drivers[this.myValue].driver_password;
   }
 
   resetTempB(){
@@ -60,6 +61,7 @@ export class busdriverComponent{
   setTempB(){
     this.bus.name = this.buses[this.myValue].bus_name;
     this.bus.status = this.buses[this.myValue].bus_status;
+    this.bus.route = this.buses[this.myValue].route_id;
 
   }
 
@@ -128,7 +130,10 @@ console.log("password:" + this.driver.password);
     this.getDrivers();
     
   }
-
+getAssignedRoute(id:number): String{
+  this.route =this.routes.filter(x => x.route_id === this.bus.route)
+        return this.route[2];
+}
 
 
 //Routes for modal
