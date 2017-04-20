@@ -131,8 +131,18 @@ console.log("password:" + this.driver.password);
     
   }
 getAssignedRoute(id:number): String{
-  this.route =this.routes.filter(x => x.route_id === this.bus.route)
-        return this.route[2];
+  console.log("id:" + id);
+  for(var x: number = 0; x < this.routes.length; x++){
+    console.log("x:" + x);
+    console.log("route id:" + this.routes[x].route_id);
+    if(id == this.routes[x].route_id){
+      return this.routes[x].route_name
+    }
+    
+  }
+  return "";
+  // this.route =this.routes.filter(x => x.route_id === this.bus.route)
+  //       return this.route[2];
 }
 
 
