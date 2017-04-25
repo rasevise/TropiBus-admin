@@ -74,7 +74,6 @@ export class busdriverComponent{
 
 
   addB(bus: Bus): void {
-    console.log("status:" + bus.status);
     this.service.createBus(bus).subscribe(() => { this.getBuses() });
   }
 
@@ -109,8 +108,6 @@ export class busdriverComponent{
 
 
   addD(driver:Driver): void {
-   
-console.log("password:" + this.driver.password);
     this.service.createDriver(driver);
     this.getDrivers();
   }
@@ -131,7 +128,6 @@ console.log("password:" + this.driver.password);
     
   }
 getAssignedRoute(id:number): String{
-  console.log("id:" + id);
   for(var x: number = 0; x < this.routes.length; x++){
     if(id == this.routes[x].route_id){
       return this.routes[x].route_name

@@ -1,43 +1,41 @@
-// import { Component, OnInit } from '@angular/core';
-// import { Router, ActivatedRoute } from '@angular/router';
-// import { AuthenticationService } from './app.loginService';
-// import { AlertService } from './app.alertService';
+import { Component, OnInit, Inject } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
-// @Component({
-//   selector: 'login',
-//   templateUrl: './app/components/login/login.html',
-// })
-// export class loginComponent{
+import { AlertService, AuthenticationService } from '../../services/index';
 
-//  model: any = {};
-//     loading = false;
-//     returnUrl: string;
+@Component({
+    templateUrl: './app/components/login/login.html'
+})
 
-//     constructor(
-//         private route: ActivatedRoute,
-//         private router: Router,
-//         private authenticationService: AuthenticationService,
-//         private alertService: AlertService) { }
+export class LoginComponent implements OnInit {
+    model: any = {};
+    loading = false;
+    returnUrl: string;
 
-//     ngOnInit() {
-//         // reset login status
-//         this.authenticationService.logout();
+    constructor(
+        @Inject(ActivatedRoute) private route: ActivatedRoute,
+        @Inject(Router) private router: Router,
+        @Inject(AuthenticationService) private authenticationService: AuthenticationService,
+        @Inject(AlertService) private alertService: AlertService) { }
 
-//         // get return url from route parameters or default to '/'
-//         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
-//     }
+    ngOnInit() {
+        // reset login status
+        this.authenticationService.logout();
 
-//     login() {
-//         this.loading = true;
-//         this.authenticationService.login(this.model.username, this.model.password)
-//             .subscribe(
-//                 (data:any) => {
-//                     this.router.navigate([this.returnUrl]);
-//                 },
-//                 (error:any) => {
-//                     this.alertService.error(error);
-//                     this.loading = false;
-//                 });
-//     }
+        // get return url from route parameters or default to '/'
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    }
 
-// }
+    login() {
+        this.loading = true;
+        this.authenticationService.login(this.model.username, this.model.password)
+            .subscribe(
+                data => {
+                    this.router.navigate([this.returnUrl]);
+                },
+                error => {
+                    this.alertService.error(error);
+                    this.loading = false;
+                });
+    }
+}
