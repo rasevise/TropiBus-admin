@@ -39,9 +39,8 @@ router.get('/', function(req, res, next){
 router.post('/addBus', function(req, res, next) {
     console.log('Create a bus')
     //console.log(req.query.)
-    var id = 0
-    var status
-    var b_id = Math.floor(Math.random() * (100000 - 1000)) + 1000;
+    var id = 0;
+    var status;
          
          db.query('INSERT INTO GPS(gps_latitude, gps_longitude) VALUES(0,0) RETURNING gps_id', function(err, result) {
             console.log("Result:", result)
@@ -59,7 +58,7 @@ router.post('/addBus', function(req, res, next) {
                 { console.error(err); response.send("Error " + err); }
                 else{
                   console.log("entre a meter driver",result1)
-                     b_id = result1.rows[0].bus_id
+                      var b_id = result1.rows[0].bus_id
                   db.query('UPDATE driver SET bus_id=$1 WHERE driver_id=$2',[b_id,req.body.driverid] ,function(err, result) {
                 {
                     res.send(result1);

@@ -79,21 +79,22 @@
 		
 		  <div class="form-group">
           <label for="">Message</label>
-
-          <input type="text"  class="form-control"
-                required minlength="4" maxlength="25"
-                name="messageContent" [(ngModel)]="message.messageContent" 
-                #mcontent="ngModel">
-          <div *ngIf="mcontent.errors && (mcontent.dirty || mcontent.touched)"
+         
+         
+          <textarea class="form-control" rows="3" cols="25"
+                required minlength="4" maxlength="50" name="messageContent"
+                   [(ngModel)]="message.messageContent" #mContent="ngModel"></textarea>
+         
+          <div *ngIf="mContent.errors && (mContent.dirty || mContent.touched)"
                 class="alert alert-danger">
-            <div [hidden]="!mcontent.errors.required">
-              Body is required
+            <div [hidden]="!mContent.errors.required">
+              Message is required
             </div>
-            <div [hidden]="!mcontent.errors.minlength">
-              Body must be at least 4 characters long.
+            <div [hidden]="!mContent.errors.minlength">
+              Message must be at least 4 characters long.
             </div>
-            <div [hidden]="!mcontent.errors.maxlength">
-              Body cannot be more than 25 characters long.
+            <div [hidden]="!mContent.errors.maxlength">
+              Message cannot be more than 24 characters long.
             </div>
           </div>
         </div>

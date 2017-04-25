@@ -133,8 +133,6 @@ console.log("password:" + this.driver.password);
 getAssignedRoute(id:number): String{
   console.log("id:" + id);
   for(var x: number = 0; x < this.routes.length; x++){
-    console.log("x:" + x);
-    console.log("route id:" + this.routes[x].route_id);
     if(id == this.routes[x].route_id){
       return this.routes[x].route_name
     }
@@ -169,8 +167,6 @@ getRoutes(){
 //Verify username availability
 checkUsername(){
    for(var i:number = 0; i < this.drivers.length; i++){
-      //console.log("username:" + this.drivers[this.myValue].driver_username);
-      console.log(this.drivers[i].driver_username);
       if(this.driver.username == this.drivers[i].driver_username){
         return false;
       }
@@ -181,8 +177,6 @@ checkUsername(){
 
 checkUsernameEdit(){
    for(var i:number = 0; i < this.drivers.length; i++){
-      console.log("username:" + this.driver.username);
-      console.log(this.drivers[i].driver_username);
       if(this.driver.username == this.drivers[i].driver_username){
         return false;
       }
