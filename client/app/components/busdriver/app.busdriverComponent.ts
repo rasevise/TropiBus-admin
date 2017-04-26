@@ -163,8 +163,6 @@ getRoutes(){
 //Verify username availability
 checkUsername(){
    for(var i:number = 0; i < this.drivers.length; i++){
-      //console.log("username:" + this.drivers[this.myValue].driver_username);
-      console.log(this.drivers[i].driver_username);
       if(this.driver.username == this.drivers[i].driver_username){
         return false;
       }
