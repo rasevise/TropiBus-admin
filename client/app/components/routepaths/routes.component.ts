@@ -159,6 +159,7 @@ export class RoutesComponent implements OnInit{
     this.service.delete(this.m_stop.stop_id, this.r_id);
     this.getStopsFromRoute(this.r_id);
     this.m_stop = new Stops(null, null, '', '', null, null, '');
+    alert("Stop deleted");
   }
 
   confirmDelete(){
@@ -171,8 +172,9 @@ export class RoutesComponent implements OnInit{
   addStop(){
     this.service.create(this.m_stop, this.r_id)
     .subscribe(() => {
-    this.getStopsFromRoute(this.r_id)});
-    this.m_stop = new Stops(null, null, '', '', null, null, '');
+      this.getStopsFromRoute(this.r_id)});
+      this.m_stop = new Stops(null, null, '', '', null, null, '');
+      alert("Stop successfully added");
   }
 
   updateRoute(){
@@ -182,6 +184,7 @@ export class RoutesComponent implements OnInit{
       this.getRoutes();
       this.setButtonText('routeDisplay', 'Select Route');
       this.m_title = '';
+      alert("Stop successfully updated");
     });
   }
 
