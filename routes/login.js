@@ -16,14 +16,15 @@ router.post('/authenticate', function (req, res) {
     }
     else{
         if(result.rows.length==0){
-            res.json({admin:-1});
+            res.status(400).send({
+              message: 'Incorrect Credentials'
+            });
         }
         else{
           admin = result.rows[0];
           res.json({admin, token});
         }
     }
-    
     });
 
 });

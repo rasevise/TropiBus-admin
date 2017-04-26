@@ -62,6 +62,11 @@ http.createServer(app).listen(port, (err) => {
   console.log(`server is listening on ${port}`)
 });
 
+//The 404 Route (ALWAYS Keep this as the last route)
+app.get('*', function(req, res){
+  res.render('index.html');
+});
+
 client.on('error', function (err, client) {
   // if an error is encountered by a client while it sits idle in the pool
   // the pool itself will emit an error event with both the error and
