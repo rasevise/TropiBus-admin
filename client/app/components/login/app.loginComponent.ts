@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit {
         @Inject(ActivatedRoute) private route: ActivatedRoute,
         @Inject(Router) private router: Router,
         @Inject(AuthenticationService) private authenticationService: AuthenticationService,
-        @Inject(AlertService) private alertService: AlertService) { }
+        @Inject(AlertService) private alertService: AlertService) {}
 
     ngOnInit() {
         // reset login status
@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
     }
 
     login() {
+        console.log(this.model.username + ' ' + this.model.password);
         this.loading = true;
         this.authenticationService.login(this.model.username, this.model.password)
             .subscribe(

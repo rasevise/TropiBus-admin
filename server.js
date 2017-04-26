@@ -24,6 +24,7 @@ var buses = require('./routes/buses');
 var stops = require('./routes/stops');
 var drivers = require('./routes/drivers');
 var messages = require('./routes/messages');
+var login = require('./routes/login');
 
 
 var port = process.env.PORT || 8080;
@@ -46,6 +47,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 
 // Route Services
 app.use('/', index);
+app.use('/login', login);
 app.use('/routes', routes);
 app.use('/buses', buses);
 app.use('/stops', stops);
