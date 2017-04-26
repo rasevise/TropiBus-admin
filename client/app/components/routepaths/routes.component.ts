@@ -31,6 +31,7 @@ export class RoutesComponent implements OnInit{
   busMarkers:any;
   polylinePaths:any;
   tempRoute:any;
+  public alerts: any = [];
 
   //Modal window Values
   m_title: any = '';
@@ -149,6 +150,14 @@ export class RoutesComponent implements OnInit{
     })
   }
 
+  addAlert(message:string): void {
+    this.alerts.push({
+      type: 'success',
+      msg: message,
+      timeout: 3000
+    });
+  }
+
   editStop(){
     this.service.update(this.m_stop)
     .subscribe(() => {
@@ -159,13 +168,13 @@ export class RoutesComponent implements OnInit{
     this.service.delete(this.m_stop.stop_id, this.r_id);
     this.getStopsFromRoute(this.r_id);
     this.m_stop = new Stops(null, null, '', '', null, null, '');
-    alert("Stop deleted");
   }
 
   confirmDelete(){
     var c = confirm("Are you sure you want to delete stop: " + this.m_stop.name);
     if (c == true) {
         this.deleteStop();
+        this.addAlert('Stop Deleted');
     }
   }
 

@@ -3,7 +3,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { AlertService } from '../../services/app.alertService';
 
 @Component({
-    selector: 'alert',
+    selector: 'alert-temp',
     templateUrl: './app/directives/alert/alert.html'
 })
 
