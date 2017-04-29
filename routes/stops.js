@@ -41,6 +41,7 @@ router.put('/updateStop', function (req, res, next) {
         }
     });
 });
+
 router.post('/createStop', function(req, res, next) {
     var stop_name = req.body.stop_name;
     var stop_description = req.body.stop_description;
@@ -70,7 +71,11 @@ router.delete('/deleteStop', function (req, res, next) {
     var r_id = req.query.r_id;
     db.query(deleteStop,[req.query.stop_id] ,function(err, result) {
         if (err){ 
-            console.error(err); res.send("Error " + err); }
+            console.error(err); res.send("Error " + err); 
+        }
+        else {
+            res.send(result);
+        }
     });
 });
 

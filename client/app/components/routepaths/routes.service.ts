@@ -46,7 +46,7 @@ export class RoutesService {
     return this.http
     .delete(this._stopsURL + '/deleteStop' + "/?stop_id=" + stop_id + "&r_id=" + r_id, { headers:this.headers })
     .map((res: Response) => res.json())
-    .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
+    // .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
   }
 
   create(stop: any, route_id:number){

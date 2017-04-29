@@ -12,7 +12,6 @@ import { AuthGuard }            from './guards/app.authGuard';
 import { LoginComponent }       from './components/login/app.loginComponent';
 import { AppComponent }         from './app.component';
 import { headerComponent }      from './components/header/app.headerComponent';
-import { AlertComponent }       from './directives/alert/app.alertComponent';
 import { contentAreaComponent } from './components/contentArea/app.contentAreaComponent';
 import { footerComponent }      from './components/footer/app.footerComponent';
 import { busdriverComponent }   from './components/busdriver/app.busdriverComponent';
@@ -49,7 +48,6 @@ import { routing }              from './app.routing';
                   busdriverComponent,
                   messagesComponent,
                   RoutesComponent,
-                  AlertComponent,
                   LoginComponent,
                   RegisterComponent
                   ],

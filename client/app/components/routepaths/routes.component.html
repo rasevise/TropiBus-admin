@@ -1,4 +1,7 @@
-
+<!--alerts-->
+<div *ngFor="let alert of alerts">
+  <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout">{{ alert.msg }}</alert>
+</div>
 <!--Map-->
 <div #map id="map"></div>
 <!--Route Select DropDown-->
@@ -26,9 +29,6 @@
   {{route.route_name}}</a>
 </div>
 </div>
-<div *ngFor="let alert of alerts">
-  <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout">{{ alert.msg }}</alert>
-</div>
 
 <!-- Path Edit Modal -->
 <div class="modal fade bd-example-modal-lg" id="pathModal" tabindex="-1" role="dialog" aria-labelledby="pathModalLabel" aria-hidden="true">
@@ -43,6 +43,10 @@
       <div class="modal-body" *ngIf="m_title">
         <!--body-->
         <div class="container-fluid">
+          <!--alerts-->
+          <div *ngFor="let alert of alerts">
+            <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout">{{ alert.msg }}</alert>
+          </div>
           <div class="row" name="First row of Modal Window">
             <div class="col-md-4">
               <div class="row">
@@ -212,9 +216,9 @@
           <div class="row">
             <div class="col-md-12">
               <div class="list-group" id="stopInfo">
-                <a type="button" class="list-group-item list-group-item-action active">
+                <button type="button" class="list-group-item list-group-item-action active">
                 <h5>Stop List</h5>
-                </a> 
+                </button> 
                 <accordion>
                   <accordion-group *ngFor="let stop of locationMarkers; let i = index" 
                   [closeOthers]="oneAtATime"
@@ -327,4 +331,22 @@
       </div>
     </div>
   </div>
+</div>
+
+<!--Confirm Delete-->
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Confirm Delete</h4>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete <strong>{{m_stop?.name}}</strong>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button class="btn btn-danger btn-ok" (click)="deleteStop()">Delete</button>
+            </div>
+        </div>
+    </div>
 </div>

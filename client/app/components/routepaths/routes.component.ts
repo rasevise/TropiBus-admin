@@ -31,7 +31,8 @@ export class RoutesComponent implements OnInit{
   busMarkers:any;
   polylinePaths:any;
   tempRoute:any;
-  public alerts: any = [];
+  alerts: any = [];
+
 
   //Modal window Values
   m_title: any = '';
@@ -150,9 +151,17 @@ export class RoutesComponent implements OnInit{
     })
   }
 
-  addAlert(message:string): void {
+  successAlert(message:string): void {
     this.alerts.push({
       type: 'success',
+      msg: message,
+      timeout: 3000
+    });
+  }
+
+  errorAlert(message:string): void {
+    this.alerts.push({
+      type: 'warning',
       msg: message,
       timeout: 3000
     });
@@ -162,20 +171,21 @@ export class RoutesComponent implements OnInit{
     this.service.update(this.m_stop)
     .subscribe(() => {
     this.getStopsFromRoute(this.r_id)});
+    this.successAlert('Stop Updated');
   }
 
   deleteStop(){
-    this.service.delete(this.m_stop.stop_id, this.r_id);
-    this.getStopsFromRoute(this.r_id);
-    this.m_stop = new Stops(null, null, '', '', null, null, '');
+    $('#confirm-delete').modal('hide');
+    this.service.delete(this.m_stop.stop_id, this.r_id)
+    .subscribe(() => {
+      this.getStopsFromRoute(this.r_id);
+      this.m_stop = new Stops(null, null, '', '', null, null, '');
+      this.errorAlert('Stop Deleted');
+    });
   }
 
   confirmDelete(){
-    var c = confirm("Are you sure you want to delete stop: " + this.m_stop.name);
-    if (c == true) {
-        this.deleteStop();
-        this.addAlert('Stop Deleted');
-    }
+    $('#confirm-delete').modal('show');
   }
 
   addStop(){
@@ -183,7 +193,7 @@ export class RoutesComponent implements OnInit{
     .subscribe(() => {
       this.getStopsFromRoute(this.r_id)});
       this.m_stop = new Stops(null, null, '', '', null, null, '');
-      alert("Stop successfully added");
+      this.successAlert("Stop successfully added");
   }
 
   updateRoute(){
@@ -193,7 +203,7 @@ export class RoutesComponent implements OnInit{
       this.getRoutes();
       this.setButtonText('routeDisplay', 'Select Route');
       this.m_title = '';
-      alert("Stop successfully updated");
+      this.successAlert("Route successfully updated");
     });
   }
 
