@@ -8,7 +8,11 @@ const db = require('../server.js');
 router.get('/', function(req, res, next){
     console.log("getting buses from server: " );
     res.contentType('application/json');
+<<<<<<< HEAD
     db.query('SELECT * FROM Bus NATURAL LEFT JOIN Driver', sendData);
+=======
+    db.query('SELECT * FROM Bus NATURAL JOIN Driver ORDER BY bus_status', sendData);
+>>>>>>> d1ec6436a4d69b4542f2215562f96190e83d70cb
 
   function sendData(err, results) {
     console.log("getting buses from server: ");

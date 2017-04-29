@@ -7,7 +7,7 @@ const db = require('../server.js');
 router.get('/', function(req, res, next){
     console.log("getting messages from server: " );
     res.contentType('application/json');
-    db.query('SELECT * FROM Driver', sendData);
+    db.query('SELECT * FROM Driver ORDER BY driver_status', sendData);
     
       function sendData(err, results) {
     console.log("getting drivers from server: ");

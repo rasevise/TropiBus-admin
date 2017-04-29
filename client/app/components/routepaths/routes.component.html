@@ -1,7 +1,9 @@
-
+<!--alerts-->
+<div *ngFor="let alert of alerts">
+  <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout">{{ alert.msg }}</alert>
+</div>
 <!--Map-->
 <div #map id="map"></div>
-
 <!--Route Select DropDown-->
 <div class="btn-group" id="routeSelect">
 <button class="btn btn-primary btn-lg" type="button" data-toggle="" aria-haspopup="true" aria-expanded="false" id="routeDisplay" (click)="openPathModal()" href="javascript:void(0)">
@@ -41,16 +43,29 @@
       <div class="modal-body" *ngIf="m_title">
         <!--body-->
         <div class="container-fluid">
-          <div class="row" name="First row of Modal Window">
-            <div class="col-md-4">
+          <!--alerts-->
+          <div *ngFor="let alert of alerts">
+            <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout">{{ alert.msg }}</alert>
+          </div>
               <div class="row">
-                <div class="card-block">
+                <div class="card-block col-md-4">
                   <h5 class="card-title">Route</h5>
                   <p class="card-text">{{m_route.route_name}}</p>
                 </div>
+                <div class="card-block col-md-4">
+                  <h5 class="card-title">Area</h5>
+                  <p class="card-text">{{m_route.route_area}}</p>
+                </div>
+                <div class="card-block col-md-4">
+                  <h5 class="card-title">Status</h5>
+                  <p class="card-text">{{m_route.route_status}}</p>
+                </div>
               </div>
-              <div class="row form-group">
-                <div class="card-block">
+              <div id="StopEditFields"
+              [collapse]="isCollapsed"
+              class="card card-outline-secondary">
+              <div class="row">
+                <div class="card-block form-group col-md-4">
                   <h5 class="card-title">Stop Name</h5>
                   <input class="form-control" 
                   required 
@@ -61,54 +76,19 @@
                   [(ngModel)]="m_stop.name"
                   [formControl]="mname"> 
                      <div *ngIf="mname.errors && (mname.dirty || mname.touched)"
-                        class="alert alert-danger">
+                        class="alert alert-danger validAlert">
                       <div [hidden]="!mname.errors.required">
-                        Name is required
+                        <small>Name is required</small>
                       </div>
                       <div [hidden]="!mname.errors.minlength">
-                        Name must be at least 4 characters long.
+                        <small>Name must be at least 4 characters long.</small>
                       </div>
                       <div [hidden]="!mname.errors.maxlength">
-                        Name cannot be more than 15 characters long.
+                        <small>Name cannot be more than 15 characters long.</small>
                       </div>
                     </div>
                 </div>
-              </div>
-              <div class="row form-group">
-                <div class="card-block">
-                  <h5 class="card-title">Latitude</h5>
-                  <input class="form-control" 
-                  required 
-                  minlength="4" 
-                  maxlength="100"
-                  type="number" 
-                  id="stopLatInput" 
-                  [(ngModel)] ="m_stop.latitude"
-                  [formControl]="mlatitude">
-                    <div *ngIf="mlatitude.errors && (mlatitude.dirty || mlatitude.touched)"
-                        class="alert alert-danger">
-                    <div [hidden]="!mlatitude.errors.required">
-                      Latitude is required
-                    </div>
-                    <div [hidden]="!mlatitude.errors.minlength">
-                      Latitude must be at least 4 digits long.
-                    </div>
-                    <div [hidden]="!mlatitude.errors.maxlength">
-                      Latitude cannot be more than 100 digits long.
-                    </div>
-                    </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="row">
-                <div class="card-block">
-                  <h5 class="card-title">Area</h5>
-                  <p class="card-text">{{m_route.route_area}}</p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="card-block form-group">
+                <div class="card-block form-group col-md-4">
                   <h5 class="card-title">Stop Description</h5>
                   <input type="text"  
                   class="form-control"
@@ -120,20 +100,75 @@
                   [(ngModel)] ="m_stop.description"
                   [formControl]="mdescription">
                     <div *ngIf="mdescription.errors && (mdescription.dirty || mdescription.touched)"
-                        class="alert alert-danger">
+                        class="alert alert-danger validAlert">
                     <div [hidden]="!mdescription.errors.required">
-                      Description is required
+                      <small>Description is required</small>
                     </div>
                     <div [hidden]="!mdescription.errors.minlength">
-                      Description must be at least 4 characters long.
+                      <small>Description must be at least 4 characters long.</small>
                     </div>
                     <div [hidden]="!mdescription.errors.maxlength">
-                      Description cannot be more than 100 characters long.
+                      <small>Description cannot be more than 100 characters long.</small>
                     </div>
                     </div>
                 </div>
+                <div class="card-block col-md-4">
+                  <!--<h5 class="card-title"></h5>
+                  <p class="card-text"></p>
+                  <div id="editdeletestopbuttons" class= "btn-group-vertical">
+                  <button 
+                  (click)="addStop()"
+                  href="javascript:void(0)" 
+                  class="btn btn-success btn-md" 
+                  role="button" 
+                  aria-pressed="true"
+                  [disabled]="!(mname.valid && mdescription.valid && mlatitude.valid && mlongitude.valid)">
+                  Add New Stop</button>
+                  <button 
+                  (click)="editStop()"
+                  href="javascript:void(0)" 
+                  class="btn btn-primary btn-md" 
+                  role="button" 
+                  aria-pressed="true"
+                  [disabled]="!(mname.valid && mdescription.valid && mlatitude.valid && mlongitude.valid)">
+                  Confirm Edit</button>
+                  <button 
+                  (click)="isCollapsed = true;"
+                  href="javascript:void(0)" 
+                  class="btn btn-secondary btn-md" 
+                  role="button" 
+                  aria-pressed="true">
+                  Cancel
+                  </button>
+                  </div>-->
                 </div>
-                <div class="row card-block form-group">
+              </div>
+
+              <div class="row">
+                <div class="card-block form-group col-md-4">
+                  <h5 class="card-title">Latitude</h5>
+                  <input class="form-control" 
+                  required 
+                  minlength="4" 
+                  maxlength="100"
+                  type="number" 
+                  id="stopLatInput" 
+                  [(ngModel)] ="m_stop.latitude"
+                  [formControl]="mlatitude">
+                    <div *ngIf="mlatitude.errors && (mlatitude.dirty || mlatitude.touched)"
+                        class="alert alert-danger validAlert">
+                    <div [hidden]="!mlatitude.errors.required">
+                      <small>Latitude is required</small>
+                    </div>
+                    <div [hidden]="!mlatitude.errors.minlength">
+                      <small>Latitude must be at least 4 digits long.</small>
+                    </div>
+                    <div [hidden]="!mlatitude.errors.maxlength">
+                      <small>Latitude cannot be more than 100 digits long.</small>
+                    </div>
+                    </div>
+                </div>
+                <div class="card-block form-group col-md-4">
                   <h5 class="card-title">Longitude</h5>
                   <input class="form-control" 
                   required 
@@ -144,40 +179,26 @@
                   [(ngModel)]="m_stop.longitude"
                   [formControl]="mlongitude">
                     <div *ngIf="mlongitude.errors && (mlongitude.dirty || mlongitude.touched)"
-                        class="alert alert-danger">
+                        class="alert alert-danger validAlert">
                     <div [hidden]="!mlongitude.errors.required">
-                      Longitude is required
+                      <small>Longitude is required</small>
                     </div>
                     <div [hidden]="!mlongitude.errors.minlength">
-                      Longitude must be at least 4 digits long.
+                      <small>Longitude must be at least 4 digits long.</small>
                     </div>
                     <div [hidden]="!mlongitude.errors.maxlength">
-                      Longitude cannot be more than 100 digits long.
+                      <small>Longitude cannot be more than 100 digits long.</small>
                     </div>
                     </div>
                 </div>
-              </div>
-             <div class="col-md-4">
-              <div class="row">
-                <div class="card-block">
-                  <h5 class="card-title">Status</h5>
-                  <p class="card-text">{{m_route.route_status}}</p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="card-block">
-                  <h5 class="card-title"></h5>
-                  <p class="card-text"></p></div>
-              </div>
-              <div class="row">
-                <div class="card-block">
+                <div class="card-block col-md-4">
                   <h5 class="card-title"></h5>
                   <p class="card-text"></p>
                   <div id="editdeletestopbuttons" class= "btn-group-vertical">
                   <button 
                   (click)="addStop()"
                   href="javascript:void(0)" 
-                  class="btn btn-success btn-md active" 
+                  class="btn btn-success btn-md" 
                   role="button" 
                   aria-pressed="true"
                   [disabled]="!(mname.valid && mdescription.valid && mlatitude.valid && mlongitude.valid)">
@@ -185,20 +206,27 @@
                   <button 
                   (click)="editStop()"
                   href="javascript:void(0)" 
-                  class="btn btn-primary btn-md active" 
+                  class="btn btn-primary btn-md" 
                   role="button" 
                   aria-pressed="true"
                   [disabled]="!(mname.valid && mdescription.valid && mlatitude.valid && mlongitude.valid)">
                   Confirm Edit</button>
+                  <button 
+                  (click)="isCollapsed = true; setEmptyStop();"
+                  href="javascript:void(0)" 
+                  class="btn btn-secondary btn-md" 
+                  role="button" 
+                  aria-pressed="true">
+                  Cancel
+                  </button>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
+              </div>
           <!--Description-->
           <div class="row">
             <div class="col-md-12">
-              <div class="card w-100">
+              <div class="card w-100 card-outline-info">
                 <div class="card-block">
                   <h5 class="card-title">Description</h5>
                   <p class="card-text">{{m_route.route_description}}</p>
@@ -209,13 +237,32 @@
           <!--Route List-->
           <div class="row">
             <div class="col-md-12">
-              <div class="list-group" id="stopInfo">
-                <a type="button" class="list-group-item list-group-item-action active">
+              <div class="row" id="stopInfo">
+                <button type="button" class="list-group-item list-group-item-action active col-md-12">
                 <h5>Stop List</h5>
-                </a> 
-                <accordion>
+                </button>
+              </div>
+              <div class="row">
+                <button 
+                (click)="isCollapsed = false; setEmptyStop();"
+                href="javascript:void(0)" 
+                class="btn btn-success btn-sm col-md-6" 
+                role="button" 
+                aria-pressed="true">
+                  Add Stop
+                </button> 
+                <button 
+                (click)="updateOrderShow();"
+                href="javascript:void(0)" 
+                class="btn btn-warning col-md-6" 
+                role="button" 
+                aria-pressed="true">
+                  Update Order
+                </button> 
+              </div>
+              <div class="row">
+                <accordion class="col-md-12">
                   <accordion-group *ngFor="let stop of locationMarkers; let i = index" 
-                  [closeOthers]="oneAtATime"
                   [heading]="stop.name">
                     <div class="list-group">
                       <a class="list-group-item list-group-item-action">Description: {{stop.description}}</a>
@@ -229,7 +276,7 @@
                     class="btn btn-primary btn-md active" 
                     role="button" 
                     aria-pressed="true"
-                    (click)="scrollModalTop('pathModal'); selectStop(stop);">
+                    (click)="scrollModalTop('pathModal'); selectStop(stop); isCollapsed = false;">
                     Edit</button>
                     <button 
                     id="deleteButtonStop"
@@ -267,7 +314,7 @@
       <div class="modal-body" *ngIf="m_title">
         <div class="row form-group">
           <div class="card-block row">
-            <h5 class="card-title">Stop Name</h5>
+            <h5 class="card-title">Route Name</h5>
             <input class="form-control" 
             required 
             minlength="4" 
@@ -282,19 +329,19 @@
                 Latitude is required
               </div>
               <div [hidden]="!mroutename.errors.minlength">
-                Latitude must be at least 4 digits long.
+                Name must be at least 4 characters long.
               </div>
               <div [hidden]="!mroutename.errors.maxlength">
-                Latitude cannot be more than 100 digits long.
+                Name cannot be more than 15 characters long.
               </div>
               </div>
           </div>
           <div class="card-block row">
-            <h5 class="card-title">Stop Description</h5>
+            <h5 class="card-title">Route Description</h5>
             <textarea class="form-control" 
             required 
             minlength="4" 
-            maxlength="25"
+            maxlength="50"
             type="text" 
             id="routeDescriptionInput" 
             [(ngModel)]="m_route.route_description"
@@ -302,13 +349,13 @@
               <div *ngIf="mroutedesc.errors && (mroutedesc.dirty || mroutedesc.touched)"
                   class="alert alert-danger">
               <div [hidden]="!mroutedesc.errors.required">
-                Latitude is required
+                Description is required
               </div>
               <div [hidden]="!mroutedesc.errors.minlength">
-                Latitude must be at least 4 digits long.
+                Description must be at least 4 characters long.
               </div>
               <div [hidden]="!mroutedesc.errors.maxlength">
-                Latitude cannot be more than 100 digits long.
+                Description cannot be more than 50 characters long.
               </div>
               </div>
           </div>
@@ -318,6 +365,7 @@
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button 
         type="button" 
+        href="javascript:void(0)" 
         class="btn btn-primary" 
         (click)="updateRoute()"
         [disabled]="!(mroutename.valid && mroutedesc.valid)">
@@ -325,4 +373,50 @@
       </div>
     </div>
   </div>
+</div>
+
+<!--Confirm Delete-->
+<div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Confirm Delete</h4>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete <strong>{{m_stop?.name}}</strong>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" (click)="focusModal()" href="javascript:void(0)">Cancel</button>
+                <button class="btn btn-danger btn-ok" (click)="deleteStop()" href="javascript:void(0)">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Update Stops Order-->
+<div class="modal fade" id="update-stop-order" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Update Stops Order</h4>
+            </div>
+            <div class="modal-body">
+              <div class="">
+              <bs-sortable
+                [(ngModel)]="locationMarkers"
+                fieldName="name"
+                itemClass="sortable-item card card-block text-nowrap"
+                itemActiveClass="sortable-item-active"
+                placeholderItem="Drag here"
+                placeholderClass="sortable-item"
+                wrapperClass="sortable-wrapper">
+                </bs-sortable>
+              </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" (click)="focusModal()" href="javascript:void(0)">Cancel</button>
+                <button class="btn btn-warning btn-ok active" (click)="updateStopOrder(); closeModal('update-stop-order'); focusModal()" href="javascript:void(0)">Update Order</button>
+            </div>
+        </div>
+    </div>
 </div>
