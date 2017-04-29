@@ -168,6 +168,10 @@ export class RoutesComponent implements OnInit{
     });
   }
 
+  closeModal(modal_name:string){
+    $('#' + modal_name).modal('hide');
+  }
+
   successAlert(message:string): void {
     this.alerts.push({
       type: 'success',
@@ -182,6 +186,23 @@ export class RoutesComponent implements OnInit{
       msg: message,
       timeout: 3000
     });
+  }
+
+  updateOrderShow(){
+      $('#update-stop-order').modal('show');
+  }
+
+  updateStopOrder(){
+    var newOrder = [];
+    for (var i = 0; i < this.locationMarkers.length; i++) { 
+      newOrder.push({id: this.locationMarkers[i].stop_id, order: i});
+      if(newOrder.length == this.locationMarkers.length){
+        this.service.updateOrder(newOrder)
+        .subscribe(() => {
+        this.getStopsFromRoute(this.r_id)});
+        this.successAlert('Stop Order Successfully Updated');
+      }
+    }
   }
 
   editStop(){

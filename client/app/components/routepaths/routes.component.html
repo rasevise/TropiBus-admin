@@ -237,19 +237,31 @@
           <!--Route List-->
           <div class="row">
             <div class="col-md-12">
-              <div class="list-group" id="stopInfo">
-                <button type="button" class="list-group-item list-group-item-action active">
+              <div class="row" id="stopInfo">
+                <button type="button" class="list-group-item list-group-item-action active col-md-12">
                 <h5>Stop List</h5>
-                </button> 
+                </button>
+              </div>
+              <div class="row">
                 <button 
                 (click)="isCollapsed = false; setEmptyStop();"
                 href="javascript:void(0)" 
-                class="btn btn-success btn-sm" 
+                class="btn btn-success btn-sm col-md-6" 
                 role="button" 
                 aria-pressed="true">
                   Add Stop
-                </button>
-                <accordion>
+                </button> 
+                <button 
+                (click)="updateOrderShow();"
+                href="javascript:void(0)" 
+                class="btn btn-warning col-md-6" 
+                role="button" 
+                aria-pressed="true">
+                  Update Order
+                </button> 
+              </div>
+              <div class="row">
+                <accordion class="col-md-12">
                   <accordion-group *ngFor="let stop of locationMarkers; let i = index" 
                   [heading]="stop.name">
                     <div class="list-group">
@@ -375,6 +387,34 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal" (click)="focusModal()">Cancel</button>
                 <button class="btn btn-danger btn-ok" (click)="deleteStop()">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Update Stops Order-->
+<div class="modal fade" id="update-stop-order" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Update Stops Order</h4>
+            </div>
+            <div class="modal-body">
+              <div class="">
+              <bs-sortable
+                [(ngModel)]="locationMarkers"
+                fieldName="name"
+                itemClass="sortable-item card card-block text-nowrap"
+                itemActiveClass="sortable-item-active"
+                placeholderItem="Drag here"
+                placeholderClass="sortable-item"
+                wrapperClass="sortable-wrapper">
+                </bs-sortable>
+              </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" (click)="focusModal()">Cancel</button>
+                <button class="btn btn-warning btn-ok" (click)="updateStopOrder(); closeModal('update-stop-order'); focusModal()">Update Order</button>
             </div>
         </div>
     </div>

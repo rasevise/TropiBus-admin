@@ -7,6 +7,7 @@ var createStop = 'INSERT INTO Stop(stop_name,stop_description,stop_latitude,stop
 var asignStopToRoute = 'INSERT INTO route_stop(route_id, stop_id) VALUES($1,$2)'
 var deleteStop = 'DELETE FROM Stop WHERE stop_id=$1'
 var updateStop = 'UPDATE stop SET stop_name=$1, stop_description=$2 WHERE stop_id=$3'
+var updateStopOrder = 'UPDATE stop SET stop_order=$1 WHERE stop_id=$2'
 
 stops = [];
 
@@ -40,6 +41,19 @@ router.put('/updateStop', function (req, res, next) {
             res.json(result.rows);
         }
     });
+});
+
+router.put('/updateStopOrder', function (req, res, next) {
+    var stops = req.body;
+    console.log(stops);
+    for (i = 0; i < stops.length; i++) {
+        db.query('UPDATE stop SET stop_order=$1 WHERE stop_id=$2',[i, stops[i].id] ,function(err, result) {
+            if (err){ 
+                console.error(err); res.send("Error" + err); 
+            }
+        });
+    }
+    
 });
 
 router.post('/createStop', function(req, res, next) {
