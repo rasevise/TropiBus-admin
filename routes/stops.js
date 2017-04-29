@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const db = require('../server.js');
 
-var getStopsFromRoute = 'SELECT * FROM route_stop NATURAL JOIN stop NATURAL JOIN route WHERE route_id=$1'
+var getStopsFromRoute = 'SELECT * FROM route_stop NATURAL JOIN stop NATURAL JOIN route WHERE route_id=$1 ORDER BY stop_order'
 var createStop = 'INSERT INTO Stop(stop_name,stop_description,stop_latitude,stop_longitude) VALUES($1,$2,$3,$4) RETURNING stop_id'
 var asignStopToRoute = 'INSERT INTO route_stop(route_id, stop_id) VALUES($1,$2)'
 var deleteStop = 'DELETE FROM Stop WHERE stop_id=$1'
