@@ -7,15 +7,20 @@ import { Stops } from './stops';
 import { RoutesService } from './routes.service';
 import { Http } from '@angular/http';
 import { ModalDirective } from 'ng2-bootstrap/modal';
+import { AccordionConfig } from 'ng2-bootstrap';
 
 declare var $:JQueryStatic;
 declare var google:any;
 
+//Accordion configuration
+export function getAccordionConfig(): AccordionConfig {
+  return Object.assign(new AccordionConfig(), {closeOthers: true});
+}
+
 @Component({
     selector: 'routes',
     templateUrl: './app/components/routepaths/routes.component.html',
-    providers: [ RoutesService ],
-
+    providers: [ RoutesService, {provide: AccordionConfig, useFactory: getAccordionConfig} ],
 })
 
 export class RoutesComponent implements OnInit{
@@ -46,6 +51,9 @@ export class RoutesComponent implements OnInit{
   @Input() m_stop: Stops;
   @Input() m_route: Routes;
 
+  isCollapsed:boolean = true;
+  timeout:number = 3000;
+
   mname: FormControl;
   mdescription: FormControl;
   mlatitude: FormControl;
@@ -70,7 +78,6 @@ export class RoutesComponent implements OnInit{
     this.mlatitude = new FormControl('', [Validators.required]);
     this.mroutename = new FormControl('', [Validators.required]);
     this.mroutedesc = new FormControl('', [Validators.required]);
-    setInterval(() => { this.getBusLocation(); }, 5000);
   }
 
   loadMap(){
@@ -102,7 +109,6 @@ export class RoutesComponent implements OnInit{
     else{
       this.m_route = new Routes(null, '', '', '', '', '', []);
     }
-    // this.m_route = route;
     this.m_title = title;
   }
 
@@ -115,10 +121,14 @@ export class RoutesComponent implements OnInit{
   }
 
   setRoute(r_id:any){
-    this.m_stop = new Stops(null, null, '', '', null, null, '');
+    this.setEmptyStop();
     this.r_id = r_id;
     this.getRoute(r_id);
     this.getStopsFromRoute(r_id);
+  }
+
+  setEmptyStop(){
+    this.m_stop = new Stops(null, null, '', '', null, null, '');
   }
 
   selectStop(stop:any){
@@ -151,6 +161,13 @@ export class RoutesComponent implements OnInit{
     })
   }
 
+  //scroll fix for nested modals
+  focusModal(){
+    $(document).on('hidden.bs.modal', '.modal', function () {
+      $('.modal:visible').length && $(document.body).addClass('modal-open');
+    });
+  }
+
   successAlert(message:string): void {
     this.alerts.push({
       type: 'success',
@@ -172,6 +189,8 @@ export class RoutesComponent implements OnInit{
     .subscribe(() => {
     this.getStopsFromRoute(this.r_id)});
     this.successAlert('Stop Updated');
+    this.setEmptyStop();
+    this.isCollapsed = true;
   }
 
   deleteStop(){
@@ -179,7 +198,7 @@ export class RoutesComponent implements OnInit{
     this.service.delete(this.m_stop.stop_id, this.r_id)
     .subscribe(() => {
       this.getStopsFromRoute(this.r_id);
-      this.m_stop = new Stops(null, null, '', '', null, null, '');
+      this.setEmptyStop();
       this.errorAlert('Stop Deleted');
     });
   }
@@ -192,8 +211,9 @@ export class RoutesComponent implements OnInit{
     this.service.create(this.m_stop, this.r_id)
     .subscribe(() => {
       this.getStopsFromRoute(this.r_id)});
-      this.m_stop = new Stops(null, null, '', '', null, null, '');
+      this.setEmptyStop();
       this.successAlert("Stop successfully added");
+      this.isCollapsed = true;
   }
 
   updateRoute(){
