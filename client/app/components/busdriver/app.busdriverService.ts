@@ -39,9 +39,10 @@ export class BusDriverService {
       
       // .catch(this.handleError);
   }
-    updateBus(bus: any, id: number) {
+    updateBus(bus: any, id: number, buses:any) {
+      console.log("buses"+ buses.driver_id)
     return this.http
-      .put('/buses/updateBus', JSON.stringify({name: bus.name, id: id, routeid: bus.route, driverid: bus.driver, status: bus.status}), { headers:this.headers })
+      .put('/buses/updateBus', JSON.stringify({name: bus.name, id: id, routeid: bus.route, driverid: bus.driver, status: bus.status, olddriverid: buses.driver_id}), { headers:this.headers })
       .map((res: Response) => res.json().data)      
       // .catch(this.handleError);
     }

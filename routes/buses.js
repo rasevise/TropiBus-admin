@@ -8,11 +8,9 @@ const db = require('../server.js');
 router.get('/', function(req, res, next){
     console.log("getting buses from server: " );
     res.contentType('application/json');
-<<<<<<< HEAD
-    db.query('SELECT * FROM Bus NATURAL LEFT JOIN Driver', sendData);
-=======
-    db.query('SELECT * FROM Bus NATURAL JOIN Driver ORDER BY bus_status', sendData);
->>>>>>> d1ec6436a4d69b4542f2215562f96190e83d70cb
+
+    db.query('SELECT * FROM Bus NATURAL LEFT JOIN Driver ORDER BY bus_status', sendData);
+
 
   function sendData(err, results) {
     console.log("getting buses from server: ");
@@ -83,7 +81,15 @@ router.put('/updateBus', function(req, res, next) {
 
     console.log("edit id:" + req.body.id);
     //compare with .compareSync(req.body.data.attributes.password, storedPW)
+    
+
     db.query('UPDATE Bus SET bus_name=$2, bus_status=$3, route_id=$4 WHERE bus_id=$1 RETURNING bus_id', [ req.body.id,req.body.name, req.body.status, req.body.routeid], function(err, result) {
+
+       if (err) {
+        return console.error('error running query', err);
+      }
+      else{
+        db.query('UPDATE driver SET bus_id=$1 WHERE driver_id=$2',[null, req.body.olddriverid], function(err, result1) {
       if (err) {
         return console.error('error running query', err);
       }
@@ -94,7 +100,9 @@ router.put('/updateBus', function(req, res, next) {
       res.send(result);
     }
         });
-        }
+      }
+          });
+      }
     });
   });
 

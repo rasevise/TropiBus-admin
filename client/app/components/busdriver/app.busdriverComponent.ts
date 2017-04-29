@@ -88,7 +88,7 @@ export class busdriverComponent{
   }
 
   editB(): void {
-    this.service.updateBus(this.bus, this.buses[this.myValue].bus_id).subscribe(() => { 
+    this.service.updateBus(this.bus, this.buses[this.myValue].bus_id, this.buses[this.myValue]).subscribe(() => { 
         this.getBuses();
      });
     
