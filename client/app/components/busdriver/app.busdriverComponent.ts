@@ -53,16 +53,18 @@ export class busdriverComponent{
 
   resetTempB(){
     this.bus.name = "";
-    this.bus.driver= null;
+    // this.bus.driver= null;
     this.bus.route = null;
     this.bus.status = null;
 
   }
   setTempB(){
+    this.resetTempB();
     this.bus.name = this.buses[this.myValue].bus_name;
-    this.bus.status = this.buses[this.myValue].bus_status;
+    this.bus.status = this.buses[this.myValue].bus_status;  
+    this.bus.driver = this.buses[this.myValue].driver_id;
     this.bus.route = this.buses[this.myValue].route_id;
-
+    // this.bus.driver = null;
   }
 
   //  Buses Crud
@@ -173,9 +175,13 @@ checkUsername(){
 
 checkUsernameEdit(){
    for(var i:number = 0; i < this.drivers.length; i++){
-      if(this.driver.username == this.drivers[i].driver_username){
+      if(this.myValue == i){
+
+      }
+      else if(this.driver.username == this.drivers[i].driver_username){
         return false;
       }
+
     }
        return true; 
   }
@@ -191,6 +197,7 @@ checkUsernameEdit(){
 
 setValue(val:number) {
         this.myValue = val;
+        
 }
 
 
@@ -199,14 +206,14 @@ getValue(){
 }
 
 confirmDeleteDriver(){
-    var c = confirm("Are you sure you want to delete driver: " + this.driver.name);
+    var c = confirm("Are you sure you want to delete driver: ");
     if (c == true) {
         this.deleteD();
     }
   }
 
 confirmDeleteBus(){
-    var c = confirm("Are you sure you want to delete bus: " + this.bus.name);
+    var c = confirm("Are you sure you want to delete bus: ");
     if (c == true) {
         this.deleteB();
     }
@@ -225,7 +232,9 @@ closeAddDriver(modalId: String){
       }
    }
 closeEditDriver(modalId: String){
+  console.log("Hello")
         if(this.checkUsernameEdit()){
+          console.log("Hello2")
           this.userNameValid = true;
           this.editD();
           $('#'+ modalId).modal('hide');
