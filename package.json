@@ -5,6 +5,9 @@
     "repository": {
         "url": "https://github.com/rasevise/TropiBus-admin"
     },
+    "engines": {
+        "node": "^6.10.3"
+    },
     "scripts": {
         "build.dev": "gulp build.dev --color --env-config dev",
         "build.dev.watch": "gulp build.dev.watch --color",
