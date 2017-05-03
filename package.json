@@ -200,6 +200,7 @@
         "core-js": "*",
         "cors": "^2.8.3",
         "express": "^4.15.2",
+        "gulp": "*",
         "gulp-filter": "^5.0.0",
         "gulp-progeny": "^0.4.0",
         "gulp-protractor": "^4.1.0",
