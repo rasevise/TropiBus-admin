@@ -222,7 +222,6 @@
         "gulp-minify-html": "^0.1.8",
         "gulp-rev": "^2.0.1",
         "gulp-usemin": "^0.3.8",
-        "assemble": "git://github.com/assemble/assemble#v0.6.0",
         "lodash": "^2.4.1",
         "marked": "^0.3.2",
         "angular-in-memory-web-api": "^0.3.2",
