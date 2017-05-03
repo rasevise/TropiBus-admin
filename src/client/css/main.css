@@ -1,0 +1,129 @@
+h1 {
+    color: #369;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 250%;
+}
+
+header {
+    display: block;
+    width: 100%;
+}
+
+#map {
+    position: absolute;
+}
+
+#routeSelect {
+    position: relative;
+    float: right;
+}
+
+#addBusButton {
+    float: right;
+    /*background: #0275d8;*/
+}
+
+#addDriversButton {
+    float: right;
+    /*background: #0275d8;*/
+}
+
+#addMessageButton {
+    float: right;
+    /*background: #0275d8;*/
+}
+
+#messageDeleteButton {
+    float: right;
+    /*background: #0275d8;*/
+}
+
+#editMessageButton {
+    float: right;
+    /*background: #0275d8;*/
+}
+
+#editDriverButton {
+    border-right-width: 10px;
+    border-left-width: 10px;
+    float: right;
+}
+
+#editBusButton {
+    border-right-width: 10px;
+    border-left-width: 10px;
+    float: right;
+}
+
+#deleteBusButton {
+    float: right;
+}
+
+#deleteDriverButton {
+    float: right;
+}
+
+#busAndDriverButton {
+    margin: 3% auto;
+    height: 40px;
+}
+
+#mainBusDriver {
+    height: 500px;
+}
+
+#mainRoutePaths {
+    height: 500px;
+}
+
+#mainMessages {
+    height: 500px;
+}
+
+#busdriverList {
+    height: 100%;
+    overflow-y: scroll;
+}
+
+#messageDate {
+    padding-left: 10cm;
+}
+
+th {
+    font: 10px;
+}
+
+.ng-valid[required],
+.ng-valid.required {
+    border-left: 5px solid #42A948;
+    /* green */
+}
+
+.ng-invalid:not(form) {
+    border-left: 5px solid #a94442;
+    /* red */
+}
+
+@media only screen and (max-width: 1345px) {
+    #container {
+        width: auto;
+        margin: 0 3%;
+    }
+}
+
+.headColor {
+    color: white;
+    background-color: #369;
+}
+
+#editdeletestopbuttons {
+    float: right;
+}
+
+#messageList {
+    overflow-y: scroll;
+}
+
+#editDeleteStopButtons {
+    float: right;
+}

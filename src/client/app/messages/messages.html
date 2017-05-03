@@ -1,0 +1,162 @@
+<div class="container-fluid">
+    <div class="row" id="mainMessages">
+        <div class="col-md-12">
+            <br>
+            <div class="row">
+                <div class="col-md-12">
+                    <button id="addMessageButton" type="button" class="btn btn-primary" data-toggle="modal" (click)="resetTemp()" data-target="#AddMessageModal">Add Message</button>
+
+                </div>
+            </div>
+            <br>
+            <div>
+                <div *ngFor="let message of messages; let i = index">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div>
+                                <h4>
+                                    {{message.message_title}} {{message.message_date| date}}
+                                    <button id="editMessageButton" type="button" class="btn btn-primary" (click)="setValue(i); setTemp()" data-toggle="modal" data-target="#EditMessageModal">
+                    Edit
+                  </button>
+                                    <button id="messageDeleteButton" class="btn btn-danger btn md" type="button" (click)="delete(i)">
+                  Delete
+                  </button>
+                                </h4>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div>
+                                {{message.message_text}}
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- AddMessageModal -->
+<div class="modal fade" id="AddMessageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <form #messageFormA="ngForm">
+                    <div class="form-group">
+                        <label for="">Title   </label>
+
+                        <input type="text" class="form-control" required minlength="4" maxlength="15" name="title" [(ngModel)]="message.title" #mtitle="ngModel">
+                        <div *ngIf="mtitle.errors && (mtitle.dirty || mtitle.touched)" class="alert alert-danger">
+                            <div [hidden]="!mtitle.errors.required">
+                                Title is required
+                            </div>
+                            <div [hidden]="!mtitle.errors.minlength">
+                                Title must be at least 4 characters long.
+                            </div>
+                            <div [hidden]="!mtitle.errors.maxlength">
+                                Title cannot be more than 15 characters long.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Message</label>
+
+
+                        <textarea class="form-control" rows="3" cols="25" required minlength="4" maxlength="50" name="messageContent" [(ngModel)]="message.messageContent" #mContent="ngModel"></textarea>
+
+                        <div *ngIf="mContent.errors && (mContent.dirty || mContent.touched)" class="alert alert-danger">
+                            <div [hidden]="!mContent.errors.required">
+                                Message is required
+                            </div>
+                            <div [hidden]="!mContent.errors.minlength">
+                                Message must be at least 4 characters long.
+                            </div>
+                            <div [hidden]="!mContent.errors.maxlength">
+                                Message cannot be more than 24 characters long.
+                            </div>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" [disabled]="!messageFormA.form.valid" (click)=" add(); messageFormA.reset();close('AddMessageModal')">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- EditMessageModal -->
+<div class="modal fade" id="EditMessageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Message</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <form #messageFormE="ngForm" ng-controller="updateCtrl">
+                    <div class="form-group">
+                        <label for="">Title</label>
+
+                        <input type="text" class="form-control" required minlength="4" maxlength="15" name="temp_title" [(ngModel)]="message.title" #title="ngModel">
+
+                        <div *ngIf="title.errors && (title.dirty || title.touched)" class="alert alert-danger">
+                            <div [hidden]="!title.errors.required">
+                                Title is required
+                            </div>
+                            <div [hidden]="!title.errors.minlength">
+                                Title must be at least 4 characters long.
+                            </div>
+                            <div [hidden]="!title.errors.maxlength">
+                                Name cannot be more than 15 characters long.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Message</label>
+
+
+                        <textarea class="form-control" rows="3" cols="25" required minlength="4" maxlength="50" name="messageContent" [(ngModel)]="message.messageContent" #mContent="ngModel"></textarea>
+
+                        <div *ngIf="mContent.errors && (mContent.dirty || mContent.touched)" class="alert alert-danger">
+                            <div [hidden]="!mContent.errors.required">
+                                Message is required
+                            </div>
+                            <div [hidden]="!mContent.errors.minlength">
+                                Message must be at least 4 characters long.
+                            </div>
+                            <div [hidden]="!mContent.errors.maxlength">
+                                Message cannot be more than 24 characters long.
+                            </div>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary" data-dismiss="modal" [disabled]="!messageFormE.form.valid" (click)=" edit(message); ;messageFormE.reset(); close('EditMessageModal')">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>

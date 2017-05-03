@@ -1,0 +1,56 @@
+<!--main container-->
+<div class="container-fluid" id="mainContainer" style="height:100%">
+    <div class="row">
+        <div class="col-9" id="mainTabs">
+            <tabset #staticTabs>
+                <tab heading="Map Overview" (select)="selectedMapTab()">
+                    <!--map component-->
+                    <routes></routes>
+                </tab>
+                <tab heading="Buses and Drivers">
+                    <!--busdriver component-->
+                    <busdriver></busdriver>
+                </tab>
+                <tab heading="Messages">
+                    <!--Message Component-->
+                    <messages></messages>
+                </tab>
+            </tabset>
+        </div>
+
+
+        <!--Dashboard Content-->
+        <div class="col-3" id="dashboard">
+            <ul class="list-group" id="ActiveItems">
+                <li class="list-group-item justify-content-between">
+                    Active Buses
+                    <img alt="busicon" src="../../assets/graphics/busimg.jpg" width="50px" />
+                    <span class="badge badge-default badge-pill">9/18</span>
+                </li>
+                <li class="list-group-item justify-content-between">
+                    Active Drivers
+                    <img alt="busicon" src="../../assets/graphics/driverimg.png" width="50px" />
+                    <span class="badge badge-default badge-pill">9/24</span>
+                </li>
+                <li class="list-group-item justify-content-between">
+                    Working Routes
+                    <img alt="busicon" src="../../assets/graphics/routeimg.jpg" width="50px" />
+                    <span class="badge badge-default badge-pill">9/9</span>
+                </li>
+            </ul>
+            <!--messages-->
+            <h6 class="card-title text-center">Messages</h6>
+            <div class="list-group">
+                <a href="javascript:void(0)" class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let message of messages; let i = index">
+                    <div class="d-flex w-100 justify-content-between">
+                        <h6 class="mb-1">{{message.message_title}}</h6>
+                        <small>{{message.message_date| date}}</small>
+                    </div>
+                    <p class="mb-1">{{message.message_text}}</p>
+                    <small></small>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>
