@@ -1,7 +1,7 @@
 
 import * as gulp from 'gulp';
-let util = require('gulp-util');
-let runSequence = require('run-sequence');
+import * as util from 'gulp-util';
+import * as runSequence from 'run-sequence';
 
 import Config from './tools/config';
 import { loadTasks, loadCompositeTasks } from './tools/utils';
