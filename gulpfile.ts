@@ -1,6 +1,3 @@
-/// <reference types="gulp" />
-/// <reference types="gulp-util" />
-/// <reference types="run-sequence" />
 import * as gulp from 'gulp';
 import * as util from 'gulp-util';
 import * as runSequence from 'run-sequence';
