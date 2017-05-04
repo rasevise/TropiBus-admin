@@ -24,10 +24,7 @@
         ],
         "types": [
             "node",
-            "gulp",
-            "ts-node",
-            "run-sequence",
-            "gulp-util"
+            "gulp"
         ]
     },
     "files": [
