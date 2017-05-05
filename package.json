@@ -127,6 +127,7 @@
         "cors": "^2.8.3",
         "express": "^4.15.2",
         "express-history-api-fallback": "^2.0.0",
+        "jsonwebtoken": "^7.4.0",
         "intl": "^1.2.5",
         "open": "0.0.5",
         "pg": "^6.1.5",

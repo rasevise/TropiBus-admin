@@ -13,17 +13,15 @@ var admin;
 app.post(`/login/authenticate`, (req:any, res:any) => {
     console.log('inside server: ' + req.body.username);
   db.query(checkCredentials,[req.body.username, req.body.password] ,function(err:any, result:any) {
-    if (err){ 
-        console.error(err); 
-        res.send("Error" + err); 
-    }
-    else{
-        if(result.rows.length==0){
+    if (err) {
+        console.error(err);
+        res.send('Error' + err);
+    }else {
+        if(result.rows.length===0) {
             res.status(400).send({
               message: 'Incorrect Credentials'
             });
-        }
-        else{
+        }else {
             admin = result.rows[0];
             res.json({admin, token});
         }
