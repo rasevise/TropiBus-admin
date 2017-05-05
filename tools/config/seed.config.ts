@@ -446,7 +446,7 @@ export class SeedConfig {
       // for other modules like @ngx-translate the package.json path needs to updated here
       // otherwise npm run build.prod would fail
       // join('node_modules', '@ngx-translate', '*', 'package.json')
-      // join('node_modules', 'ng2-bootstrap', '*', 'package.json')
+      join('node_modules', 'ng2-bootstrap', '*', 'package.json')
     ],
     paths: {
       // Note that for multiple apps this configuration need to be updated
@@ -458,6 +458,7 @@ export class SeedConfig {
       'dist/tmp/node_modules/*': 'dist/tmp/node_modules/*',
       'node_modules/*': 'node_modules/*',
       '*': 'node_modules/*',
+      'ng2-bootstrap': 'node_modules/ng2-bootstrap/*'
     },
     packages: {
       '@angular/animations': {
@@ -502,11 +503,6 @@ export class SeedConfig {
       },
       '@angular/service-worker': {
         main: 'bundles/service-worker.umd.js',
-        defaultExtension: 'js'
-      },
-      'ng2-bootstrap': {
-        format: 'cjs',
-        main: 'bundles/ngx-bootstrap.umd.js',
         defaultExtension: 'js'
       },
       'rxjs': {

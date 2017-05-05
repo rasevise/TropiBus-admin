@@ -63,7 +63,7 @@ export class RoutesComponent implements OnInit{
 
   constructor (private service: RoutesService){}
 
-  ngOnInit(){
+  ngOnInit() {
     //checkInternet connection
     this.loadMap();
     this.routes=[];
@@ -402,12 +402,11 @@ export class RoutesComponent implements OnInit{
       content: content
     });
     google.maps.event.addListener(item, 'click', (event:any) => {
-    if(!item.open){
+    if(!item.open) {
         infowindow.setPosition(event.latLng)
         infowindow.open(this.map,item);
         item.open = true;
-    }
-    else{
+    }else {
         infowindow.close();
         item.open = false;
     }
@@ -436,7 +435,7 @@ export class RoutesComponent implements OnInit{
   });
 
   google.maps.event.addListener(item, 'mouseout', function(latlng:any) {
-      if(this.tempRoute!=undefined){
+      if(this.tempRoute !== undefined){
         this.tempRoute.setMap(null);
       }
   });
@@ -446,8 +445,7 @@ export class RoutesComponent implements OnInit{
                 infowindow.setPosition(event.latLng)
                 infowindow.open(this.map,item);
                 item.open = true;
-  }
-  else {
+  }else {
       infowindow.close();
       item.open = false;
   }
