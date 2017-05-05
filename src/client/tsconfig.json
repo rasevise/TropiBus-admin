@@ -24,9 +24,7 @@
         "types": [
             "node",
             "jasmine",
-            "systemjs",
-            "pg",
-            "gulp"
+            "systemjs"
         ]
     },
     "exclude": [
