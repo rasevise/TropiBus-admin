@@ -23,9 +23,7 @@
             "./node_modules"
         ],
         "types": [
-            "node",
-            "gulp",
-            "gulp-util"
+            "node"
         ]
     },
     "files": [
