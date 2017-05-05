@@ -17,6 +17,8 @@ var app = express();
 
 export function init(port: number, mode: string) {
 
+  var usePort = process.env.PORT || 8080;
+
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
   app.use(bodyParser.text());
@@ -30,7 +32,7 @@ export function init(port: number, mode: string) {
    * Dev Mode.
    * @note Dev server will only give for you middleware.
    */
-  if (mode == 'dev') {
+  if (mode === 'dev') {
 
     app.use('/*', function(req, res, next) {
       res.header('Access-Control-Allow-Origin', '*');
@@ -54,8 +56,7 @@ export function init(port: number, mode: string) {
     /**
      * Api Routes for `Development`.
      */
-  }
-  else {
+  }else {
     /**
      * Prod Mode.
      * @note Prod mod will give you static + middleware.
@@ -83,7 +84,7 @@ export function init(port: number, mode: string) {
      * @param req {any}
      * @param res {any}
      */
-    var renderIndex = function (req: express.Request, res: express.Response) {
+    let renderIndex = function (req: express.Request, res: express.Response) {
       res.sendFile(path.resolve(__dirname, _clientDir + '/index.html'));
     };
 
@@ -93,14 +94,22 @@ export function init(port: number, mode: string) {
     app.get('/*', renderIndex);
   }
 
+  app.listen(usePort, (err:any) => {
+    if (err) {
+      return console.log('something bad happened', err);
+    }
+
+    console.log(`server is listening on ${port}`);
+  });
+
   /**
    * Server with gzip compression.
    */
-  return new Promise<http.Server>((resolve, reject) => {
-    let server = app.listen(port, () => {
-      var port = server.address().port;
-      console.log('App is listening on port:' + port);
-      resolve(server);
-    });
-  });
-};
+  // return new Promise<http.Server>((resolve, reject) => {
+  //   let server = app.listen(port, () => {
+  //     var port = server.address().port;
+  //     console.log('App is listening on port:' + port);
+  //     resolve(server);
+  //   });
+  // });
+}

@@ -86,6 +86,7 @@
     "@types/gulp-util": "^3.0.29",
     "@types/jasmine": "^2.5.47",
     "@types/jquery": "^2.0.42",
+    "@types/jsonwebtoken": "^7.2.0",
     "@types/node": "^7.0.16",
     "@types/pg": "^6.1.39",
     "@types/rimraf": "0.0.28",
