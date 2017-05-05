@@ -22,11 +22,12 @@ export class ProjectConfig extends SeedConfig {
     // Add `NPM` third-party libraries to be injected/bundled.
     this.NPM_DEPENDENCIES = [
       ...this.NPM_DEPENDENCIES,
-      { src: 'jquery/dist/jquery.min.js', inject: 'libs'},
-      { src: 'tether/dist/js/tether.min.js', inject: 'libs'},
-      { src: 'bootstrap/dist/js/bootstrap.min.js', inject: 'libs' },
-      { src: 'bootstrap/dist/css/bootstrap.min.css', inject: true },
-      { src: 'reflect-metadata/Reflect.js', inject: 'libs'}
+      {src: 'jquery/dist/jquery.min.js', inject: 'libs'},
+      {src: 'tether/dist/js/tether.min.js', inject: 'libs'},
+      {src: 'bootstrap/dist/js/bootstrap.min.js', inject: 'libs'},
+      {src: 'bootstrap/dist/css/bootstrap.min.css', inject: true},
+      {src: 'reflect-metadata/Reflect.js', inject: 'libs'},
+      {src: 'moment/moment.js', inject: 'libs'}
     ];
 
     // Add `local` third-party libraries to be injected/bundled.
@@ -37,14 +38,7 @@ export class ProjectConfig extends SeedConfig {
 
     // Add packages (e.g. ng2-translate)
     let additionalPackages: ExtendPackages[] = [
-      {
-        name:'ng2-bootstrap',
-        path:'node_modules/ng2-bootstrap/bundles/ngx-bootstrap.umd.min.js'
-      },
-      {
-        name:'ng2-bootstrap/*',
-        path:'node_modules/ng2-bootstrap/bundles/ngx-bootstrap.umd.min.js'
-      }
+      {name: 'ng2-bootstrap', path: 'node_modules/ng2-bootstrap/bundles/ngx-bootstrap.umd.min.js'},
     ];
 
     this.addPackagesBundles(additionalPackages);

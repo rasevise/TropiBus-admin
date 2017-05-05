@@ -42,7 +42,6 @@ ts-node
 /tools/**/*.js
 dev
 docs
-dist
 lib
 test
 tmp

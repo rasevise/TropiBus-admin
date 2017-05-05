@@ -19,7 +19,7 @@
                   Edit Route
                 </button>
                 <div class="dropdown-menu">
-                    <a class="dropdown-item" (click)="setMTitle('', null); setButtonText('routeDisplay', 'Select Route'); getRoutes();" href="javascript:void(0)">
+                    <a class="dropdown-item" (click)="setMTitle(''); setButtonText('routeDisplay', 'Select Route'); getRoutes();" href="javascript:void(0)">
                         <h4>Show All</h4>
                     </a>
                     <a *ngFor="let route of routes;" class="dropdown-item" (click)="setMTitle(route.route_name, route); setButtonText('routeDisplay', route.route_name); setRoute(route.route_id);" href="javascript:void(0)">

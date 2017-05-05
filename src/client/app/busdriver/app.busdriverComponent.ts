@@ -42,9 +42,9 @@ export class BusDriverComponent{
   }
 
     resetTempD(){
-    this.driver.name = '';
-    this.driver.lastName = '';
-    this.driver.username = '';
+    this.driver.name = "";
+    this.driver.lastName = "";
+    this.driver.username = "";
   }
   setTempD(driver: Driver){
     this.driver.name = this.drivers[this.myValue].driver_firstname;
