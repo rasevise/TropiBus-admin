@@ -1,12 +1,11 @@
 import * as express from 'express';
 import * as db from '../db/pg';
+import * as jwt from 'jsonwebtoken';
 
 var checkCredentials= "SELECT admin_id FROM administrator WHERE admin_username=$1 and admin_password=$2"
 
 export function login(app: express.Application) {
 // sign with default (HMAC SHA256)
-
-var jwt = require('jsonwebtoken');
 var token = jwt.sign({ token: 'tropitoken'}, 'tropi');
 var admin;
 //Method to validate Login info with db
