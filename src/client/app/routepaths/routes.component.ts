@@ -18,9 +18,10 @@ export function getAccordionConfig(): AccordionConfig {
 }
 
 @Component({
-    selector: 'routes',
-    templateUrl: 'routes.component.html',
-    providers: [ RoutesService, {provide: AccordionConfig, useFactory: getAccordionConfig} ],
+  moduleId: module.id,
+  selector: 'routes',
+  templateUrl: 'routes.component.html',
+  providers: [ RoutesService, {provide: AccordionConfig, useFactory: getAccordionConfig} ],
 })
 
 export class RoutesComponent implements OnInit{

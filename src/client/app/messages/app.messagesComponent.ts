@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 import 'rxjs/add/operator/catch';
 
 @Component({
+  moduleId: module.id,
   selector: 'messages',
   templateUrl: './messages.html',
   providers: [MessageService],

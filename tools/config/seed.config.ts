@@ -139,7 +139,7 @@ export class SeedConfig {
    * The bootstrap file to be used to boot the application.
    * @type {string}
    */
-  BOOTSTRAP_MODULE = `${this.BOOTSTRAP_DIR}/main`;
+  BOOTSTRAP_MODULE = `${this.BOOTSTRAP_DIR}/` + 'main';
 
   BOOTSTRAP_PROD_MODULE = `${this.BOOTSTRAP_DIR}/` + 'main';
 
@@ -392,7 +392,13 @@ export class SeedConfig {
    * @type {any}
    */
   SYSTEM_CONFIG_DEV: any = {
-    defaultJSExtensions: true,
+    defaultExtension: true,
+    // map tells the System loader where to look for things
+    map: {
+      // our app is within the app folder
+      app: 'app',
+
+    },
     paths: {
       [this.BOOTSTRAP_MODULE]: `${this.APP_BASE}${this.BOOTSTRAP_MODULE}`,
       '@angular/animations': 'node_modules/@angular/animations/bundles/animations.umd.js',
@@ -420,9 +426,13 @@ export class SeedConfig {
       'app/*': '/app/*',
       // For test config
       'dist/client/dev/*': '/base/dist/client/dev/*',
-      '*': 'node_modules/*'
+      '*': 'node_modules/*',
     },
     packages: {
+      app: {
+        main: './main',
+        defaultExtension: 'js'
+      },
     }
   };
 
@@ -438,7 +448,7 @@ export class SeedConfig {
    * @type {any}
    */
   SYSTEM_BUILDER_CONFIG: any = {
-    defaultJSExtensions: true,
+    defaultExtension: true,
     base: this.PROJECT_ROOT,
     packageConfigPaths: [
       join('node_modules', '*', 'package.json'),
@@ -512,7 +522,7 @@ export class SeedConfig {
       'rxjs': {
         main: 'Rx.js',
         defaultExtension: 'js'
-      }
+      },
     },
   };
 
@@ -595,7 +605,7 @@ export class SeedConfig {
             [`${this.APP_BASE}${this.APP_SRC}`]: this.APP_SRC,
             [`${this.APP_BASE}${this.APP_DEST}`]: this.APP_DEST,
             [`${this.APP_BASE}node_modules`]: 'node_modules',
-            [`${this.APP_BASE.replace(/\/$/, '')}`]: this.APP_DEST
+            [`${this.APP_BASE.replace(/\/$/, '')}`]: this.APP_DEST,
           }
         }
       },
@@ -621,7 +631,7 @@ export class SeedConfig {
         targetFile: `${this.CSS_BUNDLE_NAME}.css`,
         options: {
           rebaseUrls: false
-        }
+        },
       }
     };
 
@@ -643,7 +653,7 @@ export class SeedConfig {
         dir: this.COVERAGE_DIR + '/',
         reporters: [
           { type: 'json', subdir: '.', file: 'coverage-final.json' },
-          { type: 'html', subdir: '.' }
+          { type: 'html', subdir: '.' },
         ]
       },
       remapIstanbulReporter: {

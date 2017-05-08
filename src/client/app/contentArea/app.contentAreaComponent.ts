@@ -8,6 +8,7 @@ import { RoutesComponent } from '../routepaths/routes.component';
 import { Config } from '../shared/config/env.config';
 
 @Component({
+  moduleId: module.id,
   selector: 'contentarea',
   templateUrl: 'contentArea.html',
   providers: [ MessageService ]
