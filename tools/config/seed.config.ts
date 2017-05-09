@@ -393,6 +393,9 @@ export class SeedConfig {
    */
   SYSTEM_CONFIG_DEV: any = {
     defaultJSExtensions: true,
+    map: {
+      app: 'app'
+    },
     paths: {
       [this.BOOTSTRAP_MODULE]: `${this.APP_BASE}${this.BOOTSTRAP_MODULE}`,
       '@angular/animations': 'node_modules/@angular/animations/bundles/animations.umd.js',
@@ -424,6 +427,10 @@ export class SeedConfig {
       'ng2-bootstrap': 'node_modules/ng2-bootstrap/*'
     },
     packages: {
+      app: {
+        main: './main',
+        defaultExtension: 'js'
+      },
     }
   };
 
