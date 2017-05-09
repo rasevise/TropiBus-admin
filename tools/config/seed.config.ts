@@ -454,7 +454,7 @@ export class SeedConfig {
       // for other modules like @ngx-translate the package.json path needs to updated here
       // otherwise npm run build.prod would fail
       // join('node_modules', '@ngx-translate', '*', 'package.json')
-      join('node_modules', 'ng2-bootstrap', '*', 'package.json')
+      // join('node_modules', 'ng2-bootstrap', '*', 'package.json')
     ],
     paths: {
       // Note that for multiple apps this configuration need to be updated
