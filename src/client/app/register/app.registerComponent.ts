@@ -2,7 +2,8 @@ import { Component, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-    templateUrl: './register.html'
+  moduleId: module.id,
+  templateUrl: './register.html'
 })
 
 export class RegisterComponent {

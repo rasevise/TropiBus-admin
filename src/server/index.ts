@@ -17,7 +17,7 @@ var app = express();
 
 export function init(port: number, mode: string) {
 
-  var usePort = process.env.PORT || 8080;
+  var usePort = process.env.PORT || port;
 
   app.use(bodyParser.urlencoded({ extended: false }));
   app.use(bodyParser.json());
@@ -52,6 +52,15 @@ export function init(port: number, mode: string) {
       res.sendFile(path.resolve(__dirname, _clientDir + '/index.html'));
     };
     app.get('/*', renderIndex);
+
+
+    app.listen(port, (err:any) => {
+      if (err) {
+        return console.log('something bad happened', err);
+      }
+
+      console.log(`server is listening on ${port}`);
+    });
 
     /**
      * Api Routes for `Development`.
@@ -92,15 +101,16 @@ export function init(port: number, mode: string) {
      * Prevent server routing and use @ng2-router.
      */
     app.get('/*', renderIndex);
+
+    app.listen(usePort, (err:any) => {
+      if (err) {
+        return console.log('something bad happened', err);
+      }
+
+      console.log(`server is listening on ${usePort}`);
+    });
   }
 
-  app.listen(usePort, (err:any) => {
-    if (err) {
-      return console.log('something bad happened', err);
-    }
-
-    console.log(`server is listening on ${port}`);
-  });
 
   /**
    * Server with gzip compression.

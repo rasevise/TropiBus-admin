@@ -1,12 +1,12 @@
 {
   "static": {
     "urls": {
-      "/index.html": "cd8a290c30542ac79a211b9dbc66de8dca64d784",
+      "/index.html": "a8fce3af221d433e097252087c45b14dc20d2f62",
       "/worker-basic.min.js": "72cc18504609557733120ef137edcc35fdf5670d",
       "/assets\\favicon.ico": "32144a2be28d83d4ea08e414f46120a35e48787f",
       "/css\\main.css": "ba7e3578e0c2a43a590f637176697c45482f0922",
-      "/js\\app.js": "24feab7106c36afb438bc07cf6a11c7323ad2d3d",
-      "/js\\shims.js": "4e23ef41dd35d6b7199dde64d861660e294573ff",
+      "/js\\app.js": "49110dcd2b50cc3159bfbdf327ac25eb8845dd67",
+      "/js\\shims.js": "ed9680e82bf321d8a81e44ca987a0435de070d8d",
       "/assets\\favicon\\android-chrome-192x192.png": "255bba2ae79bb04a9a79673ab22808663abf4f81",
       "/assets\\favicon\\android-chrome-512x512.png": "eaaf7dfc43a1d9c9e92385852d36d92b2a4a6f66",
       "/assets\\favicon\\apple-touch-icon.png": "8651f777337e5df6d6a5d70bf0c57b235b2c1d35",
@@ -24,11 +24,11 @@
       "/assets\\graphics\\routeimg.jpg": "c1ae3f76c49e5954463fa1dd81368551d7a5d12e",
       "/assets\\graphics\\tropibuslogo.png": "bf7e30e58d2536ec50beb570485efec05208f508",
       "/assets\\svg\\more.svg": "9838cd822e0f989a0befbd365365ee2751bbdebc",
+      "/typings\\googlemaps\\package.json": "a160244190edb7a86291f50bbed846273886b178",
+      "/typings\\googlemaps\\README.md": "34d6f40c9f31c80385adf08b105ecb86f26fd7c6",
       "/typings\\google-maps\\package.json": "6d3531d3caef167785001ccba9502ac1ea58f272",
       "/typings\\google-maps\\README.md": "eb1634a1f426bcca47f4edad89ef21db654f6954",
-      "/typings\\google-maps\\types-metadata.json": "4e40074f4517fff428b97b37cc98d57809ca8ef9",
-      "/typings\\googlemaps\\package.json": "a160244190edb7a86291f50bbed846273886b178",
-      "/typings\\googlemaps\\README.md": "34d6f40c9f31c80385adf08b105ecb86f26fd7c6"
+      "/typings\\google-maps\\types-metadata.json": "4e40074f4517fff428b97b37cc98d57809ca8ef9"
     }
   },
   "routing": {

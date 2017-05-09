@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { LoginService } from '../shared/login/login.service';
 
 @Component({
+  moduleId: module.id,
   selector: 'header',
   templateUrl: 'header.html',
 })

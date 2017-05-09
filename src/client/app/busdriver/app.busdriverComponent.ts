@@ -9,6 +9,7 @@ import { Routes } from '../routepaths/routes';
 
 
 @Component({
+  moduleId: module.id,
   selector: 'busdriver',
   templateUrl: 'busdriver.html',
   providers: [RoutesService],
