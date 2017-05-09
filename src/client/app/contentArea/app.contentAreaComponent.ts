@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { MessageService } from '../shared/messages/app.messageService'
+import { MessageService } from '../shared/messages/app.messageService';
 import { Message } from '../messages/messages';
 import { Observable } from 'rxjs/Rx';
 import { Inject } from '@angular/core';
@@ -9,11 +9,15 @@ import { Config } from '../shared/config/env.config';
 
 @Component({
   moduleId: module.id,
+<<<<<<< HEAD
   selector: 'contentarea',
+=======
+  selector: 'content-area',
+>>>>>>> b43fd3f043c805e075d2e46b68e72515c72b5c71
   templateUrl: 'contentArea.html',
   providers: [ MessageService ]
 })
-export class ContentAreaComponent{
+export class ContentAreaComponent {
   message: Message = new Message(null,'', Date.now(), '');
   messages:any[];
 
@@ -22,11 +26,11 @@ export class ContentAreaComponent{
 
   constructor (private MessageService: MessageService){}
 
-   ngOnInit(): void {
+  ngOnInit(): void {
     this.getMessages();
   }
 
-  getMessages(): void{
+  getMessages(): void {
     this.MessageService.getMessages()
     .subscribe((messages: any) => {
         this.messages = messages;

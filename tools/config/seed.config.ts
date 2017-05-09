@@ -392,12 +392,18 @@ export class SeedConfig {
    * @type {any}
    */
   SYSTEM_CONFIG_DEV: any = {
+<<<<<<< HEAD
     defaultExtension: true,
     // map tells the System loader where to look for things
     map: {
       // our app is within the app folder
       app: 'app',
 
+=======
+    defaultJSExtensions: true,
+    map: {
+      app: 'app'
+>>>>>>> b43fd3f043c805e075d2e46b68e72515c72b5c71
     },
     paths: {
       [this.BOOTSTRAP_MODULE]: `${this.APP_BASE}${this.BOOTSTRAP_MODULE}`,
@@ -427,6 +433,10 @@ export class SeedConfig {
       // For test config
       'dist/client/dev/*': '/base/dist/client/dev/*',
       '*': 'node_modules/*',
+<<<<<<< HEAD
+=======
+      'ng2-bootstrap': 'node_modules/ng2-bootstrap/*'
+>>>>>>> b43fd3f043c805e075d2e46b68e72515c72b5c71
     },
     packages: {
       app: {
@@ -662,7 +672,7 @@ export class SeedConfig {
         }
       }
     };
-  };
+  }
 
   /**
    * Recursively merge source onto target.

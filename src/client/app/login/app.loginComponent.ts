@@ -2,7 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 // import { AlertService, loginService } from '../services/index';
-import { LoginService } from '../shared/login/login.service'
+import { LoginService } from '../shared/login/login.service';
 
 @Component({
   moduleId: module.id,
@@ -36,9 +36,9 @@ export class LoginComponent implements OnInit {
                     this.router.navigate([this.returnUrl]);
                 },
                 error => {
-                    this.errorMessage = <any>error
+                    this.errorMessage = <any>error;
                     this.loading = false;
-                    alert("Incorrect credentials");
+                    alert('Incorrect credentials');
                 },
                 );
     }

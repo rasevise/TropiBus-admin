@@ -11,9 +11,9 @@ import { APP_BASE_HREF } from '@angular/common';
 
 import { LoginComponent }       from './login/app.loginComponent';
 import { AppComponent }         from './app.component';
-import { headerComponent }      from './header/app.headerComponent';
+import { HeaderComponent }      from './header/app.headerComponent';
 import { ContentAreaComponent } from './contentArea/app.contentAreaComponent';
-import { footerComponent }      from './footer/app.footerComponent';
+import { FooterComponent }      from './footer/app.footerComponent';
 import { BusDriverComponent }   from './busdriver/app.busdriverComponent';
 import { messagesComponent }    from './messages/app.messagesComponent';
 import { RoutesComponent }      from './routepaths/routes.component';
@@ -38,9 +38,9 @@ import { SharedModule }         from './shared/shared.module';
                   ],
   declarations: [ AppComponent,
                   EqualValidator,
-                  headerComponent,
+                  HeaderComponent,
                   ContentAreaComponent,
-                  footerComponent,
+                  FooterComponent,
                   BusDriverComponent,
                   messagesComponent,
                   RoutesComponent,
