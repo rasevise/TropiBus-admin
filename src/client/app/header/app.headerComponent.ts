@@ -4,16 +4,16 @@ import { LoginService } from '../shared/login/login.service';
 
 @Component({
   moduleId: module.id,
-  selector: 'header',
+  selector: 'header-component',
   templateUrl: 'header.html',
 })
-export class headerComponent  {
+export class HeaderComponent  {
   returnUrl:string;
     constructor(
         public route: ActivatedRoute,
         public router: Router,
         public loginService: LoginService
-        ){}
+        ) {}
 
     logout() {
       this.loginService.logout();
