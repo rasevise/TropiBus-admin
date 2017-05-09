@@ -3,7 +3,6 @@
     "@angular/compiler-cli": "^4.1.1",
     "@angular/platform-server": "^4.1.1",
     "@types/jasmine": "^2.5.47",
-    "@types/rimraf": "0.0.28",
     "angular-in-memory-web-api": "^0.3.2",
     "async": "^2.1.1",
     "autoprefixer": "^6.5.1",
