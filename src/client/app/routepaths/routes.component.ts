@@ -19,7 +19,7 @@ export function getAccordionConfig(): AccordionConfig {
 
 @Component({
   moduleId: module.id,
-  selector: 'routes',
+  selector: 'routes-component',
   templateUrl: 'routes.component.html',
   providers: [ RoutesService, {provide: AccordionConfig, useFactory: getAccordionConfig} ],
 })

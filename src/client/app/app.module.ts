@@ -15,7 +15,7 @@ import { HeaderComponent }      from './header/app.headerComponent';
 import { ContentAreaComponent } from './contentArea/app.contentAreaComponent';
 import { FooterComponent }      from './footer/app.footerComponent';
 import { BusDriverComponent }   from './busdriver/app.busdriverComponent';
-import { messagesComponent }    from './messages/app.messagesComponent';
+import { MessagesComponent }    from './messages/app.messagesComponent';
 import { RoutesComponent }      from './routepaths/routes.component';
 import { RegisterComponent }    from './register/app.registerComponent';
 import { Routes }               from './routepaths/routes';
@@ -42,7 +42,7 @@ import { SharedModule }         from './shared/shared.module';
                   ContentAreaComponent,
                   FooterComponent,
                   BusDriverComponent,
-                  messagesComponent,
+                  MessagesComponent,
                   RoutesComponent,
                   LoginComponent,
                   RegisterComponent

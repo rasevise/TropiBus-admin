@@ -9,18 +9,18 @@ import 'rxjs/add/operator/catch';
 
 @Component({
   moduleId: module.id,
-  selector: 'messages',
+  selector: 'messages-component',
   templateUrl: './messages.html',
   providers: [MessageService],
 
 })
-export class messagesComponent implements OnInit{
+export class MessagesComponent implements OnInit {
   message: Message = new Message(null,'', Date.now(), '');
   messages: any[] = [];
   private myValue: number;
 
 
-  constructor (@Inject(MessageService) private service: MessageService, ){
+  constructor (@Inject(MessageService) private service: MessageService, ) {
   }
 
   ngOnInit(): void {
@@ -30,11 +30,11 @@ export class messagesComponent implements OnInit{
   setValue(val:number) {
       this.myValue = val;
   }
-  getValue(){
+  getValue() {
     return this.myValue;
   }
 
-  getMessages(): void{
+  getMessages(): void {
     this.service
     .getMessages()
     .subscribe(messages => this.messages = messages);
@@ -43,41 +43,41 @@ export class messagesComponent implements OnInit{
 
   add(): void {
     this.message.date = Date.now();
-    this.service.create(this.message, this.messages.length).subscribe(() => {this.getMessages()});
+    this.service.create(this.message, this.messages.length).subscribe(() => {this.getMessages();});
   }
 
   delete(i : number): void {
     this.service
     .delete(this.messages[i].message_id)
-    .subscribe(() => {this.getMessages()});
+    .subscribe(() => {this.getMessages();});
   }
 
   edit(message: any): void {
     this.service.update(this.message, this.messages[this.myValue].message_id)
-    .subscribe(() => {this.getMessages()});
+    .subscribe(() => {this.getMessages();});
   }
-  resetTemp(){
-    this.message.title = "";
-    this.message.messageContent = "";
+  resetTemp() {
+    this.message.title = '';
+    this.message.messageContent = '';
   }
-  setTemp(){
+  setTemp() {
     this.message.title = this.messages[this.myValue].message_title;
     this.message.messageContent = this.messages[this.myValue].message_text;
   }
 
-  confirmDeleteMessage(){
-    var c = confirm("Are you sure you want to delete driver: ");
-    if (c == true) {
+  confirmDeleteMessage() {
+    var c = confirm('Are you sure you want to delete driver: ');
+    if (c === true) {
         this.delete(this.myValue);
     }
   }
 
 
-  close(modalId: string){
+  close(modalId: string) {
     $('#'+ modalId).modal('hide');
   }
 
-  log(){
+  log() {
     console.log(this.messages.length);
   }
 }

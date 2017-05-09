@@ -10,7 +10,7 @@ import { Routes } from '../routepaths/routes';
 
 @Component({
   moduleId: module.id,
-  selector: 'busdriver',
+  selector: 'bus-driver',
   templateUrl: './busdriver.html',
   providers: [RoutesService],
 })
@@ -109,7 +109,7 @@ export class BusDriverComponent{
 
   addD(driver:Driver): void {
     this.service.createDriver(driver).subscribe(() => {this.getDrivers() });
-    
+
   }
 
   deleteD(): void {
@@ -164,7 +164,7 @@ checkBusName()
       }
     }
 
-         return true; 
+         return true;
   }
 
 checkEditBusName()
@@ -177,7 +177,7 @@ checkEditBusName()
       }
     }
 
-         return true; 
+         return true;
   }
 
 //Close bus modals
