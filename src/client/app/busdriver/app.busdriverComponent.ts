@@ -43,9 +43,11 @@ export class BusDriverComponent{
   }
 
     resetTempD(){
-    this.driver.name = "";
-    this.driver.lastName = "";
-    this.driver.username = "";
+    this.driver.name = null;
+    this.driver.lastName = null;
+    this.driver.username = null;
+    this.driver.password = null;
+    this.driver.confirmpassword = null;
   }
   setTempD(driver: Driver){
     this.driver.name = this.drivers[this.myValue].driver_firstname;
@@ -56,19 +58,17 @@ export class BusDriverComponent{
   }
 
   resetTempB(){
-    this.bus.name = "";
-    // this.bus.driver= null;
+    this.bus.name = null;
     this.bus.route = null;
     this.bus.status = null;
+    this.bus.driver = null;
 
   }
   setTempB(){
-    this.resetTempB();
     this.bus.name = this.buses[this.myValue].bus_name;
     this.bus.status = this.buses[this.myValue].bus_status;
     this.bus.driver = this.buses[this.myValue].driver_id;
     this.bus.route = this.buses[this.myValue].route_id;
-    // this.bus.driver = null;
   }
 
   //  Buses Crud
@@ -134,17 +134,12 @@ getAssignedRoute(id:number): String{
 
   }
   return '';
-  // this.route =this.routes.filter(x => x.route_id === this.bus.route)
-  //       return this.route[2];
 }
 
 
 //Routes for modal
 ngOnInitR(): void {
   this.getRoutes();
-      //for(var i : number = 0; i< this.routes.length;i++){
-   // console.log(this.routes[i].route_name);
- // }
 }
 
 getRoutes(){
@@ -155,10 +150,61 @@ getRoutes(){
 }
 
 
+//Verify bus name availability
+checkBusName()
+{
+   for(var i:number = 0; i < this.buses.length; i++)
+   {
+      if(this.bus.name === this.buses[i].bus_name)
+      {
+        return false;
+      }
+    }
 
+         return true; 
+  }
+
+checkEditBusName()
+{
+   for(var i:number = 0; i < this.buses.length; i++)
+   {
+      if((this.bus.name === this.buses[i].bus_name) && (this.myValue !== i))
+      {
+        return false;
+      }
+    }
+
+         return true; 
+  }
+
+//Close bus modals
+  closeBus(modalId: String)
+  {
+        if(this.checkBusName())
+        {
+          this.addB(this.bus)
+          $('#'+ modalId).modal('hide')
+        }
+      else{
+         $('#busNameModal').modal('show')
+      }
+   }
+
+  closeEditBus(modalId: String)
+  {
+        if(this.checkEditBusName())
+        {
+          this.addB(this.bus)
+          $('#'+ modalId).modal('hide')
+        }
+      else{
+         $('#busNameModal').modal('show')
+      }
+   }
 
 //Verify username availability
 checkUsername(){
+  console.log("usernmae" + this.driver.username);
    for(var i:number = 0; i < this.drivers.length; i++){
       if(this.driver.username === this.drivers[i].driver_username){
         return false;
@@ -169,10 +215,7 @@ checkUsername(){
 
 checkUsernameEdit(){
    for(var i:number = 0; i < this.drivers.length; i++){
-      if(this.myValue === i){
-        //empty--------------------------------------------------
-      }
-      if(this.driver.username == this.drivers[i].driver_username){
+      if((this.driver.username == this.drivers[i].driver_username) && (this.myValue !== i)){
         return false;
       }
     }
@@ -184,9 +227,7 @@ checkUsernameEdit(){
 
 
 //Function for modals and values regarding delete and edit index
-// getRouteName(){
-// this.route=this.routes.filter(x => x.route_id === this.route.id)
-// }
+
 
 setValue(val:number) {
         this.myValue = val;
