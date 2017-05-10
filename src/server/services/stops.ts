@@ -10,7 +10,7 @@ var updateStopOrder = 'UPDATE stop SET stop_order=$1 WHERE stop_id=$2';
 
 export function stops(app: express.Application) {
   let _stopsURL = '/stops';
-// router.get('/', function(req, res, next){
+// router.get('/', (req, res, next) => {
 //     res.contentType('application/json');
 //     var routesJSON = JSON.stringify(this.stops);
 //     res.json(this.stops);
@@ -19,7 +19,7 @@ export function stops(app: express.Application) {
 app.get(_stopsURL + '/getStopsFromRoute', (req, res, next) => {//Parameter: Route ID
     // console.log('Print all Stopf from a specific route')
     // console.log('Route ID: ', req.query.r_id)
-    db.query(getStopsFromRoute,[req.query.r_id], function(err:any, result:any) {
+    db.query(getStopsFromRoute,[req.query.r_id], (err:any, result:any) => {
         if (err) {
           console.error(err); res.send('Error ' + err);
         }else {
@@ -28,7 +28,7 @@ app.get(_stopsURL + '/getStopsFromRoute', (req, res, next) => {//Parameter: Rout
     });
 });
 
-app.put(_stopsURL + '/updateStop', function (req, res, next) {
+app.put(_stopsURL + '/updateStop', (req, res, next) => {
     var stop_name = req.body.stop_name;
     var stop_description = req.body.stop_description;
     var stop_id = req.body.s_id;
