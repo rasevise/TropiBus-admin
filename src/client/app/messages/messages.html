@@ -19,7 +19,7 @@
                                     <button id="editMessageButton" type="button" class="btn btn-primary" (click)="setValue(i); setTemp()" data-toggle="modal" data-target="#EditMessageModal">
                     Edit
                   </button>
-                                    <button id="messageDeleteButton" class="btn btn-danger btn md" type="button" (click)="delete(i)">
+                                    <button id="messageDeleteButton" class="btn btn-danger btn md" type="button" (click)=" setValue(i); confirmDeleteMessage()">
                   Delete
                   </button>
                                 </h4>

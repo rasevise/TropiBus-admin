@@ -65,6 +65,13 @@ export class messagesComponent implements OnInit{
     this.message.messageContent = this.messages[this.myValue].message_text;
   }
 
+  confirmDeleteMessage(){
+    var c = confirm("Are you sure you want to delete driver: ");
+    if (c == true) {
+        this.delete(this.myValue);
+    }
+  }
+
 
   close(modalId: string){
     $('#'+ modalId).modal('hide');
