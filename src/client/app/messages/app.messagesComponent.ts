@@ -35,28 +35,26 @@ export class messagesComponent implements OnInit{
   }
 
   getMessages(): void{
-    this.service.getMessages()
-    .subscribe((messages: any) => {
-        this.messages = messages
-    });
+    this.service
+    .getMessages()
+    .subscribe(messages => this.messages = messages);
   }
 
 
   add(): void {
     this.message.date = Date.now();
-    this.service.create(this.message, this.messages.length);
-    this.getMessages();
+    this.service.create(this.message, this.messages.length).subscribe(() => {this.getMessages()});
   }
 
   delete(i : number): void {
     this.service
-    .delete(this.messages[i].message_id);
-    this.getMessages();
+    .delete(this.messages[i].message_id)
+    .subscribe(() => {this.getMessages()});
   }
 
   edit(message: any): void {
     this.service.update(this.message, this.messages[this.myValue].message_id)
-    this.getMessages();
+    .subscribe(() => {this.getMessages()});
   }
   resetTemp(){
     this.message.title = "";

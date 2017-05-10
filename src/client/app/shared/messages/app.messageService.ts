@@ -24,7 +24,6 @@ export class MessageService {
     return this.http
     .delete(`${Config.API}/messages/deleteMessage` + '/?id=' + i, { headers:this.headers })
     .map((res: Response) => res.json())
-    .subscribe((res:Response) => { this.postResponse = res; console.log(res); })
   }
     create(message: any, index: number): Observable<any[]>{
     return this.http
