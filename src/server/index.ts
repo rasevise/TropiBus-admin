@@ -53,16 +53,6 @@ export function init(port: number, mode: string) {
     };
     app.get('/*', renderIndex);
 
-<<<<<<< HEAD
-    app.listen(port, (err:any) => {
-    if (err) {
-      return console.log('something bad happened', err);
-    }
-
-    console.log(`server is listening on ${port}`);
-    });
-=======
-
     app.listen(port, (err:any) => {
       if (err) {
         return console.log('something bad happened', err);
@@ -71,7 +61,6 @@ export function init(port: number, mode: string) {
       console.log(`server is listening on ${port}`);
     });
 
->>>>>>> b43fd3f043c805e075d2e46b68e72515c72b5c71
     /**
      * Api Routes for `Development`.
      */
@@ -113,15 +102,6 @@ export function init(port: number, mode: string) {
     app.get('/*', renderIndex);
 
     app.listen(usePort, (err:any) => {
-<<<<<<< HEAD
-    if (err) {
-      return console.log('something bad happened', err);
-    }
-
-    console.log(`server is listening on ${usePort}`);
-  });
-  }
-=======
       if (err) {
         return console.log('something bad happened', err);
       }
@@ -130,7 +110,6 @@ export function init(port: number, mode: string) {
     });
   }
 
->>>>>>> b43fd3f043c805e075d2e46b68e72515c72b5c71
 
   /**
    * Server with gzip compression.

@@ -392,18 +392,9 @@ export class SeedConfig {
    * @type {any}
    */
   SYSTEM_CONFIG_DEV: any = {
-<<<<<<< HEAD
-    defaultExtension: true,
-    // map tells the System loader where to look for things
-    map: {
-      // our app is within the app folder
-      app: 'app',
-
-=======
     defaultJSExtensions: true,
     map: {
       app: 'app'
->>>>>>> b43fd3f043c805e075d2e46b68e72515c72b5c71
     },
     paths: {
       [this.BOOTSTRAP_MODULE]: `${this.APP_BASE}${this.BOOTSTRAP_MODULE}`,
@@ -418,7 +409,6 @@ export class SeedConfig {
       '@angular/platform-browser-dynamic': 'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
       '@angular/router': 'node_modules/@angular/router/bundles/router.umd.js',
       '@angular/animations/browser': 'node_modules/@angular/animations/bundles/animations-browser.umd.js',
-
       '@angular/common/testing': 'node_modules/@angular/common/bundles/common-testing.umd.js',
       '@angular/compiler/testing': 'node_modules/@angular/compiler/bundles/compiler-testing.umd.js',
       '@angular/core/testing': 'node_modules/@angular/core/bundles/core-testing.umd.js',
@@ -433,10 +423,7 @@ export class SeedConfig {
       // For test config
       'dist/client/dev/*': '/base/dist/client/dev/*',
       '*': 'node_modules/*',
-<<<<<<< HEAD
-=======
       'ng2-bootstrap': 'node_modules/ng2-bootstrap/*'
->>>>>>> b43fd3f043c805e075d2e46b68e72515c72b5c71
     },
     packages: {
       app: {

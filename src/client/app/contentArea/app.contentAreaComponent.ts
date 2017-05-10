@@ -9,11 +9,7 @@ import { Config } from '../shared/config/env.config';
 
 @Component({
   moduleId: module.id,
-<<<<<<< HEAD
-  selector: 'contentarea',
-=======
   selector: 'content-area',
->>>>>>> b43fd3f043c805e075d2e46b68e72515c72b5c71
   templateUrl: 'contentArea.html',
   providers: [ MessageService ]
 })

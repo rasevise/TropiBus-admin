@@ -304,7 +304,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)=" busFormE.reset()">Close</button>
-                <button type="button" class="btn btn-primary" data-dismiss="modal" [disabled]="!busFormE.form.valid" (click)="         closeBus('EditBusModal')">Save changes</button>
+                <button type="button" class="btn btn-primary"  [disabled]="!busFormE.form.valid" (click)="         closeEditBus('EditBusModal')">Save changes</button>
             </div>
         </div>
     </div>

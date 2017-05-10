@@ -40,6 +40,7 @@ export class BusDriverComponent{
   ngOnInit(): void {
     this.getBuses();
     this.getRoutes();
+    this.getDrivers();
   }
 
     resetTempD(){
@@ -107,19 +108,21 @@ export class BusDriverComponent{
 
 
   addD(driver:Driver): void {
-    this.service.createDriver(driver);
-    this.getDrivers();
+    this.service.createDriver(driver).subscribe(() => {this.getDrivers() });
+    
   }
 
   deleteD(): void {
     this.service
-        .deleteDriver(this.drivers[this.myValue].driver_id);
+        .deleteDriver(this.drivers[this.myValue].driver_id).subscribe(() => {
         this.getDrivers();
+        });;
   }
 
   editD(): void {
-    this.service.updateDriver(this.driver, this.drivers[this.myValue].driver_id)
+    this.service.updateDriver(this.driver, this.drivers[this.myValue].driver_id).subscribe(() => {
     this.getDrivers();
+    });
   }
 
   ngOnInitD(): void {
@@ -194,7 +197,7 @@ checkEditBusName()
   {
         if(this.checkEditBusName())
         {
-          this.addB(this.bus)
+          this.editB()
           $('#'+ modalId).modal('hide')
         }
       else{
