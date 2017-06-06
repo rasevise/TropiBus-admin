@@ -66,7 +66,7 @@ export class MessagesComponent implements OnInit {
   }
 
   confirmDeleteMessage() {
-    var c = confirm('Are you sure you want to delete driver: ');
+    var c = confirm('Are you sure you want to delete message: ');
     if (c === true) {
         this.delete(this.myValue);
     }

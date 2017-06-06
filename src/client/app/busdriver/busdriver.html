@@ -6,7 +6,7 @@
                 <div class="col-md-6">
                     <h3>
                         Bus
-                        <button id="addDriversButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddBusModal" (click)="busFormA.reset(); resetTempB()"> Add Bus</button>
+                        <button id="addDriversButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddBusModal" (click)="resetTempB()"> Add Bus</button>
                     </h3>
                 </div>
                 <div class="col-md-6">
@@ -125,17 +125,15 @@
 
                     <div class="form-group">
                         <label for="driver">Assign Driver</label>
-                        <select class="form-control" name="busDriver" [(ngModel)]="bus.driver" required #busDriverAdd="ngModel">
+                        <select class="form-control" name="busDriver" [(ngModel)]="bus.driver">
            <option *ngFor="let driver of drivers" [value] = "driver.driver_id">{{driver.driver_firstname}} {{driver.driver_lastname}}</option>
          </select>
-                        <div *ngIf="busDriverAdd.errors && busDriverAdd.touched" class="alert alert-danger">
-                            <div [hidden]="!busDriverAdd.errors.required">Driver is required</div>
-                        </div>
+                        
                     </div>
                     <label>Status</label>
                     <br>
                     <div class="form-group; btn-group" data-toggle="buttons">
-                        <select class="form-control" name="busStatus" [(ngModel)]="bus.status">
+                        <select class="form-control" name="busStatus" [(ngModel)]="bus.status" value = "Inactive">
           <option value = "Inactive" selected >Inactive</option>
           <option value = "Active">Active</option>
         </select>
@@ -283,14 +281,11 @@
                     </div>
                     <div class="form-group">
                         <label for="driver">Assign Driver</label>
-                        <select class="form-control" name="busDriver" [(ngModel)]="bus.driver" required #driverB="ngModel">
+                        <select class="form-control" name="busDriver" [(ngModel)]="bus.driver">
                    <option *ngFor="let driver of drivers" [value] = "driver.driver_id" >
                      {{driver.driver_firstname}} {{driver.driver_lastname}}
                    </option>
                  </select>
-                        <div *ngIf="driverB.errors && driverB.touched" class="alert alert-danger">
-                            <div [hidden]="!driverB.errors.required">Driver is required</div>
-                        </div>
                     </div>
                     <label>Status</label>
                     <br>
@@ -304,7 +299,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)=" busFormE.reset()">Close</button>
-                <button type="button" class="btn btn-primary"  [disabled]="!busFormE.form.valid" (click)="         closeEditBus('EditBusModal')">Save changes</button>
+                <button type="button" class="btn btn-primary"  [disabled]="!busFormE.form.valid" (click)="closeEditBus('EditBusModal')">Save changes</button>
             </div>
         </div>
     </div>

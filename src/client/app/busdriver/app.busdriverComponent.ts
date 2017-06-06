@@ -61,7 +61,7 @@ export class BusDriverComponent{
   resetTempB(){
     this.bus.name = null;
     this.bus.route = null;
-    this.bus.status = null;
+    this.bus.status = "Inactive";
     this.bus.driver = null;
 
   }
@@ -116,6 +116,7 @@ export class BusDriverComponent{
     this.service
         .deleteDriver(this.drivers[this.myValue].driver_id).subscribe(() => {
         this.getDrivers();
+        this.getBuses();
         });;
   }
 

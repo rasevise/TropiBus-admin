@@ -13,14 +13,17 @@ import { Config } from '../shared/config/env.config';
   templateUrl: 'contentArea.html',
   providers: [ MessageService ]
 })
-export class ContentAreaComponent {
-  message: Message = new Message(null,'', Date.now(), '');
+export class ContentAreaComponent{
+  message: Message = new Message(null,'', null, '');
   messages:any[];
+  recentMessages: any[];
 
   //calls child component
   @ViewChild(RoutesComponent) routecomponent: RoutesComponent;
 
   constructor (private MessageService: MessageService){}
+
+
 
   ngOnInit(): void {
     this.getMessages();
@@ -31,12 +34,31 @@ export class ContentAreaComponent {
     .subscribe((messages: any) => {
         this.messages = messages;
     });
+    
   }
 
   public selectedMapTab(): void{
     console.log('selected map tab');
     // this.routecomponent.greyFix();
   }
+
+  // getRecentMessages(): void{
+  //   console.log("hello")
+  //   this.getMessages();
+  //   var date = new Date();
+  //   var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  //   var y: number = 0;
+  //   for(var x: number = 0; x < this.messages.length; x++){
+  //     var exp = new Date(this.messages[x].message_date.getFullYear(), this.messages[x].message_date.getMonth(), this.messages[x].message_date.getDate());
+  //     console.log("EXPDate" + exp.getTime())
+  //     if(exp.getTime() < today.getTime()){
+  //       this.recentMessages[y] = this.messages[x];
+  //       y++;
+  //     }
+  //   }
+
+  // }
+
 
 
 
