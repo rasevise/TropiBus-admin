@@ -52,8 +52,7 @@ export class BusDriverService {
     return this.http
     .delete(`${Config.API}`+ this._driversURL + '/deleteDriver' + '/?id=' + id, { headers:this.headers })
     .map((res: Response) => res.json())
-    .catch(this.handleError)
-    .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
+    .catch(this.handleError);
   }
 
   createDriver(driver: any) {
@@ -61,8 +60,7 @@ export class BusDriverService {
       .post(`${Config.API}`+ this._driversURL + '/addDriver', JSON.stringify({name: driver.name,
          lastName: driver.lastName, username : driver.username, password: driver.password}), { headers:this.headers })
       .map((res: Response) => res.json().data)
-      .catch(this.handleError)
-      .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
+      .catch(this.handleError);
   }
 
   updateDriver(driver: any, id: any) {
@@ -70,8 +68,7 @@ export class BusDriverService {
     .put(`${Config.API}`+ this._driversURL + '/updateDriver', JSON.stringify({name: driver.name,
         lastName: driver.lastName, username : driver.username, password: driver.password, id: id}), { headers:this.headers })
     .map((res: Response) => res.json().data)
-    .catch(this.handleError)
-    .subscribe((res:Response) => { this.postResponse = res; console.log(res); });
+    .catch(this.handleError);
   }
 
   /**

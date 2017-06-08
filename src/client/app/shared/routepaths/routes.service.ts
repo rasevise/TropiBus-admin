@@ -8,23 +8,22 @@ import { Config } from '../config/env.config';
 @Injectable()
 export class RoutesService {
   private headers = new Headers({'Content-Type': 'application/json'});
-  postResponse:any;
 
   constructor (private http: Http ) {}
 
-  getPaths(){
+  getPaths() {
     return this.http.get(`${Config.API}/routes`, {headers: this.headers})
     .map((res: Response) => res.json())
     .catch(this.handleError);
   }
 
-  getBusLocation(){
+  getBusLocation() {
     return this.http.get(`${Config.API}/routes/getBusLocation`, {headers: this.headers})
     .map((res: Response) => res.json())
     .catch(this.handleError);
   }
 
-  getPath(r_id: any){
+  getPath(r_id: any) {
     return this.http.get(`${Config.API}/routes/getRoute?r_id=` + r_id, {headers: this.headers})
     .map((res: Response) => res.json())
     .catch(this.handleError);
@@ -41,39 +40,39 @@ export class RoutesService {
     .map((res: Response) => res.json())
     .catch(this.handleError);
   }
-  
+
   delete(stop_id: any, r_id:any): Observable<string[]> {
     return this.http
-    .delete(`${Config.API}/stops/deleteStop` + "/?stop_id=" + stop_id + "&r_id=" + r_id, { headers:this.headers })
+    .delete(`${Config.API}/stops/deleteStop` + '/?stop_id=' + stop_id + '&r_id=' + r_id, { headers:this.headers })
     .map((res: Response) => res.json())
   }
 
   create(stop: any, route_id:number): Observable<string[]> {
     return this.http
-    .post(`${Config.API}/stops/createStop`, 
-    JSON.stringify({stop_name: stop.name, stop_description: stop.description, 
-      stop_latitude: stop.latitude, stop_longitude: stop.longitude, r_id: route_id}), 
+    .post(`${Config.API}/stops/createStop`,
+    JSON.stringify({stop_name: stop.name, stop_description: stop.description,
+      stop_latitude: stop.latitude, stop_longitude: stop.longitude, r_id: route_id}),
     { headers:this.headers })
-    .map((res: Response) => res.json())
+    .map((res: Response) => res.json());
   }
 
   update(stop: any): Observable<string[]> {
     return this.http
-    .put(`${Config.API}/stops/updateStop`, JSON.stringify({stop_name: stop.name, stop_description: stop.description, s_id: stop.stop_id}), 
+    .put(`${Config.API}/stops/updateStop`, JSON.stringify({stop_name: stop.name, stop_description: stop.description, s_id: stop.stop_id}),
     { headers:this.headers })
     .map((res: Response) => res.json().data);
   }
 
   updateOrder(stops: any[]): Observable<string[]> {
     return this.http
-    .put(`${Config.API}/stops/updateStopOrder`, JSON.stringify(stops), 
+    .put(`${Config.API}/stops/updateStopOrder`, JSON.stringify(stops),
     { headers:this.headers })
     .map((res: Response) => res.json().data);
   }
 
   updateRoute(route: any): Observable<string[]> {
     return this.http
-    .put(`${Config.API}/routes/updateRoute`, JSON.stringify({route_name: route.route_name, route_description: route.route_description, route_id: route.route_id}), 
+    .put(`${Config.API}/routes/updateRoute`, JSON.stringify({route_name: route.route_name, route_description: route.route_description, route_id: route.route_id}),
     { headers:this.headers })
     .map((res: Response) => res.json().data);
   }

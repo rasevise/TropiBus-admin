@@ -53,7 +53,6 @@ export function init(port: number, mode: string) {
     };
     app.get('/*', renderIndex);
 
-
     app.listen(port, (err:any) => {
       if (err) {
         return console.log('something bad happened', err);

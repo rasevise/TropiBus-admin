@@ -139,7 +139,7 @@ export class SeedConfig {
    * The bootstrap file to be used to boot the application.
    * @type {string}
    */
-  BOOTSTRAP_MODULE = `${this.BOOTSTRAP_DIR}/main`;
+  BOOTSTRAP_MODULE = `${this.BOOTSTRAP_DIR}/` + 'main';
 
   BOOTSTRAP_PROD_MODULE = `${this.BOOTSTRAP_DIR}/` + 'main';
 
@@ -409,7 +409,6 @@ export class SeedConfig {
       '@angular/platform-browser-dynamic': 'node_modules/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic.umd.js',
       '@angular/router': 'node_modules/@angular/router/bundles/router.umd.js',
       '@angular/animations/browser': 'node_modules/@angular/animations/bundles/animations-browser.umd.js',
-
       '@angular/common/testing': 'node_modules/@angular/common/bundles/common-testing.umd.js',
       '@angular/compiler/testing': 'node_modules/@angular/compiler/bundles/compiler-testing.umd.js',
       '@angular/core/testing': 'node_modules/@angular/core/bundles/core-testing.umd.js',
@@ -520,7 +519,7 @@ export class SeedConfig {
       'rxjs': {
         main: 'Rx.js',
         defaultExtension: 'js'
-      }
+      },
     },
   };
 
@@ -603,7 +602,7 @@ export class SeedConfig {
             [`${this.APP_BASE}${this.APP_SRC}`]: this.APP_SRC,
             [`${this.APP_BASE}${this.APP_DEST}`]: this.APP_DEST,
             [`${this.APP_BASE}node_modules`]: 'node_modules',
-            [`${this.APP_BASE.replace(/\/$/, '')}`]: this.APP_DEST
+            [`${this.APP_BASE.replace(/\/$/, '')}`]: this.APP_DEST,
           }
         }
       },
@@ -629,7 +628,7 @@ export class SeedConfig {
         targetFile: `${this.CSS_BUNDLE_NAME}.css`,
         options: {
           rebaseUrls: false
-        }
+        },
       }
     };
 
@@ -651,7 +650,7 @@ export class SeedConfig {
         dir: this.COVERAGE_DIR + '/',
         reporters: [
           { type: 'json', subdir: '.', file: 'coverage-final.json' },
-          { type: 'html', subdir: '.' }
+          { type: 'html', subdir: '.' },
         ]
       },
       remapIstanbulReporter: {

@@ -19,12 +19,17 @@ export class MessageService {
     .catch(this.handleError);
   }
 
+  // getRecentMessages(): Observable<any[]> {
+  //   return this.http.get(`${Config.API}/recentMessages`, { headers:this.headers })
+  //   .map((res: Response) => res.json())
+  //   .catch(this.handleError);
+  // }
+
     delete(i: number){
       console.log('delete i :' + i);
     return this.http
     .delete(`${Config.API}/messages/deleteMessage` + '/?id=' + i, { headers:this.headers })
     .map((res: Response) => res.json())
-    .subscribe((res:Response) => { this.postResponse = res; console.log(res); })
   }
     create(message: any, index: number): Observable<any[]>{
     return this.http

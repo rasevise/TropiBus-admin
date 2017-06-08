@@ -3,7 +3,7 @@ import { Validators, FormGroup, FormArray, FormBuilder } from '@angular/forms';
 
 @Component({
   moduleId: module.id,
-  selector: 'app',
+  selector: 'main-app',
   templateUrl: 'app.component.html',
   providers:[ ],
 })

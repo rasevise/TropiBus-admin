@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { MessageService } from '../shared/messages/app.messageService'
+import { MessageService } from '../shared/messages/app.messageService';
 import { Message } from '../messages/messages';
 import { Observable } from 'rxjs/Rx';
 import { Inject } from '@angular/core';
@@ -9,34 +9,56 @@ import { Config } from '../shared/config/env.config';
 
 @Component({
   moduleId: module.id,
-  selector: 'contentarea',
+  selector: 'content-area',
   templateUrl: 'contentArea.html',
   providers: [ MessageService ]
 })
 export class ContentAreaComponent{
-  message: Message = new Message(null,'', Date.now(), '');
+  message: Message = new Message(null,'', null, '');
   messages:any[];
+  recentMessages: any[];
 
   //calls child component
   @ViewChild(RoutesComponent) routecomponent: RoutesComponent;
 
   constructor (private MessageService: MessageService){}
 
-   ngOnInit(): void {
+
+
+  ngOnInit(): void {
     this.getMessages();
   }
 
-  getMessages(): void{
+  getMessages(): void {
     this.MessageService.getMessages()
     .subscribe((messages: any) => {
         this.messages = messages;
     });
+    
   }
 
   public selectedMapTab(): void{
     console.log('selected map tab');
     // this.routecomponent.greyFix();
   }
+
+  // getRecentMessages(): void{
+  //   console.log("hello")
+  //   this.getMessages();
+  //   var date = new Date();
+  //   var today = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+  //   var y: number = 0;
+  //   for(var x: number = 0; x < this.messages.length; x++){
+  //     var exp = new Date(this.messages[x].message_date.getFullYear(), this.messages[x].message_date.getMonth(), this.messages[x].message_date.getDate());
+  //     console.log("EXPDate" + exp.getTime())
+  //     if(exp.getTime() < today.getTime()){
+  //       this.recentMessages[y] = this.messages[x];
+  //       y++;
+  //     }
+  //   }
+
+  // }
+
 
 
 

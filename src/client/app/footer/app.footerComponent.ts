@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 
 @Component({
   moduleId: module.id,
-  selector: 'footer',
+  selector: 'footer-component',
   templateUrl: 'footer.html',
 })
-export class footerComponent  {
+export class FooterComponent  {
 
 }
