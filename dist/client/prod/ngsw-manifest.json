@@ -1,17 +1,12 @@
 {
   "static": {
     "urls": {
-<<<<<<< HEAD
-      "/index.html": "a0b4db3b8afbf8cf60d7e83c8da92a1b98aff944",
+      "/index.html": "47373532765e08b6bd957e8a062d7d04d8d4cff8",
       "/worker-basic.min.js": "72cc18504609557733120ef137edcc35fdf5670d",
       "/assets/favicon.ico": "32144a2be28d83d4ea08e414f46120a35e48787f",
-      "/css/main.css": "ba7e3578e0c2a43a590f637176697c45482f0922",
-      "/js/app.js": "bd101315589580c24fa997670f28d44f20b4c475",
+      "/css/main.css": "8b032837286be8442326adf94783d643a30c565d",
+      "/js/app.js": "edaba36738b40d3131092c60a9ba48569fc1637d",
       "/js/shims.js": "ed9680e82bf321d8a81e44ca987a0435de070d8d",
-      "/assets/graphics/busimg.jpg": "b6ada94be0e79e0e3db49b7fd583e9d7b3ede3f3",
-      "/assets/graphics/driverimg.png": "334e1be2fa32cfdc6220ab7dda587eb574e39bc1",
-      "/assets/graphics/routeimg.jpg": "c1ae3f76c49e5954463fa1dd81368551d7a5d12e",
-      "/assets/graphics/tropibuslogo.png": "bf7e30e58d2536ec50beb570485efec05208f508",
       "/assets/favicon/android-chrome-192x192.png": "255bba2ae79bb04a9a79673ab22808663abf4f81",
       "/assets/favicon/android-chrome-512x512.png": "eaaf7dfc43a1d9c9e92385852d36d92b2a4a6f66",
       "/assets/favicon/apple-touch-icon.png": "8651f777337e5df6d6a5d70bf0c57b235b2c1d35",
@@ -24,37 +19,11 @@
       "/assets/favicon/manifest.json": "16b3dbc8c3a43038d6e2746038e45fe6038072cb",
       "/assets/favicon/mstile-150x150.png": "c35eccd8f706b7bde58b4d4c0b6142ad27e071f9",
       "/assets/favicon/safari-pinned-tab.svg": "64de30c983823dd60a721289e238ab1f57deb392",
+      "/assets/graphics/busimg.jpg": "b6ada94be0e79e0e3db49b7fd583e9d7b3ede3f3",
+      "/assets/graphics/driverimg.png": "334e1be2fa32cfdc6220ab7dda587eb574e39bc1",
+      "/assets/graphics/routeimg.jpg": "c1ae3f76c49e5954463fa1dd81368551d7a5d12e",
+      "/assets/graphics/tropibuslogo.png": "bf7e30e58d2536ec50beb570485efec05208f508",
       "/assets/svg/more.svg": "9838cd822e0f989a0befbd365365ee2751bbdebc"
-=======
-      "/index.html": "a95ef8abd784ca9d0f900e36b5ee2072bf02dd15",
-      "/worker-basic.min.js": "72cc18504609557733120ef137edcc35fdf5670d",
-      "/assets\\favicon.ico": "32144a2be28d83d4ea08e414f46120a35e48787f",
-      "/css\\main.css": "8b032837286be8442326adf94783d643a30c565d",
-      "/js\\app.js": "e0ca3135a1e646e7a2e4e35fa6772f2fad8b8357",
-      "/js\\shims.js": "ed9680e82bf321d8a81e44ca987a0435de070d8d",
-      "/assets\\favicon\\android-chrome-192x192.png": "255bba2ae79bb04a9a79673ab22808663abf4f81",
-      "/assets\\favicon\\android-chrome-512x512.png": "eaaf7dfc43a1d9c9e92385852d36d92b2a4a6f66",
-      "/assets\\favicon\\apple-touch-icon.png": "8651f777337e5df6d6a5d70bf0c57b235b2c1d35",
-      "/assets\\favicon\\browserconfig.xml": "4e104bfc1559f3088f25edc3409e9677415226ca",
-      "/assets\\favicon\\favicon-16x16.png": "b6b53323ff3ae00170f20dba04fb85b0c6d48166",
-      "/assets\\favicon\\favicon-32x32.png": "cd3346523673e08fe58a5baa93b4323012dafb75",
-      "/assets\\favicon\\favicon-DEV.ico": "aa4fb0706ed367fb5c2fd6bd2b058c0dce8cc785",
-      "/assets\\favicon\\favicon-PROD.ico": "5d40a29d26398292f08a46b26f6788ec60f5f43e",
-      "/assets\\favicon\\favicon.ico": "32144a2be28d83d4ea08e414f46120a35e48787f",
-      "/assets\\favicon\\manifest.json": "a984b07d37e4ad3c919eb5b8abbc61e46911adbf",
-      "/assets\\favicon\\mstile-150x150.png": "c35eccd8f706b7bde58b4d4c0b6142ad27e071f9",
-      "/assets\\favicon\\safari-pinned-tab.svg": "b5b08b2b13b0e0360542ccfe2f974105a02abe28",
-      "/assets\\graphics\\busimg.jpg": "b6ada94be0e79e0e3db49b7fd583e9d7b3ede3f3",
-      "/assets\\graphics\\driverimg.png": "334e1be2fa32cfdc6220ab7dda587eb574e39bc1",
-      "/assets\\graphics\\routeimg.jpg": "c1ae3f76c49e5954463fa1dd81368551d7a5d12e",
-      "/assets\\graphics\\tropibuslogo.png": "bf7e30e58d2536ec50beb570485efec05208f508",
-      "/assets\\svg\\more.svg": "9838cd822e0f989a0befbd365365ee2751bbdebc",
-      "/typings\\google-maps\\package.json": "6d3531d3caef167785001ccba9502ac1ea58f272",
-      "/typings\\google-maps\\README.md": "eb1634a1f426bcca47f4edad89ef21db654f6954",
-      "/typings\\google-maps\\types-metadata.json": "4e40074f4517fff428b97b37cc98d57809ca8ef9",
-      "/typings\\googlemaps\\package.json": "a160244190edb7a86291f50bbed846273886b178",
-      "/typings\\googlemaps\\README.md": "34d6f40c9f31c80385adf08b105ecb86f26fd7c6"
->>>>>>> 0feb32b0ffd0d47722b1510bc862a0cad7014162
     }
   },
   "routing": {
