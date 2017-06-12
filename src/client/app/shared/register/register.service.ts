@@ -34,8 +34,9 @@ export class RegisterService {
         .catch(this.handleError);
     }
 
-    getAdmin(id: any): Observable<any> {
+    getAdmin(): Observable<any> {
     let headers = new Headers({ 'Content-Type': 'application/json' });
+    let id = JSON.parse(localStorage.getItem('currentUser')).admin
         return this.http.get(`${Config.API}/register/getAdmin?id=` + id, { headers:headers })
         .map((response: Response) => response.json())
         .catch(this.handleError);

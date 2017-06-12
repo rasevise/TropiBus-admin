@@ -12,11 +12,11 @@ app.get('/register/getAdmin', (req, res, next) => {
     res.contentType('application/json');
     db.query(getAdmin, [req.query.id], (err:any, result:any) => {
         if (err) {
-            console.error( err);
+            console.error(err);
             result.send('Error ' + err);
         }else {
             res.json(result.rows[0]);
-    }
+        }
     });
 });
 

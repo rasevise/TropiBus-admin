@@ -18,7 +18,7 @@ app.get(_routesURL, (req, res, next) => {
             if (err) {
               console.error(err); res.send('Error ' + err);
             }else {
-            res.json(result.rows);
+              res.json(result.rows);
             }
     });
 });
@@ -30,7 +30,7 @@ app.get(_routesURL + '/countDriver', (req, res, next) => {
             if (err) {
               console.error(err); res.send('Error ' + err);
             }else {
-            res.json(result.rows[0].count);
+              res.json(result.rows[0].count);
             }
     });
 });
@@ -42,7 +42,7 @@ app.get(_routesURL + '/countBus', (req, res, next) => {
             if (err) {
               console.error(err); res.send('Error ' + err);
             }else {
-            res.json(result.rows[0].count);
+              res.json(result.rows[0].count);
             }
     });
 });
@@ -53,7 +53,7 @@ app.get(_routesURL + '/getRoute', (req, res, next) => {
     if (err) {
       console.error(err); res.send('Error ' + err);
     }else {
-    res.json(result.rows);
+      res.json(result.rows);
     }
   });
 });
@@ -78,7 +78,7 @@ app.get(_routesURL + '/getBusLocation', (req, res, next) => {
   res.contentType('application/json');
   db.query(getBusLocation, null, (err:any, result:any) => {
     if (err) {
-        res.send('Error ' + err);
+      res.send('Error ' + err);
     }else {
       res.json(result.rows);
     }
