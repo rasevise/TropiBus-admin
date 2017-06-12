@@ -54,7 +54,6 @@ app.get(_routesURL + '/getBusLocation', (req, res, next) => {
     if (err) {
         res.send('Error ' + err);
     }else {
-      console.error(result.rows);
       res.json(result.rows);
     }
   });

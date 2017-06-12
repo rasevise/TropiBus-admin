@@ -10,7 +10,6 @@ var token = jwt.sign({ token: 'tropitoken'}, 'tropi');
 var admin;
 //Method to validate Login info with db
 app.post(`/login/authenticate`, (req:any, res:any) => {
-    console.log('inside server: ' + req.body.username);
   db.query(checkCredentials,[req.body.username, req.body.password] ,function(err:any, result:any) {
     if (err) {
         console.error(err);
@@ -22,7 +21,7 @@ app.post(`/login/authenticate`, (req:any, res:any) => {
             });
         }else {
             admin = result.rows[0];
-            res.json({admin, token});
+            res.json(admin, token);
         }
     }
     });

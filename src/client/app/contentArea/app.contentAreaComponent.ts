@@ -19,7 +19,7 @@ export class ContentAreaComponent{
   recentMessages: any[];
 
   //calls child component
-  @ViewChild(RoutesComponent) routecomponent: RoutesComponent;
+  // @ViewChild(RoutesComponent) routecomponent: RoutesComponent;
 
   constructor (private MessageService: MessageService){}
 
@@ -37,10 +37,10 @@ export class ContentAreaComponent{
     
   }
 
-  public selectedMapTab(): void{
-    console.log('selected map tab');
-    // this.routecomponent.greyFix();
-  }
+  // public selectedMapTab(): void{
+  //   console.log('selected map tab');
+  //   this.routecomponent.loadMap();
+  // }
 
   // getRecentMessages(): void{
   //   console.log("hello")
