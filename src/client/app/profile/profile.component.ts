@@ -37,7 +37,8 @@ export class ProfileComponent implements OnInit {
     }
 
     getCurrentUser(){
-        this.registerService.getAdmin(JSON.parse(localStorage.getItem('currentUser').toString()).admin)
+        const adminId = JSON.parse(localStorage.getItem('currentUser')).admin;
+        this.registerService.getAdmin(adminId)
         .subscribe(
             data => {
                 this.user.name = data.admin_first_name;
