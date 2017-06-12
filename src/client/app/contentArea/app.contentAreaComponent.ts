@@ -30,8 +30,14 @@ export class ContentAreaComponent{
 
   ngOnInit(): void {
     this.getMessages();
-    this.getBusCount();
-    this.getDriverCount();
+    this.getCounts(this);
+  }
+
+  getCounts(that:any){
+    setInterval(function(){
+      that.getBusCount();
+      that.getDriverCount();
+    }, 4000);
   }
 
   getMessages(): void {
