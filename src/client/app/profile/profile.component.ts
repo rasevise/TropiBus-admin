@@ -37,15 +37,13 @@ export class ProfileComponent implements OnInit {
     }
 
     getCurrentUser(){
-        // console.log(localStorage.getItem('currentUser'));
-        this.registerService.getAdmin(1)
+        this.registerService.getAdmin(JSON.parse(localStorage.getItem('currentUser').toString()).admin)
         .subscribe(
             data => {
                 this.user.name = data.admin_first_name;
                 this.user.last = data.admin_last_name;
                 this.user.password = data.admin_password;
                 this.user.id = data.admin_id;
-                console.log(this.user);
             }
         )
     }
@@ -56,7 +54,6 @@ export class ProfileComponent implements OnInit {
             .subscribe(
                 data => {
                     this.loading = false;
-                    console.log(data);
                     this.successAlert('User successfully updated!');
                 },
                 error => {

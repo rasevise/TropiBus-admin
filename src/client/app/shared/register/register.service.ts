@@ -25,7 +25,7 @@ export class RegisterService {
     updateProfile(user: any): Observable<string[]>  {
     let headers = new Headers({ 'Content-Type': 'application/json' });
         return this.http.put(`${Config.API}/register/update`, 
-        JSON.stringify({ name: user.name, last: user.last, username: user.username, password: user.password }), 
+        JSON.stringify({ name: user.name, last: user.last, password: user.password, id: user.id }), 
         {headers: headers})
         .map((response: Response) => 
             response.json()

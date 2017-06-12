@@ -5,6 +5,8 @@ var getAllRoutes = 'SELECT * FROM Route NATURAL JOIN routepath';
 var getRoute = 'SELECT * FROM route NATURAL JOIN routepath WHERE route_id = $1';
 var updateRoute = 'UPDATE Route SET route_name=$1, route_description=$2 WHERE route_id=$3';
 var getBusLocation = 'SELECT gps_latitude, gps_longitude, bus_name FROM bus NATURAL JOIN gps WHERE bus_status=\'Active\'';
+var countDriver = 'SELECT COUNT(*) FROM driver WHERE driver_status=\'Logged\'';
+var countBus = 'SELECT COUNT(*) FROM bus WHERE bus_status=\'Active\'';
 
 export function routes(app: express.Application) {
 
@@ -17,6 +19,30 @@ app.get(_routesURL, (req, res, next) => {
               console.error(err); res.send('Error ' + err);
             }else {
             res.json(result.rows);
+            }
+    });
+});
+
+app.get(_routesURL + '/countDriver', (req, res, next) => {
+    console.log('inside routes get');
+    res.contentType('application/json');
+    db.query(countDriver, null, (err:any, result:any) => {
+            if (err) {
+              console.error(err); res.send('Error ' + err);
+            }else {
+            res.json(result.rows[0].count);
+            }
+    });
+});
+
+app.get(_routesURL + '/countBus', (req, res, next) => {
+    console.log('inside routes get');
+    res.contentType('application/json');
+    db.query(countBus, null, (err:any, result:any) => {
+            if (err) {
+              console.error(err); res.send('Error ' + err);
+            }else {
+            res.json(result.rows[0].count);
             }
     });
 });
