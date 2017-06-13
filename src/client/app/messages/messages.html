@@ -12,32 +12,7 @@
             </div>
             <br>
             <div>
-<<<<<<< HEAD
-                <div *ngFor="let message of messages; let i = index">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h5>
-                                    {{message.message_text}} 
-                                    <button id="editMessageButton" type="button" class="btn btn-primary" (click)="setValue(i); setTemp()" data-toggle="modal" data-target="#EditMessageModal">
-                    Edit
-                  </button>
-                                    <button id="messageDeleteButton" class="btn btn-danger btn md" type="button" (click)=" setValue(i); confirmDeleteMessage()">
-                  Delete
-                  </button>
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card-footer text-muted">
-                                {{message.message_date| date}}
-                            </div>
-=======
                 <div class="list-group">
                     <a *ngFor="let message of messages; let i = index" href="#" class="list-group-item list-group-item-action flex-column align-items-start">
                         <div class="d-flex w-100 justify-content-between">
@@ -52,7 +27,6 @@
                              Delete
                          </a>
                         </div>
->>>>>>> be31f0d9a829f1bfbd36a72764f80765e70c655a
                         </div>
                         </div>
                         <p class="mb-1">{{message.message_text}}</p>

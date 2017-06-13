@@ -1,12 +1,11 @@
 {
   "static": {
     "urls": {
-<<<<<<< HEAD
-      "/index.html": "921e0a0ad32736aa175526ad943c33d91dcd53ad",
+      "/index.html": "45d45802162873fbcbe96acf283f61295ddda07c",
       "/worker-basic.min.js": "fc1cdb3d873dacf8b8e779c702f4afa7b7773c4a",
       "/assets\\favicon.ico": "32144a2be28d83d4ea08e414f46120a35e48787f",
       "/css\\main.css": "8b032837286be8442326adf94783d643a30c565d",
-      "/js\\app.js": "e9e78bca1c8d8d464e43ff550428620068024a35",
+      "/js\\app.js": "9047975285faf4f5d0a4e0ab3074693594513658",
       "/js\\shims.js": "0e727e22df019cb3fcbedaab17cfa1752aa85698",
       "/assets\\favicon\\android-chrome-192x192.png": "255bba2ae79bb04a9a79673ab22808663abf4f81",
       "/assets\\favicon\\android-chrome-512x512.png": "eaaf7dfc43a1d9c9e92385852d36d92b2a4a6f66",
@@ -22,35 +21,10 @@
       "/assets\\favicon\\safari-pinned-tab.svg": "b5b08b2b13b0e0360542ccfe2f974105a02abe28",
       "/assets\\graphics\\busimg.jpg": "b6ada94be0e79e0e3db49b7fd583e9d7b3ede3f3",
       "/assets\\graphics\\driverimg.png": "334e1be2fa32cfdc6220ab7dda587eb574e39bc1",
+      "/assets\\graphics\\profile.png": "5a958a1036fb2fbef128ee87ebd428f41f99df15",
       "/assets\\graphics\\routeimg.jpg": "c1ae3f76c49e5954463fa1dd81368551d7a5d12e",
       "/assets\\graphics\\tropibuslogo.png": "bf7e30e58d2536ec50beb570485efec05208f508",
       "/assets\\svg\\more.svg": "f0ebcdcc3d9f8f58ef7be95a3498229ec55e8eb6"
-=======
-      "/index.html": "774d5e5a5c34d3074dcb925aa6ed799bb01be558",
-      "/worker-basic.min.js": "72cc18504609557733120ef137edcc35fdf5670d",
-      "/assets/favicon.ico": "32144a2be28d83d4ea08e414f46120a35e48787f",
-      "/css/main.css": "8b032837286be8442326adf94783d643a30c565d",
-      "/js/app.js": "db2e466ba0587a1a39c9c6b2cbafd0866c735c1f",
-      "/js/shims.js": "ed9680e82bf321d8a81e44ca987a0435de070d8d",
-      "/assets/favicon/android-chrome-192x192.png": "255bba2ae79bb04a9a79673ab22808663abf4f81",
-      "/assets/favicon/android-chrome-512x512.png": "eaaf7dfc43a1d9c9e92385852d36d92b2a4a6f66",
-      "/assets/favicon/apple-touch-icon.png": "8651f777337e5df6d6a5d70bf0c57b235b2c1d35",
-      "/assets/favicon/browserconfig.xml": "974aea18bda5a95802c06b80126ab1d96d91d708",
-      "/assets/favicon/favicon-16x16.png": "b6b53323ff3ae00170f20dba04fb85b0c6d48166",
-      "/assets/favicon/favicon-32x32.png": "cd3346523673e08fe58a5baa93b4323012dafb75",
-      "/assets/favicon/favicon-DEV.ico": "aa4fb0706ed367fb5c2fd6bd2b058c0dce8cc785",
-      "/assets/favicon/favicon-PROD.ico": "5d40a29d26398292f08a46b26f6788ec60f5f43e",
-      "/assets/favicon/favicon.ico": "32144a2be28d83d4ea08e414f46120a35e48787f",
-      "/assets/favicon/manifest.json": "16b3dbc8c3a43038d6e2746038e45fe6038072cb",
-      "/assets/favicon/mstile-150x150.png": "c35eccd8f706b7bde58b4d4c0b6142ad27e071f9",
-      "/assets/favicon/safari-pinned-tab.svg": "64de30c983823dd60a721289e238ab1f57deb392",
-      "/assets/svg/more.svg": "9838cd822e0f989a0befbd365365ee2751bbdebc",
-      "/assets/graphics/busimg.jpg": "b6ada94be0e79e0e3db49b7fd583e9d7b3ede3f3",
-      "/assets/graphics/driverimg.png": "334e1be2fa32cfdc6220ab7dda587eb574e39bc1",
-      "/assets/graphics/profile.png": "5a958a1036fb2fbef128ee87ebd428f41f99df15",
-      "/assets/graphics/routeimg.jpg": "c1ae3f76c49e5954463fa1dd81368551d7a5d12e",
-      "/assets/graphics/tropibuslogo.png": "bf7e30e58d2536ec50beb570485efec05208f508"
->>>>>>> be31f0d9a829f1bfbd36a72764f80765e70c655a
     }
   },
   "routing": {

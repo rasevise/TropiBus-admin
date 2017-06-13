@@ -8,7 +8,7 @@ let _driversURL = '/drivers';
 app.get(_driversURL, (req, res, next) => {
   console.log('getting messages from server: ');
   res.contentType('application/json');
-  db.query('SELECT * FROM Driver ORDER BY driver_status', null, (err:any, results:any) => {
+  db.query('SELECT * FROM Driver ORDER BY driver_status, driver_firstname', null, (err:any, results:any) => {
     if(err) {
            console.error( err);
             res.send('Error ' + err);

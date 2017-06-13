@@ -8,7 +8,7 @@ let _busesURL = '/buses';
 app.get(_busesURL, (req, res, next) => {
     console.log('getting buses from server: ');
     res.contentType('application/json');
-    db.query('SELECT * FROM Bus NATURAL LEFT JOIN Driver ORDER BY bus_status', null,  (err:any, results:any) => {
+    db.query('SELECT * FROM Bus NATURAL LEFT JOIN Driver ORDER BY bus_status, bus_name', null,  (err:any, results:any) => {
       if (err) {
          console.error(err);
          res.send('Error ' + err);
