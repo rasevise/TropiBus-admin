@@ -7,7 +7,7 @@
                     <h4>Administrator Messages</h4>
                 </div>
                 <div class="col-md-3">
-                    <button id="addMessageButton" type="button" class="btn btn-primary" data-toggle="modal" (click)="resetTemp()" data-target="#AddMessageModal">Add Message</button>
+                    <button id="addMessageButton" type="button" class="btn btn-success" data-toggle="modal" (click)="resetTemp()" data-target="#AddMessageModal">Add Message</button>
                 </div>
             </div>
             <br>
@@ -16,7 +16,17 @@
                     <a *ngFor="let message of messages; let i = index" href="#" class="list-group-item list-group-item-action flex-column align-items-start">
                         <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">{{message.message_title}}</h5>
+                        <div>
                         <small>{{message.message_date| date}}</small>
+                        <div>
+                        <a href="javascript:void(0)" id="editMessageButton" class="btn-sm btn-primary" (click)="setValue(i); setTemp()" data-toggle="modal" data-target="#EditMessageModal">
+                            Edit
+                         </a>
+                        <a href="javascript:void(0)" id="messageDeleteButton" class="btn-sm btn-danger" (click)=" setValue(i); confirmDeleteMessage()">
+                             Delete
+                         </a>
+                        </div>
+                        </div>
                         </div>
                         <p class="mb-1">{{message.message_text}}</p>
                     </a>

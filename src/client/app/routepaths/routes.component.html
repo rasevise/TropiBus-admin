@@ -56,8 +56,8 @@
                             <p class="card-text">{{m_route.route_area}}</p>
                         </div>
                         <div class="card-block col-md-4">
-                            <h5 class="card-title">Status</h5>
-                            <p class="card-text">{{m_route.route_status}}</p>
+                            <h5 class="card-title">Description</h5>
+                            <p class="card-text">{{m_route.route_description}}</p>
                         </div>
                     </div>
                     <div id="StopEditFields" [collapse]="isCollapsed" class="card card-outline-secondary">
@@ -138,17 +138,6 @@
                                     <button (click)="isCollapsed = true; setEmptyStop();" href="javascript:void(0)" class="btn btn-secondary btn-md" role="button" aria-pressed="true">
                   Cancel
                   </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!--Description-->
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="card w-100 card-outline-info">
-                                <div class="card-block">
-                                    <h5 class="card-title">Description</h5>
-                                    <p class="card-text">{{m_route.route_description}}</p>
                                 </div>
                             </div>
                         </div>

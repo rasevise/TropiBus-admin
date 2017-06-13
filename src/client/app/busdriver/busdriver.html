@@ -4,7 +4,7 @@
                 <div class="col-md-6">
                     <h3>
                         Bus
-                        <button id="addDriversButton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddBusModal" (click)="resetTempB()"> Add Bus</button>
+                        <button id="addDriversButton" type="button" class="btn btn-success" data-toggle="modal" data-target="#AddBusModal" (click)="resetTempB()"> Add Bus</button>
                     </h3>
                     <div class="table-responsive">
                         <table class="table table table-bordred table-striped" id="busList">
@@ -24,10 +24,10 @@
                                     <td>{{getAssignedRoute(bus.route_id)}}</td>
                                     <td>{{bus.bus_status}}</td>
                                     <td>
-                                            <button id="editBusButton" type="button" class="btn btn-primary btn-md" (click)="setValue(i); setTempB()" data-toggle="modal" data-target="#EditBusModal">
+                                            <button id="editBusButton" type="button" class="btn btn-primary btn-sm" (click)="setValue(i); setTempB()" data-toggle="modal" data-target="#EditBusModal">
                      Edit
                     </button>
-                                            <button id="deleteBusButton" class="btn btn-danger btn md" type="button" (click)="setValue(i); confirmDeleteBus()">
+                                            <button id="deleteBusButton" class="btn btn-danger btn-sm" type="button" (click)="setValue(i); confirmDeleteBus()">
                       Delete
                     </button>
                                     </td>
@@ -39,7 +39,7 @@
                 <div class="col-md-6">
                     <h3>
                         Drivers
-                        <button id="addDriversButton" (click)="driverFormA.reset(); resetTempD()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddDriverModal"> Add Driver</button>
+                        <button id="addDriversButton" (click)="driverFormA.reset(); resetTempD()" type="button" class="btn btn-success" data-toggle="modal" data-target="#AddDriverModal"> Add Driver</button>
                     </h3>
                     <div class="table-responsive">
                     <table class="table table-hover" id="driverList">
@@ -57,10 +57,10 @@
                                     <td>{{driver.driver_lastname}}</td>
                                     <td>{{driver.driver_status}}</td>
                                     <td>
-                                            <button id="editDriverButton" type="button" class="btn btn-primary" (click)="setValue(i); setTempD()" data-toggle="modal" data-target="#EditDriverModal">
+                                            <button id="editDriverButton" type="button" class="btn btn-primary btn-sm" (click)="setValue(i); setTempD()" data-toggle="modal" data-target="#EditDriverModal">
                     Edit
                     </button>
-                                            <button id="deleteDriverButton" class="btn btn-danger btn md" type="button" (click)="setValue(i); confirmDeleteDriver()">
+                                            <button id="deleteDriverButton" class="btn btn-danger btn-sm" type="button" (click)="setValue(i); confirmDeleteDriver()">
                     Delete
                     </button>
                                     </td>
