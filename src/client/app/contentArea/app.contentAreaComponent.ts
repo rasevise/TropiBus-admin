@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { MessageService } from '../shared/messages/app.messageService';
+import { RoutesService } from '../shared/routepaths/routes.service';
 import { Message } from '../messages/messages';
 import { Observable } from 'rxjs/Rx';
 import { Inject } from '@angular/core';
@@ -17,16 +18,26 @@ export class ContentAreaComponent{
   message: Message = new Message(null,'', null, '');
   messages:any[];
   recentMessages: any[];
+  countDriver:any;
+  countBus:any;
 
   //calls child component
-  @ViewChild(RoutesComponent) routecomponent: RoutesComponent;
+  // @ViewChild(RoutesComponent) routecomponent: RoutesComponent;
 
-  constructor (private MessageService: MessageService){}
+  constructor (private MessageService: MessageService, private RoutesService: RoutesService){}
 
 
 
   ngOnInit(): void {
     this.getMessages();
+    this.getCounts(this);
+  }
+
+  getCounts(that:any){
+    setInterval(function(){
+      that.getBusCount();
+      that.getDriverCount();
+    }, 4000);
   }
 
   getMessages(): void {
@@ -34,13 +45,24 @@ export class ContentAreaComponent{
     .subscribe((messages: any) => {
         this.messages = messages;
     });
-    
   }
 
-  public selectedMapTab(): void{
-    console.log('selected map tab');
-    // this.routecomponent.greyFix();
+  getBusCount(): void {
+    this.RoutesService.getCountBus()
+    .subscribe((countBus: any) => {
+        this.countBus = countBus;
+    });
   }
+  getDriverCount(): void {
+    this.RoutesService.getCountDriver()
+    .subscribe((countDriver: any) => {
+        this.countDriver = countDriver;
+    });
+  }
+  // public selectedMapTab(): void{
+  //   console.log('selected map tab');
+  //   this.routecomponent.loadMap();
+  // }
 
   // getRecentMessages(): void{
   //   console.log("hello")

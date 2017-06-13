@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-9" id="mainTabs">
             <tabset #staticTabs>
-                <tab heading="Map Overview" (select)="selectedMapTab()">
+                <tab heading="Map Overview">
                     <!--map component-->
                     <routes-component></routes-component>
                 </tab>
@@ -23,22 +23,18 @@
         <div class="col-3" id="dashboard">
             <ul class="list-group" id="ActiveItems">
                 <li class="list-group-item justify-content-between">
-                    Active Buses
                     <img alt="busicon" src="../../assets/graphics/busimg.jpg" width="50px" />
-                    <span class="badge badge-default badge-pill">9/18</span>
+                    Active Buses
+                    <span class="badge badge-default badge-pill">{{countBus}}</span>
                 </li>
                 <li class="list-group-item justify-content-between">
-                    Active Drivers
                     <img alt="busicon" src="../../assets/graphics/driverimg.png" width="50px" />
-                    <span class="badge badge-default badge-pill">9/24</span>
-                </li>
-                <li class="list-group-item justify-content-between">
-                    Working Routes
-                    <img alt="busicon" src="../../assets/graphics/routeimg.jpg" width="50px" />
-                    <span class="badge badge-default badge-pill">9/9</span>
+                    Logged Drivers
+                    <span class="badge badge-default badge-pill">{{countDriver}}</span>
                 </li>
             </ul>
             <!--messages-->
+            <br>
             <h6 class="card-title text-center">Messages</h6>
             <div class="list-group">
                 <a href="javascript:void(0)" class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let message of messages; let i = index">

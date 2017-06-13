@@ -17,6 +17,18 @@ export class RoutesService {
     .catch(this.handleError);
   }
 
+  getCountBus() {
+    return this.http.get(`${Config.API}/routes/countBus`, {headers: this.headers})
+    .map((res: Response) => res.json())
+    .catch(this.handleError);
+  }
+
+  getCountDriver() {
+    return this.http.get(`${Config.API}/routes/countDriver`, {headers: this.headers})
+    .map((res: Response) => res.json())
+    .catch(this.handleError);
+  }
+
   getBusLocation() {
     return this.http.get(`${Config.API}/routes/getBusLocation`, {headers: this.headers})
     .map((res: Response) => res.json())

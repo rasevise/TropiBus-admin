@@ -3,13 +3,16 @@
         <div class="col-md-12">
             <br>
             <div class="row">
-                <div class="col-md-12">
-                    <button id="addMessageButton" type="button" class="btn btn-primary" data-toggle="modal" (click)="resetTemp()" data-target="#AddMessageModal">Add Message</button>
-
+                <div class="col-md-9">
+                    <h4>Administrator Messages</h4>
+                </div>
+                <div class="col-md-3">
+                    <button id="addMessageButton" type="button" class="btn btn-success" data-toggle="modal" (click)="resetTemp()" data-target="#AddMessageModal">Add Message</button>
                 </div>
             </div>
             <br>
             <div>
+<<<<<<< HEAD
                 <div *ngFor="let message of messages; let i = index">
                     <div class="row">
                         <div class="col-md-12">
@@ -34,10 +37,28 @@
                             <div class="card-footer text-muted">
                                 {{message.message_date| date}}
                             </div>
+=======
+                <div class="list-group">
+                    <a *ngFor="let message of messages; let i = index" href="#" class="list-group-item list-group-item-action flex-column align-items-start">
+                        <div class="d-flex w-100 justify-content-between">
+                        <h5 class="mb-1">{{message.message_title}}</h5>
+                        <div>
+                        <small>{{message.message_date| date}}</small>
+                        <div>
+                        <a href="javascript:void(0)" id="editMessageButton" class="btn-sm btn-primary" (click)="setValue(i); setTemp()" data-toggle="modal" data-target="#EditMessageModal">
+                            Edit
+                         </a>
+                        <a href="javascript:void(0)" id="messageDeleteButton" class="btn-sm btn-danger" (click)=" setValue(i); confirmDeleteMessage()">
+                             Delete
+                         </a>
                         </div>
-                    </div>
-                    <br>
+>>>>>>> be31f0d9a829f1bfbd36a72764f80765e70c655a
+                        </div>
+                        </div>
+                        <p class="mb-1">{{message.message_text}}</p>
+                    </a>
                 </div>
+                <br>
             </div>
         </div>
     </div>

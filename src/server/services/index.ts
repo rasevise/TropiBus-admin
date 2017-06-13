@@ -5,6 +5,7 @@ import { routes } from './routes';
 import { stops } from './stops';
 import { drivers } from './drivers';
 import { messages } from './messages';
+import { register } from './register';
 
 export function init(app: express.Application) { 
     login(app);
@@ -13,4 +14,5 @@ export function init(app: express.Application) {
     stops(app);
     drivers(app);
     messages(app);
+    register(app);
 }

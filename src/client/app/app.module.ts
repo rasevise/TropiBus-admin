@@ -18,6 +18,7 @@ import { BusDriverComponent }   from './busdriver/app.busdriverComponent';
 import { MessagesComponent }    from './messages/app.messagesComponent';
 import { RoutesComponent }      from './routepaths/routes.component';
 import { RegisterComponent }    from './register/app.registerComponent';
+import { ProfileComponent }     from './profile/profile.component';
 import { Routes }               from './routepaths/routes';
 import { routing }              from './app.routing';
 import { SharedModule }         from './shared/shared.module';
@@ -45,7 +46,8 @@ import { SharedModule }         from './shared/shared.module';
                   MessagesComponent,
                   RoutesComponent,
                   LoginComponent,
-                  RegisterComponent
+                  RegisterComponent,
+                  ProfileComponent
                   ],
   schemas:  [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ],
   bootstrap:    [ AppComponent ],

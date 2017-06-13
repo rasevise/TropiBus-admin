@@ -68,6 +68,7 @@ export class RoutesComponent implements OnInit{
     //checkInternet connection
     this.loadMap();
     this.routes=[];
+    this.buslocation=[];
     this.polylinePaths=[];
     this.locationMarkers=[];
     this.busMarkers=[];
@@ -79,6 +80,11 @@ export class RoutesComponent implements OnInit{
     this.mlatitude = new FormControl('', [Validators.required]);
     this.mroutename = new FormControl('', [Validators.required]);
     this.mroutedesc = new FormControl('', [Validators.required]);
+    this.getBus(this);
+  }
+
+  getBus(that:any){
+    setInterval(function(){that.getBusLocation()}, 4000);
   }
 
   loadMap(){
@@ -282,6 +288,7 @@ export class RoutesComponent implements OnInit{
   }
 
   getBusLocation(){
+    console.log("lgo");
     this.service.getBusLocation()
     .subscribe(busLocation => {
       this.buslocation = busLocation;
