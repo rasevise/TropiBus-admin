@@ -225,7 +225,7 @@
                     </div>
                     <div class="form-group">
                         <label for="">Retype password</label>
-                        <input type="password" class="form-control" name="driverConfirmpassword" [(ngModel)]="driver.confirmpassword" required validateEqual="password" reverse="false" #driverConfirmPasswordAdd="ngModel">
+                        <input type="password" class="form-control" name="driverConfirmpassword" [(ngModel)]="driver.confirmpassword" required validateEqual="driverPassword" reverse="false" #driverConfirmPasswordAdd="ngModel">
                         <div *ngIf="driverConfirmPasswordAdd.errors && (driverConfirmPasswordAdd.dirty || driverConfirmPasswordAdd.touched)" class="alert alert-danger">
                             Password Mismatch
                         </div>
@@ -386,7 +386,7 @@
                     </div>
                     <div class="form-group">
                         <label for="">Retype password</label>
-                        <input type="password" class="form-control" name="driverConfirmPassword" [ngModel]="driver.confirmpassword" required validateEqual="password" reverse="false" #confirmPasswordE="ngModel">
+                        <input type="password" class="form-control" name="driverConfirmPassword" [ngModel]="driver.confirmpassword" required validateEqual="driverPassword" reverse="false" #confirmPasswordE="ngModel">
                         <div *ngIf="confirmPasswordE.errors && (confirmPasswordE.dirty || confirmPasswordE.touched)" class="alert alert-danger">
                             Password Mismatch
                         </div>
