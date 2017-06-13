@@ -105,7 +105,7 @@
 
                     <div class="form-group">
                         <label for="driver">Assign Route</label>
-                        <select class="form-control" name="busRoute" [(ngModel)]="bus.route" >
+                        <select class="form-control" required name="busRoute" [(ngModel)]="bus.route" >
            <option *ngFor="let route of routes" [value] = "route.route_id">{{route.route_name}}</option>
          </select>
                     </div>
@@ -262,7 +262,7 @@
                     </div>
                     <div class="form-group">
                         <label for="driver">Assign Route</label>
-                        <select class="form-control" name="busRoute" [(ngModel)]="bus.route">
+                        <select class="form-control" required name="busRoute" [(ngModel)]="bus.route">
                   <option *ngFor="let route of routes" [value] = "route.route_id">{{route.route_name}}</option>
                 </select>
                     </div>
