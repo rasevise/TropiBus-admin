@@ -6,7 +6,9 @@ import { stops } from './stops';
 import { drivers } from './drivers';
 import { messages } from './messages';
 import { register } from './register';
-
+import { bustrack } from './bustrackingRoutes'
+import { userApp } from './timuserRoutes'
+ 
 export function init(app: express.Application) { 
     login(app);
     buses(app);
@@ -15,4 +17,6 @@ export function init(app: express.Application) {
     drivers(app);
     messages(app);
     register(app);
+    bustrack(app);
+    userApp(app);
 }
