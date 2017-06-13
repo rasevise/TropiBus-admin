@@ -3,37 +3,34 @@
         <div class="col-md-12">
             <br>
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-9">
+                    <h4>Administrator Messages</h4>
+                </div>
+                <div class="col-md-3">
                     <button id="addMessageButton" type="button" class="btn btn-primary" data-toggle="modal" (click)="resetTemp()" data-target="#AddMessageModal">Add Message</button>
-
                 </div>
             </div>
             <br>
             <div>
                 <div *ngFor="let message of messages; let i = index">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div>
-                                <h4>
-                                    {{message.message_title}} {{message.message_date| date}}
-                                    <button id="editMessageButton" type="button" class="btn btn-primary" (click)="setValue(i); setTemp()" data-toggle="modal" data-target="#EditMessageModal">
-                    Edit
-                  </button>
-                                    <button id="messageDeleteButton" class="btn btn-danger btn md" type="button" (click)=" setValue(i); confirmDeleteMessage()">
-                  Delete
-                  </button>
-                                </h4>
-                            </div>
-                        </div>
+                <div class="card text-center">
+                    <div class="card-header">
+                        <a href="javascript:void(0)" id="editMessageButton" class="btn-sm btn-primary" (click)="setValue(i); setTemp()" data-toggle="modal" data-target="#EditMessageModal">
+                            Edit
+                        </a>
+                        <a href="javascript:void(0)" id="messageDeleteButton" class="btn-sm btn-danger" (click)=" setValue(i); confirmDeleteMessage()">
+                            Delete
+                        </a>
                     </div>
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div>
-                                {{message.message_text}}
-                            </div>
-                        </div>
+                    <div class="card-block">
+                        <h5 class="card-title">{{message.message_title}} </h5>
+                        <p class="card-text">{{message.message_text}}</p>
                     </div>
-                    <br>
+                    <div class="card-footer text-muted">
+                        {{message.message_date| date}}
+                    </div>
+                </div>
+                <br>
                 </div>
             </div>
         </div>

@@ -53,21 +53,6 @@
                 </div>
             </div>
         </div>
-        <div class="card-block row">
-            <h5 class="card-title">re-type password</h5>
-            <input class="form-control" required minlength="4" maxlength="50" type="text" id="repassInput" [(ngModel)]="user.password" [formControl]="repass">
-            <div *ngIf="repass.errors && (repass.dirty || repass.touched)" class="alert alert-danger">
-                <div [hidden]="!repass.errors.required">
-                    Password is required
-                </div>
-                <div [hidden]="!repass.errors.minlength">
-                    Password must be at least 4 characters long.
-                </div>
-                <div [hidden]="!repass.errors.maxlength">
-                    Password cannot be more than 50 characters long.
-                </div>
-            </div>
-        </div>
         <div class="form-group">
             <button type="button" href="javascript:void(0)" class="btn btn-primary" (click)="updateProfile()" [disabled]="loading">
             Save changes</button>
