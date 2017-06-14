@@ -25,8 +25,11 @@ export class HeaderComponent  {
     this.routecomponent.loadMap();
   }
 
+  checkLogged(){
+    return localStorage.getItem('currentUser') === null
+  }
+
     logout() {
       this.loginService.logout();
-      this.router.navigate(['/login']);
     }
 }

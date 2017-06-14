@@ -1,20 +1,22 @@
 <div class="container-fluid">
     <div class="row" id="mainBusDriver">
-            <br>
                 <div class="col-md-6">
-                    <h3>
-                        Bus
+            <br>
+                    <h4>
+                        Buses
                         <button id="addDriversButton" type="button" class="btn btn-success" data-toggle="modal" data-target="#AddBusModal" (click)="resetTempB()"> Add Bus</button>
-                    </h3>
+
                       <div *ngFor="let busAlert of busAlerts">
                          <alert [type]="busAlert.type" [dismissOnTimeout]="busAlert.timeout">{{ busAlert.msg }}</alert>
                      </div>
+                    </h4>
+
                     <div class="table-responsive">
                         <table class="table table table-bordred table-striped" id="busList">
                             <thead>
                                 <tr id="busTable">
                                     <th>Bus</th>
-                                    <th>Drivers</th>
+                                    <th>Driver</th>
                                     <th>Route</th>
                                     <th>Status</th>
                                     <th></th>
@@ -40,13 +42,17 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <h3>
+            <br>
+                    <h4>
                         Drivers
                         <button id="addDriversButton" (click)="driverFormA.reset(); resetTempD()" type="button" class="btn btn-success" data-toggle="modal" data-target="#AddDriverModal"> Add Driver</button>
-                    </h3>
+
                     <div *ngFor="let driverAlert of driverAlerts">
                          <alert [type]="driverAlert.type" [dismissOnTimeout]="driverAlert.timeout">{{ driverAlert.msg }}</alert>
                      </div>
+
+                    </h4>
+
                     <div class="table-responsive">
                     <table class="table table-hover" id="driverList">
                             <thead>

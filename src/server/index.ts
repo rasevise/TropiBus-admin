@@ -23,7 +23,7 @@ export function init(port: number, mode: string) {
   app.use(bodyParser.json());
   app.use(bodyParser.text());
   app.use(compression());
-  // app.use(cors());
+  app.use(cors());
 
   // DB Init
   Init();

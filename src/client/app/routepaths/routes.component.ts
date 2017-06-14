@@ -38,8 +38,24 @@ export class RoutesComponent implements OnInit{
   polylinePaths:any;
   tempRoute:any;
   alerts: any = [];
-
-
+  busIcon = {
+    url: 'https://mt.googleapis.com/vt/icon/name=icons/onion/25-bus.png',
+    // This marker is 20 pixels wide by 32 pixels high.
+    size: new google.maps.Size(32, 32),
+    // The origin for this image is (0, 0).
+    origin: new google.maps.Point(0, 0),
+    // The anchor for this image is the base of the flagpole at (0, 32).
+    anchor: new google.maps.Point(0, 0)
+  };
+  stopIcon = {
+    url: '../../assets/graphics/stopicon.png',
+    // This marker is 20 pixels wide by 32 pixels high.
+    size: new google.maps.Size(32, 32),
+    // The origin for this image is (0, 0).
+    origin: new google.maps.Point(0, 0),
+    // The anchor for this image is the base of the flagpole at (0, 32).
+    anchor: new google.maps.Point(0, 0)
+  };
   //Modal window Values
   m_title: any = '';
   m_body: any = '';
@@ -288,7 +304,6 @@ export class RoutesComponent implements OnInit{
   }
 
   getBusLocation(){
-    console.log("lgo");
     this.service.getBusLocation()
     .subscribe(busLocation => {
       this.buslocation = busLocation;
@@ -307,14 +322,15 @@ export class RoutesComponent implements OnInit{
       var latlng = new google.maps.LatLng(bus.gps_latitude, bus.gps_longitude);
       let bus_marker = new google.maps.Marker({
         map: this.map,
-        animation: google.maps.Animation.DROP,
         position: latlng,
         name: bus.bus_name,
+        status: bus.bus_status,
         latitude: bus.gps_latitude,
-        longitude: bus.gps_longitude
+        longitude: bus.gps_longitude,
+        icon: this.busIcon
       });
       //info window content
-      let content='<h4>'+bus_marker.name+'</h4>';
+      let content='<h5>'+bus_marker.name+'</h5><p>Status: ' + bus_marker.status + '</p>';
       this.addInfoWindow(bus_marker,content);
       this.busMarkers.push(bus_marker);
     }
@@ -396,7 +412,8 @@ export class RoutesComponent implements OnInit{
         name: stop.stop_name,
         description: stop.stop_description,
         latitude: stop.stop_latitude,
-        longitude: stop.stop_longitude
+        longitude: stop.stop_longitude,
+        icon: this.stopIcon
       });
       //info window content
       let content='<h4>'+stop_marker.name+'</h4><p>'+stop_marker.description+'</p>';
