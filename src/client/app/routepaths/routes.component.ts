@@ -39,15 +39,23 @@ export class RoutesComponent implements OnInit{
   tempRoute:any;
   alerts: any = [];
   busIcon = {
-    url: 'https://maps.google.com/mapfiles/kml/shapes/bus.png',
+    url: 'https://mt.googleapis.com/vt/icon/name=icons/onion/25-bus.png',
     // This marker is 20 pixels wide by 32 pixels high.
-    size: new google.maps.Size(64, 64),
+    size: new google.maps.Size(32, 32),
     // The origin for this image is (0, 0).
     origin: new google.maps.Point(0, 0),
     // The anchor for this image is the base of the flagpole at (0, 32).
     anchor: new google.maps.Point(0, 0)
   };
-
+  stopIcon = {
+    url: '../../assets/graphics/stopicon.png',
+    // This marker is 20 pixels wide by 32 pixels high.
+    size: new google.maps.Size(32, 32),
+    // The origin for this image is (0, 0).
+    origin: new google.maps.Point(0, 0),
+    // The anchor for this image is the base of the flagpole at (0, 32).
+    anchor: new google.maps.Point(0, 0)
+  };
   //Modal window Values
   m_title: any = '';
   m_body: any = '';
@@ -404,7 +412,8 @@ export class RoutesComponent implements OnInit{
         name: stop.stop_name,
         description: stop.stop_description,
         latitude: stop.stop_latitude,
-        longitude: stop.stop_longitude
+        longitude: stop.stop_longitude,
+        icon: this.stopIcon
       });
       //info window content
       let content='<h4>'+stop_marker.name+'</h4><p>'+stop_marker.description+'</p>';
