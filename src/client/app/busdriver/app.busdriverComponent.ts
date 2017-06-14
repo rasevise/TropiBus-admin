@@ -50,7 +50,7 @@ export class BusDriverComponent{
       that.getBuses();
       that.getDrivers();
       that.getRoutes();
-    }, 4000);
+    }, 5000);
   }
 
     resetTempD(){
