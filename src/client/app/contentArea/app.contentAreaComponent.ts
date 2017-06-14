@@ -37,6 +37,7 @@ export class ContentAreaComponent{
     setInterval(function(){
       that.getBusCount();
       that.getDriverCount();
+      that.getMessages();
     }, 4000);
   }
 

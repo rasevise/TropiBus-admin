@@ -23,6 +23,8 @@ export class BusDriverComponent{
   buses: any[] = [];
   drivers: any[] = [];
   routes:any[] = [];
+  busAlerts: any = [];
+  driverAlerts:any = [];
 
   private myValue: number;
   private userNameValid: boolean = false;
@@ -41,6 +43,14 @@ export class BusDriverComponent{
     this.getBuses();
     this.getRoutes();
     this.getDrivers();
+  }
+
+    getCounts(that:any){
+    setInterval(function(){
+      that.getBuses();
+      that.getDrivers();
+      that.getRoutes();
+    }, 4000);
   }
 
     resetTempD(){
@@ -81,13 +91,17 @@ export class BusDriverComponent{
 
 
   addB(bus: Bus): void {
-    this.service.createBus(bus).subscribe(() => { this.getBuses() });
+    this.service.createBus(bus).subscribe(() => { 
+      this.getBuses();
+      this.successAlertBus('Bus Successfully Added'); 
+    });
   }
 
   deleteB(): void {
     this.service
         .deleteBus(this.buses[this.myValue].bus_id).subscribe(() => {
           this.getBuses();
+          this.errorAlertBus('Bus Deleted');
           });;
 
   }
@@ -95,6 +109,7 @@ export class BusDriverComponent{
   editB(): void {
     this.service.updateBus(this.bus, this.buses[this.myValue].bus_id, this.buses[this.myValue]).subscribe(() => {
         this.getBuses();
+        this.successAlertBus('Bus Successfully Updated');
      });
 
   }
@@ -108,7 +123,10 @@ export class BusDriverComponent{
 
 
   addD(driver:Driver): void {
-    this.service.createDriver(driver).subscribe(() => {this.getDrivers() });
+    this.service.createDriver(driver).subscribe(() => {
+      this.getDrivers();
+      this.successAlertDriver('Driver Successfully Added');
+     });
 
   }
 
@@ -117,12 +135,15 @@ export class BusDriverComponent{
         .deleteDriver(this.drivers[this.myValue].driver_id).subscribe(() => {
         this.getDrivers();
         this.getBuses();
+        this.errorAlertDriver('Driver Deleted');
         });;
   }
 
   editD(): void {
     this.service.updateDriver(this.driver, this.drivers[this.myValue].driver_id).subscribe(() => {
     this.getDrivers();
+    this.getBuses();
+    this.successAlertDriver('Driver Successfully Updated');
     });
   }
 
@@ -284,6 +305,40 @@ closeEditDriver(modalId: String){
 close(modalId: String){
       $('#'+ modalId).modal('hide');
 }
+
+
+ successAlertBus(message:string): void {
+    this.busAlerts.push({
+      type: 'success',
+      msg: message,
+      timeout: 3000
+    });
+  }
+
+  errorAlertBus(message:string): void {
+    this.busAlerts.push({
+      type: 'warning',
+      msg: message,
+      timeout: 3000
+    });
+  }
+
+   successAlertDriver(message:string): void {
+    this.driverAlerts.push({
+      type: 'success',
+      msg: message,
+      timeout: 3000
+    });
+  }
+
+  errorAlertDriver(message:string): void {
+    this.driverAlerts.push({
+      type: 'warning',
+      msg: message,
+      timeout: 3000
+    });
+  }
+
 
 }
 

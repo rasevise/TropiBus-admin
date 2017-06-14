@@ -17,6 +17,7 @@ import 'rxjs/add/operator/catch';
 export class MessagesComponent implements OnInit {
   message: Message = new Message(null,'', Date.now(), '');
   messages: any[] = [];
+  alerts: any = [];
   private myValue: number;
 
 
@@ -43,18 +44,27 @@ export class MessagesComponent implements OnInit {
 
   add(): void {
     this.message.date = Date.now();
-    this.service.create(this.message, this.messages.length).subscribe(() => {this.getMessages();});
+    this.service.create(this.message, this.messages.length).subscribe(() => {
+      this.getMessages();
+        this.successAlert('Message Successfully Added');
+    });
   }
 
   delete(i : number): void {
     this.service
     .delete(this.messages[i].message_id)
-    .subscribe(() => {this.getMessages();});
+    .subscribe(() => {
+      this.getMessages();
+      this.errorAlert('Message Deleted');
+    });
   }
 
   edit(message: any): void {
     this.service.update(this.message, this.messages[this.myValue].message_id)
-    .subscribe(() => {this.getMessages();});
+    .subscribe(() => {
+      this.getMessages();   
+        this.successAlert('Message Successfully Updated');
+    });
   }
   resetTemp() {
     this.message.title = '';
@@ -70,6 +80,22 @@ export class MessagesComponent implements OnInit {
     if (c === true) {
         this.delete(this.myValue);
     }
+  }
+
+    successAlert(message:string): void {
+    this.alerts.push({
+      type: 'success',
+      msg: message,
+      timeout: 3000
+    });
+  }
+
+  errorAlert(message:string): void {
+    this.alerts.push({
+      type: 'warning',
+      msg: message,
+      timeout: 3000
+    });
   }
 
 

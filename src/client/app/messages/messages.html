@@ -1,8 +1,13 @@
 <div class="container-fluid">
     <div class="row" id="mainMessages">
+        
+                <div *ngFor="let alert of alerts">
+                   <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout">{{ alert.msg }}</alert>
+                </div>
         <div class="col-md-12">
             <br>
             <div class="row">
+                
                 <div class="col-md-9">
                     <h4>Administrator Messages</h4>
                 </div>

@@ -8,7 +8,7 @@ export function messages(app: express.Application) {
   app.get(_messagesURL, (req, res, next) => {
     console.log('inside message get');
     res.contentType('application/json');
-    db.query('SELECT * FROM Message', null, (err:any, result:any) => {
+    db.query('SELECT * FROM Message ORDER BY message_date', null, (err:any, result:any) => {
       if (err) {
            console.error( err);
             res.send('Error ' + err);

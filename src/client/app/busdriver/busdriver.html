@@ -6,6 +6,9 @@
                         Bus
                         <button id="addDriversButton" type="button" class="btn btn-success" data-toggle="modal" data-target="#AddBusModal" (click)="resetTempB()"> Add Bus</button>
                     </h3>
+                      <div *ngFor="let busAlert of busAlerts">
+                         <alert [type]="busAlert.type" [dismissOnTimeout]="busAlert.timeout">{{ busAlert.msg }}</alert>
+                     </div>
                     <div class="table-responsive">
                         <table class="table table table-bordred table-striped" id="busList">
                             <thead>
@@ -41,6 +44,9 @@
                         Drivers
                         <button id="addDriversButton" (click)="driverFormA.reset(); resetTempD()" type="button" class="btn btn-success" data-toggle="modal" data-target="#AddDriverModal"> Add Driver</button>
                     </h3>
+                    <div *ngFor="let driverAlert of driverAlerts">
+                         <alert [type]="driverAlert.type" [dismissOnTimeout]="driverAlert.timeout">{{ driverAlert.msg }}</alert>
+                     </div>
                     <div class="table-responsive">
                     <table class="table table-hover" id="driverList">
                             <thead>
