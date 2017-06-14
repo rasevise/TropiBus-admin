@@ -412,8 +412,7 @@ export class RoutesComponent implements OnInit{
         name: stop.stop_name,
         description: stop.stop_description,
         latitude: stop.stop_latitude,
-        longitude: stop.stop_longitude,
-        icon: this.stopIcon
+        longitude: stop.stop_longitude
       });
       //info window content
       let content='<h4>'+stop_marker.name+'</h4><p>'+stop_marker.description+'</p>';

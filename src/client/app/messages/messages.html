@@ -1,11 +1,12 @@
 <div class="container-fluid">
     <div class="row" id="mainMessages">
         
-                <div *ngFor="let alert of alerts">
-                   <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout">{{ alert.msg }}</alert>
-                </div>
+                
         <div class="col-md-12">
             <br>
+            <div *ngFor="let alert of alerts">
+                   <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout">{{ alert.msg }}</alert>
+                </div>
             <div class="row">
                 
                 <div class="col-md-9">
@@ -159,6 +160,24 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary" data-dismiss="modal" [disabled]="!messageFormE.form.valid" (click)=" edit(message); ;messageFormE.reset(); close('EditMessageModal')">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="confirm-deleteMessage" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Confirm Delete</h4>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete message?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal"  href="javascript:void(0)">Cancel</button>
+                <button class="btn btn-danger btn-ok" (click)="delete()" href="javascript:void(0)">Delete</button>
             </div>
         </div>
     </div>

@@ -98,6 +98,7 @@ export class BusDriverComponent{
   }
 
   deleteB(): void {
+    $('#confirm-deleteBus').modal('hide')
     this.service
         .deleteBus(this.buses[this.myValue].bus_id).subscribe(() => {
           this.getBuses();
@@ -131,6 +132,7 @@ export class BusDriverComponent{
   }
 
   deleteD(): void {
+    $('#confirm-deleteDriver').modal('hide')
     this.service
         .deleteDriver(this.drivers[this.myValue].driver_id).subscribe(() => {
         this.getDrivers();
@@ -264,19 +266,20 @@ getValue(){
       return this.myValue;
 }
 
-confirmDeleteDriver(){
-    var c = confirm("Are you sure you want to delete driver: ");
-    if (c == true) {
-        this.deleteD();
-    }
-  }
+
 
 confirmDeleteBus(){
-    var c = confirm("Are you sure you want to delete bus: ");
-    if (c == true) {
-        this.deleteB();
-    }
+    // var c = confirm("Are you sure you want to delete bus: ");
+    // if (c == true) {
+      $('#confirm-deleteBus').modal('show')
   }
+
+confirmDeleteDriver(){
+    // var c = confirm("Are you sure you want to delete bus: ");
+    // if (c == true) {
+      $('#confirm-deleteDriver').modal('show')
+  }
+
 
 
 closeAddDriver(modalId: String){

@@ -50,9 +50,10 @@ export class MessagesComponent implements OnInit {
     });
   }
 
-  delete(i : number): void {
+  delete(): void { 
+    $('#confirm-deleteMessage').modal('hide')
     this.service
-    .delete(this.messages[i].message_id)
+    .delete(this.messages[this.myValue].message_id)
     .subscribe(() => {
       this.getMessages();
       this.errorAlert('Message Deleted');
@@ -75,11 +76,10 @@ export class MessagesComponent implements OnInit {
     this.message.messageContent = this.messages[this.myValue].message_text;
   }
 
-  confirmDeleteMessage() {
-    var c = confirm('Are you sure you want to delete message: ');
-    if (c === true) {
-        this.delete(this.myValue);
-    }
+confirmDeleteMessage(){
+    // var c = confirm("Are you sure you want to delete bus: ");
+    // if (c == true) {
+      $('#confirm-deleteMessage').modal('show')
   }
 
     successAlert(message:string): void {

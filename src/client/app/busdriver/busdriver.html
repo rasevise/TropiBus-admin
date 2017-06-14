@@ -2,13 +2,14 @@
     <div class="row" id="mainBusDriver">
                 <div class="col-md-6">
             <br>
+            <div *ngFor="let busAlert of busAlerts">
+                         <alert [type]="busAlert.type" [dismissOnTimeout]="busAlert.timeout">{{ busAlert.msg }}</alert>
+                     </div>
                     <h4>
                         Buses
                         <button id="addDriversButton" type="button" class="btn btn-success" data-toggle="modal" data-target="#AddBusModal" (click)="resetTempB()"> Add Bus</button>
 
-                      <div *ngFor="let busAlert of busAlerts">
-                         <alert [type]="busAlert.type" [dismissOnTimeout]="busAlert.timeout">{{ busAlert.msg }}</alert>
-                     </div>
+                      
                     </h4>
 
                     <div class="table-responsive">
@@ -43,13 +44,14 @@
                 </div>
                 <div class="col-md-6">
             <br>
+            <div *ngFor="let driverAlert of driverAlerts">
+                         <alert [type]="driverAlert.type" [dismissOnTimeout]="driverAlert.timeout">{{ driverAlert.msg }}</alert>
+                     </div>
                     <h4>
                         Drivers
                         <button id="addDriversButton" (click)="driverFormA.reset(); resetTempD()" type="button" class="btn btn-success" data-toggle="modal" data-target="#AddDriverModal"> Add Driver</button>
 
-                    <div *ngFor="let driverAlert of driverAlerts">
-                         <alert [type]="driverAlert.type" [dismissOnTimeout]="driverAlert.timeout">{{ driverAlert.msg }}</alert>
-                     </div>
+                    
 
                     </h4>
 
@@ -438,6 +440,41 @@
       </div>
     </div>
   </div>
+</div>
+
+<!--Confirm Delete-->
+<div class="modal fade" id="confirm-deleteBus" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Confirm Delete</h4>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete bus?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal"  href="javascript:void(0)">Cancel</button>
+                <button class="btn btn-danger btn-ok" (click)="deleteB()" href="javascript:void(0)">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="confirm-deleteDriver" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Confirm Delete</h4>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete driver?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal"  href="javascript:void(0)">Cancel</button>
+                <button class="btn btn-danger btn-ok" (click)="deleteD()" href="javascript:void(0)">Delete</button>
+            </div>
+        </div>
+    </div>
 </div>
 
 
