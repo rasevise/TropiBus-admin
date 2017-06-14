@@ -45,7 +45,7 @@ export class RoutesComponent implements OnInit{
     // The origin for this image is (0, 0).
     origin: new google.maps.Point(0, 0),
     // The anchor for this image is the base of the flagpole at (0, 32).
-    anchor: new google.maps.Point(0, 0)
+    anchor: new google.maps.Point(16, 16)
   };
   stopIcon = {
     url: '../../assets/graphics/stopicon.png',
@@ -54,7 +54,7 @@ export class RoutesComponent implements OnInit{
     // The origin for this image is (0, 0).
     origin: new google.maps.Point(0, 0),
     // The anchor for this image is the base of the flagpole at (0, 32).
-    anchor: new google.maps.Point(0, 0)
+    anchor: new google.maps.Point(16, 16)
   };
   //Modal window Values
   m_title: any = '';
@@ -412,7 +412,8 @@ export class RoutesComponent implements OnInit{
         name: stop.stop_name,
         description: stop.stop_description,
         latitude: stop.stop_latitude,
-        longitude: stop.stop_longitude
+        longitude: stop.stop_longitude,
+        icon: this.stopIcon
       });
       //info window content
       let content='<h4>'+stop_marker.name+'</h4><p>'+stop_marker.description+'</p>';
