@@ -327,10 +327,11 @@ export class RoutesComponent implements OnInit{
         status: bus.bus_status,
         latitude: bus.gps_latitude,
         longitude: bus.gps_longitude,
+        route_name: bus.route_name,
         icon: this.busIcon
       });
       //info window content
-      let content='<h5>'+bus_marker.name+'</h5><p>Status: ' + bus_marker.status + '</p>';
+      let content='<h5>'+bus_marker.name+'</h5><p>Route Name: ' + bus_marker.route_name + '</p><p>Status: ' + bus_marker.status + '</p>';
       this.addInfoWindow(bus_marker,content);
       this.busMarkers.push(bus_marker);
     }

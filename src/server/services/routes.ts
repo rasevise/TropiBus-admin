@@ -4,8 +4,8 @@ import * as db from '../db/pg';
 var getAllRoutes = 'SELECT * FROM Route NATURAL JOIN routepath';
 var getRoute = 'SELECT * FROM route NATURAL JOIN routepath WHERE route_id = $1';
 var updateRoute = 'UPDATE Route SET route_name=$1, route_description=$2 WHERE route_id=$3';
-var getBusLocation = 'SELECT gps_latitude, gps_longitude, bus_name, bus_status FROM bus NATURAL JOIN gps WHERE bus_status=\'Active\'';
-var countDriver = 'SELECT COUNT(*) FROM driver WHERE driver_status=\'Logged\'';
+var getBusLocation = 'SELECT gps_latitude, gps_longitude, bus_name, bus_status, route_name FROM bus NATURAL JOIN gps NATURAL JOIN route WHERE bus_status=\'Active\'';
+var countDriver = 'SELECT COUNT(*) FROM driver WHERE driver_status=\'logged\'';
 var countBus = 'SELECT COUNT(*) FROM bus WHERE bus_status=\'Active\'';
 
 export function routes(app: express.Application) {

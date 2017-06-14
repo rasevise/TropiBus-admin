@@ -40,7 +40,7 @@
         </div>
         <div class="card-block row">
             <h5 class="card-title">Password</h5>
-            <input class="form-control" required minlength="4" maxlength="50" type="text" id="passInput" [(ngModel)]="user.password" [formControl]="pass">
+            <input type="password" class="form-control" required minlength="8" maxlength="50" id="passInput" [(ngModel)]="user.password" [formControl]="pass">
             <div *ngIf="pass.errors && (pass.dirty || pass.touched)" class="alert alert-danger">
                 <div [hidden]="!pass.errors.required">
                     Password is required
