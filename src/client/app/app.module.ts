@@ -19,6 +19,7 @@ import { MessagesComponent }    from './messages/app.messagesComponent';
 import { RoutesComponent }      from './routepaths/routes.component';
 import { RegisterComponent }    from './register/app.registerComponent';
 import { ProfileComponent }     from './profile/profile.component';
+import { PasswordComponent }    from './password/password.component';
 import { Routes }               from './routepaths/routes';
 import { routing }              from './app.routing';
 import { SharedModule }         from './shared/shared.module';
@@ -47,7 +48,8 @@ import { SharedModule }         from './shared/shared.module';
                   RoutesComponent,
                   LoginComponent,
                   RegisterComponent,
-                  ProfileComponent
+                  ProfileComponent,
+                  PasswordComponent
                   ],
   schemas:  [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ],
   bootstrap:    [ AppComponent ],

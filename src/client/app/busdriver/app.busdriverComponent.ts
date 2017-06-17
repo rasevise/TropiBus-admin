@@ -45,6 +45,7 @@ export class BusDriverComponent {
     this.getBuses();
     this.getRoutes();
     this.getDrivers();
+    this.getCounts(this);
   }
 
   getCounts(that: any) {

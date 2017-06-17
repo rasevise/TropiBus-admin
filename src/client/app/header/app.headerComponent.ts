@@ -20,7 +20,6 @@ export class HeaderComponent  {
         ) {}
     
   public logoClick(): void{
-    console.log('selected map tab');
     this.router.navigate(['/']);
     this.routecomponent.loadMap();
   }

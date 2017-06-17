@@ -34,6 +34,32 @@ export class RegisterService {
         .catch(this.handleError);
     }
 
+    setPassword(password: any): Observable<string[]>  {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let id = JSON.parse(localStorage.getItem('currentUser')).admin
+        return this.http.put(`${Config.API}/register/setPassword`, 
+        JSON.stringify({password: password, id: id }), 
+        {headers: headers})
+        .map((response: Response) => 
+            response.json()
+        )
+        // .do(data => console.log('server data:', data))  // debug
+        .catch(this.handleError);
+    }
+
+    updatePassword(password: any, oldpassword: any): Observable<string[]>  {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let id = JSON.parse(localStorage.getItem('currentUser')).admin
+        return this.http.put(`${Config.API}/register/updatePassword`, 
+        JSON.stringify({password: password, id: id, oldpassword: oldpassword }), 
+        {headers: headers})
+        .map((response: Response) => 
+            response.json()
+        )
+        // .do(data => console.log('server data:', data))  // debug
+        .catch(this.handleError);
+    }
+
     getAdmin(): Observable<any> {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let id = JSON.parse(localStorage.getItem('currentUser')).admin
