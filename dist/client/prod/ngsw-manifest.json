@@ -1,20 +1,11 @@
 {
   "static": {
     "urls": {
-<<<<<<< HEAD
-
-      "/index.html": "a1cd37cd5042526c2a0aa6b558f8bc045fb6c6e4",
+      "/index.html": "3f141a8af482e4078b4d78a04e7b4fc68ede1bac",
       "/worker-basic.min.js": "72cc18504609557733120ef137edcc35fdf5670d",
       "/assets/favicon.ico": "32144a2be28d83d4ea08e414f46120a35e48787f",
       "/css/main.css": "8b032837286be8442326adf94783d643a30c565d",
-      "/js/app.js": "a2ab3ce1a3d39a35d40ff3ae1acf235a001a880d",
-=======
-      "/index.html": "030d1620d36a5dd8c87cb856146f811fc12ffdbb",
-      "/worker-basic.min.js": "72cc18504609557733120ef137edcc35fdf5670d",
-      "/assets/favicon.ico": "32144a2be28d83d4ea08e414f46120a35e48787f",
-      "/css/main.css": "8b032837286be8442326adf94783d643a30c565d",
-      "/js/app.js": "920e3f3bcd99076b86fbd9de00f30cce1a415e87",
->>>>>>> 00d6e44a658c16413fdccf1520024446c536a86b
+      "/js/app.js": "60356adac42cc13b0f61b0a7c8fa52cf1712472d",
       "/js/shims.js": "ed9680e82bf321d8a81e44ca987a0435de070d8d",
       "/assets/favicon/android-chrome-192x192.png": "255bba2ae79bb04a9a79673ab22808663abf4f81",
       "/assets/favicon/android-chrome-512x512.png": "eaaf7dfc43a1d9c9e92385852d36d92b2a4a6f66",
@@ -28,21 +19,13 @@
       "/assets/favicon/manifest.json": "16b3dbc8c3a43038d6e2746038e45fe6038072cb",
       "/assets/favicon/mstile-150x150.png": "c35eccd8f706b7bde58b4d4c0b6142ad27e071f9",
       "/assets/favicon/safari-pinned-tab.svg": "64de30c983823dd60a721289e238ab1f57deb392",
-<<<<<<< HEAD
-      "/assets/svg/more.svg": "9838cd822e0f989a0befbd365365ee2751bbdebc",
-=======
->>>>>>> 00d6e44a658c16413fdccf1520024446c536a86b
       "/assets/graphics/busimg.jpg": "b6ada94be0e79e0e3db49b7fd583e9d7b3ede3f3",
       "/assets/graphics/driverimg.png": "334e1be2fa32cfdc6220ab7dda587eb574e39bc1",
       "/assets/graphics/profile.png": "5a958a1036fb2fbef128ee87ebd428f41f99df15",
       "/assets/graphics/routeimg.jpg": "c1ae3f76c49e5954463fa1dd81368551d7a5d12e",
       "/assets/graphics/stopicon.png": "f906f73a043f793eab06c7e3a8ddf7619916dd3f",
-<<<<<<< HEAD
-      "/assets/graphics/tropibuslogo.png": "bf7e30e58d2536ec50beb570485efec05208f508"
-=======
       "/assets/graphics/tropibuslogo.png": "bf7e30e58d2536ec50beb570485efec05208f508",
       "/assets/svg/more.svg": "9838cd822e0f989a0befbd365365ee2751bbdebc"
->>>>>>> 00d6e44a658c16413fdccf1520024446c536a86b
     }
   },
   "routing": {
