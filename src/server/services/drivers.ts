@@ -30,7 +30,17 @@ app.post(_driversURL + '/addDriver', (req, res, next) => {
 });
 
 app.put(_driversURL + '/updateDriver', (req, res, next) => {
-  db.query('UPDATE driver SET driver_firstname = $2, driver_lastname = $3,  driver_username = $4, driver_password = $5 WHERE driver_id = $1', [req.body.id, req.body.name, req.body.lastName, req.body.username, req.body.password], (err:any, result:any) => {
+  db.query('UPDATE driver SET driver_firstname = $2, driver_lastname = $3,  driver_username = $4 WHERE driver_id = $1', [req.body.id, req.body.name, req.body.lastName, req.body.username], (err:any, result:any) => {
+    if (err) {
+           console.error( err);
+            res.send('Error ' + err);
+    }
+    res.send(result);
+  });
+});
+
+app.put(_driversURL + '/updatePassword', (req, res, next) => {
+  db.query('UPDATE driver SET  driver_password = $2 WHERE driver_id = $1', [req.body.id, req.body.password], (err:any, result:any) => {
     if (err) {
            console.error( err);
             res.send('Error ' + err);

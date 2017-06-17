@@ -66,7 +66,14 @@ export class BusDriverService {
   updateDriver(driver: any, id: any) {
     return this.http
     .put(`${Config.API}`+ this._driversURL + '/updateDriver', JSON.stringify({name: driver.name,
-        lastName: driver.lastName, username : driver.username, password: driver.password, id: id}), { headers:this.headers })
+        lastName: driver.lastName, username : driver.username, id: id}), { headers:this.headers })
+    .map((res: Response) => res.json().data)
+    .catch(this.handleError);
+  }
+
+  updatePassword(driver: any, id: any) {
+    return this.http
+    .put(`${Config.API}`+ this._driversURL + '/updatePassword', JSON.stringify({ password: driver.password, id: id}), { headers:this.headers })
     .map((res: Response) => res.json().data)
     .catch(this.handleError);
   }

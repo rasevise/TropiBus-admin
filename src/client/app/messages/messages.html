@@ -1,14 +1,14 @@
 <div class="container-fluid">
     <div class="row" id="mainMessages">
-        
-                
+
+
         <div class="col-md-12">
             <br>
             <div *ngFor="let alert of alerts">
-                   <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout">{{ alert.msg }}</alert>
-                </div>
+                <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout">{{ alert.msg }}</alert>
+            </div>
             <div class="row">
-                
+
                 <div class="col-md-9">
                     <h4>Administrator Messages</h4>
                 </div>
@@ -22,18 +22,19 @@
                 <div class="list-group">
                     <a *ngFor="let message of messages; let i = index" href="#" class="list-group-item list-group-item-action flex-column align-items-start">
                         <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">{{message.message_title}}</h5>
-                        <div>
-                        <small>{{message.message_date| date}}</small>
-                        <div>
-                        <a href="javascript:void(0)" id="editMessageButton" class="btn-sm btn-primary" (click)="setValue(i); setTemp()" data-toggle="modal" data-target="#EditMessageModal">
+                            <h5 class="mb-1">{{message.message_title}}</h5>
+                            <div>
+                                <small>{{message.message_date| date}}</small>
+                                <div>
+                                    <a href="javascript:void(0)" id="editMessageButton" class="btn-sm btn-primary" (click)="setValue(i); setTemp()" data-toggle="modal"
+                                        data-target="#EditMessageModal">
                             Edit
                          </a>
-                        <a href="javascript:void(0)" id="messageDeleteButton" class="btn-sm btn-danger" (click)=" setValue(i); confirmDeleteMessage()">
+                                    <a href="javascript:void(0)" id="messageDeleteButton" class="btn-sm btn-danger" (click)=" setValue(i); confirmDeleteMessage()">
                              Delete
                          </a>
-                        </div>
-                        </div>
+                                </div>
+                            </div>
                         </div>
                         <p class="mb-1">{{message.message_text}}</p>
                     </a>
@@ -79,7 +80,8 @@
                         <label for="">Message</label>
 
 
-                        <textarea class="form-control" rows="3" cols="25" required minlength="4" maxlength="50" name="messageContent" [(ngModel)]="message.messageContent" #mContent="ngModel"></textarea>
+                        <textarea class="form-control" rows="3" cols="25" required minlength="4" maxlength="50" name="messageContent" [(ngModel)]="message.messageContent"
+                            #mContent="ngModel"></textarea>
 
                         <div *ngIf="mContent.errors && (mContent.dirty || mContent.touched)" class="alert alert-danger">
                             <div [hidden]="!mContent.errors.required">
@@ -120,7 +122,8 @@
                     <div class="form-group">
                         <label for="">Title</label>
 
-                        <input type="text" class="form-control" required minlength="4" maxlength="15" name="temp_title" [(ngModel)]="message.title" #title="ngModel">
+                        <input type="text" class="form-control" required minlength="4" maxlength="15" name="temp_title" [(ngModel)]="message.title"
+                            #title="ngModel">
 
                         <div *ngIf="title.errors && (title.dirty || title.touched)" class="alert alert-danger">
                             <div [hidden]="!title.errors.required">
@@ -139,7 +142,8 @@
                         <label for="">Message</label>
 
 
-                        <textarea class="form-control" rows="3" cols="25" required minlength="4" maxlength="50" name="messageContent" [(ngModel)]="message.messageContent" #mContent="ngModel"></textarea>
+                        <textarea class="form-control" rows="3" cols="25" required minlength="4" maxlength="50" name="messageContent" [(ngModel)]="message.messageContent"
+                            #mContent="ngModel"></textarea>
 
                         <div *ngIf="mContent.errors && (mContent.dirty || mContent.touched)" class="alert alert-danger">
                             <div [hidden]="!mContent.errors.required">
@@ -176,7 +180,7 @@
                 Are you sure you want to delete message?
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal"  href="javascript:void(0)">Cancel</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" href="javascript:void(0)">Cancel</button>
                 <button class="btn btn-danger btn-ok" (click)="delete()" href="javascript:void(0)">Delete</button>
             </div>
         </div>

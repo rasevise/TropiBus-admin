@@ -1,6 +1,6 @@
 
 import { Component, OnInit, Injectable, Inject, Input } from '@angular/core';
-import { Location }   from '@angular/common';
+import { Location } from '@angular/common';
 import { Message } from './messages';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { MessageService } from '../shared/messages/app.messageService';
@@ -15,21 +15,21 @@ import 'rxjs/add/operator/catch';
 
 })
 export class MessagesComponent implements OnInit {
-  message: Message = new Message(null,'', Date.now(), '');
+  message: Message = new Message(null, '', Date.now(), '');
   messages: any[] = [];
   alerts: any = [];
   private myValue: number;
 
 
-  constructor (@Inject(MessageService) private service: MessageService, ) {
+  constructor( @Inject(MessageService) private service: MessageService, ) {
   }
 
   ngOnInit(): void {
     this.getMessages();
   }
 
-  setValue(val:number) {
-      this.myValue = val;
+  setValue(val: number) {
+    this.myValue = val;
   }
   getValue() {
     return this.myValue;
@@ -37,8 +37,8 @@ export class MessagesComponent implements OnInit {
 
   getMessages(): void {
     this.service
-    .getMessages()
-    .subscribe(messages => this.messages = messages);
+      .getMessages()
+      .subscribe(messages => this.messages = messages);
   }
 
 
@@ -46,26 +46,26 @@ export class MessagesComponent implements OnInit {
     this.message.date = Date.now();
     this.service.create(this.message, this.messages.length).subscribe(() => {
       this.getMessages();
-        this.successAlert('Message Successfully Added');
+      this.successAlert('Message Successfully Added');
     });
   }
 
-  delete(): void { 
+  delete(): void {
     $('#confirm-deleteMessage').modal('hide')
     this.service
-    .delete(this.messages[this.myValue].message_id)
-    .subscribe(() => {
-      this.getMessages();
-      this.errorAlert('Message Deleted');
-    });
+      .delete(this.messages[this.myValue].message_id)
+      .subscribe(() => {
+        this.getMessages();
+        this.errorAlert('Message Deleted');
+      });
   }
 
   edit(message: any): void {
     this.service.update(this.message, this.messages[this.myValue].message_id)
-    .subscribe(() => {
-      this.getMessages();   
+      .subscribe(() => {
+        this.getMessages();
         this.successAlert('Message Successfully Updated');
-    });
+      });
   }
   resetTemp() {
     this.message.title = '';
@@ -76,13 +76,11 @@ export class MessagesComponent implements OnInit {
     this.message.messageContent = this.messages[this.myValue].message_text;
   }
 
-confirmDeleteMessage(){
-    // var c = confirm("Are you sure you want to delete bus: ");
-    // if (c == true) {
-      $('#confirm-deleteMessage').modal('show')
+  confirmDeleteMessage() {
+    $('#confirm-deleteMessage').modal('show')
   }
 
-    successAlert(message:string): void {
+  successAlert(message: string): void {
     this.alerts.push({
       type: 'success',
       msg: message,
@@ -90,7 +88,7 @@ confirmDeleteMessage(){
     });
   }
 
-  errorAlert(message:string): void {
+  errorAlert(message: string): void {
     this.alerts.push({
       type: 'warning',
       msg: message,
@@ -100,7 +98,7 @@ confirmDeleteMessage(){
 
 
   close(modalId: string) {
-    $('#'+ modalId).modal('hide');
+    $('#' + modalId).modal('hide');
   }
 
   log() {
