@@ -38,6 +38,7 @@ export class RoutesComponent implements OnInit{
   polylinePaths:any;
   tempRoute:any;
   alerts: any = [];
+  orderStops: any = [];
   busIcon = {
     url: 'https://mt.googleapis.com/vt/icon/name=icons/onion/25-bus.png',
     // This marker is 20 pixels wide by 32 pixels high.
@@ -213,14 +214,17 @@ export class RoutesComponent implements OnInit{
   }
 
   updateOrderShow(){
+      this.locationMarkers.forEach((s:any) => {
+        this.orderStops.push(s);
+      });
       $('#update-stop-order').modal('show');
   }
 
   updateStopOrder(){
     var newOrder = [];
-    for (var i = 0; i < this.locationMarkers.length; i++) {
-      newOrder.push({id: this.locationMarkers[i].stop_id, order: i});
-      if(newOrder.length === this.locationMarkers.length){
+    for (var i = 0; i < this.orderStops.length; i++) {
+      newOrder.push({id: this.orderStops[i].stop_id, order: i});
+      if(newOrder.length === this.orderStops.length){
         this.service.updateOrder(newOrder)
         .subscribe(() => {
         this.getStopsFromRoute(this.r_id)});
