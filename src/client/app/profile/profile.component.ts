@@ -20,8 +20,9 @@ export class ProfileComponent implements OnInit {
     alerts: any = [];
     first:FormControl;
     last:FormControl;
-    pass :FormControl;
-    repass:FormControl;
+    oldpassword :FormControl;
+    password :FormControl;
+    repassword:FormControl;
 
     constructor(
         public route: ActivatedRoute,
@@ -32,8 +33,6 @@ export class ProfileComponent implements OnInit {
         this.getCurrentUser();
         this.first = new FormControl('', [Validators.required]);
         this.last = new FormControl('', [Validators.required]);
-        this.pass = new FormControl('', [Validators.required]);
-        this.repass = new FormControl('', [Validators.required]);
     }
 
     getCurrentUser(){
@@ -42,7 +41,6 @@ export class ProfileComponent implements OnInit {
             data => {
                 this.user.name = data.admin_first_name;
                 this.user.last = data.admin_last_name;
-                this.user.password = data.admin_password;
                 this.user.id = data.admin_id;
             }
         )
@@ -63,7 +61,22 @@ export class ProfileComponent implements OnInit {
                 },
                 );
     }
-
+    updatePassword() {
+    this.loading = true;
+    this.registerService.updatePassword(this.password, this.oldpassword)
+        .subscribe(
+            data => {
+                this.loading = false;
+                $('#change-password').modal('hide');
+                this.successAlert('Password successfully updated!');
+            },
+            error => {
+                this.errorMessage = <any>error;
+                this.loading = false;
+                this.errorAlert(this.errorMessage);
+            },
+            );
+    }
     successAlert(message:string): void {
         this.alerts.push({
         type: 'success',

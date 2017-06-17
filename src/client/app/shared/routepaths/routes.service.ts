@@ -68,9 +68,9 @@ export class RoutesService {
     .map((res: Response) => res.json());
   }
 
-  update(stop: any): Observable<string[]> {
+  update(stop: any, r_id: number): Observable<string[]> {
     return this.http
-    .put(`${Config.API}/stops/updateStop`, JSON.stringify({stop_name: stop.name, stop_description: stop.description, s_id: stop.stop_id}),
+    .put(`${Config.API}/stops/updateStop`, JSON.stringify({stop_name: stop.name, stop_description: stop.description, stop_latitude: stop.latitude, stop_longitude:stop.longitude, s_id: stop.stop_id, r_id: r_id}),
     { headers:this.headers })
     .map((res: Response) => res.json().data);
   }

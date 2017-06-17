@@ -1,12 +1,12 @@
 {
   "static": {
     "urls": {
-      "/index.html": "e761b1cd7884cd3c8f4c8206659cf0abdec5d5d2",
+      "/index.html": "030d1620d36a5dd8c87cb856146f811fc12ffdbb",
       "/worker-basic.min.js": "72cc18504609557733120ef137edcc35fdf5670d",
       "/assets/favicon.ico": "32144a2be28d83d4ea08e414f46120a35e48787f",
       "/css/main.css": "8b032837286be8442326adf94783d643a30c565d",
+      "/js/app.js": "920e3f3bcd99076b86fbd9de00f30cce1a415e87",
       "/js/shims.js": "ed9680e82bf321d8a81e44ca987a0435de070d8d",
-      "/js/app.js": "3129ef9485098c8496c58064f216c82483eab00d",
       "/assets/favicon/android-chrome-192x192.png": "255bba2ae79bb04a9a79673ab22808663abf4f81",
       "/assets/favicon/android-chrome-512x512.png": "eaaf7dfc43a1d9c9e92385852d36d92b2a4a6f66",
       "/assets/favicon/apple-touch-icon.png": "8651f777337e5df6d6a5d70bf0c57b235b2c1d35",

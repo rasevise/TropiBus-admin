@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { LoginService } from '../shared/login/login.service';
+import { RegisterService } from '../shared/register/register.service';
 
 @Component({
   moduleId: module.id,
@@ -17,7 +18,8 @@ export class LoginComponent implements OnInit {
     constructor(
         public route: ActivatedRoute,
         public router: Router,
-        public loginService: LoginService) {}
+        public loginService: LoginService,
+        public registerService: RegisterService) {}
 
     ngOnInit() {
         // reset login status
@@ -32,6 +34,13 @@ export class LoginComponent implements OnInit {
         this.loginService.login(this.model.username, this.model.password)
             .subscribe(
                 data => {
+                    this.registerService.getAdmin()
+                    .subscribe(
+                        pass => {
+                            if(pass.admin_pass === true){
+                                this.router.navigate(['/password']);
+                            }
+                    });
                     this.router.navigate([this.returnUrl]);
                 },
                 error => {
@@ -39,6 +48,6 @@ export class LoginComponent implements OnInit {
                     this.loading = false;
                     alert('Incorrect credentials');
                 },
-                );
+            );
     }
 }

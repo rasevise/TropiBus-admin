@@ -230,7 +230,7 @@ export class RoutesComponent implements OnInit{
   }
 
   editStop(){
-    this.service.update(this.m_stop)
+    this.service.update(this.m_stop, this.r_id)
     .subscribe(() => {
     this.getStopsFromRoute(this.r_id)});
     this.successAlert('Stop Updated');
