@@ -23,6 +23,7 @@ export class ProfileComponent implements OnInit {
     oldpassword :FormControl;
     password :FormControl;
     repassword:FormControl;
+    admins:any = [];
 
     constructor(
         public route: ActivatedRoute,
@@ -42,6 +43,15 @@ export class ProfileComponent implements OnInit {
                 this.user.name = data.admin_first_name;
                 this.user.last = data.admin_last_name;
                 this.user.id = data.admin_id;
+            }
+        )
+    }
+
+    getAdmins(){
+        this.registerService.getAdmins()
+        .subscribe(
+            data => {
+                this.admins = data;
             }
         )
     }

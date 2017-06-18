@@ -67,6 +67,14 @@ export class RegisterService {
         .map((response: Response) => response.json())
         .catch(this.handleError);
     }
+
+    getAdmins(): Observable<any> {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+        return this.http.get(`${Config.API}/register/getAdmins`, { headers:headers })
+        .map((response: Response) => response.json())
+        .catch(this.handleError);
+    }
+
     /**
     * Handle HTTP error
     */

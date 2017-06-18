@@ -3,6 +3,7 @@ import * as db from '../db/pg';
 
 var createAdmin = 'INSERT INTO administrator(admin_first_name, admin_last_name, admin_username, admin_password) VALUES ($1,$2,$3,$4)';
 var getAdmin= 'SELECT * FROM administrator WHERE admin_id=$1';
+var getAdmins= 'SELECT * FROM administrator';
 var updateAdmin = 'UPDATE administrator SET admin_first_name=$1, admin_last_name=$2 WHERE admin_id=$3';
 var setPassword = 'UPDATE administrator SET admin_password=$1, admin_pass=$2 WHERE admin_id=$3';
 var updatePassword = 'UPDATE administrator SET admin_password=$1, admin_pass=$2 WHERE admin_id=$3 AND admin_password=$4';
@@ -18,6 +19,18 @@ app.get('/register/getAdmin', (req, res, next) => {
             res.send(err);
         }else {
             res.json(result.rows[0]);
+        }
+    });
+});
+
+app.get('/register/getAdmins', (req, res, next) => {
+    res.contentType('application/json');
+    db.query(getAdmins, null, (err:any, result:any) => {
+        if (err) {
+            console.error(err);
+            res.send(err);
+        }else {
+            res.json(result.rows);
         }
     });
 });
