@@ -2,14 +2,13 @@
 <div *ngFor="let alert of alerts">
     <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout">{{ alert.msg }}</alert>
 </div>
-<div class="row"><br><br><br></div>
+<div class="container-fluid">
 <div class="row">
 <div class="col-md-3"></div>
 <div class="col-md-6 col-md-offset-3">
     <h2>Administrator Profile</h2>
-    <div class="row form-group">
-    <div class="row">
-        <div class="card-block row">
+    <div class="form-group row">
+        <div class="card-block">
             <h5 class="card-title">First Name</h5>
             <input class="form-control" required minlength="4" maxlength="15" type="text" id="nameInput" [(ngModel)]="user.name" [formControl]="first">
             <div *ngIf="first.errors && (first.dirty || first.touched)" class="alert alert-danger">
@@ -24,7 +23,7 @@
                 </div>
             </div>
         </div>
-        <div class="card-block row">
+        <div class="card-block">
             <h5 class="card-title">Last Name</h5>
             <input class="form-control" required minlength="4" maxlength="50" type="text" id="lastInput" [(ngModel)]="user.last" [formControl]="last">
             <div *ngIf="last.errors && (last.dirty || last.touched)" class="alert alert-danger">
@@ -45,12 +44,14 @@
             Save changes</button>
             <button type="button" data-toggle="modal" data-target="#change-password" class="btn btn-primary" [disabled]="loading">
             Change Password</button>
+            <button type="button" data-toggle="modal" data-target="#reset-password" class="btn btn-primary" [disabled]="loading">
+            Reset Admin Password</button>
             <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
             <a href="/" class="btn btn-link">Cancel</a>
         </div>
+</div>
     </div>
 </div>
-
 
 <!--Change Password-->
 <div class="modal fade" id="change-password" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
@@ -77,6 +78,27 @@
                         <div *ngIf="f.submitted && !retype.valid" class="help-block">Password mismatch</div>       
                     </div>
                 </form>
+            </div>
+            <div class="modal-footer">
+                <a type="button" class="btn btn-default" data-dismiss="modal" href="/">Cancel</a>
+                <a type="button" [disabled]="loading || !f.form.valid" (click)="updatePassword();" href="/" class="btn btn-primary">Confirm New Password</a>
+                <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />            
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Reset Password-->
+<div class="modal fade" id="change-password" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>Reset password for admin</h4>
+            </div>
+            <div class="modal-body">
+                <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action" *ngFor="let admin of admins">{{admin.name}}</a>
+                </div>
             </div>
             <div class="modal-footer">
                 <a type="button" class="btn btn-default" data-dismiss="modal" href="/">Cancel</a>

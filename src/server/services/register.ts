@@ -15,7 +15,7 @@ app.get('/register/getAdmin', (req, res, next) => {
     db.query(getAdmin, [req.query.id], (err:any, result:any) => {
         if (err) {
             console.error(err);
-            result.send('Error ' + err);
+            res.send(err);
         }else {
             res.json(result.rows[0]);
         }
