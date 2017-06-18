@@ -8,6 +8,7 @@ import { messages } from './messages';
 import { register } from './register';
 import { bustrack } from './bustrackingRoutes'
 import { userApp } from './timuserRoutes'
+import { mailer } from './mailer';
  
 export function init(app: express.Application) { 
     login(app);
@@ -19,4 +20,5 @@ export function init(app: express.Application) {
     register(app);
     bustrack(app);
     userApp(app);
+    mailer(app);
 }

@@ -22,12 +22,13 @@ export class HeaderComponent implements OnInit {
         ) {}
         
  ngOnInit() {
-       this.registerService.getAdmin()
+       if(!this.checkLogged()){
+         this.registerService.getAdmin()
        .subscribe(
          data => {
            this.admin_name = data.admin_first_name + ' ' + data.admin_last_name;
          }
-       )
+       )}
        return false;
  }
   checkLogged(){

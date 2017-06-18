@@ -14,6 +14,8 @@ export class LoginComponent implements OnInit {
     loading = false;
     returnUrl: string;
     errorMessage: string;
+    email:any;
+    confirm:any;
 
     constructor(
         public route: ActivatedRoute,
@@ -49,5 +51,15 @@ export class LoginComponent implements OnInit {
                     alert('Incorrect credentials');
                 },
             );
+    }
+
+    forgotPass(){
+        this.registerService.resetPass(this.email)
+        .subscribe(
+            data => {
+                this.loading = false;
+                alert('email sent to reset password');
+            }
+        )
     }
 }
