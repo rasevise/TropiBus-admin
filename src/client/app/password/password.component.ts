@@ -30,7 +30,6 @@ export class PasswordComponent {
                 data => {
                     this.loading = false;
                     this.successAlert('Password successfully updated!');
-                    this.router.navigate(['/']);
                 },
                 error => {
                     this.errorMessage = <any>error;

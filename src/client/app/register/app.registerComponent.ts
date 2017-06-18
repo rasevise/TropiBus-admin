@@ -32,7 +32,8 @@ export class RegisterComponent {
                     if(data.toString() === '23505'){
                         this.errorAlert('Username already exists');
                     }else {
-                    this.successAlert('User successfully created!');
+                        this.model = {};
+                        this.successAlert('User successfully created!');
                     }
                 },
                 error => {
