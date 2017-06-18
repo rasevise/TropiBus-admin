@@ -13,7 +13,7 @@ function register(app) {
         db.query(getAdmin, [req.query.id], function (err, result) {
             if (err) {
                 console.error(err);
-                result.send('Error ' + err);
+                res.send('Error ' + err);
             }
             else {
                 res.json(result.rows[0]);
