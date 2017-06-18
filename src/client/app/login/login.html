@@ -37,12 +37,12 @@
                 <form name="form" (ngSubmit)="f.form.valid && forgotPass()" #f="ngForm" novalidate>
                     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !em.valid }">
                         <label for="em">email</label>
-                        <input type="text" class="form-control" name="email" [(ngModel)]="email" #em="ngModel" required minlength="8" maxlength="24"/>
+                        <input type="email" class="form-control" name="email" [(ngModel)]="email" #em="ngModel" required minlength="8" maxlength="24"/>
                         <div *ngIf="f.submitted && !em.valid" class="help-block">email required</div>
                     </div>
                     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !con.valid }">
                         <label for="con">confirm email</label>
-                        <input type="text" class="form-control" name="confirm" [(ngModel)]="confirm" #con="ngModel" required validateEqual="em" reverse="false"  />
+                        <input type="email" class="form-control" name="confirm" [(ngModel)]="confirm" #con="ngModel" required validateEqual="em" reverse="false"  />
                         <div *ngIf="f.submitted && !con.valid" class="help-block">email mismatch</div>       
                     </div>
                 </form>

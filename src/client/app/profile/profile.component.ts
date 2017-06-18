@@ -78,7 +78,11 @@ export class ProfileComponent implements OnInit {
                 this.loading = false;
                 console.log(data.rows);
                 $('#change-password').modal('hide');
+                if(data.response){
                 this.successAlert('Password successfully updated!');
+                }else {
+                this.errorAlert('Incorrect old password');
+                }
             },
             err => {
                 this.errorMessage = <any>err;

@@ -68,6 +68,13 @@ export class RegisterService {
         .catch(this.handleError);
     }
 
+    getAdminFromUsername(user:any): Observable<any> {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+        return this.http.get(`${Config.API}/register/getAdminFromUser?user=` + user, { headers:headers })
+        .map((response: Response) => response.json())
+        .catch(this.handleError);
+    }
+
     getAdmins(): Observable<any> {
     let headers = new Headers({ 'Content-Type': 'application/json' });
         return this.http.get(`${Config.API}/register/getAdmins`, { headers:headers })

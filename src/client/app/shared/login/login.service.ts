@@ -25,9 +25,18 @@ export class LoginService {
             .catch(this.handleError);
     }
 
-    logout() {
-        // remove user from local storage to log user out
-        localStorage.removeItem('currentUser');
+    logout(id:any): Observable<any[]>  {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        return this.http.put(`${Config.API}/login/logout`, JSON.stringify({id: id}), {headers: headers})
+            .map((response: Response) => {
+                let res = response.json();
+                if(res.result === 'logout'){
+                // remove user from local storage to log user out
+                localStorage.removeItem('currentUser');
+                }
+            })
+            // .do(data => console.log('server data:', data))  // debug
+            .catch(this.handleError);
     }
     
     /**

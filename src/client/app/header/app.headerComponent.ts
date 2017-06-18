@@ -13,6 +13,7 @@ import { Config } from '../shared/config/env.config';
 export class HeaderComponent implements OnInit {
   returnUrl:string;
   admin_name:string;
+  admin_id:any;
 
     constructor(
         public route: ActivatedRoute,
@@ -22,20 +23,30 @@ export class HeaderComponent implements OnInit {
         ) {}
         
  ngOnInit() {
-       if(!this.checkLogged()){
-         this.registerService.getAdmin()
-       .subscribe(
-         data => {
-           this.admin_name = data.admin_first_name + ' ' + data.admin_last_name;
-         }
-       )}
-       return false;
+    this.loadInfo();
  }
-  checkLogged(){
-     return (localStorage.getItem('currentUser') === null)
+
+  loadInfo(){
+    if(!this.checkLogged()){
+      this.registerService.getAdmin()
+    .subscribe(
+      data => {
+        this.admin_name = data.admin_first_name + ' ' + data.admin_last_name;
+        this.admin_id = data.admin_id;
+      }
+    )}
   }
 
-    logout() {
-      this.loginService.logout();
+  checkLogged(){
+    return (localStorage.getItem('currentUser') === null)
+  }
+
+  logout() {
+    this.loadInfo();
+    this.loginService.logout(this.admin_id)
+    .subscribe(data => {
+      // console.log('logout response: ' + data); //debug
+      location.reload();
+    });
     }
 }

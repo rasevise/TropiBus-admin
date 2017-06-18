@@ -24,33 +24,37 @@ export class LoginComponent implements OnInit {
         public registerService: RegisterService) {}
 
     ngOnInit() {
-        // reset login status
-        this.loginService.logout();
-
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
 
     login() {
         this.loading = true;
-        this.loginService.login(this.model.username, this.model.password)
+        this.registerService.getAdminFromUsername(this.model.username)
             .subscribe(
                 data => {
-                    this.registerService.getAdmin()
-                    .subscribe(
-                        pass => {
-                            if(pass.admin_pass === true){
-                                this.router.navigate(['/password']);
-                            }
-                    });
-                    this.router.navigate([this.returnUrl]);
-                },
-                error => {
-                    this.errorMessage = <any>error;
+                    console.log(data);
+                    if(data.admin_status === true){
+                        alert('Account already logged in!');
+                    }else {
+                    this.loginService.login(this.model.username, this.model.password)
+                        .subscribe(
+                            () => {
+                                if(data.admin_pass === true){
+                                    this.router.navigate(['/password']);
+                                }else {
+                                    this.router.navigate([this.returnUrl]);
+                                }
+                            },
+                            error => {
+                                this.errorMessage = <any>error;
+                                this.loading = false;
+                                alert('Incorrect credentials');
+                            },
+                        );
+                    }
                     this.loading = false;
-                    alert('Incorrect credentials');
-                },
-            );
+            });
     }
 
     forgotPass(){
@@ -58,6 +62,7 @@ export class LoginComponent implements OnInit {
         .subscribe(
             data => {
                 this.loading = false;
+                console.log(data);
                 alert('email sent to reset password');
             }
         )
