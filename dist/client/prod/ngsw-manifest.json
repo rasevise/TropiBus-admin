@@ -1,6 +1,8 @@
 {
   "static": {
     "urls": {
+<<<<<<< HEAD
+=======
       "/index.html": "c4c65a35f6f1ac6b428a55c0c5484a3f29f3b57c",
       "/worker-basic.min.js": "72cc18504609557733120ef137edcc35fdf5670d",
       "/assets/favicon.ico": "32144a2be28d83d4ea08e414f46120a35e48787f",
@@ -26,6 +28,7 @@
       "/assets/graphics/routeimg.jpg": "c1ae3f76c49e5954463fa1dd81368551d7a5d12e",
       "/assets/graphics/stopicon.png": "f906f73a043f793eab06c7e3a8ddf7619916dd3f",
       "/assets/graphics/tropibuslogo.png": "bf7e30e58d2536ec50beb570485efec05208f508"
+>>>>>>> 2a38442bf8b5bcca8306412ba4840504131d130d
     }
   },
   "routing": {

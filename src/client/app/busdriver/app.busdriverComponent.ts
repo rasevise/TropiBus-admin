@@ -210,12 +210,24 @@ export class BusDriverComponent {
   }
 
   verifyDriverChange() {
-    console.log("driver:" + this.bus.driver)
-    if ((this.bus.driver == this.buses[this.myValue].driver_id)) {
+
+    var check: boolean = true;
+    for( var i: number = 0; i < this.buses.length; i++){
+          console.log("actual id:" + this.buses[this.myValue].driver_id);
+          console.log("id:" + this.buses[i].driver_id);
+          console.log("this.bus.driver:" + this.bus.driver)
+      if((this.bus.driver == this.buses[i].driver_id) && (this.myValue != i)){
+         $('#verifyNewChangeModal').modal('show')
+         check = false;
+      }
+    }
+    if(check){
+    if ((this.bus.driver == this.buses[this.myValue].driver_id || this.buses[this.myValue].driver_id === null)) {
       this.closeEditBus('EditBusModal')
     }
     else {
       $('#verifyChangeModal').modal('show')
+    }
     }
   }
 
