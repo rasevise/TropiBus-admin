@@ -20,7 +20,7 @@ app.get(_driversURL, (req, res, next) => {
 app.post(_driversURL + '/addDriver', (req, res, next) => {
   var status = 'not logged';
   console.log('password:' + req.body.password);
-  db.query('INSERT INTO driver( driver_firstname, driver_lastname, driver_username, driver_password, driver_status) VALUES ($1,$2,$3,$4,$5)', [req.body.name,req.body.lastName,req.body.username,req.body.password, status], (err:any, result:any) => {
+  db.query('INSERT INTO driver( driver_firstname, driver_lastname, driver_username, driver_password, driver_status) VALUES ($1,$2,$3,CRYPT($4,GEN_SALT(\'bf\')),$5)', [req.body.name,req.body.lastName,req.body.username,req.body.password, status], (err:any, result:any) => {
     if(err) {
            console.error( err);
             res.send('Error ' + err);

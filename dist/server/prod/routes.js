@@ -1,9 +1,0 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var services = require("./services/index");
-function init(app) {
-    services.init(app);
-}
-exports.init = init;
-
-//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInJvdXRlcy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUNBLDJDQUE0QztBQUU1QyxjQUFxQixHQUF3QjtJQUMzQyxRQUFRLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxDQUFDO0FBQ3JCLENBQUM7QUFGRCxvQkFFQyIsImZpbGUiOiJyb3V0ZXMuanMiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgKiBhcyBleHByZXNzIGZyb20gJ2V4cHJlc3MnO1xyXG5pbXBvcnQgKiBhcyBzZXJ2aWNlcyBmcm9tICcuL3NlcnZpY2VzL2luZGV4J1xyXG5cclxuZXhwb3J0IGZ1bmN0aW9uIGluaXQoYXBwOiBleHByZXNzLkFwcGxpY2F0aW9uKSB7XHJcbiAgc2VydmljZXMuaW5pdChhcHApO1xyXG59XHJcbiJdfQ==
