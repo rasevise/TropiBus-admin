@@ -43,7 +43,7 @@
         </div>
         <div class="card-block">
             <h5 class="card-title">Email</h5>
-            <input class="form-control" required minlength="4" maxlength="35" type="text" id="nameInput" [(ngModel)]="user.email" [formControl]="email">
+            <input class="form-control" required minlength="4" maxlength="35" type="email" id="nameInput" [(ngModel)]="user.email" [formControl]="email">
             <div *ngIf="email.errors && (email.dirty || email.touched)" class="alert alert-danger">
                 <div [hidden]="!email.errors.required">
                     Email is required
@@ -81,17 +81,17 @@
                     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !oldpassword.valid }">
                         <label for="oldpassword">Old Password</label>
                         <input type="password" class="form-control" name="oldpassword" [(ngModel)]="old" #oldpassword="ngModel" required minlength="8" maxlength="24"/>
-                        <div *ngIf="f.submitted && !oldpassword.valid" class="help-block">Password is required</div>
+                        <div *ngIf="oldpassword.errors && (oldpassword.dirty || oldpassword.touched)" class="alert alert-danger">Password is required, must be 8 characters long.</div>
                     </div>
                     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
                         <label for="password">New Password</label>
                         <input type="password" class="form-control" name="password" [(ngModel)]="pass" #password="ngModel" required minlength="8" maxlength="24"/>
-                        <div *ngIf="f.submitted && !password.valid" class="help-block">Password mismatch</div>       
+                        <div *ngIf="password.errors && (password.dirty || password.touched)" class="alert alert-danger">Password is required, must be 8 characters long.</div>       
                     </div>
                     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !repassword.valid }">
                         <label for="repassword">Retype Password</label>
                         <input type="password" class="form-control" name="repassword" [(ngModel)]="repass" #repassword="ngModel" required validateEqual="password" reverse="false"  />
-                        <div *ngIf="f.submitted && !repassword.valid" class="help-block">Password mismatch</div>       
+                        <div *ngIf="repassword.errors && (repassword.dirty || repassword.touched)" class="alert alert-danger">Password mismatch</div>       
                     </div>
                 </form>
             </div>

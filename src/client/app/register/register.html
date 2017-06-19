@@ -7,36 +7,36 @@
 <div class="col-md-3"></div>
 <div class="col-md-6 col-md-offset-3">
     <h2>Create Administrator</h2>
-    <form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
-        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+    <form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm">
+        <div class="form-group" >
             <label for="firstName">First Name</label>
             <input type="text" class="form-control" name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel" required minlength="2" maxlength="24"/>
-            <div *ngIf="f.submitted && !firstName.valid" class="help-block">First Name is required</div>
+            <div *ngIf="firstName.errors && (firstName.dirty || firstName.touched)" class="alert alert-danger">First Name is required</div>
         </div>
-        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+        <div class="form-group">
             <label for="lastName">Last Name</label>
             <input type="text" class="form-control" name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel" required minlength="2" maxlength="24"/>
-            <div *ngIf="f.submitted && !lastName.valid" class="help-block">Last Name is required</div>
+            <div *ngIf="lastName.errors && (lastName.dirty || lastName.touched)" class="alert alert-danger">Last Name is required</div>
         </div>
-        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+        <div class="form-group" >
             <label for="username">Username</label>
             <input type="text" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel" required minlength="4" maxlength="24"/>
-            <div *ngIf="f.submitted && !username.valid" class="help-block">Username is required</div>
+            <div *ngIf="username.errors && (username.dirty || username.touched)" class="alert alert-danger">Username is required</div>
         </div>
-        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+        <div class="form-group" >
             <label for="email">email</label>
-            <input type="email" class="form-control" name="username" [(ngModel)]="model.email" #email="ngModel" required minlength="4" maxlength="24"/>
-            <div *ngIf="f.submitted && !email.valid" class="help-block">Email is required</div>
+            <input type="email" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" required minlength="4" maxlength="24"/>
+            <div *ngIf="email.errors && (email.dirty || email.touched)" class="alert alert-danger">Email is required</div>
         </div>
-        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+        <div class="form-group" >
             <label for="password">Password</label>
             <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required minlength="8" maxlength="24"/>
-            <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+            <div *ngIf="password.errors && (password.dirty || password.touched)" class="alert alert-danger">Password is required, minimum length 8.</div>
         </div>
-        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !repassword.valid }">
+        <div class="form-group">
             <label for="password">Retype Password</label>
             <input type="password" class="form-control" name="repassword" [(ngModel)]="model.repassword" #repassword="ngModel" required validateEqual="password" reverse="false"  />
-            <div *ngIf="f.submitted && !password.valid" class="help-block">Password mismatch</div>       
+            <div *ngIf="repassword.errors && (repassword.dirty || repassword.touched)" class="alert alert-danger">Password mismatch</div>       
         </div>
         <div class="form-group">
             <a [disabled]="loading || !f.form.valid" (click)="register()" href="/" class="btn btn-primary">Create</a>
