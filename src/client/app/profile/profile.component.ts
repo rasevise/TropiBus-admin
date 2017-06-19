@@ -12,7 +12,7 @@ import { User } from './user';
 
 export class ProfileComponent implements OnInit {
   //stop and route from selected stop in modal
-  @Input() user: User = new User(-1, '', '', '');
+  @Input() user: User = new User(-1, '', '', '', '');
 
     loading = false;
     returnUrl: string;
@@ -20,9 +20,13 @@ export class ProfileComponent implements OnInit {
     alerts: any = [];
     first:FormControl;
     last:FormControl;
+    email:FormControl;
     oldpassword :FormControl;
     password :FormControl;
     repassword:FormControl;
+    old:any;
+    pass:any;
+    repass:any;
 
     constructor(
         public route: ActivatedRoute,
@@ -33,6 +37,10 @@ export class ProfileComponent implements OnInit {
         this.getCurrentUser();
         this.first = new FormControl('', [Validators.required]);
         this.last = new FormControl('', [Validators.required]);
+        this.email = new FormControl('', [Validators.required]);
+        this.oldpassword = new FormControl('', [Validators.required]);
+        this.password = new FormControl('', [Validators.required]);
+        this.repassword = new FormControl('', [Validators.required]);
     }
 
     getCurrentUser(){
@@ -42,6 +50,7 @@ export class ProfileComponent implements OnInit {
                 this.user.name = data.admin_first_name;
                 this.user.last = data.admin_last_name;
                 this.user.id = data.admin_id;
+                this.user.email = data.admin_email;
             }
         )
     }
@@ -63,15 +72,20 @@ export class ProfileComponent implements OnInit {
     }
     updatePassword() {
     this.loading = true;
-    this.registerService.updatePassword(this.password, this.oldpassword)
+    this.registerService.updatePassword(this.pass, this.old)
         .subscribe(
             data => {
                 this.loading = false;
+                console.log(data.rows);
                 $('#change-password').modal('hide');
+                if(data.response){
                 this.successAlert('Password successfully updated!');
+                }else {
+                this.errorAlert('Incorrect old password');
+                }
             },
-            error => {
-                this.errorMessage = <any>error;
+            err => {
+                this.errorMessage = <any>err;
                 this.loading = false;
                 this.errorAlert(this.errorMessage);
             },
