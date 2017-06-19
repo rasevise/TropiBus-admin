@@ -65,13 +65,13 @@ export class RegisterService {
     let id = JSON.parse(localStorage.getItem('currentUser')).admin
         return this.http.get(`${Config.API}/register/getAdmin?id=` + id, { headers:headers })
         .map((response: Response) => response.json())
-        // .catch(this.handleError);
+        .catch(this.handleError);
     }
 
     getAdminFromUsername(user:any): Observable<any> {
     let headers = new Headers({ 'Content-Type': 'application/json' });
         return this.http.get(`${Config.API}/register/getAdminFromUser?user=` + user, { headers:headers })
-        .map((response: Response) => response)
+        .map((response: Response) => response.json())
         .catch(this.handleError);
     }
 
