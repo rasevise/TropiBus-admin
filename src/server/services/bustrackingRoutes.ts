@@ -46,7 +46,7 @@ var disactivateBus= 'UPDATE bus SET bus_status =\'Inactive\' WHERE bus_id=$1'
 var createNewPassword='UPDATE driver SET driver_password=CRYPT($1,GEN_SALT(\'bf\')), admin_pass=\'false\' WHERE driver_id=$2'
 
 //get information from driver from database and send back to application
-app.get('/getDriverInfo', (req:any, res:any, next:any) => { // Parameter: Route ID
+app.get(_trackURL + '/getDriverInfo', (req:any, res:any, next:any) => { // Parameter: Route ID
     console.log(" getting driver info",req.body)
         db.query(getDriverInfo, [req.query.driver_id], (err:any, result:any) => {
 
@@ -60,7 +60,7 @@ app.get('/getDriverInfo', (req:any, res:any, next:any) => { // Parameter: Route 
 });
 
 //get routes names and ids from database and send back to application
-app.get('/getRoutes', (req:any, res:any, next:any) => { // Parameter: Route ID
+app.get(_trackURL + '/getRoutes', (req:any, res:any, next:any) => { // Parameter: Route ID
     console.log("getting tim's routes ")
         db.query(getRoutes, null, (err:any, result:any) => {
 
@@ -75,7 +75,7 @@ app.get('/getRoutes', (req:any, res:any, next:any) => { // Parameter: Route ID
 
 
 //change driver route, updating on database and sending back driver info to application
-app.put('/changeDriverRoute', (req:any, res:any, next:any) => {
+app.put(_trackURL + '/changeDriverRoute', (req:any, res:any, next:any) => {
     console.log("entre a cambiar ruta de conductor",req.body)
         db.query(changeDriverRoute,[req.body.route_id,req.body.bus_id] ,(err:any, result:any) => {
 
@@ -99,7 +99,7 @@ app.put('/changeDriverRoute', (req:any, res:any, next:any) => {
 });
 
 //updating bus status on database and then sending back driver info to application
-app.put('/updateBusStatus', (req:any, res:any, next:any) => {
+app.put(_trackURL + '/updateBusStatus', (req:any, res:any, next:any) => {
     console.log("haciendo update al status del bus", req.body)
         db.query(updateBusStatus,[req.body.bus_status,req.body.bus_id] ,(err:any, result:any) => {
 
@@ -133,7 +133,7 @@ updateBusLocation server route use run two querties:
         Parameter: gps_latitude, gps_longitude, gps_id
         Update: Actual location of the bus  usign gps_latitude and gps_longitude parameters 
 */
-app.put('/updateBusLocation', (req:any, res:any, next:any) => { 
+app.put(_trackURL + '/updateBusLocation', (req:any, res:any, next:any) => { 
     
     console.log("updating bus location",req.body)
      
@@ -166,7 +166,7 @@ app.put('/updateBusLocation', (req:any, res:any, next:any) => {
 //Routes for login/logout
 //login driver on system, updatin driver status to "logged in" if credentials are correct
 //if credentials are incorrect send -1 back as a response
-app.post('/login', (req:any, res:any, next:any) => {
+app.post(_trackURL + '/login', (req:any, res:any, next:any) => {
     console.log("entre al login",req.body)
     
         db.query(checkCredentials,[req.body.username, req.body.password] ,(err:any, result:any) => {
@@ -210,7 +210,7 @@ app.post('/login', (req:any, res:any, next:any) => {
         });
 });
 
-app.post('/createNewPassword', (req:any, res:any, next:any) => {
+app.post(_trackURL + '/createNewPassword', (req:any, res:any, next:any) => {
     console.log("submitting new password")
         db.query(checkCredentials,[req.body.username, req.body.password] ,(err:any, result:any) => {
 
@@ -247,7 +247,7 @@ app.post('/createNewPassword', (req:any, res:any, next:any) => {
 
 
 //loging out driver, updting driver status on database
-app.put('/logout', (req:any, res:any, next:any) => {
+app.put(_trackURL + '/logout', (req:any, res:any, next:any) => {
     console.log("login out",req.body)
         db.query(logout,[req.body.driver_id] ,(err:any, result:any) => {
 
