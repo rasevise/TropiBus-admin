@@ -1,11 +1,11 @@
 {
   "static": {
     "urls": {
-      "/index.html": "2617c9287e0ad6036ca538ea7f765dc9ffb9aee6",
+      "/index.html": "e4637963769aa8beb0a4b5f456b7b6de48f7f1d0",
       "/worker-basic.min.js": "72cc18504609557733120ef137edcc35fdf5670d",
       "/assets/favicon.ico": "32144a2be28d83d4ea08e414f46120a35e48787f",
       "/css/main.css": "8b032837286be8442326adf94783d643a30c565d",
-      "/js/app.js": "e5eee1d80226e20c90931f755477b67e1d1b813b",
+      "/js/app.js": "b26ada92b426eee271ba60fb7bff7b7892a65e4d",
       "/js/shims.js": "ed9680e82bf321d8a81e44ca987a0435de070d8d",
       "/assets/favicon/android-chrome-192x192.png": "255bba2ae79bb04a9a79673ab22808663abf4f81",
       "/assets/favicon/android-chrome-512x512.png": "eaaf7dfc43a1d9c9e92385852d36d92b2a4a6f66",

@@ -20,12 +20,13 @@ export class LoginService {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('currentUser', JSON.stringify(user));
                 }
+                return user;
             })
             // .do(data => console.log('server data:', data))  // debug
             .catch(this.handleError);
     }
 
-    logout(id:any): Observable<any[]>  {
+    logout(id:any): Observable<any>  {
         let headers = new Headers({ 'Content-Type': 'application/json' });
         return this.http.put(`${Config.API}/login/logout`, JSON.stringify({id: id}), {headers: headers})
             .map((response: Response) => {

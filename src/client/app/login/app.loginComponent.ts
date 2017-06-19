@@ -38,9 +38,10 @@ export class LoginComponent implements OnInit {
                     }else {
                     this.loginService.login(this.model.username, this.model.password)
                         .subscribe(
-                            () => {
-                                console.log('inside login')
-                                if(data.admin_pass === true){
+                            user => {
+                                if(!user.admin){
+                                    alert('Incorrect password');
+                                }else if(data.admin_pass === true){
                                     this.router.navigate(['/password']);
                                 }else {
                                     this.router.navigate([this.returnUrl]);

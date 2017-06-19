@@ -42,11 +42,14 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.loadInfo();
-    this.loginService.logout(this.admin_id)
-    .subscribe(data => {
-      // console.log('logout response: ' + data); //debug
-      location.reload();
-    });
-    }
+    this.registerService.getAdmin()
+    .subscribe(
+      data => {
+      this.loginService.logout(data.admin_id)
+      .subscribe(data_logout => {
+        // console.log('logout response: ' + data); //debug
+        location.reload();
+      });
+      });
+  }
 }
