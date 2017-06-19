@@ -43,16 +43,13 @@
         </div>
         <div class="card-block">
             <h5 class="card-title">Email</h5>
-            <input class="form-control" required minlength="4" maxlength="35" type="email" id="nameInput" [(ngModel)]="user.email" [formControl]="email">
+            <input class="form-control" required minlength="4" type="email" id="nameInput" [(ngModel)]="user.email" [formControl]="email">
             <div *ngIf="email.errors && (email.dirty || email.touched)" class="alert alert-danger">
                 <div [hidden]="!email.errors.required">
                     Email is required
                 </div>
                 <div [hidden]="!email.errors.minlength">
                     Email must be at least 4 characters long.
-                </div>
-                <div [hidden]="!email.errors.maxlength">
-                    Email cannot be more than 35 characters long.
                 </div>
             </div>
         </div>

@@ -31,7 +31,7 @@ var getAllRoutes = 'SELECT * FROM route NATURAL JOIN routepath ORDER BY route_ar
 var getRouteStatus='SELECT route_id, bus_status from route NATURAL JOIN bus WHERE bus_status<>\'Inactive\''
 
 //get all routes from database and send them back as response
-app.get(_userURL + '/getAllRoutes', (req:any, res:any, next:any) => {
+app.get('/getAllRoutes', (req:any, res:any, next:any) => {
     console.log("entre a cojer todas las rutas");
         //run query
         db.query(getAllRoutes, null, (err:any, result:any) => {
@@ -86,7 +86,7 @@ app.get(_userURL + '/getAllRoutes', (req:any, res:any, next:any) => {
 
 
 //get all bus stops from specific route and send info back as response
-app.get(_userURL + '/getStopsFromRoute', (req:any, res:any, next:any) => {//Parameter: Route ID
+app.get('/getStopsFromRoute', (req:any, res:any, next:any) => {//Parameter: Route ID
     console.log("cojer paradas de ruta especifica",req.query.route_id)
     //conneting to database
         //running query
@@ -102,7 +102,7 @@ app.get(_userURL + '/getStopsFromRoute', (req:any, res:any, next:any) => {//Para
 });
 
 //getting bus location from specific route
-app.get(_userURL + '/getBusLocation', (req:any, res:any, next:any) => {
+app.get('/getBusLocation', (req:any, res:any, next:any) => {
     console.log("buscando localizacion de bus",req.query.route_id)
     //connecting to database
         //runnig query
@@ -118,7 +118,7 @@ app.get(_userURL + '/getBusLocation', (req:any, res:any, next:any) => {
 });
 
 //getting messages posted by administrator
-app.get(_userURL + '/getMessages', (req:any, res:any, next:any) => {
+app.get('/getMessages', (req:any, res:any, next:any) => {
     console.log("getting messages")
     //connecting to database
         //run query
