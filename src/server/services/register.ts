@@ -1,14 +1,14 @@
 import * as express from 'express';
 import * as db from '../db/pg';
 
-var createAdmin = 'INSERT INTO administrator(admin_first_name, admin_last_name, admin_username, admin_password) VALUES ($1,$2,$3,$4)';
+var createAdmin = 'INSERT INTO administrator(admin_first_name, admin_last_name, admin_username, admin_password,admin_email) VALUES ($1,$2,$3,CRYPT($4,GEN_SALT(\'bf\')),$5)';
 var getAdmin= 'SELECT admin_id, admin_email, admin_status, admin_pass, admin_first_name, admin_last_name, admin_username FROM administrator WHERE admin_id=$1';
 var getAdmins= 'SELECT admin_id, admin_email, admin_status, admin_pass, admin_first_name, admin_last_name, admin_username FROM administrator';
 var getAdminFromUser= 'SELECT admin_status FROM administrator WHERE admin_username=$1';
 var updateAdmin = 'UPDATE administrator SET admin_first_name=$1, admin_last_name=$2, admin_email=$4 WHERE admin_id=$3';
-var setPassword = 'UPDATE administrator SET admin_password=$1, admin_pass=$2 WHERE admin_id=$3';
-var updatePassword = 'UPDATE administrator SET admin_password=$1, admin_pass=$2 WHERE admin_id=$3';
-var getPass = 'SELECT admin_id FROM administrator WHERE admin_id=$1 AND admin_password=$2';
+var setPassword = 'UPDATE administrator SET admin_password=CRYPT($1,GEN_SALT(\'bf\')), admin_pass=$2 WHERE admin_id=$3';
+var updatePassword = 'UPDATE administrator SET admin_password=CRYPT($1,GEN_SALT(\'bf\')), admin_pass=$2 WHERE admin_id=$3';
+var getPass = 'SELECT admin_id FROM administrator WHERE admin_id=$1 AND admin_password=CRYPT($2,GEN_SALT(\'bf\'))';
 
 export function register(app: express.Application) {
 var admin;

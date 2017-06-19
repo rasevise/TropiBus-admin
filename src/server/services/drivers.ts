@@ -40,7 +40,9 @@ app.put(_driversURL + '/updateDriver', (req, res, next) => {
 });
 
 app.put(_driversURL + '/updatePassword', (req, res, next) => {
-  db.query('UPDATE driver SET  driver_password = $2, admin_pass=$3 WHERE driver_id = $1', [req.body.id, req.body.password, true], (err:any, result:any) => {
+  
+  console.log('password:' + req.body.password);
+  db.query('UPDATE driver SET  driver_password = CRYPT($2,GEN_SALT(\'bf\')), admin_pass=$3 WHERE driver_id = $1', [req.body.id, req.body.password, true], (err:any, result:any) => {
     if (err) {
            console.error( err);
             res.send('Error ' + err);

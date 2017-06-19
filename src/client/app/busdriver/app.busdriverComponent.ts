@@ -111,6 +111,7 @@ export class BusDriverComponent {
   }
 
   editB(): void {
+ 
     this.service.updateBus(this.bus, this.buses[this.myValue].bus_id, this.buses[this.myValue]).subscribe(() => {
       this.getBuses();
       this.successAlertBus('Bus Successfully Updated');
@@ -145,6 +146,8 @@ export class BusDriverComponent {
   }
 
   editD(): void {
+
+      console.log("password" + this.drivers[this.myValue].driver_password)
     this.service.updateDriver(this.driver, this.drivers[this.myValue].driver_id).subscribe(() => {
       this.getDrivers();
       this.getBuses();
@@ -152,6 +155,8 @@ export class BusDriverComponent {
     });
   }
   changePassword(): void {
+      console.log("password" + this.drivers[this.myValue].driver_password)
+    
     this.service.updateDriver(this.driver, this.drivers[this.myValue].driver_id).subscribe(() => {
       this.getDrivers();
       this.getBuses();

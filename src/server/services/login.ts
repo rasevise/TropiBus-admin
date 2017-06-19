@@ -2,7 +2,7 @@ import * as express from 'express';
 import * as db from '../db/pg';
 import * as jwt from 'jsonwebtoken';
 
-var checkCredentials= 'SELECT admin_id FROM administrator WHERE admin_username=$1 and admin_password=$2';
+var checkCredentials= 'SELECT admin_id FROM administrator WHERE admin_username=$1 and admin_password=CRYPT($2,admin_password)';
 var setStatus = 'UPDATE administrator SET admin_status=$1 WHERE admin_id=$2';
 
 export function login(app: express.Application) {

@@ -12,7 +12,7 @@ let transporter = nodemailer.createTransport({
         pass: 'carmela123'
     }
 });
-var setPassword = 'UPDATE administrator SET admin_password=$1, admin_pass=$2 WHERE admin_email=$3';
+var setPassword = 'UPDATE administrator SET admin_password=CRYPT($1,GEN_SALT(\'bf\')), admin_pass=$2 WHERE admin_email=$3';
 
 export function mailer(app: express.Application) {
     
