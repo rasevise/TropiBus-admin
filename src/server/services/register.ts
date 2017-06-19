@@ -1,14 +1,10 @@
 import * as express from 'express';
 import * as db from '../db/pg';
 
-<<<<<<< HEAD
-var createAdmin = 'INSERT INTO administrator(admin_first_name, admin_last_name, admin_username, admin_password,admin_email) VALUES ($1,$2,$3,CRYPT($4,GEN_SALT(\'bf\')),$5)';
-=======
-var createAdmin = 'INSERT INTO administrator(admin_first_name, admin_last_name, admin_username, admin_password, admin_email) VALUES ($1,$2,$3,$4, $5)';
->>>>>>> 97b5c9bcb81c40638171ca23947d74d49bb8949c
+var createAdmin = 'INSERT INTO administrator(admin_first_name, admin_last_name, admin_username, admin_password, admin_email) VALUES ($1,$2,$3,CRYPT($4,GEN_SALT(\'bf\')),$5)';
 var getAdmin= 'SELECT admin_id, admin_email, admin_status, admin_pass, admin_first_name, admin_last_name, admin_username FROM administrator WHERE admin_id=$1';
 var getAdmins= 'SELECT admin_id, admin_email, admin_status, admin_pass, admin_first_name, admin_last_name, admin_username FROM administrator';
-var getAdminFromUser= 'SELECT admin_status FROM administrator WHERE admin_username=$1';
+var getAdminFromUser= 'SELECT admin_status, admin_pass FROM administrator WHERE admin_username=$1';
 var updateAdmin = 'UPDATE administrator SET admin_first_name=$1, admin_last_name=$2, admin_email=$4 WHERE admin_id=$3';
 var setPassword = 'UPDATE administrator SET admin_password=CRYPT($1,GEN_SALT(\'bf\')), admin_pass=$2 WHERE admin_id=$3';
 var updatePassword = 'UPDATE administrator SET admin_password=CRYPT($1,GEN_SALT(\'bf\')), admin_pass=$2 WHERE admin_id=$3';
@@ -24,6 +20,7 @@ app.get('/register/getAdmin', (req, res, next) => {
             console.error("Error: " + err);
             res.send(err);
         }else {
+            console.log(result.rows[0]);
             res.json(result.rows[0]);
         }
     });
@@ -36,6 +33,7 @@ app.get('/register/getAdminFromUser', (req, res, next) => {
             console.error("Error: " + err);
             res.send(err);
         }else {
+            console.log(result.rows[0]);
             res.json(result.rows[0]);
         }
     });

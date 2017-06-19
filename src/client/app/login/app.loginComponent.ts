@@ -33,18 +33,20 @@ export class LoginComponent implements OnInit {
         this.registerService.getAdminFromUsername(this.model.username)
             .subscribe(
                 data => {
-                    console.log(data);
-                    if(data.admin_status === true){
+                    console.log('this is inside admin from user' + data);
+                    if(data._body.admin_status === true){
                         alert('Account already logged in!');
                     }else {
                     this.loginService.login(this.model.username, this.model.password)
                         .subscribe(
                             () => {
-                                if(data.admin_pass === true){
+                                console.log('inside login')
+                                if(data._body.admin_pass === true){
                                     this.router.navigate(['/password']);
                                 }else {
                                     this.router.navigate([this.returnUrl]);
                                 }
+                                this.loading = false;
                             },
                             error => {
                                 this.errorMessage = <any>error;
