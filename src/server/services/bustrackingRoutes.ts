@@ -39,7 +39,7 @@ var updateBusStatus = 'UPDATE bus SET bus_status = $1 WHERE bus_id = $2'
 var updateBusLocation = 'UPDATE GPS SET gps_latitude = $1, gps_longitude = $2 WHERE gps_id = $3'
 
 //Routes for login/logout 
-var checkCredentials= "SELECT driver_id,driver_status,admin_pass FROM driver WHERE driver_username=$1 and driver_password=CRYPT($2,driver_password)
+var checkCredentials= 'SELECT driver_id,driver_status,admin_pass FROM driver WHERE driver_username=$1 and driver_password=CRYPT($2,driver_password)';
 var login = 'UPDATE driver SET driver_status = \'logged\' WHERE driver_id = $1'
 var logout = 'UPDATE driver SET driver_status = \'not logged\' WHERE driver_id = $1'
 var disactivateBus= 'UPDATE bus SET bus_status =\'Inactive\' WHERE bus_id=$1'

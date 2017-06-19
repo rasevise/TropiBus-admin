@@ -34,21 +34,21 @@
             <div class="modal-body">
                 <p>Please type your email linked to your account.</p>
                 <small>Input is case sensitive</small>
-                <form name="form" (ngSubmit)="f.form.valid && forgotPass()" #f="ngForm" novalidate>
-                    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !em.valid }">
+                <form name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
+                    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !mail.valid }">
                         <label for="em">email</label>
-                        <input type="email" class="form-control" name="email" [(ngModel)]="email" #em="ngModel" required minlength="8" maxlength="24"/>
-                        <div *ngIf="f.submitted && !em.valid" class="help-block">email required</div>
+                        <input type="email" class="form-control" name="mail" [(ngModel)]="email" #mail="ngModel" required minlength="4"/>
+                        <div *ngIf="mail.errors && (mail.dirty || mail.touched)" class="alert alert-danger">email required</div>
                     </div>
-                    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !con.valid }">
-                        <label for="con">confirm email</label>
-                        <input type="email" class="form-control" name="confirm" [(ngModel)]="confirm" #con="ngModel" required validateEqual="em" reverse="false"  />
-                        <div *ngIf="f.submitted && !con.valid" class="help-block">email mismatch</div>       
+                    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !conmail.valid }">
+                        <label for="conmail">confirm email</label>
+                        <input type="email" class="form-control" name="conmail" [(ngModel)]="confirm" #conmail="ngModel" required validateEqual="mail" reverse="false"  />
+                        <div *ngIf="conmail.errors && (conmail.dirty || conmail.touched)" class="alert alert-danger">email mismatch</div>       
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <a [disabled]="loading || !f.form.valid" type="button" class="btn btn-primary" data-dismiss="modal" (click)="forgotPass()">Reset Password</a>
+                <button [disabled]="loading || !f.form.valid" type="button" class="btn btn-primary" data-dismiss="modal" (click)="forgotPass()">Reset Password</button>
                 <a type="button" class="btn btn-default" href="javascript:void(0)" data-dismiss="modal">Cancel</a>
                 <img *ngIf="loading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />            
             </div>
