@@ -72,10 +72,12 @@ export class BusDriverService {
   }
 
   updatePassword(driver: any, id: any) {
+    console.log("hello:" + id)
     return this.http
     .put(`${Config.API}`+ this._driversURL + '/updatePassword', JSON.stringify({ password: driver.password, id: id}), { headers:this.headers })
     .map((res: Response) => res.json().data)
     .catch(this.handleError);
+    
   }
 
   /**

@@ -147,7 +147,6 @@ export class BusDriverComponent {
 
   editD(): void {
 
-      console.log("password" + this.drivers[this.myValue].driver_password)
     this.service.updateDriver(this.driver, this.drivers[this.myValue].driver_id).subscribe(() => {
       this.getDrivers();
       this.getBuses();
@@ -155,9 +154,9 @@ export class BusDriverComponent {
     });
   }
   changePassword(): void {
-      console.log("password" + this.drivers[this.myValue].driver_password)
+      console.log("password" + this.driver.password)
     
-    this.service.updateDriver(this.driver, this.drivers[this.myValue].driver_id).subscribe(() => {
+    this.service.updatePassword(this.driver, this.drivers[this.myValue].driver_id).subscribe(() => {
       this.getDrivers();
       this.getBuses();
       this.successAlertDriver('Password Successfully Changed');
@@ -218,9 +217,6 @@ export class BusDriverComponent {
 
     var check: boolean = true;
     for( var i: number = 0; i < this.buses.length; i++){
-          console.log("actual id:" + this.buses[this.myValue].driver_id);
-          console.log("id:" + this.buses[i].driver_id);
-          console.log("this.bus.driver:" + this.bus.driver)
       if((this.bus.driver == this.buses[i].driver_id) && (this.myValue != i)){
          $('#verifyNewChangeModal').modal('show')
          check = false;
