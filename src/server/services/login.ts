@@ -17,7 +17,7 @@ app.post(`/login/authenticate`, (req:any, res:any) => {
         res.send('Error' + err);
     }else {
         if(result.rows.length===0) {
-            res.status(400).send({
+            res.json({
               message: 'Incorrect Credentials'
             });
         }else {

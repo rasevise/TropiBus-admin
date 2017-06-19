@@ -10,7 +10,7 @@ export class LoginService {
 
     constructor(private http: Http) { }
 
-    login(username: string, password: string): Observable<string[]>  {
+    login(username: string, password: string): Observable<any>  {
     let headers = new Headers({ 'Content-Type': 'application/json' });
         return this.http.post(`${Config.API}/login/authenticate`, JSON.stringify({ username: username, password: password }), {headers: headers})
             .map((response: Response) => {
