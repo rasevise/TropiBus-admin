@@ -1,7 +1,11 @@
 import * as express from 'express';
 import * as db from '../db/pg';
 
+<<<<<<< HEAD
 var createAdmin = 'INSERT INTO administrator(admin_first_name, admin_last_name, admin_username, admin_password,admin_email) VALUES ($1,$2,$3,CRYPT($4,GEN_SALT(\'bf\')),$5)';
+=======
+var createAdmin = 'INSERT INTO administrator(admin_first_name, admin_last_name, admin_username, admin_password, admin_email) VALUES ($1,$2,$3,$4, $5)';
+>>>>>>> 97b5c9bcb81c40638171ca23947d74d49bb8949c
 var getAdmin= 'SELECT admin_id, admin_email, admin_status, admin_pass, admin_first_name, admin_last_name, admin_username FROM administrator WHERE admin_id=$1';
 var getAdmins= 'SELECT admin_id, admin_email, admin_status, admin_pass, admin_first_name, admin_last_name, admin_username FROM administrator';
 var getAdminFromUser= 'SELECT admin_status FROM administrator WHERE admin_username=$1';
@@ -51,7 +55,7 @@ app.get('/register/getAdmins', (req, res, next) => {
 
 //Method to validate Login info with db
 app.post(`/register`, (req:any, res:any) => {
-  db.query(createAdmin,[req.body.name, req.body.last, req.body.username, req.body.password] ,(err:any, result:any) => {
+  db.query(createAdmin,[req.body.name, req.body.last, req.body.username, req.body.password, req.body.email] ,(err:any, result:any) => {
     if (err) {
         console.error("Error: " + err.code);
         res.send(err.code);

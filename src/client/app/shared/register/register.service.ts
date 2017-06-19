@@ -13,7 +13,7 @@ export class RegisterService {
     register(user: any): Observable<any>  {
     let headers = new Headers({ 'Content-Type': 'application/json' });
         return this.http.post(`${Config.API}/register`, 
-        JSON.stringify({ name: user.firstName, last: user.lastName, username: user.username, password: user.password }), 
+        JSON.stringify({ name: user.firstName, last: user.lastName, username: user.username, password: user.password, email: user.email}), 
         {headers: headers})
         .map((response: Response) => 
             response.json()
