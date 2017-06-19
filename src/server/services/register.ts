@@ -1,11 +1,7 @@
 import * as express from 'express';
 import * as db from '../db/pg';
 
-<<<<<<< HEAD
-var createAdmin = 'INSERT INTO administrator(admin_first_name, admin_last_name, admin_username, admin_password,admin_email) VALUES ($1,$2,$3,CRYPT($4,GEN_SALT(\'bf\')),$5)';
-=======
 var createAdmin = 'INSERT INTO administrator(admin_first_name, admin_last_name, admin_username, admin_password, admin_email) VALUES ($1,$2,$3,CRYPT($4,GEN_SALT(\'bf\')),$5)';
->>>>>>> 17e06bed1baa75405dfc7c795c92351c377463c8
 var getAdmin= 'SELECT admin_id, admin_email, admin_status, admin_pass, admin_first_name, admin_last_name, admin_username FROM administrator WHERE admin_id=$1';
 var getAdmins= 'SELECT admin_id, admin_email, admin_status, admin_pass, admin_first_name, admin_last_name, admin_username FROM administrator';
 var getAdminFromUser= 'SELECT admin_status, admin_pass FROM administrator WHERE admin_username=$1';
